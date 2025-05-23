@@ -12,18 +12,26 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
     <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/login.css" />
     <title>Join</title>
   </head>
   <body>
-    <img class="login_logo" src="./assets/img/logo.png" alt="" srcset="" />
-    <div class="login_head">
-      <span>Not a Join User?</span>
-      <button class="btn_dark btn_sign_up ">Sign up</button>
-    </div>
-    <div class="d_flex_center_column login_container">
-      <h1>Log in</h1>
+    <div class="login_container d_flex_center max_width_1440">
+      <img class="login_logo" src="./assets/img/logo.png" alt="" srcset="" />
+      <div class="login_head">
+        <span>Not a Join User?</span>
+        <button class="btn_dark btn_sign_up">Sign up</button>
+      </div>
       <div>
+        <a href="./templates/privacyPolicy.html">Privacy Policy</a>
+        <a href="./templates/legalNotice.html">Legal Notice</a>
+      </div>
+    </div>
+
+    <!-- LOG-IN -->
+    <div class="d_flex_center_column login_main">
+      <h1>Log in</h1>
+      <div class="d_flex_center_column">
         <input type="text" name="username" id="username" required />
         <input type="password" name="userpassword" id="userpassword" required />
       </div>
@@ -32,9 +40,25 @@
         <button class="btn_white" onclick="">Guest Log in</button>
       </div>
     </div>
-    <div>
-      <a href="./templates/privacyPolicy.html">Privacy Policy</a>
-      <a href="./templates/legalNotice.html">Legal Notice</a>
+
+    <!-- SIGN-IN -->
+    <div class="d_flex_center_column signin_main">
+      <h1>Sign in</h1>
+      <div class="d_flex_center_column">
+        <input type="text" name="Name" id="name" required />
+        <input type="text" name="Email" id="username" required />
+        <input type="password" name="userpassword" id="userpassword" required />
+        <input type="password" name="userpassword" id="userpassword" required />
+      </div>
+      <div>
+        <span
+          >>CHECKBOX I accept the
+          <a href="./templates/privacyPolicy.html">Privacy policy</a></span
+        >
+      </div>
+      <div class="login_btn">
+        <button class="btn_dark" onclick="">Sign in</button>
+      </div>
     </div>
   </body>
   <script src="./script.js"></script>

@@ -3,11 +3,11 @@
     margin: 0 auto;
     scrollbar-width: thin;
     scroll-behavior: smooth;
-    scrollbar-color: rgb(8, 32, 41) rgb(0, 0, 0);
+    scrollbar-color: rgb(42, 54, 71) rgb(246, 247, 248);
 }
 
 a {
-    color: rgb(0, 0, 0);
+    color: rgba(168, 168, 168, 1);
     text-decoration: none;
 }
 

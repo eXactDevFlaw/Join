@@ -24,7 +24,7 @@ header {
 }
 
 nav {
-    background-color: #2A3647;
+    background-color: #2a3647;
     width: 232px;
     padding-top: 64px;
     padding-bottom: 64px;
@@ -64,5 +64,4 @@ nav {
     color: rgba(42, 54, 71, 1);
     font-family: 'Inter', sans-serif;
     font-weight: bold;
-    border-width: 0px;
 }
