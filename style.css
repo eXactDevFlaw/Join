@@ -44,6 +44,7 @@ nav {
     border-radius: 50%;
     border-style: solid;
     border-color: #2a3647;
+    border-width: 3px;
     width: 56px;
     height: 56px;
     color: #29abe2;
@@ -65,4 +66,34 @@ nav {
     color: rgba(42, 54, 71, 1);
     font-family: 'Inter', sans-serif;
     font-weight: bold;
+}
+
+.nav_items {
+    gap: 15px;
+    margin-top: 100px;
+}
+
+.nav_item {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 8px 56px 8px 56px;
+    height: 46px;
+    gap: 8px;
+    color: rgba(205, 205, 205, 1);
+}
+
+.nav_item:hover {
+    cursor: pointer;
+    background-color: rgb(57, 73, 96)
+}
+
+.nav_item_active {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 8px 56px 8px 56px;
+    height: 46px;
+    gap: 8px;
+    background-color: rgba(9, 25, 49, 1);
 }
