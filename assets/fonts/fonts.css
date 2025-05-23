@@ -3,11 +3,6 @@
   src: url(./Inter-VariableFont_opsz\,wght.ttf);
 }
 
-body {
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-}
-
 h1 {
   font-family: "Inter", sans-serif;
   font-weight: bold;

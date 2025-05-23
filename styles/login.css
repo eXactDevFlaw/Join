@@ -7,7 +7,8 @@
 }
 
 .btn_sign_up {
-
+    width: 90px;
+    height: 50px;
 }
 
 .login_logo{
@@ -17,4 +18,6 @@
     height: 120px;
 }
 
-.
+.login_head {
+
+}
