@@ -1,55 +1,60 @@
 body {
-  background-color: #f6f7f8;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.login_container {
-  background-color: #ffffff;
-  width: 650px;
-  height: 450px;
-  border-radius: 30px;
-  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.04);
+    background-color: #f6f7f8;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 header {
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 96px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: #ffffff;
-  padding: 20px 40px 20px 348px;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 20px 40px 20px 348px;
 }
 
-.header_icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.user_circle {
-    font-weight: 700;
-  border-radius: 50%;
-  border-style: solid;
-  border-color: #2a3647;
-  width: 56px;
-  height: 56px;
-  color: #29abe2;
-}
-
-nav{
+nav {
     background-color: #2A3647;
     width: 232px;
     padding-top: 64px;
     padding-bottom: 64px;
     top: 0;
     left: 0;
+}
+
+.header_icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_circle {
+    font-weight: 700;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #2a3647;
+    width: 56px;
+    height: 56px;
+    color: #29abe2;
+}
+
+.btn_dark {
+    background-color: rgba(42, 54, 71, 1);
+    border-radius: 8px;
+    color: white;
+}
+
+.btn_white {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    border: 1px solid rgba(42, 54, 71, 1);
+    color: rgba(42, 54, 71, 1);
 }

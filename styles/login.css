@@ -1,0 +1,20 @@
+.login_container {
+    background-color: #ffffff;
+    width: 650px;
+    height: 450px;
+    border-radius: 30px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.04);
+}
+
+.btn_sign_up {
+
+}
+
+.login_logo{
+    position: relative;
+    top: 70px;
+    left: 80px;
+    height: 120px;
+}
+
+.
