@@ -102,3 +102,6 @@ a {
     height: 100vh;
 }
 
+.justify_start{
+    justify-content: flex-start;
+}
