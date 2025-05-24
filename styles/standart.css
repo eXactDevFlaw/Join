@@ -9,8 +9,12 @@
 a {
     color: rgba(168, 168, 168, 1);
     text-decoration: none;
+    margin: 0;
 }
 
+a:hover {
+    color: rgba(41, 171, 226, 1);
+}
 
 .d_none {
     display: none !important;
@@ -105,3 +109,11 @@ a {
 .justify_start{
     justify-content: flex-start;
 } 
+
+.align_none {
+    align-items: unset;
+}
+
+.flex_column{
+    flex-direction: column;
+}
