@@ -1,8 +1,9 @@
 .login_container {
-    height: 100vh;
+    margin-top: 70px;
+    height: fit-content;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .login_main {
@@ -18,30 +19,30 @@
 }
 
 .login_logo {
+    margin: 20px 0 0 0;
     object-fit: contain;
-    height: 120px;
-    /* position: relative;
-    top: 70px;
-    left: 80px; */
+    width: 100px;
 }
 
 .login_head {
-    width: auto;
+    align-items: center;
+    margin: 0;
     white-space: nowrap;
-    /* position: relative;
-    top: 0px;
-    left: 1040px */
+}
+
+.login_head span {
+    margin-right: 30px;
 }
 
 .btn_sign_up {
-    /* width: 90px;
-    height: 50px; */
+    width: 90px;
+    height: 50px;
 }
 
 .login_bottom {
-    /* position: relative;
+    position: relative;
     top: 100px;
-    left: 50px; */
+    left: 50px;
 }
 
 .signin_main {
