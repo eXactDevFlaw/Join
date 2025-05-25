@@ -16,24 +16,38 @@
     <title>Join</title>
   </head>
   <body>
-    <div class="login_container d_flex_center max_width_1440">
-      <img class="login_logo" src="./assets/img/logo.png" alt="" srcset="" />
-      <div class="login_head">
-        <span>Not a Join User?</span>
-        <button class="btn_dark btn_sign_up">Sign up</button>
+    <div class="login_container">
+      <div class="d_flex justify_between">
+        <img class="login_logo" src="./assets/img/logo.png" alt="" srcset="" />
+        <div class="login_head d_flex_center_row">
+          <span>Not a Join User?</span>
+          <button class="btn_dark btn_sign_up">Sign up</button>
+        </div>
       </div>
-      <div>
+      <div class="login_bottom">
         <a href="./templates/privacyPolicy.html">Privacy Policy</a>
         <a href="./templates/legalNotice.html">Legal Notice</a>
       </div>
     </div>
 
     <!-- LOG-IN -->
-    <div class="d_flex_center_column login_main">
+    <div class="d_flex_center_column login_main d_none">
       <h1>Log in</h1>
       <div class="d_flex_center_column">
-        <input type="text" name="username" id="username" required />
-        <input type="password" name="userpassword" id="userpassword" required />
+        <input
+          type="text"
+          placeholder="Email"
+          name="username"
+          id="username"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          name="userpassword"
+          id="userpassword"
+          required
+        />
       </div>
       <div class="login_btn">
         <button class="btn_dark" onclick="">Log in</button>
@@ -42,13 +56,31 @@
     </div>
 
     <!-- SIGN-IN -->
-    <div class="d_flex_center_column signin_main">
+    <div class="d_flex_center_column signin_main d_none">
       <h1>Sign in</h1>
       <div class="d_flex_center_column">
-        <input type="text" name="Name" id="name" required />
-        <input type="text" name="Email" id="username" required />
-        <input type="password" name="userpassword" id="userpassword" required />
-        <input type="password" name="userpassword" id="userpassword" required />
+        <input type="text" placeholder="Name" name="Name" id="name" required />
+        <input
+          type="text"
+          placeholder="Email"
+          name="Email"
+          id="username"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          name="userpassword"
+          id="userpassword"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          name="confirm-userpassword"
+          id="confirm-userpassword"
+          required
+        />
       </div>
       <div>
         <span

@@ -1,6 +1,9 @@
 .login_container {
     height: 100vh;
-    width: 100wh;
+    width: 1440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .login_main {
@@ -11,39 +14,50 @@
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.04);
 }
 
-.btn_sign_up {
-    width: 90px;
-    height: 50px;
-}
-
 .login_logo {
-    position: relative;
-    top: 70px;
-    left: 80px;
+    flex: 1;
+    object-fit: contain;
     height: 120px;
+    /* position: relative;
+    top: 70px;
+    left: 80px; */
 }
 
 .login_head {
-    position: relative;
-    top: 70px;
-    left: 1040px
+    flex: 1;
+    width: auto;
+    white-space: nowrap;
+    /* position: relative;
+    top: 0px;
+    left: 1040px */
 }
 
-.signin-main {
+.btn_sign_up {
+    /* width: 90px;
+    height: 50px; */
+}
+
+.login_bottom {
+    /* position: relative;
+    top: 100px;
+    left: 50px; */
+}
+
+.signin_main {
     background-color: rgba(255, 255, 255, 1);
-    width: 600px;
-    height: 650px;
+    width: 650px;
+    height: 450px;
     border-radius: 30px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.04);
     padding: 13px 15px 16px 18px;
 }
 
-.signin-main > * > a {
+.signin_main>*>a {
     color: rgba(41, 171, 226, 1);
     text-decoration: none;
 }
 
-.signin-main > * > a:hover {
+.signin_main>*>a:hover {
     color: rgba(41, 171, 226, 1);
     text-decoration: underline;
 }
