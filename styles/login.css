@@ -1,6 +1,5 @@
 .login_container {
     height: 100vh;
-    width: 1440px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -12,10 +11,13 @@
     height: 450px;
     border-radius: 30px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.04);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .login_logo {
-    flex: 1;
     object-fit: contain;
     height: 120px;
     /* position: relative;
@@ -24,7 +26,6 @@
 }
 
 .login_head {
-    flex: 1;
     width: auto;
     white-space: nowrap;
     /* position: relative;
@@ -50,6 +51,10 @@
     border-radius: 30px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.04);
     padding: 13px 15px 16px 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .signin_main>*>a {

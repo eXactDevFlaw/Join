@@ -98,6 +98,14 @@ a:hover {
     justify-content: space-between;
 }
 
+.justify_start{
+    justify-content: flex-start;
+} 
+
+.justify_end {
+    justify-content: flex-end;
+}
+
 .width_100{
     width: 100%;
 }
@@ -105,10 +113,6 @@ a:hover {
 .height_100{
     height: 100vh;
 }
-
-.justify_start{
-    justify-content: flex-start;
-} 
 
 .align_none {
     align-items: unset;
