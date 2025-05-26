@@ -25,14 +25,16 @@
 
 .login_logo img {
     width: 100px;
-    animation: landingPage 2s ;
+    animation: landingPage 2s infinite;
 }
 
 @keyframes landingPage {
-    from {top:50%;
-        left:50%;
-        width: 100%;}
-    to {width: 100px;}
+    from { 
+        width: 275px;
+    }
+    to {
+        width: 100px;
+    }
 
 }
 
