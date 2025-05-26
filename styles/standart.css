@@ -127,6 +127,7 @@ a {
 }
 
 h1 {
+    font-size: 61px;
     font-weight: 700;
-    color: ;
+    color: rgba(0, 0, 0, 1);
 }
