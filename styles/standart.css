@@ -12,10 +12,6 @@ a {
     margin: 0;
 }
 
-a:hover {
-    color: rgba(41, 171, 226, 1);
-}
-
 .d_none {
     display: none !important;
 }
@@ -120,4 +116,12 @@ a:hover {
 
 .flex_column{
     flex-direction: column;
+}
+
+.gap_8{
+    gap: 8px;
+}
+
+.gap_16{
+    gap: 16px;
 }

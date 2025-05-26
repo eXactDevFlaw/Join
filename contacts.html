@@ -1,22 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="./assets/icons/favicon.svg"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/responsive.css" />
-    <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="stylesheet" href="./styles/login.css" />
-    <title>Join - Contacts</title>
-  </head>
-  <body>
-    <div>hier entsteht was tolles!</div>
-  </body>
-  <script src="./script.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/contactsModal.css">
+    <link rel="stylesheet" href="./styles/mobileSidebar.css">
+    <link rel="stylesheet" href="./styles/mobileHeader.css">
+    <link rel="stylesheet" href="./styles/mobileContacts.css">
+    <link rel="stylesheet" href="./styles/summary.css">
+    <script src="./script.js"></script>
+    <script src="./scripts/includeHTML.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/contactsModal.js"></script>
+    <script src="./scripts/editContactsModal.js"></script>
+    <script src="./scripts/summary.js"></script>
+    <script src="./scripts/db.js"></script>
+    <script src="./scripts/guestUser.js"></script>
+    <script src="./scripts/sidebar.js"></script>
+
+    <title>Contacts</title>
+
+</head>
+
+<body onload="init()">
+    <div id="orientationOverlay" class="orientationOverlay dNone">
+        <p>Please rotate your device to portrait mode to continue browsing.</p>
+    </div>
+    <div class="content">
+        <div w3-include-html="./assets/templates/sidebar.html"></div>
+        <div class="includeHeader">
+            <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
+            <main>
+                <div class="mainContent">
+                    <div id="succesfullyCreatedOverlayImg" class="succesfullyCreatedOverlayImg"><img
+                            src="./assets/img/contactSuccesfullyCreatedOverlay.svg" alt=""></div>
+                    <div class="contactListContainer" id="contactListContainer">
+                        <button onclick="openContactsModal()" class="addContactButton">
+                            <span>Add new contact</span>
+                            <img src="./assets/img/addPerson.svg" alt=""></button>
+                        <div class="mobileListContainer">
+                            <div class="contactList" id="contactList"></div>
+                            <button class="addContactMobileButton" onclick="openContactsModal()">
+                                <img src="./assets/img/addContactMobile.svg" alt="">
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="contactsOverview" id="contactsOverview">
+                        <div class="contactsHeadline">
+                            <div class="mobileHeadlineWrapper">
+                                <h1>Contacts</h1>
+                                <div class="blueDivider"></div>
+                                <span>Better with a team</span>
+                                <p class="blueMobileUnderline"></p>
+                            </div>
+                            <button class="mobileBackArrow"><img src="./assets/img/backArrow.svg" alt=""></button>
+                        </div>
+                        <div class="contactsBody" id="showContactDetails">
+                            <div class="contactsNameContainer">
+                                <div id="contactInitials" class="userIconContainer"></div>
+                                <div class="userNameContainer" id="userNameContainer">
+                                    <h2 id="userName">Name Name</h2>
+                                    <div class="userNameIconContainer">
+                                        <div class="userNameEditContainer" onclick="openEditContactsModal()">
+                                            <div class="userNameEditIconContainer">
+                                                <img class="defaultIcon" src="./assets/img/edit.svg" alt="">
+                                                <img class="hoverIcon" src="./assets/img/editHover.svg" alt="">
+                                            </div>
+                                            <span>Edit</span>
+                                        </div>
+                                        <div id="userNameDeleteContainer" class="userNameDeleteContainer">
+                                            <div class="userNameDeleteIconContainer">
+                                                <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
+                                                <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
+                                            </div>
+                                            <!-- <span id="deleteBtn"></span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contactsInfoContainer">
+                                <h3>Contact Information</h3>
+                                <span>Email</span>
+                                <a id="userEmail" href="">@mail.com</a>
+                                <span>Phone</span>
+                                <p id="userPhoneNumber">number</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modalOverlay dNone"></div>
+    <div id="contactsModal" class="dNone"></div>
+    <div id="editContactsModal" class="dNone"></div>
+
+</body>
+
 </html>
