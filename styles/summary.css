@@ -1,4 +1,11 @@
 main{
     left: 232px;
     top: 96px;
+    padding-left: calc(328px - 232px);
+    padding-top: calc(206px - 96px);
+}
+
+.headline_vector{
+    width: 3px;
+    height: 59px;
 }

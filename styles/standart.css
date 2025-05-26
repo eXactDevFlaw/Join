@@ -130,4 +130,16 @@ h1 {
     font-size: 61px;
     font-weight: 700;
     color: rgba(0, 0, 0, 1);
+    line-height: 120%;
+}
+
+h3{
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 120%;
+    color: rgba(42, 54, 71, 1);
+}
+
+.headline{
+    gap: 30px;
 }
