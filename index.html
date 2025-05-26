@@ -16,17 +16,26 @@
     <title>Join</title>
   </head>
   <body>
-    <div class="login_container">
-        <img class="login_logo" src="./assets/img/logo.png" alt="" srcset="" />
+    <div class="login_content">
+      <div class="login_container">
+        <div class="login_logo">
+          <img src="./assets/img/logo.png" alt="" srcset="" />
+        </div>
         <div class="login_head d_flex">
           <span>Not a Join User?</span>
           <button class="btn_dark btn_sign_up">Sign up</button>
         </div>
+      </div>
+      <div class="login_bottom">
+        <a href="./templates/privacyPolicy.html">Privacy Policy</a>
+        <a href="./templates/legalNotice.html">Legal Notice</a>
+      </div>
     </div>
 
- <!-- LOG-IN -->
+    <!-- LOG-IN -->
     <div class="d_flex_center_column login_main">
       <h1>Log in</h1>
+      <div class="login_underline"></div>
       <div class="d_flex_center_column">
         <input
           type="text"
@@ -86,14 +95,6 @@
         <button class="btn_dark" onclick="">Sign in</button>
       </div>
     </div>
-
-
-    <div class="login_bottom">
-      <a href="./templates/privacyPolicy.html">Privacy Policy</a>
-      <a href="./templates/legalNotice.html">Legal Notice</a>
-    </div>
-
-   
   </body>
   <script src="./script.js"></script>
 </html>
