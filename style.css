@@ -56,6 +56,11 @@ nav {
     color: rgba(41, 171, 226, 1);
 }
 
+.user_circle:hover{
+    cursor: pointer;
+    background-color: rgba(12, 46, 98, 0.12);
+}
+
 .btn_dark {
     background-color: rgba(42, 54, 71, 1);
     border-radius: 8px;
@@ -91,7 +96,7 @@ nav {
 
 .nav_item:hover {
     cursor: pointer;
-    background-color: rgb(57, 73, 96)
+    background-color: rgba(42, 61, 89, 1)
 }
 
 .nav_item_active {
@@ -134,7 +139,6 @@ nav {
     border-bottom-right-radius: 20px;
     font-size: 16px;
     line-height: 120%;
-    color: rgba(205, 205, 205, 1);
     padding: 10px;
 }
 
@@ -142,6 +146,7 @@ nav {
     width: 130px;
     height: 46px;
     padding: 8px;
+    color: rgba(205, 205, 205, 1);
 }
 
 .small_logout_link:hover{
@@ -149,7 +154,7 @@ nav {
     background-color: rgba(42, 61, 89, 1);
 }
 
-@font-face {
+/* @font-face {
     font-family: "Inter";
     src: url("assets/fonts/inter.woff2") format('woff2');
     font-display: swap;
@@ -159,7 +164,7 @@ nav {
     margin: 0;
     box-sizing: border-box;
     font-family: "Inter";
-}
+} */
 
 .maxWidth {
     max-width: 1920px;
@@ -191,4 +196,13 @@ nav {
 
 .dNone {
   display: none;
+}
+
+.help_icon {
+    height: 32px;
+    width: 32px;
+}
+
+.help_icon:hover{
+    transform: scale(1.2);
 }
