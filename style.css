@@ -121,3 +121,47 @@ nav {
 .nav_privacy_legal a:hover{
     font-weight: 700;
 }
+
+@font-face {
+    font-family: "Inter";
+    src: url("assets/fonts/inter.woff2") format('woff2');
+    font-display: swap;
+  }
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Inter";
+}
+
+.maxWidth {
+    max-width: 1920px;
+}
+
+.dFlex {
+    display: flex;
+}
+
+.dNone {
+    display: none !important;
+}
+
+.orientationOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.dNone {
+  display: none;
+}
