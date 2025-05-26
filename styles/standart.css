@@ -125,3 +125,8 @@ a {
 .gap_16{
     gap: 16px;
 }
+
+h1 {
+    font-weight: 700;
+    color: ;
+}
