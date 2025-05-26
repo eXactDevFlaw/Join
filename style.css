@@ -206,3 +206,7 @@ nav {
 .help_icon:hover{
     transform: scale(1.2);
 }
+
+#overlay-small-logout-win{
+    z-index: 1;
+}
