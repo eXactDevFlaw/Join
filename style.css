@@ -1,7 +1,7 @@
 body {
     font-family: "Inter", sans-serif;
     font-size: 16px;
-    background-color: #f6f7f8;
+    background-color: rgba(246, 247, 248, 1);
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -19,18 +19,18 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 1);
     padding: 20px 40px 20px 348px;
 }
 
 nav {
     padding-bottom: 64px;
-    background-color: #2a3647;
+    background-color: rgba(42, 54, 71, 1);
     width: 232px;
     height: auto;
     top: 0;
     left: 0;
-    color: white;
+    color: rgba(255, 255, 255, 1);
 }
 
 .logo_navbar {
@@ -49,11 +49,11 @@ nav {
     font-weight: 700;
     border-radius: 50%;
     border-style: solid;
-    border-color: #2a3647;
+    border-color: rgba(42, 54, 71, 1);
     border-width: 3px;
     width: 56px;
     height: 56px;
-    color: #29abe2;
+    color: rgba(41, 171, 226, 1);
 }
 
 .btn_dark {
@@ -120,4 +120,31 @@ nav {
 
 .nav_privacy_legal a:hover{
     font-weight: 700;
+    color: rgba(41, 171, 226, 1);
+}
+
+.small_logout_win{
+    height: 158px;
+    width: 150px;
+    background-color: rgba(42, 54, 71, 1);
+    top: 96px;
+    right: 50px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 16px;
+    line-height: 120%;
+    color: rgba(205, 205, 205, 1);
+    padding: 10px;
+}
+
+.small_logout_link{
+    width: 130px;
+    height: 46px;
+    padding: 8px;
+}
+
+.small_logout_link:hover{
+    cursor: pointer;
+    background-color: rgba(42, 61, 89, 1);
 }
