@@ -1,0 +1,414 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    height: 100%;
+}
+
+main {
+    height: 100%;
+    background-color: #F6F7F8;
+    display: flex;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 47px;
+    font-weight: 500px;
+}
+
+h3 {
+    font-size: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: 400;
+}
+
+.includeHeader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.templateHTML {
+    position: relative;
+    z-index: 3;
+}
+
+.mainContent {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 64px;
+}
+
+.contactListContainer {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    box-shadow: 1px 2px 4px 1px #cdcdcd;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+}
+
+.addContactButton {
+    border: 1px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin: 22px 52px;
+    font-weight: 700;
+    font-size: 21px;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.addContactButton:hover {
+    cursor: pointer;
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
+}
+
+.contactList {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-left: 46px;
+    padding-right: 54px;
+    height: 100%;
+}
+
+.contactList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contactList::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+.contactList::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8;
+    border-radius: 4px;
+}
+
+.contactList::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+}
+
+.letterDivider {
+    padding-bottom: 17px;
+    padding-top: 17px;
+    padding-left: 36px;
+    padding-right: 36px;
+    font-size: 20px;
+    color: #2A3647;
+}
+
+.letterDividerLine {
+    width: 350px;
+    height: 2px;
+    background-color: #2A3647;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    gap: 10px;
+    opacity: 15%;
+}
+
+.addContactMobileButton {
+    display: none;
+}
+
+.contactCard {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    gap: 35px;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.contactCard:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.contactCard.active {
+    background-color: #2a3647;
+    color: white;
+}
+
+.contactIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.contactDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactDetails .email {
+    font-size: 14px;
+    color: #29ABE2;
+}
+
+.contactsOverview {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+.contactsHeadline {
+    display: flex;
+    padding-top: 64px;
+}
+
+.mobileHeadlineWrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.blueDivider {
+    width: 3px;
+    height: 59px;
+    background-color: #29ABE2;
+}
+
+.blueMobileUnderline {
+    display: none;
+}
+
+.mobileBackArrow {
+    display: none;
+}
+
+.contactsBody {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 20px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    right: -1024px;
+    opacity: 0;
+}
+
+.contactsBody.show {
+    right: 0;
+    opacity: 1;
+}
+
+.contactsNameContainer {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.userNameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.userNameIconContainer {
+    display: flex;
+    gap: 20px;
+    font-weight: 400;
+}
+
+.userNameEditContainer {
+    display: flex;
+    gap: 8px;
+}
+
+.userNameEditContainer:hover {
+    color: #29ABE2;
+    transform: scale(1.08);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.userNameEditIconContainer {
+    height: 19px;
+    width: 19px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.userNameEditIconContainer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.userNameEditContainer:hover .defaultIcon {
+    opacity: 0;
+}
+
+.userNameEditContainer:hover .hoverIcon {
+    opacity: 1;
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.userNameDeleteContainer {
+    display: flex;
+    gap: 8px;
+
+}
+
+.userNameDeleteContainer:hover {
+    color: #29ABE2;
+    transform: scale(1.08);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.userNameDeleteIconContainer {
+    height: 19px;
+    width: 19px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.userNameDeleteIconContainer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hoverIcon {
+    opacity: 0;
+}
+
+.userNameDeleteContainer:hover .defaultIcon {
+    opacity: 0;
+}
+
+.userNameDeleteContainer:hover .hoverIcon {
+    opacity: 1;
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.userIconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    border: white 2px solid;
+    height: 120px;
+    width: 120px;
+    border-radius: 60px;
+    background-color: #FF7A00;
+    color: white;
+    font-weight: 500;
+}
+
+.contactsInfoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contactsInfoContainer span {
+    font-weight: 700;
+}
+
+.contactsInfoContainer a {
+    color: #29ABE2;
+    text-decoration: none;
+    transform: none;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.modalMainContent {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 600px;
+    width: 1148px;
+    padding-right: 20px;
+    z-index: 3;
+    display: flex;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translate(100%, -45%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.modalMainContent.show {
+    opacity: 1;
+    transform: translate(-50%, -45%);
+    pointer-events: all;
+}
+
+.dNone {
+    display: none;
+}
+
+.succesfullyCreatedOverlayImg {
+    z-index: 3;
+    display: flex;
+    position: absolute;
+    right: -240px;
+    top: 105px;
+    transform: translateX(100px);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.succesfullyCreatedOverlayImg.show {
+    opacity: 1;
+    transform: translateX(-250px);
+}
