@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+}
+
 main{
     left: 232px;
     top: 96px;
@@ -5,7 +9,44 @@ main{
     padding-top: calc(206px - 96px);
 }
 
+.summary_overview{
+    width: 560px;
+    height: 562px;
+}
+
 .headline_vector{
     width: 3px;
     height: 59px;
 }
+
+.summary_first_row img{
+    width: 69px;
+    height: 69px;
+}
+
+.summary_box {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 30px;
+    height: 168px;
+    width: 264px;
+    padding: 38px 19px 38px 19px;
+    gap: 18px;
+}
+
+.task_number{
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 120%;
+}
+
+.task_name{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.urgent {
+    width: 560px;
+    padding: 28px 48px 28px 48px;
+}
+
