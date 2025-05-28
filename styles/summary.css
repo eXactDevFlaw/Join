@@ -29,7 +29,7 @@ main{
     border-radius: 30px;
     height: 168px;
     width: 264px;
-    padding: 38px 19px 38px 19px;
+    /* padding: 38px 19px 38px 19px; */
     gap: 18px;
 }
 
@@ -50,3 +50,14 @@ main{
     padding: 28px 48px 28px 48px;
 }
 
+.small_box {
+    width: 168px;
+    gap: 13px;
+    padding: 25px;
+    text-align: center;
+}
+
+p{
+    font-size: 16px;
+    text-align: center;
+}
