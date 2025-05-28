@@ -3,15 +3,20 @@
 }
 
 main{
+    margin: 0 auto;
     left: 232px;
     top: 96px;
     padding-left: calc(328px - 232px);
     padding-top: calc(206px - 96px);
+    width: calc(100% - 232px);
+    height: calc(100vh - 96px);
 }
 
 .summary_overview{
     width: 560px;
     height: 562px;
+    margin-top: 50px;
+    margin-right: 50px;
 }
 
 .headline_vector{
@@ -47,7 +52,7 @@ main{
 
 .urgent {
     width: 560px;
-    padding: 28px 48px 28px 48px;
+    /* padding: 28px 48px 28px 48px; */
 }
 
 .small_box {
@@ -60,4 +65,14 @@ main{
 p{
     font-size: 16px;
     text-align: center;
+}
+
+#date{
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.date{
+    align-items: start;
+    gap: 13px;
 }
