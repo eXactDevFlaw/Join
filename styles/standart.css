@@ -103,7 +103,7 @@ a {
 }
 
 .width_100{
-    width: 100%;
+    width: 100% !important;
 }
 
 .height_100{
@@ -124,6 +124,10 @@ a {
 
 .gap_16{
     gap: 16px;
+}
+
+.gap_18{
+    gap: 18px;
 }
 
 .headline{
