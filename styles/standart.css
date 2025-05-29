@@ -94,6 +94,10 @@ a {
     justify-content: space-between;
 }
 
+.justify_evenly {
+    justify-content: space-evenly !important;
+}
+
 .justify_start{
     justify-content: flex-start;
 } 
