@@ -2,8 +2,6 @@
     margin-top: 70px;
     height: fit-content;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
 }
 
 .login_logo {

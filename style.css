@@ -34,6 +34,10 @@ nav {
     color: rgba(255, 255, 255, 1);
 }
 
+button {
+    cursor: pointer;
+}
+
 .logo_navbar {
     width: 100px;
     padding-top: 64px;
@@ -88,6 +92,18 @@ nav {
     color: rgba(42, 54, 71, 1);
     font-family: 'Inter', sans-serif;
     font-weight: bold;
+}
+
+.btn_white:hover {
+    border: 2px solid rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: rgba(41, 171, 226, 1);
+}
+
+.btn_white:active {
+    border: 1px solid rgba(9, 25, 49, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: rgba(9, 25, 49, 1);
 }
 
 .nav_items {
