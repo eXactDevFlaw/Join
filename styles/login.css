@@ -1,3 +1,9 @@
+.login_content {
+    position: fixed;
+    width: 1440px;
+    height: 100vh;
+}
+
 .login_container {
     margin-top: 70px;
     height: fit-content;
@@ -5,7 +11,7 @@
 }
 
 .login_logo {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     width: 300px;
@@ -52,8 +58,8 @@
 }
 
 .login_head {
+    margin-right: 60px;
     align-items: center;
-    margin: 0;
     white-space: nowrap;
 }
 
@@ -72,6 +78,15 @@
     top: 94%;
     left: 50%;
     transform: translate(-50%);
+}
+
+.login_bottom a {
+    margin: 8px;
+}
+
+.login_bottom a:hover {
+    color: rgba(41, 171, 226, 1);
+    font-weight: 700;
 }
 
 .login_head_wrapper {
