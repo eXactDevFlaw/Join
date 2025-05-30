@@ -1,165 +1,169 @@
-let colors = [
-    "#9327ff", // lila
-    "#1fd7c1", // grün
-    "#fc71ff", // pink
-    "#6e52ff", // blau
-    "#ff7a02", // orange
-    "#6e52ff", // gelb
+let editIndex = null;
+
+// Dummy-Kontakte (ersetzt später lokale Speicherung oder Backend)
+const contacts = [
+  { id: 1, name: "Anna Müller", email: "anna.mueller@example.com", phone: "+49 170 1234567" },
+  { id: 2, name: "Ben Schneider", email: "ben.schneider@example.com", phone: "+49 172 9876543" },
+  { id: 3, name: "Clara Fischer", email: "clara.fischer@example.com", phone: "+49 151 7654321" }
 ];
 
-async function renderContacts() {
-    console.log("renderContacts wurde aufgerufen");
-    let container = document.getElementById("contactList");
-    container.innerHTML = "";
+// Elemente referenzieren
+const contactsList = document.getElementById('contacts-list');
+const overlay = document.getElementById('contact-overlay');
 
-    let data = await getData('/users/' + loggedInUser + '/contacts');
+// Kontakte anzeigen
+function renderContacts() {
+    const contactList = document.getElementById("contacts-list");
+    contactList.innerHTML = "";
 
-    if (!data) return;
-
-    let entries = Object.entries(data).sort((a, b) => a[1].name.localeCompare(b[1].name));
-    let currentLetter = "";
-
-    for (let [id, contact] of entries) {
-        let firstLetter = contact.name.charAt(0).toUpperCase();
-        if (firstLetter !== currentLetter) {
-            currentLetter = firstLetter;
-            container.appendChild(createLetterDivider(firstLetter));
-            container.appendChild(createLetterDividerLine());
-        }
-        container.appendChild(createContactCard(contact, id));
-    };
+    contacts.forEach((contact, index) => {
+        const contactItem = document.createElement("div");
+        contactItem.className = "contact-item";
+        contactItem.innerHTML = `
+            <strong>${contact.name}</strong><br>
+            ${contact.email}<br>
+            ${contact.phone}<br>
+            <button class="btn_white" onclick="editContact(${index})">Bearbeiten</button>
+        `;
+        contactList.appendChild(contactItem);
+    });
 }
+function editContact(index) {
+    const contact = contacts[index];
+    editIndex = index;
 
-function createLetterDivider(letter) {
-    let div = document.createElement("div");
-    div.classList.add("letterDivider");
-    div.textContent = letter;
-    return div;
+// Fülle die Felder mit vorhandenen Daten
+    // Make sure these elements exist in your HTML and have the correct IDs
+    const nameInput = document.getElementById("contact-name");
+    const emailInput = document.getElementById("contact-email");
+    const phoneInput = document.getElementById("contact-phone");
 
+    if (nameInput) nameInput.value = contact.name;
+    if (emailInput) emailInput.value = contact.email;
+    if (phoneInput) phoneInput.value = contact.phone;
+    // Zeige Overlay
+    openOverlay();
 }
+function saveContact() {
+    const name = document.getElementById("contact-name").value;
+    const email = document.getElementById("contact-email").value;
+    const phone = document.getElementById("contact-phone").value;
 
-function createLetterDividerLine() {
-    let div = document.createElement("div");
-    div.classList.add("letterDividerLine");
-    return div
-}
+    const newContact = { name, email, phone };
 
-function createContactCard(contact, contactId) {
-    let card = document.createElement("div");
-    card.classList.add("contactCard");
-    card.dataset.contactId = contactId;
-    let initials = getInitials(contact.name);
-    let bgColor = getColorFromName(contact.name + contact.email);
+    if (editIndex !== null) {
+        // Bearbeite bestehenden Kontakt
+        contacts[editIndex] = newContact;
+        editIndex = null;
+    } else {
+        // Füge neuen Kontakt hinzu
+        contacts.push(newContact);
+    }
 
-
-    card.innerHTML = `
-        <div class="contactIcon" style="background-color: ${bgColor}">${initials}</div>
-        <div class="contactDetails">
-            <strong>${contact.name}</strong>
-            <span class="email">${contact.email}</span>
-        </div>
-    `;
-
-
-    card.onclick = async () => {
-        currentContactId = contactId;
-        await openContactById(contactId);
-        addContactCardBgToggle(card);
-        showContactDetailsToggle(card);
-        if (window.innerWidth <= 800) {
-            openContactMobile(contactId);
-        }
-    };
-
-    return card;
-}
-
-async function openContactById(contactId) {
-    let contact = (await getData(`/users/${loggedInUser}/contacts/${contactId}`));
-    let userNameDeleteContainer = document.getElementById('userNameDeleteContainer');
-
-
-    if (!contact || !contact.name || !contact.email) return;
-    document.getElementById("userName").innerHTML = contact.name;
-    document.getElementById("userEmail").innerHTML = contact.email;
-    document.getElementById("userPhoneNumber").innerHTML = contact.phone;
-
-    let initials = getInitials(contact.name);
-    let color = getColorFromName(contact.name + contact.email);
-    let initialsContainer = document.getElementById("contactInitials");
-
-    initialsContainer.innerHTML = initials;
-    initialsContainer.style.backgroundColor = color;
-    initialsContainer.style.color = "white";
-    userNameDeleteContainer.innerHTML = `
-    <div class="userNameDeleteIconContainer">
-    <img class="defaultIcon" src="./assets/img/delete.svg" alt="">
-    <img class="hoverIcon" src="./assets/img/deleteHover.svg" alt="">
-    </div>
-    <span onclick="deleteContact('${contactId}')">Delete</span>`;
-
-    currentContactId = adjustEmail(contact.email);
-}
-
-function getInitials(name) {
-    if (!name || typeof name !== 'string') return '';
-    return name
-        .split(" ")
-        .map(word => word[0])
-        .join("")
-        .toUpperCase();
-}
-
-window.addEventListener("DOMContentLoaded", () => {
     renderContacts();
+    closeOverlay();
+}
+
+
+// Overlay öffnen
+function openOverlay() {
+    document.getElementById("overlay").classList.remove("dNone");
+
+    // Felder nur zurücksetzen, wenn KEIN Bearbeiten läuft
+    if (editIndex === null) {
+        document.getElementById("contact-name").value = "";
+        document.getElementById("contact-email").value = "";
+        document.getElementById("contact-phone").value = "";
+    }
+}
+
+function openContactOverlay(contact) {
+  overlay.classList.remove('dNone');
+  overlay.innerHTML = `
+    <div class="overlay-content" style="background: white; padding: 24px; border-radius: 8px; max-width: 400px;">
+      <h2>${contact.name}</h2>
+      <p><strong>Email:</strong> ${contact.email}</p>
+      <p><strong>Phone:</strong> ${contact.phone}</p>
+      <button class="btn_dark" onclick="closeOverlay()">Close</button>
+    </div>
+  `;
+
+  // zentrieren
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.zIndex = '999';
+}
+
+// Overlay schließen
+function closeOverlay() {
+  overlay.classList.add('dNone');
+  overlay.innerHTML = '';
+}
+
+// Initialisierung nach Laden
+window.addEventListener('DOMContentLoaded', () => {
+  renderContacts();
 });
+// Kontakt hinzufügen Overlay öffnen
+function openAddContactOverlay() {
+  overlay.classList.remove('dNone');
+  overlay.innerHTML = `
+    <div class="overlay-content" style="background: white; padding: 24px; border-radius: 8px; max-width: 400px;">
+      <h2>Neuen Kontakt hinzufügen</h2>
+      <form onsubmit="submitNewContact(event)">
+        <div style="margin-bottom: 12px;">
+          <label>Name:<br>
+            <input type="text" id="new-name" required>
+          </label>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label>Email:<br>
+            <input type="email" id="new-email" required>
+          </label>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label>Telefon:<br>
+            <input type="tel" id="new-phone" required>
+          </label>
+        </div>
+        <button type="submit" class="btn_dark">Speichern</button>
+        <button type="button" class="btn_white" onclick="closeOverlay()" style="margin-left: 12px;">Abbrechen</button>
+      </form>
+    </div>
+  `;
 
-function getColorFromName(name) {
-    let sum = 0;
-    for (let i = 0; i < name.length; i++) {
-        sum += name.charCodeAt(i) + (i + 1);
-    }
-    let index = sum % colors.length;
-    return colors[index];
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.zIndex = '999';
 }
 
-function addContactCardBgToggle(cardElement) {
-    let allCards = document.querySelectorAll('.contactCard');
+// Formularverarbeitung für neuen Kontakt
+function submitNewContact(event) {
+  event.preventDefault();
+  const name = document.getElementById('new-name').value;
+  const email = document.getElementById('new-email').value;
+    const newContact = {
+    id: contacts.length + 1, // einfache ID-Generierung
+    name,
+    email,
+    phone
+  };
 
-    if (cardElement.classList.contains('active')) {
-        cardElement.classList.remove('active');
-    } else {
-        allCards.forEach(card => card.classList.remove('active'));
-        cardElement.classList.add('active');
-    }
-}
-
-function showContactDetailsToggle(cardElement) {
-    let overview = document.getElementById('showContactDetails');
-
-    if (cardElement.classList.contains('active', 'show')) {
-        overview.classList.add('active', 'show');
-    } else {
-        overview.classList.remove('active', 'show');
-    }
-}
-
-function showSuccessOverlayImg() {
-    let successOverlayImg = document.getElementById('succesfullyCreatedOverlayImg');
-
-    successOverlayImg.classList.add('show');
-    setTimeout(() => {
-        successOverlayImg.classList.remove('show');
-    }, 800);
-}
-
-function openContactMobile(contactId) {
-    document.getElementById('contactListContainer').classList.add('dNone');
-    document.getElementById('contactsOverview').classList.remove('dNone');
-    document.getElementById('contactsOverview').classList.add('mobileVisible');
-    openContactById(contactId);
-}
-
-function closeContactDetailOverlay() {
-
+  contacts.push(newContact);
+  closeOverlay();
+  renderContacts();
 }

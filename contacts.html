@@ -21,106 +21,119 @@
       type="image/x-icon"
       media="(prefers-color-scheme: dark)"
     />
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./styles/sidebar.css">
-    <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./styles/contacts.css">
-    <link rel="stylesheet" href="./styles/contactsModal.css">
-    <link rel="stylesheet" href="./styles/mobileSidebar.css">
-    <link rel="stylesheet" href="./styles/mobileHeader.css">
-    <link rel="stylesheet" href="./styles/mobileContacts.css">
-    <link rel="stylesheet" href="./styles/summary.css">
-    <script src="./script.js"></script>
-    <script src="./scripts/includeHTML.js"></script>
-    <script src="./scripts/header.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/contactsModal.js"></script>
-    <script src="./scripts/editContactsModal.js"></script>
-    <script src="./scripts/summary.js"></script>
-    <script src="./scripts/db.js"></script>
-    <script src="./scripts/guestUser.js"></script>
-    <script src="./scripts/sidebar.js"></script>
 
-    <title>Contacts</title>
-
+   <title>Join - Contacts</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./styles/standart.css">
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+  <link rel="stylesheet" href="./styles/contacts.css">
+  <link rel="stylesheet" href="./styles/overlay.css">
+  
 </head>
-
-<body onload="init()">
-    <div id="orientationOverlay" class="orientationOverlay dNone">
-        <p>Please rotate your device to portrait mode to continue browsing.</p>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header_icons">
+      <img src="./assets/icons/help.svg" class="help_icon" alt="Help" />
+      <div class="user_circle">AM</div>
     </div>
-    <div class="content">
-        <div w3-include-html="./assets/templates/sidebar.html"></div>
-        <div class="includeHeader">
-            <div class="templateHTML" w3-include-html="./assets/templates/header.html"></div>
-            <main>
-                <div class="mainContent">
-                    <div id="succesfullyCreatedOverlayImg" class="succesfullyCreatedOverlayImg"><img
-                            src="./assets/icons/contactSuccesfullyCreatedOverlay.svg" alt=""></div>
-                    <div class="contactListContainer" id="contactListContainer">
-                        <button onclick="openContactsModal()" class="addContactButton">
-                            <span>Add new contact</span>
-                            <img src="./assets/icons/addPerson.svg" alt=""></button>
-                        <div class="mobileListContainer">
-                            <div class="contactList" id="contactList"></div>
-                            <button class="addContactMobileButton" onclick="openContactsModal()">
-                                <img src="./assets/icons/addContactMobile.svg" alt="">
-                            </button>
+  </header>
 
-                        </div>
 
-                    </div>
-
-                    <div class="contactsOverview" id="contactsOverview">
-                        <div class="contactsHeadline">
-                            <div class="mobileHeadlineWrapper">
-                                <h1>Contacts</h1>
-                                <div class="blueDivider"></div>
-                                <span>Better with a team</span>
-                                <p class="blueMobileUnderline"></p>
-                            </div>
-                            <button class="mobileBackArrow"><img src="./assets/icons/backArrow.svg" alt=""></button>
-                        </div>
-                        <div class="contactsBody" id="showContactDetails">
-                            <div class="contactsNameContainer">
-                                <div id="contactInitials" class="userIconContainer"></div>
-                                <div class="userNameContainer" id="userNameContainer">
-                                    <h2 id="userName">Name Name</h2>
-                                    <div class="userNameIconContainer">
-                                        <div class="userNameEditContainer" onclick="openEditContactsModal()">
-                                            <div class="userNameEditIconContainer">
-                                                <img class="defaultIcon" src="./assets/icons/edit.svg" alt="">
-                                                <img class="hoverIcon" src="./assets/icons/editHover.svg" alt="">
-                                            </div>
-                                            <span>Edit</span>
-                                        </div>
-                                        <div id="userNameDeleteContainer" class="userNameDeleteContainer">
-                                            <div class="userNameDeleteIconContainer">
-                                                <img class="defaultIcon" src="./assets/icons/delete.svg" alt="">
-                                                <img class="hoverIcon" src="./assets/icons/deleteHover.svg" alt="">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contactsInfoContainer">
-                                <h3>Contact Information</h3>
-                                <span>Email</span>
-                                <a id="userEmail" href="">@mail.com</a>
-                                <span>Phone</span>
-                                <p id="userPhoneNumber">number</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+    <nav
+      class="height_100 position_absolute d_flex flex_column justify_between"
+    >
+      <div class="d_flex_center">
+        <img
+          src="./assets/img/logo_navbar.svg"
+          class="d_flex logo_navbar"
+          alt=""
+        />
+      </div>
+      <div class="d_flex_center_column justify_start nav_items margin_0">
+        <div class="d_flex_center justify_start nav_item_active">
+          <img
+            class="margin_0"
+            src="./assets/icons/icon_summary_active.svg"
+            alt="summary icon"
+          />Summary
         </div>
+        <a href="./templates/addtask.html" class="margin_0 width_100">
+          <div class="d_flex_center justify_start nav_item">
+            <img
+              class="margin_0"
+              src="./assets/icons/icon_add_task.svg"
+              alt="add task icon"
+            />Add Task
+          </div>
+        </a>
+        <a href="./board.html" class="margin_0 width_100">
+          <div class="d_flex_center justify_start nav_item">
+            <img
+              class="margin_0"
+              src="./assets/icons/icon_board.svg"
+              alt="board icon"
+            />Board
+          </div>
+        </a>
+        <a href="./contacts.html" class="margin_0 width_100">
+          <div class="d_flex_center justify_start nav_item">
+            <img
+              class="margin_0"
+              src="./assets/icons/icon_contacts.svg"
+              alt="contacts icon"
+            />Contacts
+          </div>
+        </a>
+      </div>
+      <div
+        class="d_flex_center_column justify_start nav_privacy_legal align_none margin_0"
+      >
+        <a class="justify_start" href="./templates/privacyPolicy.html"
+          >Privacy Policy</a
+        >
+        <a class="justify_start" href="./templates/legalNotice.html"
+          >Legal Notice</a
+        >
+      </div>
+    </nav>
+
+
+    <!-- Hauptinhalt -->
+    <main style="flex-grow: 1; padding: 96px 40px 40px 40px;">
+      <h1>Contacts</h1>
+      <p>Here you can manage your contacts.</p>
+    <div style="margin-bottom: 16px;">
+        <button class="btn_dark" onclick="openAddContactOverlay()">+ Kontakt hinzufügen</button>
     </div>
 
-    <div id="modalOverlay" class="modalOverlay dNone"></div>
-    <div id="contactsModal" class="dNone"></div>
-    <div id="editContactsModal" class="dNone"></div>
+      <!-- Platzhalter für Kontakte -->
+      <div id="contacts-list">
+        <!-- Kontakte werden hier per JS eingefügt -->
+      </div>
+      <!-- Platzhalter für Overlay z. B. zum Hinzufügen/Bearbeiten -->
+      <div id="contact-overlay" class="dNone">
+   <!-- Am Ende vom Overlay (statt nur "Speichern") -->
+<div class="overlay-buttons">
+    <button class="btn_dark" onclick="saveContact()">Speichern</button>
+    <button class="btn_white" onclick="closeOverlay()">Abbrechen</button>
+</div>
 
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Logout-Overlay (optional) -->
+  <div id="overlay-small-logout-win" class="small_logout_win dNone">
+    <div class="small_logout_link">Help</div>
+    <div class="small_logout_link">Legal</div>
+    <div class="small_logout_link">Logout</div>
+  </div>
+
+  <!-- JavaScript (falls vorhanden) -->
+<script src="script.js"></script>
+    <script src="./scripts/contacts.js"></script>
 </body>
 </html>
