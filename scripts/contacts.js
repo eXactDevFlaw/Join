@@ -1,169 +1,123 @@
 let editIndex = null;
 
-// Dummy-Kontakte (ersetzt später lokale Speicherung oder Backend)
+// Dummy-Kontakte (ersetze später durch lokale Speicherung oder Backend)
 const contacts = [
   { id: 1, name: "Anna Müller", email: "anna.mueller@example.com", phone: "+49 170 1234567" },
   { id: 2, name: "Ben Schneider", email: "ben.schneider@example.com", phone: "+49 172 9876543" },
   { id: 3, name: "Clara Fischer", email: "clara.fischer@example.com", phone: "+49 151 7654321" }
 ];
 
-// Elemente referenzieren
 const contactsList = document.getElementById('contacts-list');
 const overlay = document.getElementById('contact-overlay');
+const overlayTitle = document.getElementById('overlay-title');
+const nameInput = document.getElementById('contact-name');
+const emailInput = document.getElementById('contact-email');
+const phoneInput = document.getElementById('contact-phone');
 
-// Kontakte anzeigen
+function getInitials(name) {
+  return name.split(' ').map(n => n.charAt(0).toUpperCase()).join('');
+}
+
+function groupContactsAlphabetically() {
+  const grouped = {};
+  contacts.sort((a, b) => a.name.localeCompare(b.name)).forEach(contact => {
+    const initial = contact.name.charAt(0).toUpperCase();
+    if (!grouped[initial]) grouped[initial] = [];
+    grouped[initial].push(contact);
+  });
+  return grouped;
+}
+
 function renderContacts() {
-    const contactList = document.getElementById("contacts-list");
-    contactList.innerHTML = "";
+  contactsList.innerHTML = "";
+  const groupedContacts = groupContactsAlphabetically();
 
-    contacts.forEach((contact, index) => {
-        const contactItem = document.createElement("div");
-        contactItem.className = "contact-item";
-        contactItem.innerHTML = `
-            <strong>${contact.name}</strong><br>
-            ${contact.email}<br>
-            ${contact.phone}<br>
-            <button class="btn_white" onclick="editContact(${index})">Bearbeiten</button>
-        `;
-        contactList.appendChild(contactItem);
+  for (const initial in groupedContacts) {
+    const section = document.createElement("div");
+    section.className = "contact-section";
+    section.innerHTML = `<div class="contact-initial">${initial}</div>`;
+
+    groupedContacts[initial].forEach((contact, index) => {
+      const contactItem = document.createElement("div");
+      contactItem.className = "contact-item join-style";
+      contactItem.innerHTML = `
+        <div class="contact-left">
+          <div class="contact-circle">${getInitials(contact.name)}</div>
+          <div class="contact-details">
+            <div class="contact-name">${contact.name}</div>
+            <div class="contact-email">${contact.email}</div>
+          </div>
+        </div>
+        <div class="contact-actions">
+          <img src="./assets/edit_icon.svg" alt="Bearbeiten" onclick="editContact(${contacts.indexOf(contact)})" class="icon">
+        </div>
+      `;
+      section.appendChild(contactItem);
     });
+
+    contactsList.appendChild(section);
+  }
 }
+
 function editContact(index) {
-    const contact = contacts[index];
-    editIndex = index;
-
-// Fülle die Felder mit vorhandenen Daten
-    // Make sure these elements exist in your HTML and have the correct IDs
-    const nameInput = document.getElementById("contact-name");
-    const emailInput = document.getElementById("contact-email");
-    const phoneInput = document.getElementById("contact-phone");
-
-    if (nameInput) nameInput.value = contact.name;
-    if (emailInput) emailInput.value = contact.email;
-    if (phoneInput) phoneInput.value = contact.phone;
-    // Zeige Overlay
-    openOverlay();
+  const contact = contacts[index];
+  editIndex = index;
+  nameInput.value = contact.name;
+  emailInput.value = contact.email;
+  phoneInput.value = contact.phone;
+  overlayTitle.textContent = "Kontakt bearbeiten";
+  openOverlay();
 }
+
 function saveContact() {
-    const name = document.getElementById("contact-name").value;
-    const email = document.getElementById("contact-email").value;
-    const phone = document.getElementById("contact-phone").value;
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const phone = phoneInput.value.trim();
 
-    const newContact = { name, email, phone };
+  if (!name || !email || !phone) {
+    alert("Bitte alle Felder ausfüllen.");
+    return;
+  }
 
-    if (editIndex !== null) {
-        // Bearbeite bestehenden Kontakt
-        contacts[editIndex] = newContact;
-        editIndex = null;
-    } else {
-        // Füge neuen Kontakt hinzu
-        contacts.push(newContact);
-    }
+  const newContact = { id: Date.now(), name, email, phone };
 
-    renderContacts();
-    closeOverlay();
+  if (editIndex !== null) {
+    contacts[editIndex].name = name;
+    contacts[editIndex].email = email;
+    contacts[editIndex].phone = phone;
+    editIndex = null;
+  } else {
+    contacts.push(newContact);
+  }
+
+  renderContacts();
+  closeOverlay();
 }
 
-
-// Overlay öffnen
 function openOverlay() {
-    document.getElementById("overlay").classList.remove("dNone");
-
-    // Felder nur zurücksetzen, wenn KEIN Bearbeiten läuft
-    if (editIndex === null) {
-        document.getElementById("contact-name").value = "";
-        document.getElementById("contact-email").value = "";
-        document.getElementById("contact-phone").value = "";
-    }
+  overlay.classList.remove("dNone");
+  if (editIndex === null) {
+    overlayTitle.textContent = "Neuen Kontakt hinzufügen";
+    nameInput.value = "";
+    emailInput.value = "";
+    phoneInput.value = "";
+  }
 }
 
-function openContactOverlay(contact) {
-  overlay.classList.remove('dNone');
-  overlay.innerHTML = `
-    <div class="overlay-content" style="background: white; padding: 24px; border-radius: 8px; max-width: 400px;">
-      <h2>${contact.name}</h2>
-      <p><strong>Email:</strong> ${contact.email}</p>
-      <p><strong>Phone:</strong> ${contact.phone}</p>
-      <button class="btn_dark" onclick="closeOverlay()">Close</button>
-    </div>
-  `;
-
-  // zentrieren
-  overlay.style.position = 'fixed';
-  overlay.style.top = '0';
-  overlay.style.left = '0';
-  overlay.style.width = '100vw';
-  overlay.style.height = '100vh';
-  overlay.style.display = 'flex';
-  overlay.style.justifyContent = 'center';
-  overlay.style.alignItems = 'center';
-  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  overlay.style.zIndex = '999';
-}
-
-// Overlay schließen
 function closeOverlay() {
-  overlay.classList.add('dNone');
-  overlay.innerHTML = '';
+  overlay.classList.add("dNone");
+  editIndex = null;
 }
 
-// Initialisierung nach Laden
-window.addEventListener('DOMContentLoaded', () => {
+function openAddContactOverlay() {
+  editIndex = null;
+  overlayTitle.textContent = "Neuen Kontakt hinzufügen";
+  nameInput.value = "";
+  emailInput.value = "";
+  phoneInput.value = "";
+  openOverlay();
+}
+
+window.addEventListener("DOMContentLoaded", () => {
   renderContacts();
 });
-// Kontakt hinzufügen Overlay öffnen
-function openAddContactOverlay() {
-  overlay.classList.remove('dNone');
-  overlay.innerHTML = `
-    <div class="overlay-content" style="background: white; padding: 24px; border-radius: 8px; max-width: 400px;">
-      <h2>Neuen Kontakt hinzufügen</h2>
-      <form onsubmit="submitNewContact(event)">
-        <div style="margin-bottom: 12px;">
-          <label>Name:<br>
-            <input type="text" id="new-name" required>
-          </label>
-        </div>
-        <div style="margin-bottom: 12px;">
-          <label>Email:<br>
-            <input type="email" id="new-email" required>
-          </label>
-        </div>
-        <div style="margin-bottom: 12px;">
-          <label>Telefon:<br>
-            <input type="tel" id="new-phone" required>
-          </label>
-        </div>
-        <button type="submit" class="btn_dark">Speichern</button>
-        <button type="button" class="btn_white" onclick="closeOverlay()" style="margin-left: 12px;">Abbrechen</button>
-      </form>
-    </div>
-  `;
-
-  overlay.style.position = 'fixed';
-  overlay.style.top = '0';
-  overlay.style.left = '0';
-  overlay.style.width = '100vw';
-  overlay.style.height = '100vh';
-  overlay.style.display = 'flex';
-  overlay.style.justifyContent = 'center';
-  overlay.style.alignItems = 'center';
-  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  overlay.style.zIndex = '999';
-}
-
-// Formularverarbeitung für neuen Kontakt
-function submitNewContact(event) {
-  event.preventDefault();
-  const name = document.getElementById('new-name').value;
-  const email = document.getElementById('new-email').value;
-    const newContact = {
-    id: contacts.length + 1, // einfache ID-Generierung
-    name,
-    email,
-    phone
-  };
-
-  contacts.push(newContact);
-  closeOverlay();
-  renderContacts();
-}

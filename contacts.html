@@ -52,13 +52,15 @@
         />
       </div>
       <div class="d_flex_center_column justify_start nav_items margin_0">
-        <div class="d_flex_center justify_start nav_item_active">
+        <a href="./summary.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
           <img
             class="margin_0"
-            src="./assets/icons/icon_summary_active.svg"
+            src="./assets/icons/icon_summery.svg"
             alt="summary icon"
           />Summary
         </div>
+        </a>
         <a href="./templates/addtask.html" class="margin_0 width_100">
           <div class="d_flex_center justify_start nav_item">
             <img
@@ -78,10 +80,10 @@
           </div>
         </a>
         <a href="./contacts.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
+          <div class="d_flex_center justify_start nav_item_active">
             <img
               class="margin_0"
-              src="./assets/icons/icon_contacts.svg"
+              src="./assets/icons/icon_contacts_active.svg"
               alt="contacts icon"
             />Contacts
           </div>
@@ -99,31 +101,44 @@
       </div>
     </nav>
 
-
-    <!-- Hauptinhalt -->
-    <main style="flex-grow: 1; padding: 96px 40px 40px 40px;">
-      <h1>Contacts</h1>
-      <p>Here you can manage your contacts.</p>
-    <div style="margin-bottom: 16px;">
-        <button class="btn_dark" onclick="openAddContactOverlay()">+ Kontakt hinzufügen</button>
-    </div>
-
-      <!-- Platzhalter für Kontakte -->
-      <div id="contacts-list">
-        <!-- Kontakte werden hier per JS eingefügt -->
-      </div>
-      <!-- Platzhalter für Overlay z. B. zum Hinzufügen/Bearbeiten -->
-      <div id="contact-overlay" class="dNone">
-   <!-- Am Ende vom Overlay (statt nur "Speichern") -->
-<div class="overlay-buttons">
-    <button class="btn_dark" onclick="saveContact()">Speichern</button>
-    <button class="btn_white" onclick="closeOverlay()">Abbrechen</button>
-</div>
-
-      </div>
-    </main>
-
+<!-- Hauptinhalt im Join-Stil -->
+<main class="contacts-main">
+  <!-- Kopfzeile -->
+  <div class="contacts-header">
+    <h1>Contacts</h1>
+    <p>Here you can manage your contacts.</p>
+    <button class="btn btn-primary" onclick="openAddContactOverlay()">
+      + Add Contact
+    </button>
   </div>
+
+  <!-- Kontaktliste -->
+  <div id="contacts-list" class="contacts-list"></div>
+
+  <!-- Kontakt-Overlay (Bearbeiten / Hinzufügen) -->
+  <div id="contact-overlay" class="overlay dNone">
+    <div class="overlay-content">
+      <h2 id="overlay-title">Kontakt</h2>
+      <form onsubmit="saveContact(); return false;">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" required />
+
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" required />
+
+        <label for="contact-phone">Telefon</label>
+        <input type="tel" id="contact-phone" required />
+
+        <div class="overlay-buttons">
+          <button type="submit" class="btn btn-primary">Speichern</button>
+          <button type="button" class="btn btn-secondary" onclick="closeOverlay()">
+            Abbrechen
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
 
   <!-- Logout-Overlay (optional) -->
   <div id="overlay-small-logout-win" class="small_logout_win dNone">
@@ -132,8 +147,8 @@
     <div class="small_logout_link">Logout</div>
   </div>
 
-  <!-- JavaScript (falls vorhanden) -->
-<script src="script.js"></script>
-    <script src="./scripts/contacts.js"></script>
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <script src="./scripts/contacts.js"></script>
 </body>
 </html>
