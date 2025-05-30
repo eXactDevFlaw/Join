@@ -37,13 +37,25 @@ main{
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     gap: 18px;
     transition-duration: 80ms;
-    
 }
 
 .summary_box:hover{
-    height: 184px;
+    transform: scale(1.07);
     background-color: rgba(42, 54, 71, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+}
+
+.summary_box:active{
+    color: rgba(0, 0, 0, 1);;
+    transition-duration: 100ms;
+    background-color: rgba(255, 255, 255, 1);
+    height: 168px;
+    width: 264px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    gap: 18px;
+    
 }
 
 
@@ -59,8 +71,15 @@ main{
     line-height: 120%;
 }
 
-.urgent {
+.urgent { 
     width: 560px;
+    transform-origin: top left;
+}
+
+
+.urgent:hover{
+    transform: scale(1.028);
+    cursor: pointer;
 }
 
 .small_box {
@@ -70,8 +89,40 @@ main{
     text-align: center;
 }
 
-.small_box:hover{
+/* .small_box:hover{
     width: 184px;
+} */
+
+.box_item{
+    height: 69px;
+    width: 69px;
+    background-size: contain;
+}
+
+.pencil{
+    background-size: 69px 69px;
+    background-image: url(/assets/icons/pencil_rectangle.svg);
+}
+
+.summary_box:hover .check{
+    background-image: url(/assets/icons/check_rectangle_hover.svg);
+}
+
+.summary_box:active .check{
+    background-image: url(/assets/icons/check_rectangle.svg);
+}
+
+.summary_box:hover .pencil{
+    background-image: url(/assets/icons/pencil_rectangle_hover.svg);
+}
+
+.summary_box:hover .pencil{
+    background-image: url(/assets/icons/pencil_rectangle.svg);
+}
+
+.check{
+    background-size: 69px 69px;
+    background-image: url(/assets/icons/check_rectangle.svg);
 }
 
 p{
@@ -87,4 +138,12 @@ p{
 .date{
     align-items: start;
     gap: 13px;
+}
+
+.inner_left{
+    transform-origin: left center;
+}
+
+.inner_right{
+    transform-origin: right center;
 }
