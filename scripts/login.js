@@ -12,3 +12,8 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }, 1000);
 });
+
+function toggleSignIn() {
+  document.getElementById('login-form').classList.toggle('d_none');
+  document.getElementById('signin-form').classList.toggle('d_none');
+}
