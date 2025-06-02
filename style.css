@@ -232,6 +232,12 @@ button {
     left: 0;
 }
 
+.input_icon_wrapper {
+    position: relative;
+    width: 420px;
+    margin-bottom: 20px;
+}
+
 .input_icon_wrapper .input_icon {
     position: absolute;
     right: 12px;
