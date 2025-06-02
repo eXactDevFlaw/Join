@@ -140,3 +140,28 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.signin_btn_back {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+}
+
+.signin-btn-checkbock {
+    background: none;
+    border: none;
+}
+
+.signin_pp_link{
+    color: rgba(41, 171, 226, 1);
+}
+
+.signin_pp_link:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
