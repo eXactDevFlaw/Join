@@ -8,12 +8,29 @@ main{
     height: calc(100vh - 96px);
 }
 
+h1{
+    margin: 0;
+}
+
+.headline{
+    width: 1056px;
+}
+
 .input_icon_wrapper:hover {
     cursor: pointer;
 }
 
+input{
+    padding-right: 66px !important;
+}
+
 input:hover {
     cursor: pointer;
+}
+
+.vector {
+    position: absolute;
+    right: 60px;
 }
 
 .input_icon_container {
@@ -35,7 +52,7 @@ input:hover {
 
 .search_icon{
     background-image: url(/assets/icons/search.svg);
-    background-size: contain;
+    background-size: cover;
     height: 17.58px;
     width: 17.58px;
 }
@@ -43,4 +60,23 @@ input:hover {
 .input_icon_container:active .search_icon{
     background-image: url(/assets/icons/search_active.svg);
     background-color: unset;
+}
+
+button {
+    font-weight: 700;
+    width: 160px;
+    height: 48px;
+    font-size: 21px;
+    padding: 12px 16px 12px 16px;
+    gap: 4px;
+}
+
+.plus {
+    width: 18.67px;
+    height: 18.67px;
+}
+
+.find_add{
+    gap: 32px;
+    margin: 0;
 }
