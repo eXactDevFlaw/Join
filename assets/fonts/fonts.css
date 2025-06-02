@@ -1,10 +1,11 @@
 @font-face {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   src: url(./Inter-VariableFont_opsz\,wght.ttf);
 }
 
+
 h1 {
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
     font-size: 61px;
     font-weight: 700;
     color: rgba(0, 0, 0, 1);
@@ -12,13 +13,13 @@ h1 {
 }
 
 h2 {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   font-weight: bold;
   font-size: 40px;
 }
 
 h3{
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
     font-weight: 400;
     font-size: 27px;
     line-height: 120%;
@@ -26,7 +27,7 @@ h3{
 }
 
 h4 {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   font-weight: bold;
   font-size: 20px;
 }

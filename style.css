@@ -136,6 +136,10 @@ button {
     background-color: rgba(9, 25, 49, 1);
 }
 
+.nav_active{
+    color: rgba(255, 255, 255, 1);
+}
+
 .nav_privacy_legal {
     padding-top: 243px;
     padding-left: 52px;
