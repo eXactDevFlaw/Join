@@ -140,13 +140,3 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-.signin_main>*>a {
-    color: rgba(41, 171, 226, 1);
-    text-decoration: none;
-}
-
-.signin_main>*>a:hover {
-    color: rgba(41, 171, 226, 1);
-    text-decoration: underline;
-}
