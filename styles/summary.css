@@ -19,6 +19,10 @@ main{
     margin-right: 50px;
 }
 
+.summary_overview a{
+    color: unset;
+}
+
 .headline{
     width: 625px;
 }
@@ -60,7 +64,6 @@ main{
     gap: 18px;
     
 }
-
 
 .task_number{
     font-weight: 600;
@@ -120,7 +123,7 @@ main{
     background-image: url(/assets/icons/pencil_rectangle_hover.svg);
 }
 
-.summary_box:hover .pencil{
+.summary_box:active .pencil{
     background-image: url(/assets/icons/pencil_rectangle.svg);
 }
 
