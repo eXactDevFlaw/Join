@@ -1,29 +1,46 @@
-.input_icon_wrapper {
-    position: relative;
-    width: 420px;
-    margin-bottom: 20px;
+main{
+    margin: 0 auto;
+    left: 232px;
+    top: 96px;
+    padding-left: calc(328px - 232px);
+    padding-top: calc(206px - 96px);
+    width: calc(100% - 232px);
+    height: calc(100vh - 96px);
 }
 
-.input_icon_wrapper .input_icon {
+.input_icon_wrapper:hover {
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.input_icon_container {
+    height: 32px !important;
+    width: 32px !important;
     position: absolute;
     right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    pointer-events: none;
+    
 }
 
-.input_icon_wrapper input {
-    width: 100%;
-    padding: 10px 40px 10px 10px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(209, 209, 209, 1);
-    color: rgba(209, 209, 209, 1);
+.input_icon_container:hover{
+    background-color: rgba(238, 238, 238, 1);
+    border-radius: 50%;
 }
 
-.input_icon_wrapper input:focus {
-    outline-color: rgba(41, 171, 226, 1);
-    color: rgba(0, 0, 0, 1)
+.input_icon_container:active {
+    background-color: unset;
+}
+
+.search_icon{
+    background-image: url(/assets/icons/search.svg);
+    background-size: contain;
+    height: 17.58px;
+    width: 17.58px;
+}
+
+.input_icon_container:active .search_icon{
+    background-image: url(/assets/icons/search_active.svg);
+    background-color: unset;
 }

@@ -65,7 +65,7 @@ a {
 }
 
 .margin_0 {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .margin_0_auto {

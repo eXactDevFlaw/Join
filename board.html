@@ -21,11 +21,11 @@
       media="(prefers-color-scheme: dark)"
     />
     <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
     <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="stylesheet" href="./styles/summary.css" />
-    <link rel="stylesheet" href="./styles/board.css">
+    
     <title>Join - Board</title>
   </head>
   <body>
@@ -131,13 +131,14 @@
     <main class="position_absolute">
        <div class="headline d_flex_center justify_around">
             <h1>Board</h1>
-              <div class="input_icon_wrapper">
-            <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
+              <div class="input_icon_wrapper d_flex_center margin_0">
+            <div class="input_icon_container d_flex_center">
+              <div class="search_icon"></div>
+            </div>
             <input
               type="text"
               placeholder="Find Task"
-              name="username"
-              id="username"
+              id="find-task"
               required
             />
           </div>
