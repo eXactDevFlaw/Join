@@ -114,36 +114,6 @@
 }
 
 
-.input_icon_wrapper {
-    position: relative;
-    width: 420px;
-    margin-bottom: 20px;
-}
-
-.input_icon_wrapper .input_icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    pointer-events: none;
-}
-
-.input_icon_wrapper input {
-    width: 100%;
-    padding: 10px 40px 10px 10px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(209, 209, 209, 1);
-    color: rgba(209, 209, 209, 1);
-}
-
-.input_icon_wrapper input:focus {
-    outline-color: rgba(41, 171, 226, 1);
-    color: rgba(0, 0, 0, 1)
-}
-
 .login_btn {
     height: 50px;
     width: 110px;
