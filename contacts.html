@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
       href="./assets/icons/favicon_dark.svg"
@@ -22,24 +21,59 @@
       media="(prefers-color-scheme: dark)"
     />
 
-   <title>Join - Contacts</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="./styles/standart.css">
-  <link rel="icon" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="./assets/fonts/fonts.css">
-  <link rel="stylesheet" href="./styles/contacts.css">
-  <link rel="stylesheet" href="./styles/overlay.css">
-  
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <div class="header_icons">
-      <img src="./assets/icons/help.svg" class="help_icon" alt="Help" />
-      <div class="user_circle">AM</div>
+    <title>Join - Contacts</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/standart.css" />
+    <link rel="icon" href="assets/img/favicon.png" />
+    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./styles/contacts.css" />
+    <link rel="stylesheet" href="./styles/overlay.css" />
+  </head>
+  <body>
+    <div
+      class="position_absolute height_100 width_100 d_none"
+      id="overlay-small-logout-win"
+      onclick="toggleLogoutOverlay()"
+    >
+      <div
+        class="position_absolute small_logout_win d_flex_center"
+        onclick="stopPropagation(event)"
+      >
+        <div class="d_flex_center justify_around flex_column">
+          <a
+            class="d_flex_center justify_start small_logout_link"
+            href="./templates/legalNotice.html"
+            >Legal Notice</a
+          >
+          <a
+            class="d_flex_center justify_start small_logout_link"
+            href="./templates/privacyPolicy.html"
+            >Privacy Policy</a
+          >
+          <a class="d_flex_center justify_start small_logout_link" href="#"
+            >Log Out</a
+          >
+        </div>
+      </div>
     </div>
-  </header>
 
+    <!-- Header -->
+    <header>
+      <div class="header_container d_flex_center justify_between width_100">
+        <div class="margin_0">Kanban Project Management Tool</div>
+        <div class="d_flex_center margin_0 gap_16">
+          <a href="./templates/help.html">
+            <img src="./assets/icons/help.svg" class="help_icon" alt="" />
+          </a>
+          <div
+            class="user_circle d_flex_center"
+            onclick="toggleLogoutOverlay()"
+          >
+            <div class="position_absolute">LU</div>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <nav
       class="height_100 position_absolute d_flex flex_column justify_between"
@@ -53,13 +87,13 @@
       </div>
       <div class="d_flex_center_column justify_start nav_items margin_0">
         <a href="./summary.html" class="margin_0 width_100">
-        <div class="d_flex_center justify_start nav_item">
-          <img
-            class="margin_0"
-            src="./assets/icons/icon_summery.svg"
-            alt="summary icon"
-          />Summary
-        </div>
+          <div class="d_flex_center justify_start nav_item">
+            <img
+              class="margin_0"
+              src="./assets/icons/icon_summery.svg"
+              alt="summary icon"
+            />Summary
+          </div>
         </a>
         <a href="./templates/addtask.html" class="margin_0 width_100">
           <div class="d_flex_center justify_start nav_item">
@@ -101,54 +135,58 @@
       </div>
     </nav>
 
-<!-- Hauptinhalt im Join-Stil -->
-<main class="contacts-main">
-  <!-- Kopfzeile -->
-  <div class="contacts-header">
-    <h1>Contacts</h1>
-    <p>Here you can manage your contacts.</p>
-    <button class="btn btn-primary" onclick="openAddContactOverlay()">
-      + Add Contact
-    </button>
-  </div>
+    <!-- Hauptinhalt im Join-Stil -->
+    <main class="contacts-main">
+      <!-- Kopfzeile -->
+      <div class="contacts-header">
+        <h1>Contacts</h1>
+        <p>Better with a Team</p>
+        <button class="btn btn-primary" onclick="openAddContactOverlay()">
+          + Add Contact
+        </button>
+      </div>
 
-  <!-- Kontaktliste -->
-  <div id="contacts-list" class="contacts-list"></div>
+      <!-- Kontaktliste -->
+      <div id="contacts-list" class="contacts-list"></div>
 
-  <!-- Kontakt-Overlay (Bearbeiten / Hinzufügen) -->
-  <div id="contact-overlay" class="overlay dNone">
-    <div class="overlay-content">
-      <h2 id="overlay-title">Kontakt</h2>
-      <form onsubmit="saveContact(); return false;">
-        <label for="contact-name">Name</label>
-        <input type="text" id="contact-name" required />
+      <!-- Kontakt-Overlay (Bearbeiten / Hinzufügen) -->
+      <div id="contact-overlay" class="overlay dNone">
+        <div class="overlay-content">
+          <h2 id="overlay-title">Kontakt</h2>
+          <form onsubmit="saveContact(); return false;">
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" required />
 
-        <label for="contact-email">Email</label>
-        <input type="email" id="contact-email" required />
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" required />
 
-        <label for="contact-phone">Telefon</label>
-        <input type="tel" id="contact-phone" required />
+            <label for="contact-phone">Telefon</label>
+            <input type="tel" id="contact-phone" required />
 
-        <div class="overlay-buttons">
-          <button type="submit" class="btn btn-primary">Speichern</button>
-          <button type="button" class="btn btn-secondary" onclick="closeOverlay()">
-            Abbrechen
-          </button>
+            <div class="overlay-buttons">
+              <button type="submit" class="btn btn-primary">Speichern</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="closeOverlay()"
+              >
+                Abbrechen
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+    </main>
+
+    <!-- Logout-Overlay (optional) -->
+    <div id="overlay-small-logout-win" class="small_logout_win dNone">
+      <div class="small_logout_link">Help</div>
+      <div class="small_logout_link">Legal</div>
+      <div class="small_logout_link">Logout</div>
     </div>
-  </div>
-</main>
 
-  <!-- Logout-Overlay (optional) -->
-  <div id="overlay-small-logout-win" class="small_logout_win dNone">
-    <div class="small_logout_link">Help</div>
-    <div class="small_logout_link">Legal</div>
-    <div class="small_logout_link">Logout</div>
-  </div>
-
-  <!-- JavaScript -->
-  <script src="script.js"></script>
-  <script src="./scripts/contacts.js"></script>
-</body>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="./scripts/contacts.js"></script>
+  </body>
 </html>
