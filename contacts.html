@@ -30,17 +30,18 @@
     <link rel="stylesheet" href="./assets/fonts/fonts.css" />
     <link rel="stylesheet" href="./styles/contacts.css" />
     <link rel="stylesheet" href="./styles/overlay.css" />
-    <script src="./scripts/add-edit_contacts.js"></script>
-    <script src="./scripts/overlay.js"></script>
-        <script src="script.js"></script>
-    <script src="./scripts/contacts.js"></script>
 
+    <!-- Scripts -->
+    <!--<script src="./scripts/add-edit_contacts.js" defer></script> -->
+    <script src="./scripts/overlay.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="./scripts/contacts.js" defer></script>
   </head>
   <body>
     <!-- Logout Overlay -->
     <div
-      id="overlay-small-logout-win"
       class="position_absolute height_100 width_100 d_none"
+      id="overlay-small-logout-win"
       onclick="toggleLogoutOverlay()"
     >
       <div
@@ -71,7 +72,7 @@
         <div class="margin_0">Kanban Project Management Tool</div>
         <div class="d_flex_center margin_0 gap_16">
           <a href="./templates/help.html">
-            <img src="./assets/icons/help.svg" class="help_icon" alt="Help" />
+            <img src="./assets/icons/help.svg" class="help_icon" alt="" />
           </a>
           <div
             class="user_circle d_flex_center"
@@ -84,24 +85,18 @@
     </header>
 
     <!-- Sidebar -->
-    <nav
-      class="height_100 position_absolute d_flex flex_column justify_between"
-    >
+    <nav class="height_100 position_absolute d_flex flex_column justify_between">
       <div class="d_flex_center">
-        <img
-          src="./assets/img/logo_navbar.svg"
+        <img src="./assets/img/logo_navbar.svg"
           class="d_flex logo_navbar"
-          alt=""
-        />
+          alt=""/>
       </div>
       <div class="d_flex_center_column justify_start nav_items margin_0">
         <a href="./summary.html" class="margin_0 width_100">
           <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
+            <img class="margin_0"
               src="./assets/icons/icon_summary.svg"
-              alt="summary icon"
-            />Summary
+              alt="summary icon"/>Summary
           </div>
         </a>
         <a href="./addtask.html" class="margin_0 width_100">
@@ -109,150 +104,82 @@
             <img
               class="margin_0"
               src="./assets/icons/icon_add_task.svg"
-              alt="add task icon"
-            />Add Task
+              alt="add task icon"/>Add Task
           </div>
         </a>
         <a href="./board.html" class="margin_0 width_100">
           <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
+            <img class="margin_0"
               src="./assets/icons/icon_board.svg"
-              alt="board icon"
-            />Board
+              alt="board icon"/>Board
           </div>
         </a>
         <div class="d_flex_center justify_start nav_item_active">
-          <img
-            class="margin_0"
+          <img class="margin_0"
             src="./assets/icons/icon_contacts_active.svg"
-            alt="contacts icon"
-          />Contacts
+            alt="contacts icon"/>Contacts
         </div>
       </div>
-      <div
-        class="d_flex_center_column justify_start nav_privacy_legal align_none margin_0"
-      >
-        <a class="justify_start" href="./templates/privacyPolicy.html"
-          >Privacy Policy</a
-        >
-        <a class="justify_start" href="./templates/legalNotice.html"
-          >Legal Notice</a
-        >
+      <div class="d_flex_center_column justify_start nav_privacy_legal align_none margin_0">
+        <a class="justify_start" href="./templates/privacyPolicy.html">Privacy Policy</a>
+        <a class="justify_start" href="./templates/legalNotice.html">Legal Notice</a>
       </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="contacts-main">
-      <!-- Linke Kontakt-Spalte -->
-                <div class="contactlist-area">
-                    <button class="btn-newcontact d-flex-c-c" onclick="openAddNewContactOverlay()">
-                        Add new contact
-                        <img src="./assets/icons/addContactMobile.svg">
-                    </button>
-                    <div id="contactslist">
+ <main class="contacts-main">
+  <!-- Linke Spalte: Add-Button + Kontaktliste -->
+  <div class="contactlist-area">
+    <button class="btn-dark add-contact-btn" onclick="openAddContactOverlay()">
+      <img src="./assets/icons/addPerson.svg" alt="" />
+      Add new contact
+    </button>
+    <div id="contacts-list" class="contacts-list"></div>
+  </div>
 
-                    </div>
-                </div>
-        <div id="contacts-list" class="contacts-list"></div>
-      </div>
-
-      <div id="contact-details-area" class="contact-details-area">
-        <div class="d-flex-bw-st">
-          <div class="headline-with-divider d-flex-ac gap32">
-            <h1>Contacts</h1>
-            <div class="head-dividing-line"></div>
-            <h6>Better with a team</h6>
-            <div class="head-dividing-line-horizontal d-none"></div>
-          </div>
-          <div
-            class="contact-details-arrow"
-            onclick="hideContactDetailsArea(); hideEditContactMobileMenu()"
-          >
-            <img src="./assets/img/icon_arrow-left.png" alt="" />
-          </div>
+  <!-- Rechte Spalte: Detail­ansicht (anfangs versteckt) -->
+  <div id="contact-details-area" class="contact-details-area d-none">
+    <div class="d-flex-bw-st">
+      <div class="headline-with-divider d-flex-ac gap32">
+        <h1>Contacts</h1>
+        <div class="headline_vector">
         </div>
-        <div id="contact-singleview" class="contact-singleview d-none">
-          <div class="contact-singleview-nameblock d-flex-ac">
-            <div
-              id="singleview-initials"
-              class="singleview-initials d-flex-c-c"
-            ></div>
-            <div>
-              <h2 id="singleview-name"></h2>
-              <div class="singleview-buttons-panel d-flex-ac gap24">
-                <span
-                  class="singleview-button d-flex-ac gap8"
-                  onclick="openEditContactOverlay()"
-                >
-                  <img
-                    class="singleview-button-icon"
-                    src="./assets/icons/edit.svg"
-                    alt=""
-                  />
-                  <img
-                    class="singleview-button-icon-blue"
-                    src="./assets/icons/editHover.svg"
-                    alt=""
-                  />
-                  Edit
-                </span>
-                <span
-                  class="singleview-button d-flex-ac gap8"
-                  onclick="deleteContact(); hideEditContactMobileMenu()"
-                >
-                  <img
-                    class="singleview-button-icon"
-                    src="./assets/icons/delete.svg"
-                    alt=""
-                  />
-                  <img
-                    class="singleview-button-icon-blue"
-                    src="./assets/icons/deleteHover.svg"
-                    alt=""
-                  />
-                  Delete
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="contact-information d-flex-clm gap16">
-            <h5>Contact Information</h5>
-            <span class="contacts-mail-phone-head">Email</span>
-            <span id="singleview-email" class="contact-email"></span>
-            <span class="contacts-mail-phone-head">Phone</span>
-            <span id="singleview-phone"></span>
+        <h6>Better with a team</h6>
+      </div>
+      <div class="contact-details-arrow" onclick="hideContactDetailsArea()">
+        <img src="./assets/icons/arrow_left_hover.svg" alt="Zurück"/>
+      </div>
+    </div>
+    <div id="contact-singleview" class="contact-singleview">
+      <div class="contact-singleview-nameblock d-flex-ac">
+        <div id="singleview-initials" class="singleview-initials d-flex-c-c"></div>
+        <div>
+          <h2 id="singleview-name"></h2>
+          <div class="singleview-buttons-panel d-flex-ac gap24">
+            <span onclick="openEditContactOverlay()" class="singleview-button d-flex-ac gap8">
+              <img src="./assets/icons/edit.svg" alt="Edit"/> Edit
+            </span>
+            <span onclick="deleteContact(); hideEditContactMobileMenu()" class="singleview-button d-flex-ac gap8">
+              <img src="./assets/icons/delete.svg" alt="Delete"/> Delete
+            </span>
           </div>
         </div>
       </div>
-        <button id="btn-newcontact-mobile" class="btn-mobile btn-newcontact-mobile d-flex-c-c"
-        onclick="openAddNewContactOverlay()">
-        <img src="./assets/icons/addPerson.svg">
-    </button>
-    <button id="btn-editcontact-mobile" class="btn-mobile btn-editontact-mobile d-flex-c-c d-none"
-        onclick="showEditContactMobileMenu()">
-        <img src="./assets/img/icon_options.png">
-    </button>
-    <div id="edit-contact-mobile-menu" class="edit-contact-mobile-menu d-flex-clm d-flex-jc gap8 d-none">
-        <span class="d-flex-ac gap8" onclick="editContactViaMobileMenu()">
-            <img class="singleview-button-icon" src="./assets/icons/pencil_rectangle.svg" alt="">
-            Edit
-        </span>
-        <span class="d-flex-ac gap8" onclick="deleteContactViaMobileMenu()">
-            <img class="singleview-button-icon" src="./assets/icons/delete.svg" alt="">
-            Delete
-        </span>
+      <div class="contact-information d-flex-clm gap16">
+        <h5>Contact Information</h5>
+        <span class="contacts-mail-phone-head">Email</span>
+        <span id="singleview-email" class="contact-email"></span>
+        <span class="contacts-mail-phone-head">Phone</span>
+        <span id="singleview-phone"></span>
+      </div>
     </div>
-         <div id="overlay" class="overlay d-flex-c-c">
-        <div id="overlay-container" class="overlay-container">
-            <div class="overlay-container-closebutton d-flex-c-c" onclick="closeOverlay()">
-                <img src="./assets/icons/close.svg" alt="X">
-            </div>
-            <div id="overlay-content" class="contacts-overlay d-flex">
+  </div>
+</main>
+ <!-- Overlay: leerer Container, wird per overlay.js befüllt -->
+  <div id="overlay" class="overlay">
+    <div id="overlay-container" class="overlay-container">
+      <div id="overlay-content" class="overlay-content"></div>
+    </div>
+  </div>
 
-            </div>
-        </div>
-    </div>
-    </main>
   </body>
 </html>

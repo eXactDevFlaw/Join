@@ -1,160 +1,92 @@
-let editIndex = null;
+;(function() {
+  let editIndex = null;
+  const contacts = [
+    { id: 1, name: "Anna Müller",   email: "anna.mueller@example.com",    phone: "+49 170 1234567" },
+    { id: 2, name: "Ben Schneider", email: "ben.schneider@example.com",  phone: "+49 172 9876543" },
+    { id: 3, name: "Clara Fischer", email: "clara.fischer@example.com",  phone: "+49 151 7654321" },
+    { id: 4, name: "Lars Tieseler", email: "lars.tieseler@example.com",   phone: "+49 160 1234567" },
+    { id: 5, name: "Andrea Fischer",email: "andrea.f@web.de",             phone: "+49 170 7654321" }
+  ];
+  const listEl = document.getElementById('contacts-list');
 
-// Dummy-Kontakte (ersetzt später durch lokale Speicherung oder Backend)
-const contacts = [
-  { id: 1, name: "Anna Müller", email: "anna.mueller@example.com", phone: "+49 170 1234567" },
-  { id: 2, name: "Ben Schneider", email: "ben.schneider@example.com", phone: "+49 172 9876543" },
-  { id: 3, name: "Clara Fischer", email: "clara.fischer@example.com", phone: "+49 151 7654321" },
-  { id: 4, name: "Lars Tieseler", email: "max.mustermann@example.com", phone: "+49 160 1234567" },
-  { id: 5, name: "Andrea Fischer", email: "andrea.f@web.de", phone: "+49 170 7654321" },
-];
-
-const contactsList  = document.getElementById('contacts-list');
-const overlay       = document.getElementById('contact-overlay');
-const overlayTitle  = document.getElementById('overlay-title');
-const nameInput     = document.getElementById('contact-name');
-const emailInput    = document.getElementById('contact-email');
-const phoneInput    = document.getElementById('contact-phone');
-
-// erzeugt Initialen aus "Vorname Nachname"
-function getInitials(name) {
-  return name
-    .split(' ')
-    .map(part => part.charAt(0).toUpperCase())
-    .join('');
-}
-
-// berechnet aus einem String eine HSL-Farbe
-function stringToColor(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  function getInitials(name) {
+    return name.split(' ').map(p=>p[0].toUpperCase()).join('');
   }
-  const h = hash % 360;
-  return `hsl(${h}, 70%, 50%)`;
-}
-
-// gruppiert alphabetisch nach erstem Buchstaben
-function groupContactsAlphabetically() {
-  const grouped = {};
-  contacts
-    .slice() // kopie zum Sortieren
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .forEach(contact => {
-      const initial = contact.name.charAt(0).toUpperCase();
-      if (!grouped[initial]) grouped[initial] = [];
-      grouped[initial].push(contact);
-    });
-  return grouped;
-}
-
-// rendert die komplette Liste
-function renderContacts() {
-  contactsList.innerHTML = '';
-  const groups = groupContactsAlphabetically();
-
-  for (const initial in groups) {
-    // Buchstaben-Header
-    const section = document.createElement('div');
-    section.className = 'contact-section';
-    section.innerHTML = `<div class="contact-initial">${initial}</div>`;
-    
-    // Einträge
-    groups[initial].forEach(contact => {
-      const idx = contacts.findIndex(c => c.id === contact.id);
-      const item = document.createElement('div');
-      item.className = 'contact-item join-style';
-      item.innerHTML = `
-        <div class="contact-left">
-          <div class="contact-circle">${getInitials(contact.name)}</div>
-          <div class="contact-details">
-            <div class="contact-name">${contact.name}</div>
-            <div class="contact-email">${contact.email}</div>
+  function stringToColor(str) {
+    let h=0; for(const c of str) h=(h<<5)-h+c.charCodeAt(0);
+    return `hsl(${h%360},70%,50%)`;
+  }
+  function groupContacts() {
+    const g = {};
+    contacts.slice().sort((a,b)=>a.name.localeCompare(b.name))
+      .forEach(c=>{
+        const L=c.name[0].toUpperCase();
+        (g[L]||(g[L]=[])).push(c);
+      });
+    return g;
+  }
+  function renderContacts() {
+    listEl.innerHTML = '';
+    const groups = groupContacts();
+    for(const L in groups) {
+      const sec = document.createElement('div');
+      sec.className = 'contact-section';
+      sec.innerHTML = `<div class="contact-initial">${L}</div>`;
+      groups[L].forEach(c=>{
+        const idx = contacts.findIndex(x=>x.id===c.id);
+        const item = document.createElement('div');
+        item.className = 'contact-item join-style';
+        item.innerHTML = `
+          <div class="contact-left">
+            <div class="contact-circle">${getInitials(c.name)}</div>
+            <div class="contact-details">
+              <div class="contact-name">${c.name}</div>
+              <div class="contact-email">${c.email}</div>
+            </div>
           </div>
-        </div>
-        <div class="contact-actions">
-          <img src="./assets/icons/edit.svg" class="icon" alt="Bearbeiten" onclick="editContact(${idx})">
-          <img src="./assets/icons/delete.svg" class="icon" alt="Löschen" onclick="deleteContact(${idx})">
-        </div>
-      `;
-      // farbigen Kreis setzen
-      const circle = item.querySelector('.contact-circle');
-      circle.style.backgroundColor = stringToColor(contact.name);
-
-      section.appendChild(item);
-    });
-
-    contactsList.appendChild(section);
-  }
-}
-
-// bearbeitet einen Kontakt
-function editContact(index) {
-  const contact = contacts[index];
-  editIndex = index;
-  overlayTitle.textContent = 'Kontakt bearbeiten';
-  nameInput.value  = contact.name;
-  emailInput.value = contact.email;
-  phoneInput.value = contact.phone;
-  openOverlay();
-}
-
-// löscht einen Kontakt
-function deleteContact(index) {
-  if (confirm('Kontakt wirklich löschen?')) {
-    contacts.splice(index, 1);
-    renderContacts();
-  }
-}
-
-// speichert neuen oder bearbeiteten Kontakt
-function saveContact() {
-  const name  = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const phone = phoneInput.value.trim();
-
-  if (!name || !email || !phone) {
-    alert('Bitte alle Felder ausfüllen.');
-    return;
+          <div class="contact-actions">
+            <img src="./assets/icons/edit.svg"   class="icon" alt="Bearbeiten" onclick="openEditContactOverlay(${idx})">
+          </div>`;
+        item.querySelector('.contact-circle').style.backgroundColor = stringToColor(c.name);
+        item.addEventListener('click', ()=>showContactDetails(c));
+        sec.appendChild(item);
+      });
+      listEl.appendChild(sec);
+    }
   }
 
-  if (editIndex !== null) {
-    // update
-    contacts[editIndex].name  = name;
-    contacts[editIndex].email = email;
-    contacts[editIndex].phone = phone;
+  // Detail-Ansicht
+  window.showContactDetails = c => {
+    const area = document.getElementById('contact-details-area');
+    area.classList.remove('d-none');
+    document.getElementById('singleview-initials').textContent = getInitials(c.name);
+    document.getElementById('singleview-email').textContent    = c.email;
+    document.getElementById('singleview-phone').textContent    = c.phone;
+    document.getElementById('singleview-name').textContent     = c.name;
+  };
+  window.hideContactDetailsArea = ()=> {
+    document.getElementById('contact-details-area').classList.add('d-none');
+  };
+
+  // Add-Dialog
+  window.openAddContactOverlay = async () => {
     editIndex = null;
-  } else {
-    // neu
-    contacts.push({ id: Date.now(), name, email, phone });
-  }
+    await loadFormIntoOverlay('templates/edit_Contacts.html');
+    slideInOverlay();
+  };
 
-  renderContacts();
-  closeOverlay();
-}
+  // Edit-Dialog
+  window.openEditContactOverlay = async idx => {
+    editIndex = idx;
+    await loadFormIntoOverlay('templates/edit_Contacts.html');
+    // fülle Formular-Felder:
+    document.getElementById('edit-contact-initials').textContent = getInitials(contacts[idx].name);
+    document.getElementById('contact-namefield').value    = contacts[idx].name;
+    document.getElementById('contact-emailfield').value   = contacts[idx].email;
+    document.getElementById('contact-phonefield').value   = contacts[idx].phone;
+    slideInOverlay();
+  };
 
-// zeigt Overlay
-function openOverlay() {
-  overlay.classList.remove('dNone');
-  if (editIndex === null) {
-    overlayTitle.textContent = 'Neuen Kontakt hinzufügen';
-    nameInput.value = '';
-    emailInput.value = '';
-    phoneInput.value = '';
-  }
-}
-
-// versteckt Overlay
-function closeOverlay() {
-  overlay.classList.add('dNone');
-  editIndex = null;
-}
-
-// öffnet Overlay im "Neu"-Modus
-function openAddContactOverlay() {
-  editIndex = null;
-  openOverlay();
-}
-
-// initial render
-window.addEventListener('DOMContentLoaded', renderContacts);
+  // Initial Render
+  window.addEventListener('DOMContentLoaded', renderContacts);
+})();

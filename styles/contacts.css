@@ -1,42 +1,50 @@
-
-/* Haupt-Layout: Sidebar + Content */
+/* Gesamt-Layout: Sidebar + Content */
 .contacts-main {
   display: flex;
-  height: calc(100vh - 96px); /* Vollbild minus Header */
-  margin-top: 96px; /* Platz für Header */
+  height: calc(100vh - 96px);
+  margin-top: 96px;
+}
+
+/* Linke Spalte: Kontaktliste */
+.contactlist-area {
+  width: 456px;
+  background: #fff;
+  padding: 32 px 24px;
+  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.08);
+  overflow: auto;
 }
 
 /* "+ Add new contact"-Button */
-.btn-newcontact{
-    width: 100%;
-    font-weight: 700;
-    font-size: 21px;
-    height: 56px;
-    gap: 16px;
+.add-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  font-size: 14px;
+  background-color: #2a3647;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
 }
-.d-flex-c-c{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.add-contact-btn img {
+  width: 16px;
+  height: 16px;
 }
-.button{
-    padding: 8px 16px;
-    background-color: #2a3647;
-    color: #FFFFFF;
-    border-radius: 10px;
-    border: 1px #2a3647;
-    cursor: pointer;
+.add-contact-btn:hover {
+  background-color: #1f2836;
 }
 
-/* Scrollbare Kontaktliste */
+/* Scrollbare Liste */
 .contacts-list {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 0 16px 16px;
-  margin-left: 0;
+  padding: 0;
+  margin: 0;
 }
 
-/* Buchstaben-Abschnitt */
+/* Alphabetische Gruppen-Überschrift */
 .contact-section .contact-initial {
   font-size: 12px;
   font-weight: 600;
@@ -44,7 +52,7 @@
   margin: 24px 0 8px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 4px;
-  margin-left: 0;
+  padding-left: 0;
 }
 
 /* Einzelne Kontaktkarte */
@@ -55,9 +63,8 @@
   background: #fafafa;
   border-radius: 8px;
   margin-bottom: 8px;
-  transition: background 0.2s;
   cursor: pointer;
-  margin-left: 0;
+  transition: background 0.2s;
 }
 .contact-item.join-style:hover {
   background: #f0f8ff;
@@ -65,38 +72,39 @@
 
 /* Kreis mit Initialen */
 .contact-circle {
-  flex-shrink: 0;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #007bff; /* fallback */
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
   margin-right: 12px;
 }
 
 /* Kontaktdetails */
-
+.contact-details {
+  flex-grow: 1;
+}
 .contact-name {
   font-size: 15px;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin: 0;
   color: #1d1d1d;
 }
 .contact-email {
   font-size: 13px;
   color: #007bff;
+  margin: 0;
 }
 
 /* Aktionen (Icons) */
 .contact-actions {
-  margin-left: auto;
   display: flex;
   gap: 8px;
+  margin-left: auto;
 }
 .contact-actions .icon {
   width: 20px;
@@ -107,35 +115,12 @@
   opacity: 0.8;
 }
 
-/* Rechte Inhalts-Spalte */
-.contacts-content {
-  flex-grow: 1;
-  background: rgba(246,247,248,1);
-  padding: 48px;
+/* Rechte Spalte: Detail-Ansicht */
+.contact-details-area {
+  flex: 1;
+  background: rgba(246, 247, 248, 1);
+  padding: 32px 56px;
   overflow-y: auto;
-}
-
-/* Header im rechten Bereich */
-.contacts-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
-}
-.contacts-header h1 {
-  font-size: 32px;
-  margin: 0;
-}
-.contacts-header .divider {
-  width: 4px;
-  height: 32px;
-  background-color: #007bff;
-}
-.contacts-header h2 {
-  font-size: 20px;
-  font-weight: 400;
-  color: #2f2f2f;
-  margin: 0;
 }
 
 /* Overlay */
@@ -149,18 +134,35 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
-.overlay.dNone {
-  display: none !important;
+.overlay.show {
+  visibility: visible;
+  opacity: 1;
 }
+.overlay-container {
+  position: relative;
+  right: -100vw;
+  max-width: 1100px;
+  max-height: 95%;
+  margin: 32px;
+  border-radius: 30px;
+  transition: right 0.25s ease;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+}
+.overlay-slide-in {
+  right: 0;
+}
+
+/* Formularbereich im Overlay */
 .overlay-content {
-  background: white;
+  flex: 1;
   padding: 32px;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 .overlay-content h2 {
   margin-top: 0;
@@ -183,66 +185,68 @@
   justify-content: flex-end;
   gap: 12px;
 }
-.btn-dark {
+.btn-clear {
+  background: none;
+  border: none;
+  color: #ff4646;
+  cursor: pointer;
+}
+.button-font {
   background-color: #2a3647;
   color: white;
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
 }
-.btn-dark:hover {
+.button-font img {
+  width: 16px;
+  height: 16px;
+}
+.button-font:hover {
   background-color: #1f2836;
 }
-.btn-white {
-  background-color: #f1f1f1;
-  color: #333;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 16px;
+
+/* Header im Detail-Bereich: enger zusammenrücken */
+.headline-with-divider {
+  display: flex;
+  align-items: center;
+  gap: 32px;               /* statt 32px jetzt nur 8px Abstand */
+}
+
+/* Haupt-Überschrift */
+.headline-with-divider h1 {
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 58px; /* Höhe der H1 */
+  word-break: break-word;
+  color: #000000;
+}
+
+/* Die blaue Trennungslinie */
+.headline-with-divider .headline_vector {
+  border: 3px solid #29abe2;
+  height: 59px; /* Höhe der Linie */
+}
+
+/* Sub-Überschrift */
+.headline-with-divider h6 {
+  font-size: 27px;
+  font-weight: 400;
+  color: #2a3647;
+
+}
+.contact-details-arrow img {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 }
-.btn-white:hover {
-  background-color: #e0e0e0;
-}
 
-.d_flex_center1 {
-  display: flex;
-}
-.contact-details-area {
-    padding: 80px 56px 32px 80px;
-    flex: 1;
-    overflow: auto;
-}
-.gap32 {
-    gap: 32px;
-}
-.d-flex-ac {
-    display: flex;
-    align-items: center;
-}
-
-.gap32 {
-    gap: 32px;
-}
 .d-flex-bw-st{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start
-}
-.head-dividing-line {
-    border: 1px solid #007bff;
-    height: 59px;
-}
-.contactlist-area{
-    background-color: #FFFFFF;
-    box-shadow: 4px 0px 6px 0px #00000014;
-    width: 456px;
-    padding: 32px 24px;
-    overflow-y: auto;
-}
-.h6{
-    font-size: 27px;
-    font-weight: 400;
-    color: #2a3647;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start
 }
