@@ -160,7 +160,33 @@
             <div class="plus_button margin_0"></div>
           </div>
           <div class="card_column margin_0" id="column-todo">
-            <div class="no_task d_flex_center">
+            <div class="task_card margin_0">
+              <div class="task_content">
+                <div class="card_label margin_0">User Story</div>
+                <div class="task_description margin_0">
+                  <div class="task_title margin_0" id="task-title">Title</div>
+                  <div class="task_content margin_0" id="task-content">
+                    Content...
+                  </div>
+                </div>
+                <div class="subtask_progress margin_0">
+                  <div class="progress_bar margin_0">
+                    <div
+                      class="progress_status margin_0"
+                      style="width: 75%"
+                    ></div>
+                  </div>
+                  <div class="subtasks margin_0">
+                    <p id="finised-subtasks">0</p>
+                    <p>/</p>
+                    <p id="subtasks-length">2</p>
+                    <p>&nbsp;Subtasks</p>
+                  </div>
+                </div>
+                <div class="task_card_footer"></div>
+              </div>
+            </div>
+            <div class="no_task d_flex_center" id="no-tasks-to-do">
               <p>No tasks To do</p>
             </div>
           </div>
@@ -171,7 +197,7 @@
             <div class="plus_button margin_0"></div>
           </div>
           <div class="card_column margin_0" id="column-in-progress">
-             <div class="no_task d_flex_center">
+            <div class="no_task d_flex_center" id="no-tasks-In-progress">
               <p>No tasks In progress</p>
             </div>
           </div>
@@ -182,18 +208,17 @@
             <div class="plus_button margin_0"></div>
           </div>
           <div class="card_column margin_0" id="column-await-feedback">
-             <div class="no_task d_flex_center">
+            <div class="no_task d_flex_center" id="no-task-awaiting-feedback">
               <p>No tasks Awaiting feedback</p>
             </div>
           </div>
-           
         </div>
-         <div class="board_column align_none">
+        <div class="board_column align_none">
           <div class="board_column_head d_flex justify_between margin_0">
             <p class="margin_0">Done</p>
           </div>
           <div class="card_column margin_0" id="column-done">
-            <div class="no_task d_flex_center">
+            <div class="no_task d_flex_center" id="no-tasks-done">
               <p>No tasks Done</p>
             </div>
           </div>

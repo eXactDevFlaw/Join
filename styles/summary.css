@@ -3,6 +3,7 @@
 }
 
 main{
+    max-width: 1920px;
     margin: 0 auto;
     left: 232px;
     top: 96px;

@@ -1,4 +1,5 @@
 main{
+    max-width: 1920px;
     margin: 0;
     left: 232px;
     top: 96px;
@@ -142,4 +143,86 @@ content{
 
 .card_column{
     padding-top: 12px;
+}
+
+.task_card{
+    width: 252px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 24px;
+    gap: 10px;
+    padding: 16px;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08)
+}
+
+.task_card:hover{
+    cursor: pointer;
+}
+
+.task_card:active{
+    rotate: 5deg;
+    cursor: grabbing;
+}
+
+.task_content{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.card_label{
+    width: fit-content;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 56, 255, 1);
+    padding: 4px 16px 4px 16px;
+    border-radius: 8px;
+    gap: 10px;
+}
+
+.task_description{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.task_title{
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(42, 54, 71, 1);
+}
+
+.task_content{
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(168, 168, 168, 1);
+}
+
+.subtask_progress{
+    height: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress_bar{
+    width: 128px;
+    height: 8px;
+    background-color: rgba(244, 244, 244, 1);
+    border-radius: 16px;
+}
+
+.progress_status{
+    height: 8px;
+    background-color: rgba(69, 137, 255, 1);
+    border-radius: 16px;
+}
+
+.subtasks{
+    display: flex;
+    justify-content:center;
+    flex-direction: row;
+    color: rgba(0, 0, 0, 1);
+    font-size: 12px;
 }
