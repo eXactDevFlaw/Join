@@ -16,4 +16,9 @@ window.addEventListener('DOMContentLoaded', function() {
 function toggleSignIn() {
   document.getElementById('login-form').classList.toggle('d_none');
   document.getElementById('signin-form').classList.toggle('d_none');
+  document.getElementById('signin-container').classList.toggle('d_none');
+}
+
+function signIn() {
+  
 }
