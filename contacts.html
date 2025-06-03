@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Contacts</title>
+
+    <!-- Favicon & Icons -->
     <link
       rel="icon"
       href="./assets/icons/favicon_dark.svg"
@@ -21,18 +24,23 @@
       media="(prefers-color-scheme: dark)"
     />
 
-    <title>Join - Contacts</title>
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="icon" href="assets/img/favicon.png" />
     <link rel="stylesheet" href="./assets/fonts/fonts.css" />
     <link rel="stylesheet" href="./styles/contacts.css" />
     <link rel="stylesheet" href="./styles/overlay.css" />
+    <script src="./scripts/add-edit_contacts.js"></script>
+    <script src="./scripts/overlay.js"></script>
+        <script src="script.js"></script>
+    <script src="./scripts/contacts.js"></script>
+
   </head>
   <body>
+    <!-- Logout Overlay -->
     <div
-      class="position_absolute height_100 width_100 d_none"
       id="overlay-small-logout-win"
+      class="position_absolute height_100 width_100 d_none"
       onclick="toggleLogoutOverlay()"
     >
       <div
@@ -56,13 +64,14 @@
         </div>
       </div>
     </div>
+
     <!-- Header -->
     <header>
       <div class="header_container d_flex_center justify_between width_100">
         <div class="margin_0">Kanban Project Management Tool</div>
         <div class="d_flex_center margin_0 gap_16">
           <a href="./templates/help.html">
-            <img src="./assets/icons/help.svg" class="help_icon" alt="" />
+            <img src="./assets/icons/help.svg" class="help_icon" alt="Help" />
           </a>
           <div
             class="user_circle d_flex_center"
@@ -74,6 +83,7 @@
       </div>
     </header>
 
+    <!-- Sidebar -->
     <nav
       class="height_100 position_absolute d_flex flex_column justify_between"
     >
@@ -132,51 +142,117 @@
       </div>
     </nav>
 
-    <!-- Hauptinhalt im Join-Stil -->
+    <!-- Main Content -->
     <main class="contacts-main">
-      <!-- Kopfzeile -->
-      <div class="contacts-header">
-        <h1>Contacts</h1>
-        <p>Better with a Team</p>
-        <button class="btn btn-primary" onclick="openAddContactOverlay()">
-          + Add Contact
-        </button>
+      <!-- Linke Kontakt-Spalte -->
+                <div class="contactlist-area">
+                    <button class="btn-newcontact d-flex-c-c" onclick="openAddNewContactOverlay()">
+                        Add new contact
+                        <img src="./assets/icons/addContactMobile.svg">
+                    </button>
+                    <div id="contactslist">
+
+                    </div>
+                </div>
+        <div id="contacts-list" class="contacts-list"></div>
       </div>
 
-      <!-- Kontaktliste -->
-      <div id="contacts-list" class="contacts-list"></div>
-
-      <!-- Kontakt-Overlay (Bearbeiten / Hinzufügen) -->
-      <div id="contact-overlay" class="overlay dNone">
-        <div class="overlay-content">
-          <h2 id="overlay-title">Kontakt</h2>
-          <form onsubmit="saveContact(); return false;">
-            <label for="contact-name">Name</label>
-            <input type="text" id="contact-name" required />
-
-            <label for="contact-email">Email</label>
-            <input type="email" id="contact-email" required />
-
-            <label for="contact-phone">Telefon</label>
-            <input type="tel" id="contact-phone" required />
-
-            <div class="overlay-buttons">
-              <button type="submit" class="btn btn-primary">Speichern</button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="closeOverlay()"
-              >
-                Abbrechen
-              </button>
+      <div id="contact-details-area" class="contact-details-area">
+        <div class="d-flex-bw-st">
+          <div class="headline-with-divider d-flex-ac gap32">
+            <h1>Contacts</h1>
+            <div class="head-dividing-line"></div>
+            <h6>Better with a team</h6>
+            <div class="head-dividing-line-horizontal d-none"></div>
+          </div>
+          <div
+            class="contact-details-arrow"
+            onclick="hideContactDetailsArea(); hideEditContactMobileMenu()"
+          >
+            <img src="./assets/img/icon_arrow-left.png" alt="" />
+          </div>
+        </div>
+        <div id="contact-singleview" class="contact-singleview d-none">
+          <div class="contact-singleview-nameblock d-flex-ac">
+            <div
+              id="singleview-initials"
+              class="singleview-initials d-flex-c-c"
+            ></div>
+            <div>
+              <h2 id="singleview-name"></h2>
+              <div class="singleview-buttons-panel d-flex-ac gap24">
+                <span
+                  class="singleview-button d-flex-ac gap8"
+                  onclick="openEditContactOverlay()"
+                >
+                  <img
+                    class="singleview-button-icon"
+                    src="./assets/icons/edit.svg"
+                    alt=""
+                  />
+                  <img
+                    class="singleview-button-icon-blue"
+                    src="./assets/icons/editHover.svg"
+                    alt=""
+                  />
+                  Edit
+                </span>
+                <span
+                  class="singleview-button d-flex-ac gap8"
+                  onclick="deleteContact(); hideEditContactMobileMenu()"
+                >
+                  <img
+                    class="singleview-button-icon"
+                    src="./assets/icons/delete.svg"
+                    alt=""
+                  />
+                  <img
+                    class="singleview-button-icon-blue"
+                    src="./assets/icons/deleteHover.svg"
+                    alt=""
+                  />
+                  Delete
+                </span>
+              </div>
             </div>
-          </form>
+          </div>
+          <div class="contact-information d-flex-clm gap16">
+            <h5>Contact Information</h5>
+            <span class="contacts-mail-phone-head">Email</span>
+            <span id="singleview-email" class="contact-email"></span>
+            <span class="contacts-mail-phone-head">Phone</span>
+            <span id="singleview-phone"></span>
+          </div>
         </div>
       </div>
-    </main>
+        <button id="btn-newcontact-mobile" class="btn-mobile btn-newcontact-mobile d-flex-c-c"
+        onclick="openAddNewContactOverlay()">
+        <img src="./assets/icons/addPerson.svg">
+    </button>
+    <button id="btn-editcontact-mobile" class="btn-mobile btn-editontact-mobile d-flex-c-c d-none"
+        onclick="showEditContactMobileMenu()">
+        <img src="./assets/img/icon_options.png">
+    </button>
+    <div id="edit-contact-mobile-menu" class="edit-contact-mobile-menu d-flex-clm d-flex-jc gap8 d-none">
+        <span class="d-flex-ac gap8" onclick="editContactViaMobileMenu()">
+            <img class="singleview-button-icon" src="./assets/icons/pencil_rectangle.svg" alt="">
+            Edit
+        </span>
+        <span class="d-flex-ac gap8" onclick="deleteContactViaMobileMenu()">
+            <img class="singleview-button-icon" src="./assets/icons/delete.svg" alt="">
+            Delete
+        </span>
+    </div>
+         <div id="overlay" class="overlay d-flex-c-c">
+        <div id="overlay-container" class="overlay-container">
+            <div class="overlay-container-closebutton d-flex-c-c" onclick="closeOverlay()">
+                <img src="./assets/icons/close.svg" alt="X">
+            </div>
+            <div id="overlay-content" class="contacts-overlay d-flex">
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-    <script src="./scripts/contacts.js"></script>
+            </div>
+        </div>
+    </div>
+    </main>
   </body>
 </html>

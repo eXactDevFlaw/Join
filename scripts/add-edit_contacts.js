@@ -3,15 +3,6 @@ let contacts = {};
 let currentActiveContact = '';
 
 /**
- * Initializes core application components.
- * (You'll need to add the actual logic for what init() does here)
- */
-async function init() {
-    // Add your initialization logic here, e.g., loading data, setting up event listeners, etc.
-    console.log("init() called"); // Placeholder
-}
-
-/**
  * Initializes the contacts page by rendering the contact list.
  * @async
  * @function
@@ -27,7 +18,7 @@ async function initContacts() {
  * @function
  */
 async function renderContactList() {
-    let contactsList = document.getElementById('contactslist');
+    let contactsList = document.getElementById('contacts-list');
     contacts = await createContactsObjectFromDatabase();
     contacts = sortByNameAscending(contacts);
     contactsList.innerHTML = getContactListHTMLbyAlphabet();
@@ -212,12 +203,37 @@ function loadContactSingleviewInfoInFields() {
 }
 
 /**
+ * Loads an HTML form template into the overlay element.
+ * @async
+ * @param {string} templatePath - The path to the HTML template file.
+ * @throws {Error} If the overlay element is not found or fetching the template fails.
+ */
+async function loadFormIntoOverlay(templatePath) {
+    const overlay = document.getElementById('overlay'); // Assuming your overlay has the ID 'overlay'
+    if (!overlay) {
+        throw new Error("Overlay element with ID 'overlay' not found.");
+    }
+
+    try {
+        const response = await fetch(templatePath);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch template: ${response.statusText}`);
+        }
+        const html = await response.text();
+        overlay.innerHTML = html;
+    } catch (error) {
+        console.error('Error loading form into overlay:', error);
+        throw error; // Re-throw to allow the calling function to handle it
+    }
+}
+
+/**
  * Opens the overlay for adding a new contact and slides it in.
  * @async
  * @function
  */
 async function openAddNewContactOverlay() {
-    await loadFormIntoOverlay('./assets/templates/new_contact_form.html');
+    await loadFormIntoOverlay('templates/edit_Contacts.html');
     slideInOverlay();
 }
 
@@ -227,12 +243,11 @@ async function openAddNewContactOverlay() {
  * @function
  */
 async function openEditContactOverlay() {
-    await loadFormIntoOverlay('./assets/templates/edit_contact_form.html');
+    await loadFormIntoOverlay('templates/edit_Contacts.html');
     fillOverlayInputfields();
     slideInOverlay();
     showEditContactMobileButton();
 }
-
 /**
  * Fills the overlay input fields with the current contact's data.
  * @function
@@ -241,7 +256,7 @@ function fillOverlayInputfields() {
     let initialsElement = document.getElementById('edit-contact-initials');
     initialsElement.innerHTML = contacts[currentActiveContact].initials;
     initialsElement.style['background-color'] = getBackgroundColorByColorcode(contacts[currentActiveContact].color);
-    document.getElementById('contact-namefield').value = contacts[currentActiveContact].name;
+    document.getElementById('contacts-namefield').value = contacts[currentActiveContact].name;
     document.getElementById('contact-emailfield').value = contacts[currentActiveContact].email;
     document.getElementById('contact-phonefield').value = contacts[currentActiveContact].phone;
 }
