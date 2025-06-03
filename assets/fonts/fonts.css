@@ -3,6 +3,10 @@
   src: url(./Inter-VariableFont_opsz\,wght.ttf);
 }
 
+@font-face {
+  font-family: "Open Sans";
+  src: url(./OpenSans-VariableFont_wdth\,wght.ttf);
+}
 
 h1 {
     font-family: "Inter";

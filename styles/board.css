@@ -1,5 +1,5 @@
 main{
-    margin: 0 auto;
+    margin: 0;
     left: 232px;
     top: 96px;
     padding-left: calc(328px - 232px);
@@ -14,6 +14,9 @@ h1{
 
 .headline{
     width: 1056px;
+    position: absolute;
+    left: 0;
+    padding-left: 64px;
 }
 
 .input_icon_wrapper:hover {
@@ -63,6 +66,8 @@ input:hover {
 }
 
 button {
+    display: flex;
+    justify-content: space-around;
     font-weight: 700;
     width: 160px;
     height: 48px;
@@ -79,4 +84,62 @@ button {
 .find_add{
     gap: 32px;
     margin: 0;
+}
+
+content{
+    position: absolute;
+    width: 1208px;
+    height: 500px;
+    margin-top: 50px;
+    padding-right: 64px;
+    padding-left: 64px;
+    gap: 26px;
+    left: 0;
+    top: 200.5px;
+}
+
+.board_column{
+    display: flex;
+    flex-direction: column;
+    width: 252px;
+    max-height: 700px;
+}
+
+.board_column_head{
+    width: 244px;
+    font-weight: 700;
+    font-size: 20px;
+    color:rgba(66, 82, 110, 1);
+}
+
+.plus_button{
+    background-image: url(/assets/icons/plus_button.svg);
+    width: 24px;
+    height: 24px;
+}
+
+.plus_button:hover{
+    background-image: url(/assets/icons/plus_button_hover.svg);
+    cursor: pointer;
+}
+
+.plus_button:active{
+    background-image: url(/assets/icons/plus_button_active.svg);
+}
+
+.no_task{
+    color: rgba(168, 168, 168, 1);
+    font-family: "Open Sans";
+    height: 48px;
+    width: 100%;
+    background-color: rgba(231, 231, 231, 1);
+    border-radius: 10px;
+    border-style: dotted;
+    border-width: 1px;
+    margin: 0 !important;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.016);;
+}
+
+.card_column{
+    padding-top: 12px;
 }

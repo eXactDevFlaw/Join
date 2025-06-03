@@ -106,6 +106,10 @@ a {
     justify-content: flex-end;
 }
 
+.justify_none{
+    justify-content: unset;
+}
+
 .width_100{
     width: 100% !important;
 }
