@@ -250,3 +250,34 @@
   justify-content: space-between;
   align-items: flex-start
 }
+/* ---------------------------------------------
+   1. Kontakt-Karte: Flex-Layout für Kreis + Text
+   --------------------------------------------- */
+.contact-item.join-style {
+  display: flex;
+  align-items: center;    /* Kreis und Text vertikal zentrieren */
+  padding: 12px 16px;     /* optional: horizontales Padding */
+}
+
+/* Linke Gruppe aus Kreis + Details */
+.contact-item.join-style .contact-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Der Kreis selbst: kein zusätzlicher Außenabstand links */
+.contact-item.join-style .contact-circle {
+  margin-right: 12px;     /* nur Abstand zum Text, nicht zum Containerrand */
+  margin-left: 0;         /* entferne jeglichen Außenabstand links */
+}
+
+/* Kontakt-Details: Text bündig am Kreis */
+.contact-item.join-style .contact-details {
+  margin: 0;              /* falls hier ein Default-Margin war, löschen */
+}
+
+/* Gruppenkopf (Buchstabe): bündig mit den Kreisen */
+.contact-section .contact-initial {
+  padding-left: 0;        /* keine Einrückung */
+  margin-left: 0;
+}
