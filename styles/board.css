@@ -226,3 +226,33 @@ content{
     color: rgba(0, 0, 0, 1);
     font-size: 12px;
 }
+
+.task_card_footer{
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+.profile_badges{
+    width: 80px;
+}
+
+.profile_badge{
+    color: white;
+    position: relative;
+    margin-left: -15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 45px;
+    background-color: brown;
+}
+
+.priority_symbol_container{
+    width: 32px;
+    padding: 10px 18px 10px 18px;
+}
