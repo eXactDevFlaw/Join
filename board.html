@@ -29,6 +29,21 @@
     <title>Join - Board</title>
   </head>
   <body>
+    <div class="task_overlay position_absolute d_flex_center" id="task-overlay" onclick="closeTaskOverlay()">
+    </div>
+    <div class="add_task_entry show" onclick="stopPropagation(event)" id="add-task-entry">
+      <h1>Add Task</h1>
+      <div class="title">
+        <div class="d_flex_center_row justify_start margin_0">
+          <p class="margin_0">Title</p><p class="red_star margin_0">*</p></p>
+        </div>
+         <div class="input_icon_wrapper margin_0">
+          <input class="margin_0" type="text" placeholder="Enter a title">
+         </div>
+        
+      </div>
+      
+    </div>
     <div
       class="position_absolute height_100 width_100 d_none"
       id="overlay-small-logout-win"
@@ -148,7 +163,7 @@
               required
             />
           </div>
-          <button class="btn_dark margin_0 d_flex_center">
+          <button class="btn_dark margin_0 d_flex_center" onclick="openTaskOverlay()">
             Add task<img src="/assets/icons/add.svg" alt="add" />
           </button>
         </div>
@@ -236,4 +251,5 @@
     </main>
   </body>
   <script src="./script.js"></script>
+  <script src="./scripts/add_task.js"></script>
 </html>
