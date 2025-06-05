@@ -25,24 +25,48 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
     <link rel="stylesheet" href="./styles/standart.css" />
-
+    <link rel="stylesheet" href="./styles/add_task.css">
     <title>Join - Board</title>
   </head>
   <body>
-    <div class="task_overlay position_absolute d_flex_center" id="task-overlay" onclick="closeTaskOverlay()">
-    </div>
-    <div class="add_task_entry show" onclick="stopPropagation(event)" id="add-task-entry">
+    <div
+      class="task_overlay position_absolute d_flex_center"
+      id="task-overlay"
+      onclick="closeTaskOverlay()"
+    ></div>
+    <div
+      class="add_task_entry show"
+      onclick="stopPropagation(event)"
+      id="add-task-entry"
+    >
       <h1>Add Task</h1>
-      <div class="title">
-        <div class="d_flex_center_row justify_start margin_0">
-          <p class="margin_0">Title</p><p class="red_star margin_0">*</p></p>
+      <div class="task_entries">
+        <div class="title_input margin_0">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Title</p>
+            <p class="red_star margin_0">*</p>
+          </div>
+          <div class="margin_0">
+            <input type="text" placeholder="Enter a title" id="title-input-overlay"/>
+          </div>
         </div>
-         <div class="input_icon_wrapper margin_0">
-          <input class="margin_0" type="text" placeholder="Enter a title">
-         </div>
-        
+        <div class="title_input margin_0">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Description</p>
+          </div>
+          <div class="margin_0">
+            <textarea placeholder="Enter a Description" id="description-input-overlay"></textarea>
+          </div>
+        </div>
+        <div class="title_input margin_0">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Due Date</p><p class="red_star margin_0">*</p>
+          </div>
+          <div class="margin_0">
+            <input class="date" type="date" placeholder="dd/mm/yyyy">
+          </div>
+        </div>
       </div>
-      
     </div>
     <div
       class="position_absolute height_100 width_100 d_none"
@@ -163,7 +187,10 @@
               required
             />
           </div>
-          <button class="btn_dark margin_0 d_flex_center" onclick="openTaskOverlay()">
+          <button
+            class="btn_dark margin_0 d_flex_center"
+            onclick="openTaskOverlay()"
+          >
             Add task<img src="/assets/icons/add.svg" alt="add" />
           </button>
         </div>
@@ -199,13 +226,18 @@
                   </div>
                 </div>
                 <div class="task_card_footer d_flex_center_row justify_between">
-                  <div class="profile_badges d_flex_center_row margin_0 justify_start">
+                  <div
+                    class="profile_badges d_flex_center_row margin_0 justify_start"
+                  >
                     <div class="profile_badge">AM</div>
                     <div class="profile_badge">AM</div>
                     <div class="profile_badge">AM</div>
                   </div>
-                  <div class="priority_symbol_container d_flex_center margin_0" id="priority_symbol">
-                      <img src="./assets/icons/prio_medium.svg" alt="">
+                  <div
+                    class="priority_symbol_container d_flex_center margin_0"
+                    id="priority_symbol"
+                  >
+                    <img src="./assets/icons/prio_medium.svg" alt="" />
                   </div>
                 </div>
               </div>
