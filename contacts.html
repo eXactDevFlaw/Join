@@ -126,58 +126,61 @@
       </div>
     </nav>
 
- <main class="contacts-main">
-  <!-- Linke Spalte: Add-Button + Kontaktliste -->
-  <div class="contactlist-area">
-    <button class="btn-dark add-contact-btn" onclick="openAddContactOverlay()">
-      <img src="./assets/icons/addPerson.svg" alt="" />
-      Add new contact
-    </button>
-    <div id="contacts-list" class="contacts-list"></div>
-  </div>
-
-  <!-- Rechte Spalte: Detail­ansicht (anfangs versteckt) -->
-  <div id="contact-details-area" class="contact-details-area d-none">
-    <div class="d-flex-bw-st">
-      <div class="headline-with-divider d-flex-ac gap32">
-        <h1>Contacts</h1>
-        <div class="headline_vector">
-        </div>
-        <h6>Better with a team</h6>
-      </div>
-      <div class="contact-details-arrow" onclick="hideContactDetailsArea()">
-        <img src="./assets/icons/arrow_left_hover.svg" alt="Zurück"/>
-      </div>
+<main class="position_absolute">
+  <!-- Wrapper für linke & rechte Spalte -->
+  <div class="contacts_layout_wrapper">
+    <!-- Linke Spalte: Add-Button + Kontaktliste -->
+    <div class="contactlist_area">
+      <button class="btn-dark add_contact_btn" onclick="openAddContactOverlay()">
+        <img src="./assets/icons/addPerson.svg" alt="" />
+        Add new contact
+      </button>
+      <div id="contacts_list" class="contacts_list"></div>
     </div>
-    <div id="contact-singleview" class="contact-singleview">
-      <div class="contact-singleview-nameblock d-flex-ac">
-        <div id="singleview-initials" class="singleview-initials d-flex-c-c"></div>
-        <div>
-          <h2 id="singleview-name"></h2>
-          <div class="singleview-buttons-panel d-flex-ac gap24">
-            <span onclick="openEditContactOverlay()" class="singleview-button d-flex-ac gap8">
-              <img src="./assets/icons/edit.svg" alt="Edit"/> Edit
-            </span>
-            <span onclick="deleteContact(); hideEditContactMobileMenu()" class="singleview-button d-flex-ac gap8">
-              <img src="./assets/icons/delete.svg" alt="Delete"/> Delete
-            </span>
+
+    <!-- Rechte Spalte: Detailansicht -->
+    <div class="contacts_overview" id="contacts_overview">
+      <div class="d_flex_bw_st">
+        <div class="headline_with_divider d_flex_ac gap32">
+          <h1>Contacts</h1>
+          <div class="headline_vector"></div>
+          <h6>Better with a team</h6>
+        </div>
+        <div class="contact_details_arrow" onclick="hideContactDetailsArea()">
+          <img src="./assets/icons/arrow_left_hover.svg" alt="Zurück"/>
+        </div>
+      </div>
+      <div class="contact_single_view" id="showContactDetails">
+        <div class="contact-singleview-nameblock d-flex-ac">
+          <div id="singleview-initials" class="singleview-initials d-flex-c-c"></div>
+          <div>
+            <h2 id="singleview-name"></h2>
+            <div class="singleview-buttons-panel d-flex-ac gap24">
+              <span onclick="openEditContactOverlay()" class="singleview-button d-flex-ac gap8">
+                <img src="./assets/icons/edit.svg" alt="Edit"/> Edit
+              </span>
+              <span onclick="deleteContact(); hideEditContactMobileMenu()" class="singleview-button d-flex-ac gap8">
+                <img src="./assets/icons/delete.svg" alt="Delete"/>Delete
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="contact-information d-flex-clm gap16">
-        <h5>Contact Information</h5>
-        <span class="contacts-mail-phone-head">Email</span>
-        <span id="singleview-email" class="contact-email"></span>
-        <span class="contacts-mail-phone-head">Phone</span>
-        <span id="singleview-phone"></span>
+        <div class="contact_information d-flex-clm gap16">
+          <h5>Contact Information</h5>
+          <span class="contacts-mail-phone-head">Email</span>
+          <span id="singleview-email" class="contact_email"></span>
+          <span class="contacts-mail-phone-head">Phone</span>
+          <span id="singleview-phone"></span>
+        </div>
       </div>
     </div>
   </div>
 </main>
+
  <!-- Overlay: leerer Container, wird per overlay.js befüllt -->
   <div id="overlay" class="overlay">
-    <div id="overlay-container" class="overlay-container">
-      <div id="overlay-content" class="overlay-content"></div>
+    <div id="overlay_container" class="overlay_container">
+      <div id="overlay_content" class="overlay_content"></div>
     </div>
   </div>
 
