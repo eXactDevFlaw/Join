@@ -1,3 +1,7 @@
+.add_task_content{
+    margin-top: 24px;
+}
+
 .title_input{
     display: flex;
     flex-direction: column;
@@ -17,7 +21,6 @@
     display: flex;
     justify-content: start;
     flex-direction: column;
-    margin-top: 24px;
     margin-left: 0;
     margin-right: 0;
     width: 440px;
@@ -68,4 +71,55 @@ input::placeholder{
 
 input:focus {
     outline-color: rgba(41, 171, 226, 1);
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  color: rgba(209, 209, 209, 1);
+}
+
+.vector_4{
+    width: 1px;
+    height: 424px;
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.priority_button_container{
+    margin-top: 8px !important;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.priority_button{
+    border-radius: 10px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 16px 10px 16px 10px;
+    width: 136px;
+    margin: 0;
+    gap: 8px;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.urgent_set{
+    background-color: rgba(255, 61, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+}
+
+.medium_set{
+    background-color: rgba(255, 168, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+}
+
+.low_set{
+    background-color: rgba(122, 226, 41, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+}
+
+
+.priority_button:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
