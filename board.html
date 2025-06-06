@@ -90,17 +90,20 @@
               <p class="margin_0">Priority</p>
             </div>
             <div class="priority_button_container d_flex_center_row justify_between">
-             <div class="priority_button d_flex_center_row" id="urgent-button" onclick="setUrgent()">
+             <div class="priority_button d_flex_center_row" id="urgent-button" onclick="setPriority('urgent')">
               <p class="margin_0">Urgent</p>
-              <img src="./assets/icons/prio_high.svg" alt="">
+              <img class="" src="./assets/icons/prio_high.svg" alt="" id="prio-urgent-icon">
+              <img class="d_none " src="./assets/icons/prio_high_active.svg" alt="" id="prio-urgent-icon-active">
              </div>
-              <div class="priority_button medium d_flex_center_row" id="medium-button" onclick="setMedium()">
+              <div class="priority_button d_flex_center_row" id="medium-button" onclick="setPriority('medium')">
               <p class="margin_0">Medium</p>
-              <img src="./assets/icons/prio_medium.svg" alt="">
+              <img class="" src="./assets/icons/prio_medium.svg" alt="" id="prio-medium-icon">
+              <img class="d_none" src="./assets/icons/prio_medium_active.svg" alt="" id="prio-medium-icon-active">
              </div>
-              <div class="priority_button low d_flex_center_row" id="low-button" onclick="setLow()">
+              <div class="priority_button d_flex_center_row" id="low-button" onclick="setPriority('low')">
               <p class="margin_0">Low</p>
-              <div class="img"></div>
+              <img class="" src="./assets/icons/prio_low.svg" alt="" id="prio-low-icon">
+              <img class="d_none" src="./assets/icons/prio_low_active.svg" alt="" id="prio-low-icon-active">
              </div>
             </div>
           </div>

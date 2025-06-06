@@ -100,10 +100,23 @@ input[type="date"]::-webkit-datetime-edit {
     font-weight: 400;
 }
 
+.priority_button:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.priority_button img{
+    margin: 0;
+}
+
 .urgent_set{
     background-color: rgba(255, 61, 0, 1);
     color: rgba(255, 255, 255, 1);
     font-weight: 700;
+}
+
+.urgent_set:hover{
+    box-shadow: unset;
 }
 
 .medium_set{
@@ -112,14 +125,18 @@ input[type="date"]::-webkit-datetime-edit {
     font-weight: 700;
 }
 
+.medium_set:hover{
+    box-shadow: unset;
+}
+
 .low_set{
     background-color: rgba(122, 226, 41, 1);
     color: rgba(255, 255, 255, 1);
     font-weight: 700;
 }
 
-
-.priority_button:hover{
-    cursor: pointer;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+.low_set:hover{
+    box-shadow: unset;
 }
+
+
