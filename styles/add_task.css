@@ -139,4 +139,6 @@ input[type="date"]::-webkit-datetime-edit {
     box-shadow: unset;
 }
 
-
+select{
+    width: 100%;
+}
