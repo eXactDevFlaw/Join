@@ -1,19 +1,19 @@
-<!-- templates/edit_Contacts.html -->
-<div id="overlayContainer" class="overlay-container">
+<!-- templates/new_contact.html -->
+ <div id="overlayContainer" class="overlay-container"></div>
 <div class="overlayContainerCloseButton closebuttonBlue d-flex-c-c" onclick="closeOverlay()">
   <img class="closebuttonIcon" src="./assets/icons/close.svg" alt="X">
   <img class="closebuttonIconWhite" src="./assets/icons/close.svg" alt="X">
 </div>
 
 <div class="overlayContainerLeft d-flex-clm">
-  <h1>Edit Contact</h1>
-  <p class="overlaySubtitle">Make changes to your contact</p>
+  <h1>Add contact</h1>
+  <p class="overlaySubtitle">Tasks are better with a team!</p>
   <div class="dividerHorizontal"></div>
 </div>
 
 <div class="overlayContainerRight d-flex-clm">
-  <div id="edit-contact-initials" class="contact_circle"></div>
-  <form id="edit-contact-form" class="overlay-form d-flex-clm gap24" onsubmit="saveChangesToContact(); return false;">
+  <div class="addContactIcon"></div>
+  <form id="addnew-contact-form" class="overlay-form d-flex-clm gap24" onsubmit="saveNewContact(); return false;">
     <div class="inputContainer">
       <input id="contact-namefield" type="text" placeholder="Name" required>
       <i class="inputIcon userIcon"></i>
@@ -27,12 +27,10 @@
       <i class="inputIcon phoneIcon"></i>
     </div>
     <div class="overlayButtons">
-      <button type="button" class="btnClear" onclick="deleteContactViaOverlay(); return false;">Delete</button>
-      <button type="submit" class="btnPrimary">Save</button>
+      <button type="button" class="btnClear" onclick="closeOverlay()">Cancel</button>
+      <button type="submit" class="btnPrimary">Create contact</button>
     </div>
   </form>
+  </div>  
+
 </div>
-</div>
-<!-- This file is part of the Contacts application, which allows users to manage their contacts. 
-     It provides a form for editing contact details such as name, email, and phone number. 
-     The form includes validation and options to save changes or delete the contact. -->

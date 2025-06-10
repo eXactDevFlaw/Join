@@ -1,171 +1,199 @@
+/* ==========================================
+   Overlay-Grundstruktur
+   ========================================== */
 .overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.25s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
-
 .overlay.show {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
-.overlay-container {
-    position: relative;
-    right: -100vw;
-    max-width: 1100px;
-    max-height: 95%;
-    margin: 32px;
-    border-radius: 30px;
-    transition: right 0.25s ease;
-    background-color: #FFFFFF;
-    overflow-y: hidden;
+/* ==========================================
+   OverlayContainer (Querformat, Slide-In)
+   ========================================== */
+#overlayContainer {
+  display: flex;
+  width: 800px;
+  max-width: 90vw;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+#overlayContainer.show {
+  transform: translateX(0);
 }
 
-.overlay-slide-in {
-    right: 0;
+/* ==========================================
+   OverlayContainerLeft (40%)
+   ========================================== */
+.overlayContainerLeft {
+  flex: 0 0 40%;
+  background-color: rgb(42, 54, 71);
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.overlayContainerLeft h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  margin: 0;
+}
+.overlayContainerLeft .overlaySubtitle {
+  font-size: 18px;
+  color: rgb(221, 221, 221);
+  margin: 0;
+}
+.dividerHorizontal {
+  width: 60px;
+  height: 4px;
+  background-color: rgb(41, 171, 226);
+  margin-top: 8px;
 }
 
-.overlay-container-left {
-    background-color: #2A3647;
-    width: 450px;
-    height: 590px;
-    border-radius: 30px 0 0 30px;
-    padding: 36px;
+/* ==========================================
+   OverlayContainerRight (60%)
+   ========================================== */
+.overlayContainerRight {
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.addContactIcon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: rgb(221, 221, 221);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/icons/add_new_contact.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 48px 48px;
 }
 
-.overlay-container-left h1 {
-    color: #FFFFFF;
+/* ==========================================
+   Form + Input-Icons
+   ========================================== */
+.inputContainer {
+  position: relative;
+}
+.inputContainer input {
+  width: 100%;
+  padding: 12px 48px 12px 16px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 16px;
+}
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  opacity: 0.5;
+}
+.userIcon::before  { content: "\1F464"; }
+.emailIcon::before { content: "\2709"; }
+.phoneIcon::before { content: "\260E"; }
+
+/* ==========================================
+   Overlay-Buttons
+   ========================================== */
+.overlayButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: auto;
+}
+.btnClear {
+  border: 1px solid rgb(42, 54, 71);
+  background: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: rgb(42, 54, 71);
+  font-size: 16px;
+  cursor: pointer;
+}
+.btnPrimary {
+  background-color: rgb(42, 54, 71);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.overlay-container-left span {
-    font-size: 27px;
-    font-weight: 400;
-    color: #FFFFFF !important;
+/* ==========================================
+   Close-Button oben rechts
+   ========================================== */
+.overlayContainerCloseButton {
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.closebuttonBlue .closebuttonIconWhite {
+  display: none;
+}
+.closebuttonBlue:hover {
+  background-color: rgb(41, 171, 226);
+  border-radius: 50%;
+}
+.closebuttonBlue:hover .closebuttonIcon {
+  display: none;
+}
+.closebuttonBlue:hover .closebuttonIconWhite {
+  display: block;
 }
 
-.overlay-container-right {
-    background-color: #FFFFFF;
-    flex: 1;
-    height: 590px;
-    border-radius: 0 30px 30px 0;
-    padding: 48px;
-    position: relative;
-}
-
-.overlay-container-closebutton {
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    align-self: flex-end;
-    position: absolute;
-    top: 24px;
-    right: 16px;
-    z-index: 1;
-}
-
-.closebutton-blue .closebutton-icon-white {
-    display: none;
-}
-
-.closebutton-blue:hover {
-    background-color: #29ABE2;
-    border-radius: 50%;
-}
-
-.closebutton-blue:hover .closebutton-icon {
-    display: none;
-}
-
-.closebutton-blue:hover .closebutton-icon-white {
-    display: block;
-}
-
-.overlay-content {
-    overflow-y: auto;
-    max-height: 700px;
-}
-
-
-@media (max-width: 1240px) {
-
-    .overlay-container {
-        max-width: 1000px;
-    }
-
-    .overlay-container-left {
-        width: 320px;
-    }
-
-    .overlay-container-right {
-        padding: 36px;
-    }
-}
-
-@media (max-width: 1100px) {
-
-    .overlay-container-left,
-    .overlay-container-right {
-        padding: 24px;
-    }
-    
-    .overlay-container-form input {
-        width: 100%;
-    }
-}
-
+/* ==========================================
+   Responsive unter 800px
+   ========================================== */
 @media (max-width: 800px) {
-    .overlay-container {
-        right: auto;
-        flex-direction: column;
-        bottom: -100vh;
-        transition: bottom 0.25s ease;
-        /* width: calc(100% - 16px);
-        max-width: 580px; */
-        margin: 8px;
-    }
-
-    .overlay-slide-in {
-        right: auto;
-        bottom: 0;
-    }
-
-    .overlay-container-left {
-        width: 100%;
-        height: 310px;
-        border-radius: 30px 30px 0 0;
-        padding: 24px 48px 80px 24px;
-    }
-
-    .overlay-container-left span {
-        font-size: 20px;
-    }
-
-    .overlay-container-right {
-        width: 100%;
-        border-radius: 0 0 30px 30px;
-        padding: 68px 16px 24px 16px;
-    }
-
-    .overlay-container-form input {
-        width: 100%;
-    }
-
-    .closebutton-blue:hover {
-        background-color: rgba(0, 0, 0, 0.0);
-    }
-
-    .closebutton-blue .closebutton-icon-white {
-        display: block;
-    }
-
-    .closebutton-blue .closebutton-icon {
-        display: none;
-    }
+  #overlay_container,
+  .overlay-container {
+    width: 90vw;
+    height: auto;
+    flex-direction: column;
+    transform: translateY(100%);
+  }
+  #overlay_container.show,
+  .overlay-container.overlay_slideIn {
+    transform: translateY(0);
+  }
+  .overlay-container-left,
+  .overlay-container-right {
+    flex: none;
+    width: 100%;
+    border-radius: 0;
+    padding: 24px;
+  }
 }

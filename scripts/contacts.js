@@ -57,7 +57,7 @@
 
   // Detail-Ansicht
   window.showContactDetails = c => {
-    const area = document.getElementById('contacts_Overview');
+    const area = document.getElementById('contacts_overview');
     area.classList.remove('d_none');
     document.getElementById('singleview-initials').textContent = getInitials(c.name);
     document.getElementById('singleview-email').textContent    = c.email;
@@ -65,27 +65,25 @@
     document.getElementById('singleview-name').textContent     = c.name;
   };
   window.hideContactDetailsArea = ()=> {
-    document.getElementById('contacts_Overview').classList.add('d_none');
+    document.getElementById('contacts_overview').classList.add('d_none');
   };
 
-  // Add-Dialog
-  window.openAddContactOverlay = async () => {
-    editIndex = null;
-    await loadFormIntoOverlay('templates/edit_Contacts.html');
-    slideInOverlay();
-  };
+// Add-Dialog
+window.openAddContactOverlay = async function() {
+  await loadFormIntoOverlay('templates/new_contact.html');
+  slideInOverlay();
+};
 
 // Edit-Dialog
-  window.openEditContactOverlay = async idx => {
-    editIndex = idx;
-    await loadFormIntoOverlay('templates/edit_Contacts.html');
-    // fülle Formular-Felder:
-    document.getElementById('edit-contact-initials').textContent = getInitials(contacts[idx].name);
-    document.getElementById('contact-namefield').value    = contacts[idx].name;
-    document.getElementById('contact-emailfield').value   = contacts[idx].email;
-    document.getElementById('contact-phonefield').value   = contacts[idx].phone;
-    slideInOverlay();
-  };
+window.openEditContactOverlay = async function(idx) {
+  await loadFormIntoOverlay('templates/edit_Contacts.html');
+  // Formular-Felder füllen
+  document.getElementById('edit-contact-initials').textContent = getInitials(contacts[idx].name);
+  document.getElementById('contact-namefield').value = contacts[idx].name;
+  document.getElementById('contact-emailfield').value = contacts[idx].email;
+  document.getElementById('contact-phonefield').value = contacts[idx].phone;
+  slideInOverlay();
+};
   // Initial Render
   window.addEventListener('DOMContentLoaded', renderContacts);
 
