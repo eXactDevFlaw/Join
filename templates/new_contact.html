@@ -1,19 +1,18 @@
 <!-- templates/new_contact.html -->
- <div id="overlayContainer" class="overlay-container"></div>
-<div class="overlayContainerCloseButton closebuttonBlue d-flex-c-c" onclick="closeOverlay()">
-  <img class="closebuttonIcon" src="./assets/icons/close.svg" alt="X">
-  <img class="closebuttonIconWhite" src="./assets/icons/close.svg" alt="X">
+<div class="overlayContainerCloseButton closebuttonBlue" onclick="closeOverlay()">
+  <img class="closebuttonIcon" src="../assets/icons/close.svg" alt="X">
+  <img class="closebuttonIconWhite" src="../assets/icons/close.svg" alt="X">
 </div>
 
-<div class="overlayContainerLeft d-flex-clm">
-  <h1>Add contact</h1>
+<div class="overlayContainerLeft">
+  <h1>Add Contact</h1>
   <p class="overlaySubtitle">Tasks are better with a team!</p>
   <div class="dividerHorizontal"></div>
 </div>
 
-<div class="overlayContainerRight d-flex-clm">
+<div class="overlayContainerRight">
   <div class="addContactIcon"></div>
-  <form id="addnew-contact-form" class="overlay-form d-flex-clm gap24" onsubmit="saveNewContact(); return false;">
+  <form id="addnew-contact-form" onsubmit="saveNewContact(); return false;">
     <div class="inputContainer">
       <input id="contact-namefield" type="text" placeholder="Name" required>
       <i class="inputIcon userIcon"></i>
@@ -31,6 +30,4 @@
       <button type="submit" class="btnPrimary">Create contact</button>
     </div>
   </form>
-  </div>  
-
 </div>

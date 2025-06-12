@@ -84,46 +84,57 @@ main {
 /* ==========================================
    Einzelne Kontaktkarte
    ========================================== */
-.contact_item_joinStyle {
+.contactItem, .contact_item_joinStyle, .contact-item.join-style {
+  display: flex !important;          /* sorgt für Row-Layout */
+  flex-direction: row !important;    /* Kreis und Text nebeneinander */
+  align-items: center !important;    /* vertikal zentrieren */
+}
+/* Hervorhebung des aktiven Kontakts */
+.contactItemActive {
+  background-color: rgba(41, 171, 226, 0.1); /* z.B. ein helles Blau */
+}
+
+/* Stelle sicher, dass dein Kreis keine 100 % Breite hat: */
+.contactCircle, .contact_circle {
+  width: 40px;               /* gewünschter Durchmesser */
+  height: 40px;              /* gewünschter Durchmesser */
+  border-radius: 50%;        /* rund */
+  flex-shrink: 0;            /* nicht zusammenziehen */
+  margin-right: 12px;        /* Abstand zum Text */
+}
+
+/* Kontakt-Details (Name + E-Mail) nehmen den Rest des Platzes ein */
+.contactDetails, .contact_details {
   display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background-color: rgb(250, 250, 250);
-  border-radius: 8px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.contact_item_joinStyle:hover {
-  background-color: rgb(240, 248, 255);
-}
-
-.contact_item_joinStyle .contact_left {
-  display: flex;
-  align-items: center;
-}
-
-.contact_item_joinStyle .contact_circle {
-  margin-right: 12px;
-  margin-left: 0;
-}
-
-.contact_item_joinStyle .contact_details {
-  margin: 0;
-}
-
-/* Initialen-Kreis */
-.contact_circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+}
+/* Initialen-Kreis */
+.contactCircle {
+  width: 40px;              /* Durchmesser */
+  height: 40px;             /* Durchmesser */
+  border-radius: 50%;       /* macht’s rund */
+  display: flex;            /* für zentrierten Text */
+  align-items: center;      /* vertikale Zentrierung */
+  justify-content: center;  /* horizontale Zentrierung */
   font-size: 14px;
   font-weight: 600;
   color: rgb(255, 255, 255);
-  margin-right: 12px;
+  margin-right: 12px;       /* Abstand zum Namen */
+}
+.contactCircleLarge {
+  width: 48px;              /* Durchmesser des Kreises */
+  height: 48px;             /* identisch mit Breite */
+  border-radius: 50%;       /* macht’s rund */
+  display: flex;            /* damit Text mittig wird */
+  align-items: center;      /* vertikal zentriert */
+  justify-content: center;  /* horizontal zentriert */
+  font-size: 20px;          /* Größe der Initialen */
+  font-weight: 600;
+  color: rgb(255, 255, 255);/* Initialen in Weiß */
+  background-color: rgb(0, 123, 255); /* Fallback-Farbe */
+  margin-right: 16px;       /* Abstand zum Namen */
+  flex-shrink: 0;           /* nicht einziehen */
 }
 
 /* Kontaktdetails */
@@ -253,51 +264,85 @@ main {
 /* ==========================================
    Detailansicht (rechte Spalte)
    ========================================== */
-.contacts_overview {
+.contactsOverview {
   display: flex;
   flex-direction: column;
-  padding-top: 30px;
+  width: calc(100% - 456px - 32px); /* 456px für linke Spalte + 32px Padding */
+  padding: 32px;
+  background: rgb(246, 247, 248);
 }
-.contact_single_view {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 20px;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  right: -1024px;
-  opacity: 0;
-}
-.contacts_body_show {
-  right: 0;
-  opacity: 1;
+.contactsOverview.d-none {
+  display: none;
 }
 
-/* Header mit Trennungslinie */
-.headline_with_divider {
+/* Header mit Linie */
+.headlineWithDivider {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 8px;
 }
-.headline_with_divider h1 {
+.headlineWithDivider h1 {
   font-size: 61px;
   font-weight: 700;
-  line-height: 58px;
-  color: rgb(0, 0, 0);
+  color: rgb(0,0,0);
 }
-.headline_with_divider .headline_vector {
-  border: 3px solid rgb(41, 171, 226);
+.headDividingLine {
+  width: 4px;
   height: 59px;
+  background-color: rgb(41,171,226);
 }
-.headline_with_divider h6 {
+.headlineWithDivider h6 {
   font-size: 27px;
   font-weight: 400;
-  color: rgb(42, 54, 71);
+  color: rgb(42,54,71);
 }
-.contact_details_arrow img {
+
+/* Kontakt-Detail */
+.contactDetail {
+  margin-top: 24px;
+}
+.contactDetailHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.contactCircle.large {
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+}
+.detailActions .icon {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+/* Kontakt-Infos */
+/* contacts.css */
+.contact-info {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-info h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(29,29,29);
+}
+
+.contact-info .contacts-mail-phone-head {
+  font-weight: 600;
+  font-size: 13px;
+  color: rgb(29,29,29);
+  margin-bottom: 4px;
+}
+
+.contact-info .info-value {
+  font-size: 13px;
+  color: rgb(0,123,255);
 }
 
 /* ==========================================

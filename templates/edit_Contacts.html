@@ -1,19 +1,17 @@
 <!-- templates/edit_Contacts.html -->
-<div id="overlayContainer" class="overlay-container">
-<div class="overlayContainerCloseButton closebuttonBlue d-flex-c-c" onclick="closeOverlay()">
-  <img class="closebuttonIcon" src="./assets/icons/close.svg" alt="X">
-  <img class="closebuttonIconWhite" src="./assets/icons/close.svg" alt="X">
+<div class="overlayContainerCloseButton closebuttonBlue" onclick="closeOverlay()">
+  <img class="closebuttonIcon" src="../assets/icons/close.svg" alt="X">
+  <img class="closebuttonIconWhite" src="../assets/icons/close.svg" alt="X">
 </div>
 
-<div class="overlayContainerLeft d-flex-clm">
+<div class="overlayContainerLeft">
   <h1>Edit Contact</h1>
-  <p class="overlaySubtitle">Make changes to your contact</p>
   <div class="dividerHorizontal"></div>
 </div>
 
-<div class="overlayContainerRight d-flex-clm">
-  <div id="edit-contact-initials" class="contact_circle"></div>
-  <form id="edit-contact-form" class="overlay-form d-flex-clm gap24" onsubmit="saveChangesToContact(); return false;">
+<div class="overlayContainerRight">
+  <div class="addContactIcon" id="editContactInitials"></div>
+  <form id="edit-contact-form" onsubmit="saveChangesToContact(); return false;">
     <div class="inputContainer">
       <input id="contact-namefield" type="text" placeholder="Name" required>
       <i class="inputIcon userIcon"></i>
@@ -27,12 +25,8 @@
       <i class="inputIcon phoneIcon"></i>
     </div>
     <div class="overlayButtons">
-      <button type="button" class="btnClear" onclick="deleteContactViaOverlay(); return false;">Delete</button>
+      <button type="button" class="btnClear" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">Delete</button>
       <button type="submit" class="btnPrimary">Save</button>
     </div>
   </form>
 </div>
-</div>
-<!-- This file is part of the Contacts application, which allows users to manage their contacts. 
-     It provides a form for editing contact details such as name, email, and phone number. 
-     The form includes validation and options to save changes or delete the contact. -->
