@@ -139,6 +139,21 @@ input[type="date"]::-webkit-datetime-edit {
     box-shadow: unset;
 }
 
-select{
-    width: 100%;
+.arrow_drop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    rotate: 180deg;
+    color: (42, 54, 71, 1)
+}
+.arrow_drop .up{
+    rotate: 180deg;
+}
+
+.assigned_to_dropdown::placeholder{
+    color: black;
+}
+
+.assigned_to_dropdown:focus::placeholder{
+    color: transparent
 }
