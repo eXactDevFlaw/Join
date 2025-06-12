@@ -4,10 +4,21 @@ let taskDetails = {};
 function openTaskOverlay() {
     document.getElementById("task-overlay").classList.remove("d_none");;
     let add_task_entry = document.getElementById("add-task-entry");
+    document.getElementById("add-task-entry").innerHTML = addTaskTemplate();
     add_task_entry.classList.remove("d_none");
+    
     void add_task_entry.offsetWidth;
+    
+    
+    // addTaskTemplate();
     add_task_entry.classList.add("show");
-    document.getElementById("add-task-entry").innerHtml = addTaskTemplate();
+    add_task_entry.innerHtml = "";
+    console.log(add_task_entry);
+    
+}
+
+function deleteIt(){
+    document.getElementById("add-task-entry").innerHTML = "";
 }
 
 
