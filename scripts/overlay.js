@@ -1,8 +1,6 @@
-/// overlay.js
-
 /** Lädt externes HTML in #overlay_content */
 async function loadFormIntoOverlay(file) {
-  const overlayContent = document.getElementById('overlay_content');
+  const overlayContent = document.getElementById("overlay_content");
   const resp = await fetch(file);
   overlayContent.innerHTML = resp.ok
     ? await resp.text()
@@ -11,14 +9,14 @@ async function loadFormIntoOverlay(file) {
 
 /** Zeigt Overlay und zieht Container von rechts herein */
 function slideInOverlay() {
-  document.getElementById('overlay').classList.add('show');
-  document.getElementById('overlayContainer').classList.add('show');
+  document.getElementById("overlay").classList.add("show");
+  document.getElementById("overlayContainer").classList.add("show");
 }
 
 /** Schließt Overlay nach Slide-Out */
 function closeOverlay() {
-  document.getElementById('overlayContainer').classList.remove('show');
+  document.getElementById("overlayContainer").classList.remove("show");
   setTimeout(() => {
-    document.getElementById('overlay').classList.remove('show');
+    document.getElementById("overlay").classList.remove("show");
   }, 250);
 }

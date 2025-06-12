@@ -84,10 +84,12 @@ main {
 /* ==========================================
    Einzelne Kontaktkarte
    ========================================== */
-.contactItem, .contact_item_joinStyle, .contact-item.join-style {
-  display: flex !important;          /* sorgt für Row-Layout */
-  flex-direction: row !important;    /* Kreis und Text nebeneinander */
-  align-items: center !important;    /* vertikal zentrieren */
+.contactItem,
+.contact_item_joinStyle,
+.contact-item.join-style {
+  display: flex !important; /* sorgt für Row-Layout */
+  flex-direction: row !important; /* Kreis und Text nebeneinander */
+  align-items: center !important; /* vertikal zentrieren */
 }
 /* Hervorhebung des aktiven Kontakts */
 .contactItemActive {
@@ -95,46 +97,48 @@ main {
 }
 
 /* Stelle sicher, dass dein Kreis keine 100 % Breite hat: */
-.contactCircle, .contact_circle {
-  width: 40px;               /* gewünschter Durchmesser */
-  height: 40px;              /* gewünschter Durchmesser */
-  border-radius: 50%;        /* rund */
-  flex-shrink: 0;            /* nicht zusammenziehen */
-  margin-right: 12px;        /* Abstand zum Text */
+.contactCircle,
+.contact_circle {
+  width: 40px; /* gewünschter Durchmesser */
+  height: 40px; /* gewünschter Durchmesser */
+  border-radius: 50%; /* rund */
+  flex-shrink: 0; /* nicht zusammenziehen */
+  margin-right: 12px; /* Abstand zum Text */
 }
 
 /* Kontakt-Details (Name + E-Mail) nehmen den Rest des Platzes ein */
-.contactDetails, .contact_details {
+.contactDetails,
+.contact_details {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 /* Initialen-Kreis */
 .contactCircle {
-  width: 40px;              /* Durchmesser */
-  height: 40px;             /* Durchmesser */
-  border-radius: 50%;       /* macht’s rund */
-  display: flex;            /* für zentrierten Text */
-  align-items: center;      /* vertikale Zentrierung */
-  justify-content: center;  /* horizontale Zentrierung */
+  width: 40px; /* Durchmesser */
+  height: 40px; /* Durchmesser */
+  border-radius: 50%; /* macht’s rund */
+  display: flex; /* für zentrierten Text */
+  align-items: center; /* vertikale Zentrierung */
+  justify-content: center; /* horizontale Zentrierung */
   font-size: 14px;
   font-weight: 600;
   color: rgb(255, 255, 255);
-  margin-right: 12px;       /* Abstand zum Namen */
+  margin-right: 12px; /* Abstand zum Namen */
 }
 .contactCircleLarge {
-  width: 48px;              /* Durchmesser des Kreises */
-  height: 48px;             /* identisch mit Breite */
-  border-radius: 50%;       /* macht’s rund */
-  display: flex;            /* damit Text mittig wird */
-  align-items: center;      /* vertikal zentriert */
-  justify-content: center;  /* horizontal zentriert */
-  font-size: 20px;          /* Größe der Initialen */
+  width: 48px; /* Durchmesser des Kreises */
+  height: 48px; /* identisch mit Breite */
+  border-radius: 50%; /* macht’s rund */
+  display: flex; /* damit Text mittig wird */
+  align-items: center; /* vertikal zentriert */
+  justify-content: center; /* horizontal zentriert */
+  font-size: 20px; /* Größe der Initialen */
   font-weight: 600;
-  color: rgb(255, 255, 255);/* Initialen in Weiß */
+  color: rgb(255, 255, 255); /* Initialen in Weiß */
   background-color: rgb(0, 123, 255); /* Fallback-Farbe */
-  margin-right: 16px;       /* Abstand zum Namen */
-  flex-shrink: 0;           /* nicht einziehen */
+  margin-right: 16px; /* Abstand zum Namen */
+  flex-shrink: 0; /* nicht einziehen */
 }
 
 /* Kontaktdetails */
@@ -284,17 +288,17 @@ main {
 .headlineWithDivider h1 {
   font-size: 61px;
   font-weight: 700;
-  color: rgb(0,0,0);
+  color: rgb(0, 0, 0);
 }
 .headDividingLine {
   width: 4px;
   height: 59px;
-  background-color: rgb(41,171,226);
+  background-color: rgb(41, 171, 226);
 }
 .headlineWithDivider h6 {
   font-size: 27px;
   font-weight: 400;
-  color: rgb(42,54,71);
+  color: rgb(42, 54, 71);
 }
 
 /* Kontakt-Detail */
@@ -330,19 +334,19 @@ main {
   margin: 0;
   font-size: 16px;
   font-weight: 600;
-  color: rgb(29,29,29);
+  color: rgb(29, 29, 29);
 }
 
 .contact-info .contacts-mail-phone-head {
   font-weight: 600;
   font-size: 13px;
-  color: rgb(29,29,29);
+  color: rgb(29, 29, 29);
   margin-bottom: 4px;
 }
 
 .contact-info .info-value {
   font-size: 13px;
-  color: rgb(0,123,255);
+  color: rgb(0, 123, 255);
 }
 
 /* ==========================================
@@ -358,7 +362,7 @@ main {
   align-items: center;
 }
 
-.edit_contacts_window{
+.edit_contacts_window {
   position: absolute;
   top: 0;
   left: 0;
