@@ -22,3 +22,14 @@ function toggleSignIn() {
 function signIn() {
   
 }
+
+function togglePrivacyCheck(){
+  let btnRef = document.getElementById('signin-btn-checkbox');
+  let imgRef = document.getElementById('signin-btn-checkbox-img');
+
+  if(btnRef.checked){
+    imgRef.src = "./assets/icons/checkbox_active.svg"
+  }else{
+    imgRef.src = "./assets/icons/checkbox.svg"
+  }
+}

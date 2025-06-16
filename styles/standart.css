@@ -49,6 +49,11 @@ a {
     align-items: center;
 }
 
+.d_flex_ai_center {
+    display: flex;
+    align-items: center;
+}
+
 .d_grid {
     display: grid;
 }
@@ -145,4 +150,8 @@ a {
 
 .headline{
     gap: 30px;
+}
+
+.curser_pointer {
+    cursor: pointer;
 }

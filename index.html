@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div id="dialog-signin" class="dialog-signin d_flex_center d_none">
+    <div id="dialog_signin" class="dialog-signin d_flex_center d_none">
       <img src="./assets/icons/dialog_signup.svg" alt="">
     </div>
     <!-- LOG-IN -->
@@ -137,8 +137,11 @@
             />
           </div>
           <div class="d_flex_center_row">
-            <button class="signin-btn-checkbock"><img src="./assets/icons/checkbox.svg" alt="checkbox"></button>
-            <span>I accept the <a class="signin_pp_link" href="./templates/privacyPolicy.html">Privacy Policy</a></span>
+            <label class="d_flex_ai_center curser_pointer" for="signin-btn-checkbox">
+              <input type="checkbox" id="signin-btn-checkbox" class="signin_btn_checkbox" onclick="togglePrivacyCheck()">
+              <img id="signin-btn-checkbox-img" src="./assets/icons/checkbox.svg" alt="empty checkbox">
+              <span>I accept the <a class="signin_pp_link" href="./templates/privacyPolicy.html">Privacy Policy</a></span>
+            </label>
           </div>
         </div>
       </div>

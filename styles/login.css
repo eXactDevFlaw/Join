@@ -153,9 +153,22 @@
     object-fit: cover;
 }
 
-.signin-btn-checkbock {
+.signin_btn_checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
     background: none;
     border: none;
+}
+
+.signin_btn_checkbox img {
+    width: 24px;
+    margin-right: 8px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .signin_pp_link{
@@ -167,7 +180,7 @@
     font-weight: bold;
 }
 
-.dialog-signin {
+.dialog_signin {
     z-index: 3;
     position: absolute;
     top: 0;
