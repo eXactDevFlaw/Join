@@ -241,6 +241,12 @@ main {
   color: rgb(42, 54, 71);
 }
 
+.contact_left {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Abstand zwischen Kreis und Text */
+}
+
 .contact_detail {
   margin-top: 24px;
 }
