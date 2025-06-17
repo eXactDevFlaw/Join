@@ -164,9 +164,9 @@
     border: none;
 }
 
-.signin_btn_checkbox img {
+.signin_btn_checkbox_img {
     width: 24px;
-    margin-right: 8px;
+    margin-right: 16px;
     user-select: none;
     pointer-events: none;
 }
