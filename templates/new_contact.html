@@ -1,33 +1,33 @@
 <!-- templates/new_contact.html -->
-<div class="overlayContainerCloseButton closebuttonBlue" onclick="closeOverlay()">
-  <img class="closebuttonIcon" src="../assets/icons/close.svg" alt="X">
-  <img class="closebuttonIconWhite" src="../assets/icons/close.svg" alt="X">
+<div class="overlay_container_close_button closebutton_blue" onclick="closeOverlay()">
+  <img class="closebutton_icon" src="../assets/icons/close.svg" alt="X">
+  <img class="closebutton_icon_white" src="../assets/icons/close.svg" alt="X">
 </div>
 
-<div class="overlayContainerLeft">
+<div class="overlay_container_left">
   <h1>Add Contact</h1>
-  <p class="overlaySubtitle">Tasks are better with a team!</p>
-  <div class="dividerHorizontal"></div>
+  <p class="overlay_subtitle">Tasks are better with a team!</p>
+  <div class="divider_horizontal"></div>
 </div>
 
-<div class="overlayContainerRight">
-  <div class="addContactIcon"></div>
+<div class="overlay_container_right">
+  <div class="add_contact_icon"></div>
   <form id="addnew-contact-form" onsubmit="saveNewContact(); return false;">
-    <div class="inputContainer">
+    <div class="input_container">
       <input id="contact-namefield" type="text" placeholder="Name" required>
-      <i class="inputIcon userIcon"></i>
+      <i class="input_icon user_icon"></i>
     </div>
-    <div class="inputContainer">
+    <div class="input_container">
       <input id="contact-emailfield" type="email" placeholder="Email" required>
-      <i class="inputIcon emailIcon"></i>
+      <i class="input_icon email_icon"></i>
     </div>
-    <div class="inputContainer">
+    <div class="input_container">
       <input id="contact-phonefield" type="tel" placeholder="Phone" required>
-      <i class="inputIcon phoneIcon"></i>
+      <i class="input_icon phone_icon"></i>
     </div>
-    <div class="overlayButtons">
-      <button type="button" class="btnClear" onclick="closeOverlay()">Cancel</button>
-      <button type="submit" class="btnPrimary">Create contact</button>
+    <div class="overlay_buttons">
+      <button type="button" class="btn_clear" onclick="closeOverlay()">Cancel</button>
+      <button type="submit" class="btn_primary">Create contact</button>
     </div>
   </form>
 </div>

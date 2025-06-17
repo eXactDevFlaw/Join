@@ -10,12 +10,12 @@ async function loadFormIntoOverlay(file) {
 /** Zeigt Overlay und zieht Container von rechts herein */
 function slideInOverlay() {
   document.getElementById("overlay").classList.add("show");
-  document.getElementById("overlayContainer").classList.add("show");
+  document.getElementById("overlay-container").classList.add("show");
 }
 
 /** Schließt Overlay nach Slide-Out */
 function closeOverlay() {
-  document.getElementById("overlayContainer").classList.remove("show");
+  document.getElementById("overlay-container").classList.remove("show");
   setTimeout(() => {
     document.getElementById("overlay").classList.remove("show");
   }, 250);

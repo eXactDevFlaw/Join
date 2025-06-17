@@ -1,32 +1,32 @@
-<!-- templates/edit_Contacts.html -->
-<div class="overlayContainerCloseButton closebuttonBlue" onclick="closeOverlay()">
-  <img class="closebuttonIcon" src="../assets/icons/close.svg" alt="X">
-  <img class="closebuttonIconWhite" src="../assets/icons/close.svg" alt="X">
+<!-- templates/edit_contacts.html -->
+<div class="overlay_container_close_button closebutton_blue" onclick="closeOverlay()">
+  <img class="closebutton_icon" src="../assets/icons/close.svg" alt="X">
+  <img class="closebutton_icon_white" src="../assets/icons/close.svg" alt="X">
 </div>
 
-<div class="overlayContainerLeft">
+<div class="overlay_container_left">
   <h1>Edit Contact</h1>
-  <div class="dividerHorizontal"></div>
+  <div class="divider_horizontal"></div>
 </div>
 
-<div class="overlayContainerRight">
-  <div class="addContactIcon" id="editContactInitials"></div>
+<div class="overlay_container_right">
+  <div class="add_contact_icon" id="edit-contact-initials"></div>
   <form id="edit-contact-form" onsubmit="saveChangesToContact(); return false;">
-    <div class="inputContainer">
+    <div class="input_container">
       <input id="contact-namefield" type="text" placeholder="Name" required>
-      <i class="inputIcon userIcon"></i>
+      <i class="input_icon user_icon"></i>
     </div>
-    <div class="inputContainer">
+    <div class="input_container">
       <input id="contact-emailfield" type="email" placeholder="Email" required>
-      <i class="inputIcon emailIcon"></i>
+      <i class="input_icon email_icon"></i>
     </div>
-    <div class="inputContainer">
+    <div class="input_container">
       <input id="contact-phonefield" type="tel" placeholder="Phone" required>
-      <i class="inputIcon phoneIcon"></i>
+      <i class="input_icon phone_icon"></i>
     </div>
-    <div class="overlayButtons">
-      <button type="button" class="btnClear" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">Delete</button>
-      <button type="submit" class="btnPrimary">Save</button>
+    <div class="overlay_buttons">
+      <button type="button" class="btn_clear" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">Delete</button>
+      <button type="submit" class="btn_primary">Save</button>
     </div>
   </form>
 </div>

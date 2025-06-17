@@ -1,6 +1,6 @@
 (function () {
   // === Daten + State ===
-  let lastSelectedItem = null; // zuletzt ausgewählter Kontakt
+  let lastSelectedItem = null;
   const contacts = [
     {
       id: 1,
@@ -33,8 +33,8 @@
       phone: "+49 170 7654321",
     },
   ];
-  const listEl = document.getElementById("contacts_list");
-  const detailBox = document.getElementById("contactDetail");
+  const listEl = document.getElementById("contacts-list");
+  const detailBox = document.getElementById("contact-detail");
 
   // === Helfer ===
   function getInitials(name) {
@@ -43,11 +43,13 @@
       .map((p) => p[0].toUpperCase())
       .join("");
   }
+
   function stringToColor(str) {
     let hash = 0;
     for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
     return `hsl(${hash % 360},70%,50%)`;
   }
+
   function groupContacts() {
     const g = {};
     contacts
@@ -66,23 +68,21 @@
     const groups = groupContacts();
     for (const L in groups) {
       const sec = document.createElement("div");
-      sec.className = "contactSection";
-      sec.innerHTML = `<div class="contactInitial">${L}</div>`;
+      sec.className = "contact_section";
+      sec.innerHTML = `<div class="contact_initial">${L}</div>`;
       groups[L].forEach((c) => {
         const item = document.createElement("div");
-        item.className = "contactItem";
+        item.className = "contact_list_item";
         item.innerHTML = `
-          <div class="contactLeft">
-            <div class="contactCircle">${getInitials(c.name)}</div>
-            <div class="contactDetails">
-              <div class="contactName">${c.name}</div>
-              <div class="contactEmail">${c.email}</div>
+          <div class="contact_left">
+            <div class="contact_circle">${getInitials(c.name)}</div>
+            <div class="contact_details">
+              <div class="contact_name">${c.name}</div>
+              <div class="contact_email">${c.email}</div>
             </div>
           </div>`;
-        // farbigen Kreis setzen
-        const circle = item.querySelector(".contactCircle");
+        const circle = item.querySelector(".contact_circle");
         circle.style.backgroundColor = stringToColor(c.name);
-        // Klick öffnet Detail-Ansicht
         item.addEventListener("click", () => showContactDetails(c, item));
         sec.appendChild(item);
       });
@@ -92,19 +92,17 @@
 
   // === Detail-Ansicht ===
   window.showContactDetails = function (c, itemEl) {
-    // Highlight: alte entfernen, neue hinzufügen
     if (lastSelectedItem)
-      lastSelectedItem.classList.remove("contactItemActive");
-    itemEl.classList.add("contactItemActive");
+      lastSelectedItem.classList.remove("contact_list_item_active");
+    itemEl.classList.add("contact_list_item_active");
     lastSelectedItem = itemEl;
-    // Detail-Box einblenden
+
     detailBox.classList.remove("d_none");
 
-    // Felder befüllen
-    const initEl = document.getElementById("detailInitials");
-    const nameEl = document.getElementById("detailName");
-    const emailEl = document.getElementById("detailEmail");
-    const phoneEl = document.getElementById("detailPhone");
+    const initEl = document.getElementById("detail-initials");
+    const nameEl = document.getElementById("detail-name");
+    const emailEl = document.getElementById("detail-email");
+    const phoneEl = document.getElementById("detail-phone");
 
     initEl.textContent = getInitials(c.name);
     initEl.style.backgroundColor = stringToColor(c.name);
@@ -113,21 +111,19 @@
     emailEl.href = `mailto:${c.email}`;
     phoneEl.textContent = c.phone;
 
-    // Aktionen für Edit/Delete
-    document.getElementById("btnEditDetail").onclick = async () => {
+    document.getElementById("btn-edit-detail").onclick = async () => {
       await loadFormIntoOverlay("./templates/edit_Contacts.html");
       slideInOverlay();
-      // Formular-Felder füllen
       document.getElementById("contact-namefield").value = c.name;
       document.getElementById("contact-emailfield").value = c.email;
       document.getElementById("contact-phonefield").value = c.phone;
     };
-    document.getElementById("btnDeleteDetail").onclick = () => {
+
+    document.getElementById("btn-delete-detail").onclick = () => {
       if (confirm("Kontakt wirklich löschen?")) {
         const idx = contacts.findIndex((x) => x.id === c.id);
         contacts.splice(idx, 1);
         renderContacts();
-        // Detail-Box wieder ausblenden
         overview.classList.remove("d_none");
         detailBox.classList.add("d_none");
       }
@@ -135,22 +131,18 @@
   };
 
   window.hideContactDetailsArea = function () {
-    // nur Detail-Box verstecken
     overview.classList.remove("d_none");
     detailBox.classList.add("d_none");
-    // Highlight entfernen
     if (lastSelectedItem) {
-      lastSelectedItem.classList.remove("contactItemActive");
+      lastSelectedItem.classList.remove("contact_list_item_active");
       lastSelectedItem = null;
     }
   };
 
-  // === Overlay zum Neu-Kontakt ===
   window.openAddContactOverlay = async function () {
     await loadFormIntoOverlay("./templates/new_contact.html");
     slideInOverlay();
   };
 
-  // === Initialisierung ===
   window.addEventListener("DOMContentLoaded", renderContacts);
 })();

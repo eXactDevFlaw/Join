@@ -18,7 +18,6 @@ main {
   display: flex;
 }
 
-/* Wrapper für beide Spalten */
 .contacts_layout_wrapper {
   display: flex;
   width: 100%;
@@ -26,9 +25,6 @@ main {
   gap: 32px;
 }
 
-/* ==========================================
-   Kontaktliste (linke Spalte)
-   ========================================== */
 .contactlist_area {
   flex-shrink: 0;
   width: 456px;
@@ -38,7 +34,6 @@ main {
   overflow-y: auto;
 }
 
-/* Add-Button oben */
 .add_contact_btn {
   display: flex;
   align-items: center;
@@ -52,15 +47,16 @@ main {
   cursor: pointer;
   margin-bottom: 16px;
 }
+
 .add_contact_btn img {
   width: 16px;
   height: 16px;
 }
+
 .add_contact_btn:hover {
   background-color: rgb(31, 40, 54);
 }
 
-/* Scrollbare Liste */
 .contact_list,
 .contacts_list {
   flex-grow: 1;
@@ -69,7 +65,6 @@ main {
   height: 100%;
 }
 
-/* Alphabetische Gruppen-Überschrift */
 .contact_section .contact_initial {
   font-size: 12px;
   font-weight: 600;
@@ -80,145 +75,89 @@ main {
   padding-left: 0;
 }
 
-/* ==========================================
-   Einzelne Kontaktkarte
-   ========================================== */
-.contactItem,
-.contact_item_joinStyle,
-.contact-item.join-style {
-  display: flex !important; /* sorgt für Row-Layout */
-  flex-direction: row !important; /* Kreis und Text nebeneinander */
-  align-items: center !important; /* vertikal zentrieren */
-}
-/* Hervorhebung des aktiven Kontakts */
-.contactItemActive {
-  background-color: rgba(41, 171, 226, 0.1); /* z.B. ein helles Blau */
+.contact_item {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
 }
 
-/* Stelle sicher, dass dein Kreis keine 100 % Breite hat: */
-.contactCircle,
+.contact_item_active {
+  background-color: rgba(41, 171, 226, 0.1);
+}
+
 .contact_circle {
-  width: 40px; /* gewünschter Durchmesser */
-  height: 40px; /* gewünschter Durchmesser */
-  border-radius: 50%; /* rund */
-  flex-shrink: 0; /* nicht zusammenziehen */
-  margin-right: 12px; /* Abstand zum Text */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
 }
 
-/* Kontakt-Details (Name + E-Mail) nehmen den Rest des Platzes ein */
-.contactDetails,
+.contact_circle_large {
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  margin-right: 16px;
+}
+
 .contact_details {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-/* Initialen-Kreis */
-.contactCircle {
-  width: 40px; /* Durchmesser */
-  height: 40px; /* Durchmesser */
-  border-radius: 50%; /* macht’s rund */
-  display: flex; /* für zentrierten Text */
-  align-items: center; /* vertikale Zentrierung */
-  justify-content: center; /* horizontale Zentrierung */
-  font-size: 14px;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  margin-right: 12px; /* Abstand zum Namen */
-}
-.contactCircleLarge {
-  width: 48px; /* Durchmesser des Kreises */
-  height: 48px; /* identisch mit Breite */
-  border-radius: 50%; /* macht’s rund */
-  display: flex; /* damit Text mittig wird */
-  align-items: center; /* vertikal zentriert */
-  justify-content: center; /* horizontal zentriert */
-  font-size: 20px; /* Größe der Initialen */
-  font-weight: 600;
-  color: rgb(255, 255, 255); /* Initialen in Weiß */
-  background-color: rgb(0, 123, 255); /* Fallback-Farbe */
-  margin-right: 16px; /* Abstand zum Namen */
-  flex-shrink: 0; /* nicht einziehen */
-}
-
-/* Kontaktdetails */
-.contact_details {
   flex-grow: 1;
 }
+
 .contact_name {
   font-size: 15px;
   font-weight: 600;
   color: rgb(29, 29, 29);
   margin: 0;
 }
+
 .contact_email {
   font-size: 13px;
   color: rgb(0, 123, 255);
   margin: 0;
 }
 
-/* Aktionen (Icons) */
 .contact_actions {
   display: flex;
   gap: 8px;
   margin-left: auto;
 }
+
 .contact_actions .icon {
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
+
 .contact_actions .icon:hover {
   opacity: 0.8;
 }
 
-/* ==========================================
-   Overlay (Modale Fenster)
-   ========================================== */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.overlay_show {
-  visibility: visible;
-  opacity: 1;
-}
-.overlay_container {
-  position: relative;
-  right: -100vw;
-  max-width: 1100px;
-  max-height: 95%;
-  margin: 32px;
-  border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  overflow: hidden;
-  display: flex;
-  transition: right 0.25s ease;
-}
-.overlay_slideIn {
-  right: 0;
-}
 .overlay_content {
   flex: 1;
   padding: 32px;
   overflow-y: auto;
 }
+
 .overlay_content h2 {
   margin: 0 0 24px 0;
 }
+
 .overlay_content label {
   display: block;
   margin-bottom: 4px;
   font-weight: bold;
 }
+
 .overlay_content input {
   width: 100%;
   padding: 8px;
@@ -226,11 +165,13 @@ main {
   border: 1px solid rgb(204, 204, 204);
   border-radius: 8px;
 }
+
 .overlay_buttons {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
 }
+
 .btn_clear {
   background: none;
   border: none;
@@ -238,10 +179,6 @@ main {
   cursor: pointer;
 }
 
-/* ==========================================
-   Buttons (allgemein)
-   ========================================== */
-.add_contact_btn,
 .button_font {
   display: flex;
   align-items: center;
@@ -254,111 +191,104 @@ main {
   border-radius: 8px;
   cursor: pointer;
 }
-.buttonFont img,
-.add_contact_btn img {
+
+.button_font img {
   width: 16px;
   height: 16px;
 }
-.add_contact_btn:hover,
+
 .button_font:hover {
   background-color: rgb(31, 40, 54);
 }
-.btnEditDetail {
+
+.btn_edit_detail {
   cursor: pointer;
 }
 
-/* ==========================================
-   Detailansicht (rechte Spalte)
-   ========================================== */
-.contactsOverview {
+.contacts_overview {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 456px - 32px); /* 456px für linke Spalte + 32px Padding */
+  width: calc(100% - 456px - 32px);
   padding: 32px;
   background: rgb(246, 247, 248);
 }
-.contactsOverview.d-none {
+
+.contacts_overview.d_none {
   display: none;
 }
 
-/* Header mit Linie */
-.headlineWithDivider {
+.headline_with_divider {
   display: flex;
   align-items: center;
   gap: 30px;
 }
-.headlineWithDivider h1 {
+
+.headline_with_divider h1 {
   font-size: 61px;
   font-weight: 700;
   color: rgb(0, 0, 0);
 }
-.headDividingLine {
+
+.head_dividing_line {
   width: 4px;
   height: 59px;
   background-color: rgb(41, 171, 226);
 }
-.headlineWithDivider h6 {
+
+.headline_with_divider h6 {
   font-size: 27px;
   font-weight: 400;
   color: rgb(42, 54, 71);
 }
 
-/* Kontakt-Detail */
-.contactDetail {
+.contact_detail {
   margin-top: 24px;
 }
-.contactDetailHeader {
+
+.contact_detail_header {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.contactCircle.large {
-  width: 80px;
-  height: 80px;
-  font-size: 24px;
-}
-.detailActions .icon {
+
+.detail_actions .icon {
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
-/* Kontakt-Infos */
-/* contacts.css */
-.contact-info {
+.contact_info {
   margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.contact-info h5 {
+.contact_info h5 {
   margin: 0;
   font-size: 16px;
   font-weight: 600;
   color: rgb(29, 29, 29);
 }
 
-.contact-info .contacts-mail-phone-head {
+.contact_info .contacts_mail_phone_head {
   font-weight: 600;
   font-size: 13px;
   color: rgb(29, 29, 29);
   margin-bottom: 4px;
 }
 
-.contact-info .info-value {
+.contact_info .info_value {
   font-size: 13px;
   color: rgb(0, 123, 255);
 }
 
-/* ==========================================
-   Flex-Hilfen
-   ========================================== */
 .d_flex_bw_st {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .d_flex_ac {
   display: flex;
   align-items: center;
