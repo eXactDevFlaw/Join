@@ -33,3 +33,7 @@ function togglePrivacyCheck(){
     imgRef.src = "./assets/icons/checkbox.svg"
   }
 }
+
+function guestLogin(){
+  window.location = "./summary.html"
+}

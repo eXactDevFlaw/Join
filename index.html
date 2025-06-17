@@ -61,8 +61,7 @@
               type="text"
               placeholder="Email"
               name="username"
-              id="username"
-              pattern="@"
+              id="login-username"
               required
             />
           </div>
@@ -72,14 +71,14 @@
               type="password"
               placeholder="Password"
               name="userpassword"
-              id="userpassword"
+              id="login-userpassword"
               required
             />
           </div>
         </div>
         <div class="login_btn_wrapper">
-          <button class="btn_dark login_btn" onclick="">Log in</button>
-          <button class="btn_white guest_login_btn" onclick="">
+          <button class="btn_dark login_btn" onclick="login()">Log in</button>
+          <button class="btn_white guest_login_btn" id="btn-guest-login" onclick="guestLogin()">
             Guest Log in
           </button>
         </div>
