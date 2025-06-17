@@ -106,7 +106,7 @@
   border-radius: 8px;
   font-size: 16px;
 }
-.input_icon {
+.input-icon {
   position: absolute;
   top: 50%;
   right: 16px;
@@ -114,14 +114,40 @@
   font-size: 18px;
   opacity: 0.5;
 }
-.user_icon::before {
-  content: "\1F464";
+.user-icon::before {
+  content: "";
+  display: inline-block;
+  width: 16px;   /* Breite des Icons */
+  height: 16px;  /* Höhe des Icons */
+  background-image: url('/assets/icons/person.svg'); /* Pfad zu deinem User-Icon */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px; /* Abstand zum Text */
+  vertical-align: middle; /* Vertikale Ausrichtung */
 }
-.email_icon::before {
-  content: "\2709";
+
+.email-icon::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('/assets/icons/mail.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  vertical-align: middle;
 }
-.phone_icon::before {
-  content: "\260E";
+
+.phone-icon::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('/assets/icons/phone.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 /* Overlay-Buttons */
