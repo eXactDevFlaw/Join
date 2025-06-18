@@ -166,7 +166,7 @@
 
 .signin_btn_checkbox_img {
     width: 24px;
-    margin-right: 16px;
+    margin-right: 8px;
     user-select: none;
     pointer-events: none;
 }
@@ -178,6 +178,11 @@
 .signin_pp_link:hover {
     text-decoration: underline;
     font-weight: bold;
+}
+
+.signin_span {
+    color: rgba(168, 168, 168, 1);
+
 }
 
 .dialog_signin {

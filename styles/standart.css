@@ -155,3 +155,7 @@ a {
 .curser_pointer {
     cursor: pointer;
 }
+
+.mt_16px {
+    margin-top: 16px;
+}
