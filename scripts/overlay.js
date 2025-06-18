@@ -1,6 +1,6 @@
 /** Lädt externes HTML in #overlay_content */
 async function loadFormIntoOverlay(file) {
-  const overlayContent = document.getElementById("overlay_content");
+  const overlayContent = document.getElementById("overlay-content");
   const resp = await fetch(file);
   overlayContent.innerHTML = resp.ok
     ? await resp.text()

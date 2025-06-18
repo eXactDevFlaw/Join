@@ -81,10 +81,9 @@
   gap: 24px;
 }
 .add_contact_icon {
-  width: 80px;
+  width: 76px;
   height: 80px;
   margin: 0 auto;
-  background-color: rgb(221, 221, 221);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -92,7 +91,7 @@
   background-image: url("../assets/icons/add_new_contact.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 48px 48px;
+  background-size: 85px 85px;
 }
 
 /* Form + Icons */
