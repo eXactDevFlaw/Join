@@ -82,6 +82,14 @@ a {
     margin: 0 auto;
 }
 
+.margin_top_16px {
+    margin-top: 16px;
+}
+
+.margin_left_8{
+    margin-left: 8px;
+}
+
 .max_width_960 {
     max-width: 960px;
     margin: 0 auto;
@@ -109,7 +117,7 @@ a {
 }
 
 .justify_start{
-    justify-content: flex-start;
+    justify-content: flex-start !important;
 } 
 
 .justify_end {
@@ -154,8 +162,4 @@ a {
 
 .curser_pointer {
     cursor: pointer;
-}
-
-.mt_16px {
-    margin-top: 16px;
 }

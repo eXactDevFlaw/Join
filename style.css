@@ -137,7 +137,7 @@ button {
     background-color: rgba(9, 25, 49, 1);
 }
 
-.nav_active{
+.nav_active {
     color: rgba(255, 255, 255, 1);
 }
 
@@ -228,4 +228,10 @@ button {
 .input_icon_wrapper input:focus {
     outline-color: rgba(41, 171, 226, 1);
     color: rgba(0, 0, 0, 1)
+}
+
+.input_error {
+    color: #e53935;
+    margin-top: 4px;
+    min-height: 18px;
 }
