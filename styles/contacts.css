@@ -39,7 +39,7 @@ main {
   align-items: center;
   gap: 8px;
   padding: 12px;
-  font-size: 14px;
+  font-size: 18px;
   background-color: rgb(42, 54, 71);
   color: rgb(255, 255, 255);
   border: none;
@@ -144,8 +144,6 @@ main {
 
 .overlay_content {
   flex: 1;
-  padding: 32px;
-  overflow-y: auto;
 }
 
 .overlay_content h2 {
@@ -287,17 +285,6 @@ main {
 .contact_info .info_value {
   font-size: 13px;
   color: rgb(0, 123, 255);
-}
-
-.d_flex_bw_st {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.d_flex_ac {
-  display: flex;
-  align-items: center;
 }
 
 .edit_contacts_window {

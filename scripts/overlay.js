@@ -1,22 +1,23 @@
-/** Lädt externes HTML in #overlay_content */
+/** Lädt externes HTML in #overlay-content */
 async function loadFormIntoOverlay(file) {
-  const overlayContent = document.getElementById("overlay_content");
+  const contentEl = document.getElementById("overlay-content");
   const resp = await fetch(file);
-  overlayContent.innerHTML = resp.ok
+  contentEl.innerHTML = resp.ok
     ? await resp.text()
-    : `<p style="padding:16px;color:red">Template nicht gefunden</p>`;
+    : `<p style="padding:16px;color:red">Template nicht gefunden: ${file}</p>`;
 }
 
-/** Zeigt Overlay und zieht Container von rechts herein */
+/** Zeigt das Overlay und slidet das Panel rein */
 function slideInOverlay() {
   document.getElementById("overlay").classList.add("show");
   document.getElementById("overlay-container").classList.add("show");
 }
 
-/** Schließt Overlay nach Slide-Out */
+/** Schließt das Overlay */
 function closeOverlay() {
   document.getElementById("overlay-container").classList.remove("show");
   setTimeout(() => {
     document.getElementById("overlay").classList.remove("show");
   }, 250);
 }
+

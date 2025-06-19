@@ -131,16 +131,16 @@
   <div class="contacts_layout_wrapper">
     <!-- Linke Spalte: Add-Button + Kontaktliste -->
     <div class="contactlist_area">
-      <button class="btn-dark add_contact_btn" onclick="openAddContactOverlay()">
-        <img src="./assets/icons/addPerson.svg" alt="" />
+      <button class="btn_dark add_contact_btn" onclick="openAddContactOverlay()">
         Add new contact
+        <img src="./assets/icons/addPerson.svg" alt="" />
       </button>
       <div id="contacts-list" class="contacts_list"></div>
     </div>
 
     <!-- Rechte Spalte: Kontakt-Details -->
     <div class="contacts_overview" id="contacts-overview">
-      <div class="headline_with_divider d-flex-ac gap8">
+      <div class="headline_with_divider d_flex_ac gap8">
         <h1>Contacts</h1>
         <div class="head_dividing_line"></div>
         <h6>Better with a team</h6>
@@ -148,10 +148,10 @@
 
       <!-- Detail-Panel: startet versteckt -->
       <div class="contact_detail d_none" id="contact-detail">
-        <div class="contact_detail_header d-flex-ac gap16">
+        <div class="contact_detail_header d_flex_ac gap16">
           <div class="contact_circle contact_circle_large" id="detail-initials"></div>
           <h2 id="detail-name"></h2>
-          <div class="detail_actions d-flex-ac gap8">
+          <div class="detail_actions d_flex_ac gap8">
             <img src="./assets/icons/edit.svg" alt="Edit" id="btn-edit-detail" class="icon">
             <img src="./assets/icons/delete.svg" alt="Delete" id="btn-delete-detail" class="icon">
           </div>
@@ -176,6 +176,6 @@
 <!-- Overlay: leerer Container, wird per overlay.js befüllt -->
 <div id="overlay" class="overlay">
   <div id="overlay-container" class="overlay_container">
-    <div id="overlay_content" class="overlay_content"></div>
+    <div id="overlay-content" class="overlay_content"></div>
   </div>
 </div>

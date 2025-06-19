@@ -139,10 +139,17 @@
     }
   };
 
-  window.openAddContactOverlay = async function () {
-    await loadFormIntoOverlay("./templates/new_contact.html");
-    slideInOverlay();
-  };
+window.openAddContactOverlay = async () => {
+  await loadFormIntoOverlay("./templates/new_contact.html");
+  slideInOverlay();
+};
+
+window.openEditContactOverlay = async (idx) => {
+  await loadFormIntoOverlay("./templates/edit_Contacts.html");
+  slideInOverlay();
+  // … hier Formular füllen …
+};
+
 
   window.addEventListener("DOMContentLoaded", renderContacts);
 })();
