@@ -235,3 +235,7 @@ button {
     margin-top: 4px;
     min-height: 18px;
 }
+
+.privacy_policy_wrapper {
+    overflow: auto;
+}
