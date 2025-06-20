@@ -46,7 +46,7 @@ function stopPropagation(event) {
   event.stopPropagation();
 }
 
-const btnHelpBack = document.getElementById("btn-help-back");
+const btnHelpBack = document.getElementById('btn-help-back');
 
 btnHelpBack.addEventListener("click", () => {
   window.history.back()
