@@ -59,6 +59,12 @@ a {
     align-items: center;
 }
 
+.d_flex_jc_center_fd_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .d_flex_ai_center {
     display: flex;
     align-items: center;
@@ -78,6 +84,14 @@ a {
 
 .no_scroll {
     overflow: hidden;
+}
+
+.overflow_scroll{
+    overflow: scroll;
+}
+
+.overflow_auto {
+    overflow: scroll;
 }
 
 .no_hover {
