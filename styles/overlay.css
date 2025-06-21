@@ -97,6 +97,20 @@
   gap: 40px;
 }
 
+.overlay_contact_circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0 auto 24px; /* zentriert und mit Abstand zum Formular */
+  background-color: rgb(200, 200, 200); /* Fallback-Farbe */
+} 
+
 .add_contact_icon {
   width: 135px;
   height: 135px;

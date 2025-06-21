@@ -1,42 +1,9 @@
 (function () {
-  // === Daten + State ===
+  let contacts = [];
   let lastSelectedItem = null;
-  const contacts = [
-    {
-      id: 1,
-      name: "Anna Müller",
-      email: "anna.mueller@example.com",
-      phone: "+49 170 1234567",
-    },
-    {
-      id: 2,
-      name: "Ben Schneider",
-      email: "ben.schneider@example.com",
-      phone: "+49 172 9876543",
-    },
-    {
-      id: 3,
-      name: "Clara Fischer",
-      email: "clara.fischer@example.com",
-      phone: "+49 151 7654321",
-    },
-    {
-      id: 4,
-      name: "Lars Tieseler",
-      email: "lars.tieseler@example.com",
-      phone: "+49 160 1234567",
-    },
-    {
-      id: 5,
-      name: "Andrea Fischer",
-      email: "andrea.f@web.de",
-      phone: "+49 170 7654321",
-    },
-  ];
   const listEl = document.getElementById("contacts-list");
   const detailBox = document.getElementById("contact-detail");
 
-  // === Helfer ===
   function getInitials(name) {
     return name
       .split(" ")
@@ -62,26 +29,26 @@
     return g;
   }
 
-  // === Liste rendern ===
-  function renderContacts() {
+  async function renderContacts() {
+    contacts = await fetchContacts();
     listEl.innerHTML = "";
     const groups = groupContacts();
     for (const L in groups) {
       const sec = document.createElement("div");
-      sec.className = "contact_section";
-      sec.innerHTML = `<div class="contact_initial">${L}</div>`;
+      sec.className = "contact-section";
+      sec.innerHTML = `<div class="contact-initial">${L}</div>`;
       groups[L].forEach((c) => {
         const item = document.createElement("div");
-        item.className = "contact_list_item";
+        item.className = "contact-list-item";
         item.innerHTML = `
-          <div class="contact_left">
-            <div class="contact_circle">${getInitials(c.name)}</div>
-            <div class="contact_details">
-              <div class="contact_name">${c.name}</div>
-              <div class="contact_email">${c.email}</div>
+          <div class="contact-left">
+            <div class="contact-circle">${getInitials(c.name)}</div>
+            <div class="contact-details">
+              <div class="contact-name">${c.name}</div>
+              <div class="contact-email">${c.email}</div>
             </div>
           </div>`;
-        const circle = item.querySelector(".contact_circle");
+        const circle = item.querySelector(".contact-circle");
         circle.style.backgroundColor = stringToColor(c.name);
         item.addEventListener("click", () => showContactDetails(c, item));
         sec.appendChild(item);
@@ -90,14 +57,13 @@
     }
   }
 
-  // === Detail-Ansicht ===
   window.showContactDetails = function (c, itemEl) {
     if (lastSelectedItem)
-      lastSelectedItem.classList.remove("contact_list_item_active");
-    itemEl.classList.add("contact_list_item_active");
+      lastSelectedItem.classList.remove("contact-list-item-active");
+    itemEl.classList.add("contact-list-item-active");
     lastSelectedItem = itemEl;
 
-    detailBox.classList.remove("d_none");
+    detailBox.classList.remove("d-none");
 
     const initEl = document.getElementById("detail-initials");
     const nameEl = document.getElementById("detail-name");
@@ -112,44 +78,56 @@
     phoneEl.textContent = c.phone;
 
     document.getElementById("btn-edit-detail").onclick = async () => {
-      await loadFormIntoOverlay("./templates/edit_Contacts.html");
+      await loadFormIntoOverlay("./templates/edit_contacts.html");
       slideInOverlay();
+
       document.getElementById("contact-namefield").value = c.name;
       document.getElementById("contact-emailfield").value = c.email;
       document.getElementById("contact-phonefield").value = c.phone;
+
+      document.getElementById("edit-contact-form").onsubmit = async () => {
+        const updated = {
+          name: document.getElementById("contact-namefield").value,
+          email: document.getElementById("contact-emailfield").value,
+          phone: document.getElementById("contact-phonefield").value
+        };
+        await updateContact(c.id, updated);
+        closeOverlay();
+        await renderContacts();
+      };
     };
 
-    document.getElementById("btn-delete-detail").onclick = () => {
+    document.getElementById("btn-delete-detail").onclick = async () => {
       if (confirm("Kontakt wirklich löschen?")) {
-        const idx = contacts.findIndex((x) => x.id === c.id);
-        contacts.splice(idx, 1);
-        renderContacts();
-        overview.classList.remove("d_none");
-        detailBox.classList.add("d_none");
+        await deleteContact(c.id);
+        await renderContacts();
+        detailBox.classList.add("d-none");
       }
     };
   };
 
   window.hideContactDetailsArea = function () {
-    overview.classList.remove("d_none");
-    detailBox.classList.add("d_none");
+    detailBox.classList.add("d-none");
     if (lastSelectedItem) {
-      lastSelectedItem.classList.remove("contact_list_item_active");
+      lastSelectedItem.classList.remove("contact-list-item-active");
       lastSelectedItem = null;
     }
   };
 
-window.openAddContactOverlay = async () => {
-  await loadFormIntoOverlay("./templates/new_contact.html");
-  slideInOverlay();
-};
-
-window.openEditContactOverlay = async (idx) => {
-  await loadFormIntoOverlay("./templates/edit_Contacts.html");
-  slideInOverlay();
-  // … hier Formular füllen …
-};
-
+  window.openAddContactOverlay = async function () {
+    await loadFormIntoOverlay("./templates/new_contact.html");
+    slideInOverlay();
+    document.getElementById("addnew-contact-form").onsubmit = async () => {
+      const contact = {
+        name: document.getElementById("contact-namefield").value,
+        email: document.getElementById("contact-emailfield").value,
+        phone: document.getElementById("contact-phonefield").value
+      };
+      await createContact(contact);
+      closeOverlay();
+      await renderContacts();
+    };
+  };
 
   window.addEventListener("DOMContentLoaded", renderContacts);
 })();
