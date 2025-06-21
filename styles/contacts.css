@@ -35,22 +35,26 @@ main {
 }
 
 .add_contact_btn {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  padding: 12px;
+  padding: 16px 24px;
   font-size: 18px;
-  background-color: rgb(42, 54, 71);
-  color: rgb(255, 255, 255);
+  font-weight: 500;
+  background-color: rgb(42, 63, 84);
+  color: white;
   border: none;
   border-radius: 8px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
   cursor: pointer;
-  margin-bottom: 16px;
+  transition: background 0.2s ease;
 }
 
 .add_contact_btn img {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .add_contact_btn:hover {
@@ -59,10 +63,9 @@ main {
 
 .contact_list,
 .contacts_list {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 0 54px 80px 46px;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .contact_section .contact_initial {
@@ -100,10 +103,9 @@ main {
 }
 
 .contact_circle_large {
-  width: 48px;
-  height: 48px;
-  font-size: 20px;
-  margin-right: 16px;
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
 }
 
 .contact_details {
@@ -251,16 +253,35 @@ main {
 
 .contact_detail_header {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 32px;
 }
-
+.detail_actions{
+  display: flex;
+  gap: 12px;
+}
 .detail_actions .icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
 }
 
+.detail_actions .icon:hover {
+  opacity: 1;
+}
+.contact_info_block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contact_info_block h2 {
+  font-size: 40px;
+  margin: 0 0 8px 0;
+}
 .contact_info {
   margin-top: 16px;
   display: flex;
@@ -284,7 +305,7 @@ main {
 
 .contact_info .info_value {
   font-size: 13px;
-  color: rgb(0, 123, 255);
+  color: rgb(0, 124, 238, 1);
 }
 
 .edit_contacts_window {

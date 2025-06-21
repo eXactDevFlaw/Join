@@ -35,20 +35,20 @@
     const groups = groupContacts();
     for (const L in groups) {
       const sec = document.createElement("div");
-      sec.className = "contact-section";
-      sec.innerHTML = `<div class="contact-initial">${L}</div>`;
+      sec.className = "contact_section";
+      sec.innerHTML = `<div class="contact_initial">${L}</div>`;
       groups[L].forEach((c) => {
         const item = document.createElement("div");
         item.className = "contact-list-item";
         item.innerHTML = `
-          <div class="contact-left">
-            <div class="contact-circle">${getInitials(c.name)}</div>
-            <div class="contact-details">
-              <div class="contact-name">${c.name}</div>
-              <div class="contact-email">${c.email}</div>
+          <div class="contact_left">
+            <div class="contact_circle">${getInitials(c.name)}</div>
+            <div class="contact_details">
+              <div class="contact_name">${c.name}</div>
+              <div class="contact_email">${c.email}</div>
             </div>
           </div>`;
-        const circle = item.querySelector(".contact-circle");
+        const circle = item.querySelector(".contact_circle");
         circle.style.backgroundColor = stringToColor(c.name);
         item.addEventListener("click", () => showContactDetails(c, item));
         sec.appendChild(item);
@@ -57,53 +57,87 @@
     }
   }
 
-  window.showContactDetails = function (c, itemEl) {
+  window.showContactDetails = async function (contact, itemEl) {
+    // Auswahl visuell markieren
     if (lastSelectedItem)
-      lastSelectedItem.classList.remove("contact-list-item-active");
-    itemEl.classList.add("contact-list-item-active");
+      lastSelectedItem.classList.remove("contact_list_item_active");
+    itemEl.classList.add("contact_list_item_active");
     lastSelectedItem = itemEl;
 
-    detailBox.classList.remove("d-none");
+    // Kontakt-Detailbereich einblenden
+    detailBox.classList.remove("d_none");
 
-    const initEl = document.getElementById("detail-initials");
+    // Kontakt-Daten befüllen
+    const initialsEl = document.getElementById("detail-initials");
     const nameEl = document.getElementById("detail-name");
     const emailEl = document.getElementById("detail-email");
     const phoneEl = document.getElementById("detail-phone");
 
-    initEl.textContent = getInitials(c.name);
-    initEl.style.backgroundColor = stringToColor(c.name);
-    nameEl.textContent = c.name;
-    emailEl.textContent = c.email;
-    emailEl.href = `mailto:${c.email}`;
-    phoneEl.textContent = c.phone;
+    initialsEl.textContent = getInitials(contact.name);
+    initialsEl.style.backgroundColor = stringToColor(contact.name);
+    nameEl.textContent = contact.name;
+    emailEl.textContent = contact.email;
+    emailEl.href = `mailto:${contact.email}`;
+    phoneEl.textContent = contact.phone;
 
-    document.getElementById("btn-edit-detail").onclick = async () => {
-      await loadFormIntoOverlay("./templates/edit_contacts.html");
-      slideInOverlay();
+    // 🖊 Editieren des Kontakts
+    const editBtn = document.getElementById("btn-edit-detail");
+    if (editBtn) {
+      editBtn.onclick = async () => {
+        console.log("Edit-Button wurde geklickt");
+        await loadFormIntoOverlay("./templates/edit_Contacts.html"); // Großes C!
+        slideInOverlay();
 
-      document.getElementById("contact-namefield").value = c.name;
-      document.getElementById("contact-emailfield").value = c.email;
-      document.getElementById("contact-phonefield").value = c.phone;
+        // Felder vorausfüllen
+        document.getElementById("contact-namefield").value = contact.name;
+        document.getElementById("contact-emailfield").value = contact.email;
+        document.getElementById("contact-phonefield").value = contact.phone;
 
-      document.getElementById("edit-contact-form").onsubmit = async () => {
-        const updated = {
-          name: document.getElementById("contact-namefield").value,
-          email: document.getElementById("contact-emailfield").value,
-          phone: document.getElementById("contact-phonefield").value
+        // Initialen-Kreis im Overlay setzen
+        const initialsCircle = document.getElementById("edit-contact-initials");
+        initialsCircle.textContent = getInitials(contact.name);
+        initialsCircle.style.backgroundColor = stringToColor(contact.name);
+
+        // Speichern bei Submit
+        const form = document.getElementById("edit-contact-form");
+        form.onsubmit = async (e) => {
+          e.preventDefault();
+          const updated = {
+            name: document.getElementById("contact-namefield").value,
+            email: document.getElementById("contact-emailfield").value,
+            phone: document.getElementById("contact-phonefield").value,
+          };
+          await updateContact(contact.id, updated);
+          closeOverlay();
+          await renderContacts();
         };
-        await updateContact(c.id, updated);
-        closeOverlay();
-        await renderContacts();
-      };
-    };
 
-    document.getElementById("btn-delete-detail").onclick = async () => {
-      if (confirm("Kontakt wirklich löschen?")) {
-        await deleteContact(c.id);
-        await renderContacts();
-        detailBox.classList.add("d-none");
-      }
-    };
+        // 🗑 Löschen im Overlay
+        const deleteBtn = form.querySelector(".btn_clear");
+        if (deleteBtn) {
+          deleteBtn.onclick = async () => {
+            if (confirm("Kontakt wirklich löschen?")) {
+              await dbDeleteContact(contact.id);
+              closeOverlay();
+              hideContactDetailsArea();
+              await renderContacts();
+            }
+          };
+        }
+      };
+    }
+
+    // 🗑 Löschen aus der Detailansicht (nicht Overlay)
+    const deleteBtn = document.getElementById("btn-delete-detail");
+    if (deleteBtn) {
+      deleteBtn.onclick = async () => {
+        if (confirm("Kontakt wirklich löschen?")) {
+          await dbDeleteContact(contact.id);
+          detailBox.classList.add("d_none");
+          await renderContacts();
+        }
+      };
+    }
   };
 
   window.hideContactDetailsArea = function () {
@@ -121,7 +155,7 @@
       const contact = {
         name: document.getElementById("contact-namefield").value,
         email: document.getElementById("contact-emailfield").value,
-        phone: document.getElementById("contact-phonefield").value
+        phone: document.getElementById("contact-phonefield").value,
       };
       await createContact(contact);
       closeOverlay();
