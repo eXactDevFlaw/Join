@@ -138,12 +138,13 @@ button {
 }
 
 .nav_active {
+    width: 100%;
     color: rgba(255, 255, 255, 1);
 }
 
 .nav_privacy_legal {
+    width: 100%;
     padding-top: 243px;
-    padding-left: 52px;
     gap: 8px;
     font-size: 16px;
     font-weight: 400;
@@ -151,8 +152,29 @@ button {
     letter-spacing: 0%;
 }
 
+.pp_ln {
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.pp_ln_active {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 35px;
+    padding-left: 60px;
+    background-color: rgba(9, 25, 49, 1);
+    cursor: default;
+}
+
+.pp_ln_active a:hover {
+    all: unset !important;
+    color: rgba(168, 168, 168, 1) !important;
+}
+
 .nav_privacy_legal a {
-    padding: 8px;
+    padding: 8px 0px 8px 0px;
 }
 
 .nav_privacy_legal a:hover {
