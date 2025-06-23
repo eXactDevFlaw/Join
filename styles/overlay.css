@@ -15,10 +15,12 @@
   opacity: 0;
   transition: opacity 0.25s ease;
 }
+
 .overlay.show {
   visibility: visible;
   opacity: 1;
 }
+
 .overlay_content_inner {
   display: flex;
   flex-direction: row;
@@ -40,14 +42,9 @@
   transform: translateX(100%);
   transition: transform 0.25s ease;
 }
+
 #overlay-container.show {
   transform: translateX(0);
-}
-.overlay_container_left,
-.overlay_container_right {
-  width: 38%;
-  padding: 48px;
-  box-sizing: border-box;
 }
 
 /* ==========================================
@@ -60,17 +57,19 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .overlay_container_left h1 {
-  font-size: 36px;
+  font-size: 61px;
   font-weight: 700;
-  margin: 0;
   color: white;
 }
+
 .overlay_container_left .overlay_subtitle {
   font-size: 18px;
   color: rgb(200, 200, 200);
   margin: 0;
 }
+
 .divider_horizontal {
   width: 60px;
   height: 4px;
@@ -86,7 +85,7 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  padding: 27px;  
+  padding: 27px;
   width: 60%;
   box-sizing: border-box;
 }
@@ -98,18 +97,18 @@
 }
 
 .overlay_contact_circle {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  margin: 0 auto 24px; /* zentriert und mit Abstand zum Formular */
-  background-color: rgb(200, 200, 200); /* Fallback-Farbe */
-} 
+  font-size: 47px;
+  border: white 2px solid;
+  height: 120px;
+  width: 120px;
+  border-radius: 60px;
+  background-color: rgb(209, 209, 209);
+  color: white;
+  font-weight: 500;
+}
 
 .add_contact_icon {
   width: 135px;
@@ -132,6 +131,7 @@
 .input_container {
   position: relative;
 }
+
 .input_container input {
   width: 100%;
   padding: 12px 48px 16px;
@@ -145,6 +145,7 @@
   margin-bottom: 4px;
   color: rgb(51, 51, 51);
 }
+
 .input-icon {
   position: absolute;
   top: 50%;
@@ -153,16 +154,22 @@
   font-size: 18px;
   opacity: 0.5;
 }
+
 .user-icon::before {
   content: "";
   display: inline-block;
-  width: 16px;   /* Breite des Icons */
-  height: 16px;  /* Höhe des Icons */
-  background-image: url('/assets/icons/person.svg'); /* Pfad zu deinem User-Icon */
+  width: 16px;
+  /* Breite des Icons */
+  height: 16px;
+  /* Höhe des Icons */
+  background-image: url('/assets/icons/person.svg');
+  /* Pfad zu deinem User-Icon */
   background-size: contain;
   background-repeat: no-repeat;
-  margin-right: 5px; /* Abstand zum Text */
-  vertical-align: middle; /* Vertikale Ausrichtung */
+  margin-right: 5px;
+  /* Abstand zum Text */
+  vertical-align: middle;
+  /* Vertikale Ausrichtung */
 }
 
 .email-icon::before {
@@ -192,10 +199,13 @@
 /* Overlay-Buttons */
 .overlay_buttons {
   display: flex;
-  justify-content: flex-end;
-  gap: 16px;
-  margin-top: auto;
+  gap: 24px;
+  padding-top: 24px;
+  padding-bottom: 48px;
+  padding-left: 16px;
+  z-index: 10;
 }
+
 .btn_clear {
   border: 1px solid rgb(42, 54, 71);
   background: none;
@@ -205,6 +215,7 @@
   font-size: 16px;
   cursor: pointer;
 }
+
 .btn_primary {
   background-color: rgb(42, 54, 71);
   border: none;
@@ -227,16 +238,20 @@
   align-items: center;
   cursor: pointer;
 }
+
 .closebutton_blue .closebutton_icon_white {
   display: none;
 }
+
 .closebutton_blue:hover {
   background-color: rgb(41, 171, 226);
   border-radius: 50%;
 }
+
 .closebutton_blue:hover .closebutton_icon {
   display: none;
 }
+
 .closebutton_blue:hover .closebutton_icon_white {
   display: block;
 }

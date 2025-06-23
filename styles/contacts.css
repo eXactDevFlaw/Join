@@ -25,6 +25,9 @@ main {
   gap: 32px;
 }
 
+/* ==========================================
+   Kontaktliste (linke Spalte)
+   ========================================== */
 .contactlist_area {
   flex-shrink: 0;
   width: 456px;
@@ -35,18 +38,19 @@ main {
   flex-direction: column;
 }
 
+/* "+ Add new contact"-Button: volle Breite & bündig */
 .btn_dark,
 .add_contact_btn {
   width: 100%;
-  max-width: none;
   padding: 14px 16px;
   font-size: 16px;
   font-weight: 700;
   color: rgb(255, 255, 255);
-  background-color: rgb(42, 63, 84);      /* RGB von #2a3f54 */
+  background-color: rgb(42, 63, 84);
+  /* RGB von #2a3f54 */
   border: none;
   border-radius: 8px;
-  margin-bottom: 24px;                    /* mehr Abstand zur Liste */
+  margin-bottom: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,35 +67,56 @@ main {
   background-color: rgb(31, 50, 67);
 }
 
+/* Scrollbare Liste */
 .contact_list,
 .contacts_list {
   flex: 1;
   overflow-y: auto;
 }
 
+/* Alphabetische Gruppen-Überschrift */
 .contact_section .contact_initial {
   font-size: 12px;
   font-weight: 600;
   color: rgb(102, 102, 102);
-  margin: 24px 0 8px;
+  margin: 32px 0 8px;
   border-bottom: 1px solid rgb(221, 221, 221);
   padding-bottom: 4px;
   padding-left: 0;
 }
 
-.contact_item {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
+/* ==========================================
+   Einzelne Kontaktzeile
+   ========================================== */
+.contact-list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  transition: background 0.2s;
+  cursor: pointer;
 }
 
-.contact_item_active {
-  background-color: rgba(41, 171, 226, 0.1);
+.contact_list_item:hover {
+  background-color: rgb(250, 250, 250);
 }
-/* Hervorhebung des aktiven Elements */
+
+/* Aktives Element hervorheben */
 .contact_list_item_active {
-  background-color: rgba(41, 171, 226, 0.1);
+  background-color: rgba(42, 54, 71, 1);
+  border-radius: 8px;
 }
+
+.contact_list_item_active .contact_name {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* Linke Gruppe: Kreis + Details */
+.contact_left {
+  display: flex;
+  align-items: center;
+}
+
 .contact_circle {
   width: 40px;
   height: 40px;
@@ -106,24 +131,17 @@ main {
   color: rgb(255, 255, 255);
 }
 
-.contact_circle_large {
-  width: 80px;
-  height: 80px;
-  font-size: 28px;
-}
-
 .contact_details {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
 }
 
 .contact_name {
   font-size: 15px;
   font-weight: 600;
   color: rgb(29, 29, 29);
-  margin: 12px;
+  margin: 0;
 }
 
 .contact_email {
@@ -131,22 +149,9 @@ main {
   color: rgb(0, 123, 255);
 }
 
-.contact_actions {
-  display: flex;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.contact_actions .icon {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.contact_actions .icon:hover {
-  opacity: 0.8;
-}
-
+/* ==========================================
+   Overlay-Content (rechts kommt dein Detailbereich)
+   ========================================== */
 .overlay_content {
   flex: 1;
 }
@@ -167,12 +172,6 @@ main {
   margin-bottom: 16px;
   border: 1px solid rgb(204, 204, 204);
   border-radius: 8px;
-}
-
-.overlay_buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
 }
 
 .btn_clear {
@@ -208,12 +207,16 @@ main {
   cursor: pointer;
 }
 
+/* ==========================================
+   Detailansicht (rechte Spalte)
+   ========================================== */
 .contacts_overview {
   display: flex;
   flex-direction: column;
   width: calc(100% - 456px - 32px);
   padding: 32px;
   background: rgb(246, 247, 248);
+  gap: 32px;
 }
 
 .contacts_overview.d_none {
@@ -244,53 +247,69 @@ main {
   color: rgb(42, 54, 71);
 }
 
-.contact_left {
-  display: flex;
-  align-items: center;
-}
-
-.contact_detail {
+.detal_header_text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .contact_detail_header {
   display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  margin-bottom: 32px;
+  align-items: center;
+  gap: 16px;
 }
-.detail_actions{
-  display: flex;
-  gap: 12px;
+
+.detal_header_text h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: rgb(29, 29, 29);
 }
-.detail_actions .icon {
+
+.detail_actions {
+  margin-top: 8px;
+}
+
+.detail_actions_btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: rgb(42, 54, 71);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.detail_actions_btn img {
   width: 20px;
   height: 20px;
-  opacity: 0.6;
-  cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
 }
 
-.detail_actions .icon:hover {
-  opacity: 1;
-}
-.contact_info_block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.detail_actions_btn span {
+  margin-left: 4px;
 }
 
-.contact_info_block h2 {
-  font-size: 40px;
-  margin: 0 0 8px 0;
+.detail_actions_btn:hover {
+  background-color: rgba(41, 171, 226, 0.1);
 }
+
+.contact_circle_large {
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
+}
+
+/* Kontakt-Infos */
 .contact_info {
-  margin-top: 16px;
+  margin-top: 45px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 25px;
+}
+
+.info_row {
+  display: flex;
+  flex-direction: column;
 }
 
 .contact_info h5 {
@@ -298,6 +317,7 @@ main {
   font-size: 16px;
   font-weight: 600;
   color: rgb(29, 29, 29);
+  gap: 8px;
 }
 
 .contact_info .contacts_mail_phone_head {
@@ -309,7 +329,7 @@ main {
 
 .contact_info .info_value {
   font-size: 13px;
-  color: rgb(0, 124, 238, 1);
+  color: rgb(0, 123, 255);
 }
 
 .edit_contacts_window {
@@ -326,4 +346,112 @@ main {
   visibility: hidden;
   pointer-events: none;
   transition: all 0.2s ease-in-out;
+}
+
+.safe_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 111px;
+  height: 56px;
+  background-color: rgb(42, 54, 71);
+  border-radius: 10px;
+  border: 1px;
+  padding: 16px;
+  gap: 4px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.safe_btn:hover {
+  background-color: rgba(41, 171, 226, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.delete_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 126px;
+  height: 56px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: 1px solid rgb(42, 54, 71);
+  padding: 16px;
+  gap: 4px;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.delete_btn:hover {
+  border: 2px solid rgba(41, 171, 226, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: rgba(41, 171, 226, 1);
+}
+
+
+.btn_create_contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 214px;
+  height: 56px;
+  background-color: rgb(42, 54, 71);
+  border-radius: 10px;
+  border: 1;
+  padding: 16px;
+  gap: 4px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn_create_contact:hover {
+  background-color: rgba(41, 171, 226, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.btn_cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 126px;
+  height: 56px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 16px;
+  gap: 4px;
+  color: rgb(42, 54, 71);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.btn_cancel:hover {
+  border: 2px solid rgba(41, 171, 226, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: rgba(41, 171, 226, 1);
+}
+/* Icon-Buttons unter dem Namen */
+.icon_button {
+  background: none;
+  border: none;
+  padding: 4px;           /* etwas größere Klickfläche */
+  cursor: pointer;
+  border-radius: 4px;     /* leichtes Ab­runden beim Hover */
+}
+.icon_button:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+.icon_button img {
+  display: block;
+  width: 20px;            /* oder deine gewünschte Icon-Größe */
+  height: 20px;
 }

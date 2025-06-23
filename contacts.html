@@ -1,228 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join - Contacts</title>
 
-    <!-- Favicon & Icons -->
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_light.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: dark)"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join - Contacts</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./styles/contacts.css" />
-    <link rel="stylesheet" href="./styles/overlay.css" />
+  <!-- Favicon & Icons -->
+  <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" />
+  <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="./assets/icons/favicon_light.svg" type="image/x-icon" media="(prefers-color-scheme: dark)" />
 
-    <!-- Scripts -->
-    <!--<script src="./scripts/add-edit_contacts.js" defer></script> -->
-    <!-- 1. Overlay-Logik -->
-    <script src="./scripts/overlay.js" defer></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./styles/standart.css" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="./styles/contacts.css" />
+  <link rel="stylesheet" href="./styles/overlay.css" />
 
-    <!-- 2. Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <!-- Scripts -->
+  <!--<script src="./scripts/add-edit_contacts.js" defer></script> -->
+  <!-- 1. Overlay-Logik -->
+  <script src="./scripts/overlay.js" defer></script>
 
-    <script src="script.js"></script>
+  <!-- 2. Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-    <!-- 4. Hauptlogik (verwendet Funktionen aus database.js) -->
-    <script src="./scripts/contacts.js" defer></script>
-  </head>
-  <body>
-    <!-- Logout Overlay -->
-    <div
-      class="position_absolute height_100 width_100 d_none"
-      id="overlay-small-logout-win"
-      onclick="toggleLogoutOverlay()"
-    >
-      <div
-        class="position_absolute small_logout_win d_flex_center"
-        onclick="stopPropagation(event)"
-      >
-        <div class="d_flex_center justify_around flex_column">
-          <a
-            class="d_flex_center justify_start small_logout_link"
-            href="./templates/legalNotice.html"
-            >Legal Notice</a
-          >
-          <a
-            class="d_flex_center justify_start small_logout_link"
-            href="./templates/privacyPolicy.html"
-            >Privacy Policy</a
-          >
-          <a class="d_flex_center justify_start small_logout_link" href="#"
-            >Log Out</a
-          >
+  <script src="script.js"></script>
+
+  <!-- 4. Hauptlogik (verwendet Funktionen aus database.js) -->
+  <script src="./scripts/contacts.js" defer></script>
+</head>
+
+<body>
+  <!-- Logout Overlay -->
+  <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
+    onclick="toggleLogoutOverlay()">
+    <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
+      <div class="d_flex_center justify_around flex_column">
+        <a class="d_flex_center justify_start small_logout_link" href="./templates/legalNotice.html">Legal Notice</a>
+        <a class="d_flex_center justify_start small_logout_link" href="./templates/privacyPolicy.html">Privacy
+          Policy</a>
+        <a class="d_flex_center justify_start small_logout_link" href="#">Log Out</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header_container d_flex_center justify_between width_100">
+      <div class="margin_0">Kanban Project Management Tool</div>
+      <div class="d_flex_center margin_0 gap_16">
+        <a href="./templates/help.html">
+          <img src="./assets/icons/help.svg" class="help_icon" alt="" />
+        </a>
+        <div class="user_circle d_flex_center" onclick="toggleLogoutOverlay()">
+          <div class="position_absolute">LU</div>
         </div>
       </div>
     </div>
+  </header>
 
-    <!-- Header -->
-    <header>
-      <div class="header_container d_flex_center justify_between width_100">
-        <div class="margin_0">Kanban Project Management Tool</div>
-        <div class="d_flex_center margin_0 gap_16">
-          <a href="./templates/help.html">
-            <img src="./assets/icons/help.svg" class="help_icon" alt="" />
-          </a>
-          <div
-            class="user_circle d_flex_center"
-            onclick="toggleLogoutOverlay()"
-          >
-            <div class="position_absolute">LU</div>
-          </div>
+  <!-- Sidebar -->
+  <nav class="height_100 position_absolute d_flex flex_column justify_between">
+    <div class="d_flex_center">
+      <img src="./assets/img/logo_navbar.svg" class="d_flex logo_navbar" alt="" />
+    </div>
+    <div class="d_flex_center_column justify_start nav_items margin_0">
+      <a href="./summary.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="./assets/icons/icon_summary.svg" alt="summary icon" />Summary
         </div>
+      </a>
+      <a href="./addtask.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="./assets/icons/icon_add_task.svg" alt="add task icon" />Add Task
+        </div>
+      </a>
+      <a href="./board.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="./assets/icons/icon_board.svg" alt="board icon" />Board
+        </div>
+      </a>
+      <div class="d_flex_center justify_start nav_item_active">
+        <img class="margin_0" src="./assets/icons/icon_contacts_active.svg" alt="contacts icon" />Contacts
       </div>
-    </header>
-
-    <!-- Sidebar -->
-    <nav
-      class="height_100 position_absolute d_flex flex_column justify_between"
-    >
-      <div class="d_flex_center">
-        <img
-          src="./assets/img/logo_navbar.svg"
-          class="d_flex logo_navbar"
-          alt=""
-        />
+    </div>
+    <div class="d_flex_center_column nav_privacy_legal align_none margin_0">
+      <div class="pp_ln">
+        <a href="../templates/privacyPolicy.html"> Privacy Policy </a>
       </div>
-      <div class="d_flex_center_column justify_start nav_items margin_0">
-        <a href="./summary.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="./assets/icons/icon_summary.svg"
-              alt="summary icon"
-            />Summary
-          </div>
-        </a>
-        <a href="./addtask.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="./assets/icons/icon_add_task.svg"
-              alt="add task icon"
-            />Add Task
-          </div>
-        </a>
-        <a href="./board.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="./assets/icons/icon_board.svg"
-              alt="board icon"
-            />Board
-          </div>
-        </a>
-        <div class="d_flex_center justify_start nav_item_active">
-          <img
-            class="margin_0"
-            src="./assets/icons/icon_contacts_active.svg"
-            alt="contacts icon"
-          />Contacts
-        </div>
+      <div class="pp_ln">
+        <a href="../templates/legalNotice.html"> Legal Notice </a>
       </div>
-      <div class="d_flex_center_column nav_privacy_legal align_none margin_0">
-        <div class="pp_ln">
-          <a href="../templates/privacyPolicy.html"> Privacy Policy </a>
-        </div>
-        <div class="pp_ln">
-          <a href="../templates/legalNotice.html"> Legal Notice </a>
-        </div>
+    </div>
+  </nav>
+
+  <main class="position_absolute">
+    <!-- Wrapper für linke & rechte Spalte -->
+    <div class="contacts_layout_wrapper">
+      <!-- Linke Spalte: Add-Button + Kontaktliste -->
+      <div class="contactlist_area">
+        <button class="btn_dark add_contact_btn" onclick="openAddContactOverlay()">
+          Add new contact
+          <img src="./assets/icons/addPerson.svg" alt="" />
+        </button>
+        <div id="contacts-list" class="contacts_list"></div>
       </div>
-    </nav>
 
-    <main class="position_absolute">
-      <!-- Wrapper für linke & rechte Spalte -->
-      <div class="contacts_layout_wrapper">
-        <!-- Linke Spalte: Add-Button + Kontaktliste -->
-        <div class="contactlist_area">
-          <button
-            class="btn_dark add_contact_btn"
-            onclick="openAddContactOverlay()"
-          >
-            Add new contact
-            <img src="./assets/icons/addPerson.svg" alt="" />
-          </button>
-          <div id="contacts-list" class="contacts_list"></div>
+      <!-- Rechte Spalte: Kontakt-Details -->
+      <div class="contacts_overview" id="contacts-overview">
+        <div class="headline_with_divider d_flex_ac gap8">
+          <h1>Contacts</h1>
+          <div class="head_dividing_line"></div>
+          <h6>Better with a team</h6>
         </div>
 
-        <!-- Rechte Spalte: Kontakt-Details -->
-        <div class="contacts_overview" id="contacts-overview">
-          <div class="headline_with_divider d_flex_ac gap8">
-            <h1>Contacts</h1>
-            <div class="head_dividing_line"></div>
-            <h6>Better with a team</h6>
-          </div>
-
-          <!-- Detail-Panel: startet versteckt -->
-          <div class="contact_detail d_none" id="contact-detail">
-            <div class="contact_detail_header d_flex_ac gap16">
-              <div
-                class="contact_circle contact_circle_large"
-                id="detail-initials"
-              ></div>
-
-              <div class="contact_info_block">
-                <h2 id="detail-name"></h2>
-
-                <div class="detail_actions d_flex_ac gap8">
-                  <img
-                    src="./assets/icons/edit.svg"
-                    alt="Edit"
-                    id="btn-edit-detail"
-                    class="icon"
-                  />
+        <!-- Detail-Panel: startet versteckt -->
+        <div class="contact_detail d_none" id="contact-detail">
+          <div class="contact_detail_header d_flex_ac gap16">
+            <!-- Kreis links -->
+            <div class="contact_circle contact_circle_large" id="detail-initials"></div>
+            <!-- Text- und Aktions-Wrapper -->
+            <div class="detail_header_text">
+              <h2 id="detail-name"></h2>
+              <div class="detail_actions d_flex_ac gap16">
+                <button id="btn-edit-detail" class="icon_button d_flex_ac gap8">
+                  <img src="./assets/icons/edit.svg" alt="Edit">
                   <span>Edit</span>
-                  <img
-                    src="./assets/icons/delete.svg"
-                    alt="Delete"
-                    id="btn-delete-detail"
-                    class="icon"
-                  />
+                </button>
+                <button id="btn-delete-detail" class="icon_button d_flex_ac gap8">
+                  <img src="./assets/icons/delete.svg" alt="Delete">
                   <span>Delete</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="contact_info">
-              <h5>Contact Information</h5>
-              <div>
-                <span class="contacts_mail_phone_head">Email</span><br />
-                <a href="mailto:" id="detail-email" class="info_value"></a>
-              </div>
-              <div>
-                <span class="contacts_mail_phone_head">Phone</span><br />
-                <span id="detail-phone" class="info_value"></span>
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </main>
 
-    <!-- Overlay: leerer Container, wird per overlay.js befüllt -->
-    <div id="overlay" class="overlay">
-      <div id="overlay-container" class="overlay_container">
-        <div id="overlay-content" class="overlay_content"></div>
+          <div class="contact_info">
+            <h5>Contact Information</h5>
+            <div class="info_row">
+              <span class="contacts_mail_phone_head">Email</span>
+              <a href="mailto:" id="detail-email" class="info_value"></a>
+            </div>
+            <div class="info_row">
+              <span class="contacts_mail_phone_head">Phone</span>
+              <span id="detail-phone" class="info_value"></span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </body>
+  </main>
+
+  <!-- Overlay: leerer Container, wird per overlay.js befüllt -->
+  <div id="overlay" class="overlay">
+    <div id="overlay-container" class="overlay_container">
+      <div id="overlay-content" class="overlay_content"></div>
+    </div>
+  </div>
+</body>
+
 </html>

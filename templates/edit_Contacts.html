@@ -12,12 +12,13 @@
     <div class="divider_horizontal"></div>
   </div>
 
+  <div class="form_layout">
+    <div class="overlay_contact_circle" id="edit-contact-initials"></div>
+  </div>
+
   <!-- Rechte Seite: Formular -->
   <div class="overlay_container_right">
     <!-- Kreis mit Initialen -->
-    <div class="form_layout">
-      <div class="overlay_contact_circle" id="edit-contact-initials"></div>
-    </div>
 
     <!-- Edit‑Form -->
     <form id="edit-contact-form">
@@ -35,10 +36,10 @@
       </div>
 
       <div class="overlay_buttons">
-        <button class="btn_white" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">
+        <button class="delete_btn" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">
           Delete
         </button>
-        <button class="btn_dark">
+        <button class="safe_btn" type="submit" onclick="saveEditedContact(); return false;">
           Save
         </button>
       </div>
