@@ -29,49 +29,50 @@ main {
   flex-shrink: 0;
   width: 456px;
   background-color: rgb(255, 255, 255);
-  box-shadow: 4px 0 6px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.08);
   padding: 32px 24px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
+.btn_dark,
 .add_contact_btn {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  font-size: 18px;
-  font-weight: 500;
-  background-color: rgb(42, 63, 84);
-  color: white;
+  max-width: none;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  background-color: rgb(42, 63, 84);      /* RGB von #2a3f54 */
   border: none;
   border-radius: 8px;
-  margin-bottom: 24px;
-  box-sizing: border-box;
+  margin-bottom: 24px;                    /* mehr Abstand zur Liste */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 
 .add_contact_btn img {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
 }
 
 .add_contact_btn:hover {
-  background-color: rgb(31, 40, 54);
+  background-color: rgb(31, 50, 67);
 }
 
 .contact_list,
 .contacts_list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .contact_section .contact_initial {
   font-size: 12px;
   font-weight: 600;
-  color: rgb(85, 85, 85);
+  color: rgb(102, 102, 102);
   margin: 24px 0 8px;
   border-bottom: 1px solid rgb(221, 221, 221);
   padding-bottom: 4px;
@@ -87,7 +88,10 @@ main {
 .contact_item_active {
   background-color: rgba(41, 171, 226, 0.1);
 }
-
+/* Hervorhebung des aktiven Elements */
+.contact_list_item_active {
+  background-color: rgba(41, 171, 226, 0.1);
+}
 .contact_circle {
   width: 40px;
   height: 40px;
@@ -119,13 +123,12 @@ main {
   font-size: 15px;
   font-weight: 600;
   color: rgb(29, 29, 29);
-  margin: 0;
+  margin: 12px;
 }
 
 .contact_email {
   font-size: 13px;
   color: rgb(0, 123, 255);
-  margin: 0;
 }
 
 .contact_actions {
@@ -244,11 +247,12 @@ main {
 .contact_left {
   display: flex;
   align-items: center;
-  gap: 16px; /* Abstand zwischen Kreis und Text */
 }
 
 .contact_detail {
-  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contact_detail_header {

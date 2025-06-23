@@ -1,14 +1,9 @@
 <!-- templates/edit_Contacts.html -->
 <div class="overlay_content_inner">
   <!-- Close-Button oben rechts -->
-  <div
-    class="overlay_container_close_button closebutton_blue"
-    onclick="closeOverlay()">
+  <div class="overlay_container_close_button closebutton_blue" onclick="closeOverlay()">
     <img class="closebutton_icon" src="../assets/icons/close.svg" alt="Close" />
-    <img
-      class="closebutton_icon_white"
-      src="../assets/icons/close.svg"
-      alt="Close"/>
+    <img class="closebutton_icon_white" src="../assets/icons/close.svg" alt="Close" />
   </div>
 
   <!-- Linke Seite: Titel -->
@@ -31,31 +26,21 @@
         <i class="input-icon user-icon" aria-hidden="true"></i>
       </div>
       <div class="input_container">
-        <input
-          id="contact-emailfield"
-          type="email"
-          placeholder="Email"
-          required
-        />
+        <input id="contact-emailfield" type="email" placeholder="Email" required />
         <i class="input-icon email-icon" aria-hidden="true"></i>
       </div>
       <div class="input_container">
-        <input
-          id="contact-phonefield"
-          type="tel"
-          placeholder="Phone"
-          required/>
+        <input id="contact-phonefield" type="tel" placeholder="Phone" required />
         <i class="input-icon phone-icon" aria-hidden="true"></i>
       </div>
 
       <div class="overlay_buttons">
-        <button
-          type="button"
-          class="btn_clear"
-          onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">
+        <button class="btn_white" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">
           Delete
         </button>
-        <button type="submit" class="btn_primary">Save</button>
+        <button class="btn_dark">
+          Save
+        </button>
       </div>
     </form>
   </div>

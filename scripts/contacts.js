@@ -1,4 +1,3 @@
-// contacts.js
 (function () {
   const DB_PATH = "users";
 
