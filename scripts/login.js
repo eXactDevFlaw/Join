@@ -39,5 +39,5 @@ function guestLogin(){
 }
 
 function signUp(){
-  
+
 }

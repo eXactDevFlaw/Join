@@ -263,6 +263,31 @@ button {
     height: 100vh;
 }
 
+.help_wrapper {
+    padding-right: 96px;
+    padding-bottom: 110px;
+}
+
 .help_list {
     list-style: decimal;
+}
+
+.help_btn_back {
+    background: none;
+    border: none;
+    position: sticky;
+    top: 194px;
+    left: 1307px;
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+}
+
+.help_btn_back:hover {
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.fc_blue {
+    color: rgba(41, 171, 226, 1);
 }
