@@ -15,7 +15,7 @@
   <title>Join</title>
 </head>
 
-<body>
+<body onload="init()">
   <div class="login_content">
     <div class="login_logo">
       <img src="./assets/img/logo.svg" alt="join logo" />
@@ -45,6 +45,7 @@
         <div class="input_icon_wrapper">
           <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
           <input type="text" placeholder="Email" name="username" id="login-username" required />
+          <div class="input_error margin_left_8"></div>
         </div>
         <div class="input_icon_wrapper">
           <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
@@ -110,5 +111,5 @@
 </body>
 <script src="./script.js"></script>
 <script src="./scripts/login.js"></script>
-
+<scrip src="./database.js" type="module"></script>
 </html>
