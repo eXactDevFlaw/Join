@@ -1,32 +1,48 @@
 <!-- templates/edit_Contacts.html -->
-<div class="overlayContainerCloseButton closebuttonBlue" onclick="closeOverlay()">
-  <img class="closebuttonIcon" src="../assets/icons/close.svg" alt="X">
-  <img class="closebuttonIconWhite" src="../assets/icons/close.svg" alt="X">
-</div>
+<div class="overlay_content_inner">
+  <!-- Close-Button oben rechts -->
+  <div class="overlay_container_close_button closebutton_blue" onclick="closeOverlay()">
+    <img class="closebutton_icon" src="../assets/icons/close.svg" alt="Close" />
+    <img class="closebutton_icon_white" src="../assets/icons/close.svg" alt="Close" />
+  </div>
 
-<div class="overlayContainerLeft">
-  <h1>Edit Contact</h1>
-  <div class="dividerHorizontal"></div>
-</div>
+  <!-- Linke Seite: Titel -->
+  <div class="overlay_container_left">
+    <h1>Edit Contact</h1>
+    <div class="divider_horizontal"></div>
+  </div>
 
-<div class="overlayContainerRight">
-  <div class="addContactIcon" id="editContactInitials"></div>
-  <form id="edit-contact-form" onsubmit="saveChangesToContact(); return false;">
-    <div class="inputContainer">
-      <input id="contact-namefield" type="text" placeholder="Name" required>
-      <i class="inputIcon userIcon"></i>
-    </div>
-    <div class="inputContainer">
-      <input id="contact-emailfield" type="email" placeholder="Email" required>
-      <i class="inputIcon emailIcon"></i>
-    </div>
-    <div class="inputContainer">
-      <input id="contact-phonefield" type="tel" placeholder="Phone" required>
-      <i class="inputIcon phoneIcon"></i>
-    </div>
-    <div class="overlayButtons">
-      <button type="button" class="btnClear" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">Delete</button>
-      <button type="submit" class="btnPrimary">Save</button>
-    </div>
-  </form>
+  <div class="form_layout">
+    <div class="overlay_contact_circle" id="edit-contact-initials"></div>
+  </div>
+
+  <!-- Rechte Seite: Formular -->
+  <div class="overlay_container_right">
+    <!-- Kreis mit Initialen -->
+
+    <!-- Edit‑Form -->
+    <form id="edit-contact-form">
+      <div class="input_container">
+        <input id="contact-namefield" type="text" placeholder="Name" required />
+        <i class="input-icon user-icon" aria-hidden="true"></i>
+      </div>
+      <div class="input_container">
+        <input id="contact-emailfield" type="email" placeholder="Email" required />
+        <i class="input-icon email-icon" aria-hidden="true"></i>
+      </div>
+      <div class="input_container">
+        <input id="contact-phonefield" type="tel" placeholder="Phone" required />
+        <i class="input-icon phone-icon" aria-hidden="true"></i>
+      </div>
+
+      <div class="overlay_buttons">
+        <button class="delete_btn" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">
+          Delete
+        </button>
+        <button class="safe_btn" type="submit" onclick="saveEditedContact(); return false;">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

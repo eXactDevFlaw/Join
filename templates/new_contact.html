@@ -1,33 +1,40 @@
 <!-- templates/new_contact.html -->
-<div class="overlayContainerCloseButton closebuttonBlue" onclick="closeOverlay()">
-  <img class="closebuttonIcon" src="../assets/icons/close.svg" alt="X">
-  <img class="closebuttonIconWhite" src="../assets/icons/close.svg" alt="X">
-</div>
+<div class="overlay_content_inner">
+  <!-- Close-Button oben rechts -->
+  <div class="overlay_container_close_button closebutton_blue" onclick="closeOverlay()">
+    <img class="closebutton_icon" src="../assets/icons/close.svg" alt="X" />
+    <img class="closebutton_icon_white" src="../assets/icons/close.svg" alt="X" />
+  </div>
 
-<div class="overlayContainerLeft">
-  <h1>Add Contact</h1>
-  <p class="overlaySubtitle">Tasks are better with a team!</p>
-  <div class="dividerHorizontal"></div>
-</div>
+  <div class="overlay_container_left">
+    <h1>Add Contact</h1>
+    <p class="overlay_subtitle">Tasks are better with a team!</p>
+    <div class="divider_horizontal"></div>
+  </div>
 
-<div class="overlayContainerRight">
-  <div class="addContactIcon"></div>
-  <form id="addnew-contact-form" onsubmit="saveNewContact(); return false;">
-    <div class="inputContainer">
-      <input id="contact-namefield" type="text" placeholder="Name" required>
-      <i class="inputIcon userIcon"></i>
+  <div class="overlay_container_right">
+    <div class="form_layout">
+      <div class="add_contact_icon"></div>
     </div>
-    <div class="inputContainer">
-      <input id="contact-emailfield" type="email" placeholder="Email" required>
-      <i class="inputIcon emailIcon"></i>
-    </div>
-    <div class="inputContainer">
-      <input id="contact-phonefield" type="tel" placeholder="Phone" required>
-      <i class="inputIcon phoneIcon"></i>
-    </div>
-    <div class="overlayButtons">
-      <button type="button" class="btnClear" onclick="closeOverlay()">Cancel</button>
-      <button type="submit" class="btnPrimary">Create contact</button>
-    </div>
-  </form>
+    <form id="addnew-contact-form" onsubmit="saveNewContact(); return false;">
+      <div class="input_container">
+        <input id="contact-namefield" type="text" placeholder="Name" required />
+        <i class="input-icon user-icon"></i>
+      </div>
+      <div class="input_container">
+        <input id="contact-emailfield" type="email" placeholder="Email" required />
+        <i class="input-icon email-icon"></i>
+      </div>
+      <div class="input_container">
+        <input id="contact-phonefield" type="tel" placeholder="Phone" required />
+        <i class="input-icon phone-icon"></i>
+      </div>
+      <div class="overlay_buttons">
+        <button type="button" class="btn_cancel" onclick="closeOverlay()">
+          Cancel
+        </button>
+        <button type="submit" class="btn_create_contact">Create contact</button>
+      </div>
+    </form>
+  </div>
 </div>

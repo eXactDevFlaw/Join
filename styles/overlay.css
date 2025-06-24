@@ -15,54 +15,62 @@
   opacity: 0;
   transition: opacity 0.25s ease;
 }
+
 .overlay.show {
   visibility: visible;
   opacity: 1;
 }
 
-/* ==========================================
-   OverlayContainer (Querformat, Slide-In)
-   ========================================== */
-#overlayContainer {
+.overlay_content_inner {
   display: flex;
-  width: 800px;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================
+   Overlay-Container (Querformat, Slide-In)
+   ========================================== */
+#overlay-container {
+  display: flex;
+  width: 886px;
   max-width: 90vw;
-  height: 600px;
-  max-height: 95vh;
-  background-color: rgb(255, 255, 255);
+  height: 500px;
+  background-color: #fff;
   border-radius: 30px;
   overflow: hidden;
   transform: translateX(100%);
   transition: transform 0.25s ease;
 }
-#overlayContainer.show {
+
+#overlay-container.show {
   transform: translateX(0);
 }
 
 /* ==========================================
    Linke Hälfte (40%)
    ========================================== */
-.overlayContainerLeft {
-  flex: 0 0 40%;
+.overlay_container_left {
   background-color: rgb(42, 54, 71);
-  padding: 48px 32px;
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
 }
-.overlayContainerLeft h1 {
-  font-size: 36px;
+
+.overlay_container_left h1 {
+  font-size: 61px;
   font-weight: 700;
-  color: #fff;
-  margin: 0;
+  color: white;
 }
-.overlayContainerLeft .overlaySubtitle {
+
+.overlay_container_left .overlay_subtitle {
   font-size: 18px;
-  color: #ddd;
+  color: rgb(200, 200, 200);
   margin: 0;
 }
-.dividerHorizontal {
+
+.divider_horizontal {
   width: 60px;
   height: 4px;
   background-color: rgb(41, 171, 226);
@@ -72,41 +80,73 @@
 /* ==========================================
    Rechte Hälfte (60%)
    ========================================== */
-.overlayContainerRight {
-  flex: 1;
-  background-color: #fff;
-  padding: 48px 32px;
+.overlay_container_right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 27px;
+  width: 60%;
+  box-sizing: border-box;
+}
+
+.form_layout {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.overlay_contact_circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 47px;
+  border: white 2px solid;
+  height: 120px;
+  width: 120px;
+  border-radius: 60px;
+  background-color: rgb(209, 209, 209);
+  color: white;
+  font-weight: 500;
+}
+
+.add_contact_icon {
+  width: 135px;
+  height: 135px;
+  background-image: url("../assets/icons/add_new_contact.svg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#addnew-contact-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-}
-.addContactIcon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
-  background-color: rgb(221, 221, 221);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../assets/icons/add_new_contact.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 48px 48px;
+  gap: 20px;
 }
 
 /* Form + Icons */
-.inputContainer {
+.input_container {
   position: relative;
 }
-.inputContainer input {
+
+.input_container input {
   width: 100%;
-  padding: 12px 48px 12px 16px;
+  padding: 12px 48px 16px;
   border: 1px solid rgb(204, 204, 204);
   border-radius: 8px;
   font-size: 16px;
 }
-.inputIcon {
+
+.input_container label {
+  display: block;
+  margin-bottom: 4px;
+  color: rgb(51, 51, 51);
+}
+
+.input-icon {
   position: absolute;
   top: 50%;
   right: 16px;
@@ -114,24 +154,59 @@
   font-size: 18px;
   opacity: 0.5;
 }
-.userIcon::before {
-  content: "\1F464";
+
+.user-icon::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  /* Breite des Icons */
+  height: 16px;
+  /* Höhe des Icons */
+  background-image: url('/assets/icons/person.svg');
+  /* Pfad zu deinem User-Icon */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  /* Abstand zum Text */
+  vertical-align: middle;
+  /* Vertikale Ausrichtung */
 }
-.emailIcon::before {
-  content: "\2709";
+
+.email-icon::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('/assets/icons/mail.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  vertical-align: middle;
 }
-.phoneIcon::before {
-  content: "\260E";
+
+.phone-icon::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('/assets/icons/phone.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 /* Overlay-Buttons */
-.overlayButtons {
+.overlay_buttons {
   display: flex;
-  justify-content: flex-end;
-  gap: 16px;
-  margin-top: auto;
+  gap: 24px;
+  padding-top: 24px;
+  padding-bottom: 48px;
+  padding-left: 16px;
+  z-index: 10;
 }
-.btnClear {
+
+.btn_clear {
   border: 1px solid rgb(42, 54, 71);
   background: none;
   border-radius: 8px;
@@ -140,18 +215,19 @@
   font-size: 16px;
   cursor: pointer;
 }
-.btnPrimary {
+
+.btn_primary {
   background-color: rgb(42, 54, 71);
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
-  color: #fff;
+  color: white;
   font-size: 16px;
   cursor: pointer;
 }
 
 /* Close-Button oben rechts */
-.overlayContainerCloseButton {
+.overlay_container_close_button {
   position: absolute;
   top: 24px;
   right: 16px;
@@ -162,16 +238,20 @@
   align-items: center;
   cursor: pointer;
 }
-.closebuttonBlue .closebuttonIconWhite {
+
+.closebutton_blue .closebutton_icon_white {
   display: none;
 }
-.closebuttonBlue:hover {
+
+.closebutton_blue:hover {
   background-color: rgb(41, 171, 226);
   border-radius: 50%;
 }
-.closebuttonBlue:hover .closebuttonIcon {
+
+.closebutton_blue:hover .closebutton_icon {
   display: none;
 }
-.closebuttonBlue:hover .closebuttonIconWhite {
+
+.closebutton_blue:hover .closebutton_icon_white {
   display: block;
 }

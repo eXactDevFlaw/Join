@@ -3,7 +3,7 @@
 }
 
 main{
-    max-width: 1920px;
+    max-width: 1440px;
     margin: 0 auto;
     left: 232px;
     top: 96px;
@@ -11,6 +11,7 @@ main{
     padding-top: calc(206px - 96px);
     width: calc(100% - 232px);
     height: calc(100vh - 96px);
+    overflow-x: auto;
 }
 
 .summary_overview{

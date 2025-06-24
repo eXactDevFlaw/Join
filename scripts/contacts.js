@@ -1,53 +1,21 @@
 (function () {
-  // === Daten + State ===
-  let lastSelectedItem = null; // zuletzt ausgewählter Kontakt
-  const contacts = [
-    {
-      id: 1,
-      name: "Anna Müller",
-      email: "anna.mueller@example.com",
-      phone: "+49 170 1234567",
-    },
-    {
-      id: 2,
-      name: "Ben Schneider",
-      email: "ben.schneider@example.com",
-      phone: "+49 172 9876543",
-    },
-    {
-      id: 3,
-      name: "Clara Fischer",
-      email: "clara.fischer@example.com",
-      phone: "+49 151 7654321",
-    },
-    {
-      id: 4,
-      name: "Lars Tieseler",
-      email: "lars.tieseler@example.com",
-      phone: "+49 160 1234567",
-    },
-    {
-      id: 5,
-      name: "Andrea Fischer",
-      email: "andrea.f@web.de",
-      phone: "+49 170 7654321",
-    },
-  ];
-  const listEl = document.getElementById("contacts_list");
-  const detailBox = document.getElementById("contactDetail");
+  const DB_PATH = "users";
 
-  // === Helfer ===
+  let contacts = [];
+  let lastSelectedItem = null;
+  const listEl = document.getElementById("contacts-list");
+  const detailBox = document.getElementById("contact-detail");
+
   function getInitials(name) {
-    return name
-      .split(" ")
-      .map((p) => p[0].toUpperCase())
-      .join("");
+    return name.split(" ").map((p) => p[0].toUpperCase()).join("");
   }
+
   function stringToColor(str) {
     let hash = 0;
     for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
-    return `hsl(${hash % 360},70%,50%)`;
+    return `hsl(${hash % 360}, 70%, 50%)`;
   }
+
   function groupContacts() {
     const g = {};
     contacts
@@ -55,34 +23,49 @@
       .sort((a, b) => a.name.localeCompare(b.name))
       .forEach((c) => {
         const L = c.name[0].toUpperCase();
-        (g[L] || (g[L] = [])).push(c);
+        (g[L] ||= []).push(c);
       });
     return g;
   }
 
-  // === Liste rendern ===
-  function renderContacts() {
+  async function fetchContacts() {
+    const raw = await getContactsFromDatabase();
+    if (!raw) return [];
+    return Object.entries(raw).map(([id, data]) => ({ id, ...data }));
+  }
+
+  async function createContact(contact) {
+    await postToDatabase(DB_PATH, contact);
+  }
+
+  async function updateContact(id, data) {
+    await updateOnDatabase(`${DB_PATH}/${id}`, data);
+  }
+
+  async function deleteContact(id) {
+    await deleteFromDatabase(`${DB_PATH}/${id}`);
+  }
+
+  async function renderContacts() {
+    contacts = await fetchContacts();
     listEl.innerHTML = "";
     const groups = groupContacts();
     for (const L in groups) {
       const sec = document.createElement("div");
-      sec.className = "contactSection";
-      sec.innerHTML = `<div class="contactInitial">${L}</div>`;
+      sec.className = "contact_section";
+      sec.innerHTML = `<div class="contact_initial">${L}</div>`;
       groups[L].forEach((c) => {
         const item = document.createElement("div");
-        item.className = "contactItem";
+        item.className = "contact-list-item";
         item.innerHTML = `
-          <div class="contactLeft">
-            <div class="contactCircle">${getInitials(c.name)}</div>
-            <div class="contactDetails">
-              <div class="contactName">${c.name}</div>
-              <div class="contactEmail">${c.email}</div>
+          <div class="contact_left">
+            <div class="contact_circle">${getInitials(c.name)}</div>
+            <div class="contact_details">
+              <div class="contact_name">${c.name}</div>
+              <div class="contact_email">${c.email}</div>
             </div>
           </div>`;
-        // farbigen Kreis setzen
-        const circle = item.querySelector(".contactCircle");
-        circle.style.backgroundColor = stringToColor(c.name);
-        // Klick öffnet Detail-Ansicht
+        item.querySelector(".contact_circle").style.backgroundColor = stringToColor(c.name);
         item.addEventListener("click", () => showContactDetails(c, item));
         sec.appendChild(item);
       });
@@ -90,67 +73,94 @@
     }
   }
 
-  // === Detail-Ansicht ===
-  window.showContactDetails = function (c, itemEl) {
-    // Highlight: alte entfernen, neue hinzufügen
+  window.showContactDetails = async function (contact, itemEl) {
     if (lastSelectedItem)
-      lastSelectedItem.classList.remove("contactItemActive");
-    itemEl.classList.add("contactItemActive");
+      lastSelectedItem.classList.remove("contact_list_item_active");
+    itemEl.classList.add("contact_list_item_active");
     lastSelectedItem = itemEl;
-    // Detail-Box einblenden
+
     detailBox.classList.remove("d_none");
 
-    // Felder befüllen
-    const initEl = document.getElementById("detailInitials");
-    const nameEl = document.getElementById("detailName");
-    const emailEl = document.getElementById("detailEmail");
-    const phoneEl = document.getElementById("detailPhone");
+    document.getElementById("detail-initials").textContent = getInitials(contact.name);
+    document.getElementById("detail-initials").style.backgroundColor = stringToColor(contact.name);
+    document.getElementById("detail-name").textContent = contact.name;
+    const emailEl = document.getElementById("detail-email");
+    emailEl.textContent = contact.email;
+    emailEl.href = `mailto:${contact.email}`;
+    document.getElementById("detail-phone").textContent = contact.phone;
 
-    initEl.textContent = getInitials(c.name);
-    initEl.style.backgroundColor = stringToColor(c.name);
-    nameEl.textContent = c.name;
-    emailEl.textContent = c.email;
-    emailEl.href = `mailto:${c.email}`;
-    phoneEl.textContent = c.phone;
+    const editBtn = document.getElementById("btn-edit-detail");
+    if (editBtn) {
+      editBtn.onclick = async () => {
+        await loadFormIntoOverlay("./templates/edit_Contacts.html");
+        slideInOverlay();
+        document.getElementById("contact-namefield").value = contact.name;
+        document.getElementById("contact-emailfield").value = contact.email;
+        document.getElementById("contact-phonefield").value = contact.phone;
+        const initialsCircle = document.getElementById("edit-contact-initials");
+        initialsCircle.textContent = getInitials(contact.name);
+        initialsCircle.style.backgroundColor = stringToColor(contact.name);
 
-    // Aktionen für Edit/Delete
-    document.getElementById("btnEditDetail").onclick = async () => {
-      await loadFormIntoOverlay("./templates/edit_Contacts.html");
-      slideInOverlay();
-      // Formular-Felder füllen
-      document.getElementById("contact-namefield").value = c.name;
-      document.getElementById("contact-emailfield").value = c.email;
-      document.getElementById("contact-phonefield").value = c.phone;
-    };
-    document.getElementById("btnDeleteDetail").onclick = () => {
-      if (confirm("Kontakt wirklich löschen?")) {
-        const idx = contacts.findIndex((x) => x.id === c.id);
-        contacts.splice(idx, 1);
-        renderContacts();
-        // Detail-Box wieder ausblenden
-        overview.classList.remove("d_none");
-        detailBox.classList.add("d_none");
-      }
+        document.getElementById("edit-contact-form").onsubmit = async (e) => {
+          e.preventDefault();
+          const updated = {
+            name: document.getElementById("contact-namefield").value,
+            email: document.getElementById("contact-emailfield").value,
+            phone: document.getElementById("contact-phonefield").value,
+          };
+          await updateContact(contact.id, updated);
+          closeOverlay();
+          await renderContacts();
+        };
+
+        const deleteBtn = document.querySelector(".btn_clear");
+        if (deleteBtn) {
+          deleteBtn.onclick = async () => {
+            if (confirm("Kontakt wirklich löschen?")) {
+              await deleteContact(contact.id);
+              closeOverlay();
+              hideContactDetailsArea();
+              await renderContacts();
+            }
+          };
+        }
+      };
+    }
+
+    const deleteBtn = document.getElementById("btn-delete-detail");
+    if (deleteBtn) {
+      deleteBtn.onclick = async () => {
+        if (confirm("Kontakt wirklich löschen?")) {
+          await deleteContact(contact.id);
+          detailBox.classList.add("d_none");
+          await renderContacts();
+        }
+      };
+    }
+  };
+
+  window.openAddContactOverlay = async function () {
+    await loadFormIntoOverlay("./templates/new_contact.html");
+    slideInOverlay();
+    document.getElementById("addnew-contact-form").onsubmit = async () => {
+      const contact = {
+        name: document.getElementById("contact-namefield").value,
+        email: document.getElementById("contact-emailfield").value,
+        phone: document.getElementById("contact-phonefield").value,
+      };
+      await createContact(contact);
+      closeOverlay();
+      await renderContacts();
     };
   };
 
   window.hideContactDetailsArea = function () {
-    // nur Detail-Box verstecken
-    overview.classList.remove("d_none");
     detailBox.classList.add("d_none");
-    // Highlight entfernen
     if (lastSelectedItem) {
-      lastSelectedItem.classList.remove("contactItemActive");
+      lastSelectedItem.classList.remove("contact_list_item_active");
       lastSelectedItem = null;
     }
   };
 
-  // === Overlay zum Neu-Kontakt ===
-  window.openAddContactOverlay = async function () {
-    await loadFormIntoOverlay("./templates/new_contact.html");
-    slideInOverlay();
-  };
-
-  // === Initialisierung ===
   window.addEventListener("DOMContentLoaded", renderContacts);
 })();
