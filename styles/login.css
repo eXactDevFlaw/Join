@@ -75,13 +75,23 @@
 }
 
 .login_bottom {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 94%;
     left: 50%;
     transform: translate(-50%);
 }
 
+
 .login_bottom a {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
     height: 50px;
     margin: 8px;
 }
