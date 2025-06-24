@@ -247,6 +247,10 @@ button {
     border: 1px solid rgba(209, 209, 209, 1);
 }
 
+.input_icon_wrapper input::placeholder {
+    color: rgba(209, 209, 209, 1);
+}
+
 .input_icon_wrapper input:focus {
     outline-color: rgba(41, 171, 226, 1);
     color: rgba(0, 0, 0, 1)
