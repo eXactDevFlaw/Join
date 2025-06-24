@@ -156,7 +156,6 @@ button {
 .pp_ln {
     display: flex;
     align-items: center;
-    padding-left: 60px;
 }
 
 .pp_ln_active {
