@@ -1,6 +1,8 @@
 let task = [];
 let taskDetails = {};
 
+let category = ["Technical Task", "User Story"];
+
 function openTaskOverlay() {
     document.getElementById("task-overlay").classList.remove("d_none");;
     let add_task_entry = document.getElementById("add-task-entry");

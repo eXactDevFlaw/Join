@@ -24,7 +24,7 @@
     margin-left: 0;
     margin-right: 0;
     width: 440px;
-    gap: 16px;
+    gap: 24px;
 }
 
 textarea {
@@ -50,10 +50,6 @@ textarea:focus {
 }
 
 input{
-    margin-top: 8px !important;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 8px;
     font-family: "Inter";
     color: rgba(0, 0, 0, 1);
     resize: none;
@@ -156,4 +152,20 @@ input[type="date"]::-webkit-datetime-edit {
 
 .assigned_to_dropdown:focus::placeholder{
     color: transparent
+}
+
+.select_category_dropdown {
+    border-style: solid;
+    border-color: rgba(209, 209, 209, 1);
+    border-radius: 10px;
+    width: 440px;
+    padding: 12px 16px 12px 16px;
+
+}
+
+.input_assigned_to input{
+    width: 100%;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(209, 209, 209, 1);
 }
