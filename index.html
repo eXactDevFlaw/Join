@@ -1,157 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_light.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/responsive.css" />
-    <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="stylesheet" href="./styles/login.css" />
-    <title>Join</title>
-  </head>
-  <body>
-    <div class="login_content">
-      <div class="login_logo">
-        <img src="./assets/img/logo.svg" alt="join logo" />
-      </div>
-      <div id="signin-container" class="login_container d_flex justify_end width_100">
-        <div class="login_head d_flex fade_out">
-          <span>Not a Join User?</span>
-          <button class="btn_dark btn_sign_up" onclick="toggleSignIn()">Sign up</button>
-        </div>
-      </div>
-      <div class="login_bottom fade_out">
-          <a href="./templates/privacyPolicy.html">Privacy Policy</a>
-          <a href="./templates/legalNotice.html">Legal Notice</a>
-      </div>
-    </div>
-    <div id="dialog_signin" class="dialog-signin d_flex_center d_none">
-      <img src="./assets/icons/dialog_signup.svg" alt="">
-    </div>
-    <!-- LOG-IN -->
-    <form>
-      <div id="login-form" class="d_flex_center_column justify_evenly login_main fade_out">
-        <div class="login_head_wrapper">
-          <h1>Log in</h1>
-          <div class="login_underline"></div>
-        </div>
-        <div class="d_grid gap_16">
-          <div class="input_icon_wrapper">
-            <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
-            <input
-              type="text"
-              placeholder="Email"
-              name="username"
-              id="login-username"
-              required
-            />
-            <div class="input_error margin_left_8"></div>
-          </div>
-          <div class="input_icon_wrapper">
-            <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
-            <input
-              type="password"
-              placeholder="Password"
-              name="userpassword"
-              id="login-userpassword"
-              required
-            />
-            <div class="input_error margin_left_8"></div>
-          </div>
-        </div>
-        <div class="login_btn_wrapper">
-          <button class="btn_dark login_btn" onclick="login()">Log in</button>
-          <button class="btn_white guest_login_btn" id="btn-guest-login" onclick="guestLogin()">
-            Guest Log in
-          </button>
-        </div>
-      </div>
-    </form>
 
-    <!-- SIGN-IN -->
-    <form>
-      <div id="signin-form" class="d_flex_center_column justify_evenly signin_main d_none">
-        <button class="signin_btn_back" onclick="toggleSignIn()"><img src="./assets/icons/arrow_left.svg" alt="" srcset=""></button>
-        <div class="login_head_wrapper">
-          <h1>Sign in</h1>
-          <div class="login_underline"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" />
+  <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="./assets/icons/favicon_light.svg" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./styles/responsive.css" />
+  <link rel="stylesheet" href="./styles/standart.css" />
+  <link rel="stylesheet" href="./styles/login.css" />
+  <title>Join</title>
+</head>
+
+<body>
+  <div class="login_content">
+    <div class="login_logo">
+      <img src="./assets/img/logo.svg" alt="join logo" />
+    </div>
+    <div id="signin-container" class="login_container d_flex justify_end width_100">
+      <div class="login_head d_flex fade_out">
+        <span>Not a Join User?</span>
+        <button class="btn_dark btn_sign_up" onclick="toggleSignIn()">Sign up</button>
+      </div>
+    </div>
+    <div class="login_bottom fade_out">
+      <a href="./templates/privacyPolicy.html">Privacy Policy</a>
+      <a href="./templates/legalNotice.html">Legal Notice</a>
+    </div>
+  </div>
+  <div id="dialog_signin" class="dialog-signin d_flex_center d_none">
+    <img src="./assets/icons/dialog_signup.svg" alt="">
+  </div>
+  <!-- LOG-IN -->
+  <form>
+    <div id="login-form" class="d_flex_center_column justify_evenly login_main fade_out">
+      <div class="login_head_wrapper">
+        <h1>Log in</h1>
+        <div class="login_underline"></div>
+      </div>
+      <div class="d_grid gap_16">
+        <div class="input_icon_wrapper">
+          <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
+          <input type="text" placeholder="Email" name="username" id="login-username" required />
         </div>
-        <div class="d_grid gap_16">
-          <div class="d_flex_center_column">
-            <div class="input_icon_wrapper">
+        <div class="input_icon_wrapper">
+          <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
+          <input type="password" placeholder="Password" name="userpassword" id="login-userpassword" required />
+          <div id="error-wrapper" class="input_error margin_left_8"></div>
+        </div>
+      </div>
+      <div class="login_btn_wrapper">
+        <button class="btn_dark login_btn" onclick="login()">Log in</button>
+        <button class="btn_white guest_login_btn" id="btn-guest-login" onclick="guestLogin()">
+          Guest Log in
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- SIGN-IN -->
+  <form>
+    <div id="signin-form" class="d_flex_center_column justify_evenly signin_main d_none">
+      <button class="signin_btn_back" onclick="toggleSignIn()"><img src="./assets/icons/arrow_left.svg" alt=""
+          srcset=""></button>
+      <div class="login_head_wrapper">
+        <h1>Sign in</h1>
+        <div class="login_underline"></div>
+      </div>
+      <div class="d_grid gap_16">
+        <div class="d_flex_center_column">
+          <div class="input_icon_wrapper">
             <img src="./assets/icons/person.svg" alt="name" class="input_icon" />
-            <input
-              type="text"
-              placeholder="Name"
-              name="contactname"
-              id="signin-contactname"
-              required
-            />
+            <input type="text" placeholder="Name" name="contactname" id="signin-contactname" required />
             <div class="input_error margin_left_8"></div>
           </div>
           <div class="input_icon_wrapper">
             <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
-            <input
-              type="text"
-              placeholder="Email"
-              name="username"
-              id="signin-username"
-              required
-            />
+            <input type="text" placeholder="Email" name="username" id="signin-username" required />
             <div class="input_error margin_left_8"></div>
           </div>
           <div class="input_icon_wrapper">
             <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
-            <input
-              type="password"
-              placeholder="Password"
-              name="userpassword"
-              id="signin-userpassword"
-              required
-            />
+            <input type="password" placeholder="Password" name="userpassword" id="signin-userpassword" required />
             <div class="input_error margin_left_8"></div>
           </div>
           <div class="input_icon_wrapper">
             <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              name="userpassword"
-              id="signin-userpassword-check"
-              required
-            />
+            <input type="password" placeholder="Confirm Password" name="userpassword" id="signin-userpassword-check"
+              required />
             <div class="input_error margin_left_8"></div>
           </div>
           <div class="d_flex_center_row margin_top_16px">
             <label class="d_flex_ai_center curser_pointer" for="signin-btn-checkbox">
-              <input type="checkbox" id="signin-btn-checkbox" class="signin_btn_checkbox" onclick="togglePrivacyCheck()">
-              <img id="signin-btn-checkbox-img" class="signin_btn_checkbox_img" src="./assets/icons/checkbox.svg" alt="empty checkbox">
-              <span class="signin_span">I accept the <a class="signin_pp_link" href="./templates/privacyPolicy.html">Privacy Policy</a></span>
+              <input type="checkbox" id="signin-btn-checkbox" class="signin_btn_checkbox"
+                onclick="togglePrivacyCheck()">
+              <img id="signin-btn-checkbox-img" class="signin_btn_checkbox_img" src="./assets/icons/checkbox.svg"
+                alt="empty checkbox">
+              <span class="signin_span">I accept the <a class="signin_pp_link"
+                  href="./templates/privacyPolicy.html">Privacy Policy</a></span>
             </label>
           </div>
         </div>
       </div>
       <button class="btn_dark btn_sign_up" onclick="signUp()">Sign in</button>
-    </form>
-  </body>
-  <script src="./script.js"></script>
-  <script src="./scripts/login.js"></script>
+  </form>
+</body>
+<script src="./script.js"></script>
+<script src="./scripts/login.js"></script>
+
 </html>

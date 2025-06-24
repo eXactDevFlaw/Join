@@ -1,4 +1,5 @@
-const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
+const FIREBASE_URL =
+  "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Retrieves contacts from the database.
@@ -7,8 +8,8 @@ const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatab
  * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
  */
 async function getContactsFromDatabase() {
-    let contactsFromDatabase = await loadFromDatabase("users");
-    return contactsFromDatabase;
+  let contactsFromDatabase = await loadFromDatabase("users");
+  return contactsFromDatabase;
 }
 
 /**
@@ -19,9 +20,9 @@ async function getContactsFromDatabase() {
  * @returns {Promise<object>} A promise that resolves to the data from the database.
  */
 async function loadFromDatabase(path) {
-    let response = await fetch(FIREBASE_URL + path + ".json");
-    let responseToJson = await response.json();
-    return responseToJson;
+  let response = await fetch(FIREBASE_URL + path + ".json");
+  let responseToJson = await response.json();
+  return responseToJson;
 }
 
 /**
@@ -33,14 +34,14 @@ async function loadFromDatabase(path) {
  * @returns {Promise<object>} A promise that resolves to the response data from the database.
  */
 async function postToDatabase(path, data) {
-    let response = await fetch(FIREBASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return responseToJson = await response.json();
+  let response = await fetch(FIREBASE_URL + path + ".json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
 
 /**
@@ -52,14 +53,14 @@ async function postToDatabase(path, data) {
  * @returns {Promise<object>} A promise that resolves to the response data from the database.
  */
 async function updateOnDatabase(path, data) {
-    let response = await fetch(FIREBASE_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return responseToJson = await response.json();
+  let response = await fetch(FIREBASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseToJson = await response.json());
 }
 
 /**
@@ -70,14 +71,16 @@ async function updateOnDatabase(path, data) {
  * @returns {Promise<object>} A promise that resolves to the response data from the database.
  */
 async function deleteFromDatabase(path) {
-    let response = await fetch(FIREBASE_URL + path + ".json", {
-        method: "DELETE",
-    });
-    return responseToJson = await response.json();
+  let response = await fetch(FIREBASE_URL + path + ".json", {
+    method: "DELETE",
+  });
+  return (responseToJson = await response.json());
 }
 
-function toggleLogoutOverlay(){
-    document.getElementById("overlay-small-logout-win").classList.toggle("d_none");
+function toggleLogoutOverlay() {
+  document
+    .getElementById("overlay-small-logout-win")
+    .classList.toggle("d_none");
 }
 
 // function closeLogoutOverlay(){
