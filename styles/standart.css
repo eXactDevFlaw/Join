@@ -187,3 +187,7 @@ a {
 .curser_pointer {
     cursor: pointer;
 }
+
+.align_end{
+    align-items: end;
+}

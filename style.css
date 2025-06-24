@@ -22,7 +22,7 @@ header {
     flex-direction: column;
     background: rgba(255, 255, 255, 1);
     padding: 20px 40px 20px 348px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 nav {
@@ -294,4 +294,8 @@ button {
 
 .fc_blue {
     color: rgba(41, 171, 226, 1);
+}
+
+.link_container{
+    width: 105px;
 }

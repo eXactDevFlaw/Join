@@ -39,7 +39,12 @@
       onclick="stopPropagation(event)"
       id="add-task-entry"
     >
-      <h1>Add Task</h1>
+      <div>
+        <h1>Add Task</h1>
+        <div class="close">
+          <img src="./assets/icons/Close.svg" alt="close" />
+        </div>
+      </div>
       <div class="add_task_content d_flex_row justify_between">
         <div class="task_entries">
           <div class="title_input margin_0 gap_8">
@@ -176,8 +181,8 @@
               </div>
             </div>
           </div>
-            <div class="title_input margin_0 gap_8">
-           <div class="d_flex_center_row justify_start margin_0">
+          <div class="title_input margin_0 gap_8">
+            <div class="d_flex_center_row justify_start margin_0">
               <p class="margin_0">Category</p>
               <p class="red_star margin_0">*</p>
             </div>
@@ -185,33 +190,48 @@
               class="input_icon_wrapper width_100 d_flex_center margin_0"
               onclick="openCategoryDropdown()"
             >
-              <div class="select_category_dropdown d_flex_center justify_between">
-                 <div class="margin_0">Select task category</div>
-                 <div class="input_icon_container d_flex_center">
-                <div class="arrow_drop up margin_0" id="arrow-drop-down">
-                  <img
-                    src="./assets/icons/arrow_drop_down.svg"
-                    alt="drop-down-arrow"
-                  />
+              <div
+                class="select_category_dropdown d_flex_center justify_between"
+              >
+                <div class="margin_0">Select task category</div>
+                <div class="input_icon_container d_flex_center">
+                  <div class="arrow_drop up margin_0" id="arrow-drop-down">
+                    <img
+                      src="./assets/icons/arrow_drop_down.svg"
+                      alt="drop-down-arrow"
+                    />
+                  </div>
                 </div>
               </div>
-             </div>
             </div>
           </div>
           <div class="title_input margin_0 gap_8">
             <div class="d_flex_center_row justify_start margin_0">
               <p class="margin_0">Subtasks</p>
             </div>
-            <div class="input_icon_wrapper margin_0">
+            <div class="input_icon_wrapper d_flex_center margin_0">
+              <div class="input_icon_container d_flex_center">
+                <div class="add_icon"></div>
+              </div>
               <input
-                class="subtasks"
-                id="subtasks"
                 type="text"
-                placeholder="Add new subtask"
+                placeholder="Add new subtasks"
+                id="add-subtasks"
                 required
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div class="d_flex_center_row justify_between margin_0 align_end">
+        <div class="d_flex_center_row margin_0">
+          <p class="red_star margin_0">*</p>
+          <p class="margin_0">This field is required</p>
+        </div>
+        <div class="d_flex_center_row margin_0 add_task_button_container">
+          <button class="btn_white margin_0 add_task_button">Cancel x</button>
+          </button>
+          <button class="btn_dark margin_0 add_task_button">Create Task</button>
         </div>
       </div>
     </div>
