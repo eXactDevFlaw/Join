@@ -222,6 +222,7 @@ button {
 }
 
 .help_wrapper {
+    max-width: calc(1440px - 232px);
     padding-right: 96px;
     padding-bottom: 110px;
 }

@@ -23,7 +23,7 @@
     <div id="signin-container" class="login_container d_flex justify_end width_100">
       <div class="login_head d_flex fade_out">
         <span>Not a Join User?</span>
-        <button class="btn_dark btn_sign_up" onclick="toggleSignIn()">Sign up</button>
+        <button class="btn_dark btn_sign_up">Sign up</button>
       </div>
     </div>
     <div class="login_bottom fade_out">
@@ -35,7 +35,7 @@
     <img src="./assets/icons/dialog_signup.svg" alt="">
   </div>
   <!-- LOG-IN -->
-  <form>
+  <form novalidate>
     <div id="login-form" class="d_flex_center_column justify_evenly login_main fade_out">
       <div class="login_head_wrapper">
         <h1>Log in</h1>
@@ -54,14 +54,14 @@
         </div>
       </div>
       <div class="login_btn_wrapper">
-        <button class="btn_dark login_btn" onclick="login()">Log in</button>
-        <button class="btn_white guest_login_btn" id="btn-guest-login" onclick="guestLogin()">Guest Log in</button>
+        <button class="btn_dark login_btn">Log in</button>
+        <button class="btn_white guest_login_btn">Guest Log in</button>
       </div>
     </div>
   </form>
 
   <!-- SIGN-IN -->
-  <form>
+  <form novalidate>
     <div id="signin-form" class="d_flex_center_column justify_evenly signin_main d_none">
       <button class="signin_btn_back" onclick="toggleSignIn()"><img src="./assets/icons/arrow_left.svg" alt=""
           srcset=""></button>

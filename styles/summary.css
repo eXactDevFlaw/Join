@@ -2,39 +2,38 @@
     margin: 0;
 }
 
-main{
-    max-width: 1440px;
+main {
     margin: 0 auto;
     left: 232px;
     top: 96px;
     padding-left: calc(328px - 232px);
     padding-top: calc(206px - 96px);
-    width: calc(100% - 232px);
-    height: calc(100vh - 96px);
     overflow-x: auto;
+    width: calc(100vw - 232px);
+    height: calc(100vh - 96px);
 }
 
-.summary_overview{
+.summary_overview {
     width: 560px;
     height: 562px;
     margin-top: 50px;
     margin-right: 50px;
 }
 
-.summary_overview a{
+.summary_overview a {
     color: unset;
 }
 
-.headline{
+.headline {
     width: 625px;
 }
 
-.headline_vector{
+.headline_vector {
     width: 3px;
     height: 59px;
 }
 
-.summary_first_row img{
+.summary_first_row img {
     width: 69px;
     height: 69px;
 }
@@ -49,7 +48,7 @@ main{
     transition-duration: 80ms;
 }
 
-.summary_box:hover{
+.summary_box:hover {
     transform: scale(1.07);
     background-color: rgba(42, 54, 71, 1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -57,40 +56,41 @@ main{
     cursor: pointer;
 }
 
-.summary_box:active{
+.summary_box:active {
     transform: scale(1.0);
-    color: rgba(0, 0, 0, 1);;
+    color: rgba(0, 0, 0, 1);
+    ;
     transition-duration: 100ms;
     background-color: rgba(249, 249, 249, 1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     gap: 18px;
-    
+
 }
 
-.task_number{
+.task_number {
     font-weight: 600;
     font-size: 64px;
     line-height: 120%;
 }
 
-.task_name{
+.task_name {
     font-size: 20px;
     font-weight: 400;
     line-height: 120%;
 }
 
-.urgent { 
+.urgent {
     width: 560px;
     transform-origin: top left;
 }
 
 
-.urgent:hover{
+.urgent:hover {
     transform: scale(1.028);
     cursor: pointer;
 }
 
-.urgent:active{
+.urgent:active {
     transform: scale(1.0);
     cursor: pointer;
 }
@@ -102,58 +102,58 @@ main{
     text-align: center;
 }
 
-.box_item{
+.box_item {
     height: 69px;
     width: 69px;
     background-size: contain;
 }
 
-.pencil{
+.pencil {
     background-size: 69px 69px;
     background-image: url(/assets/icons/pencil_rectangle.svg);
 }
 
-.summary_box:hover .check{
+.summary_box:hover .check {
     background-image: url(/assets/icons/check_rectangle_hover.svg);
 }
 
-.summary_box:active .check{
+.summary_box:active .check {
     background-image: url(/assets/icons/check_rectangle.svg);
 }
 
-.summary_box:hover .pencil{
+.summary_box:hover .pencil {
     background-image: url(/assets/icons/pencil_rectangle_hover.svg);
 }
 
-.summary_box:active .pencil{
+.summary_box:active .pencil {
     background-image: url(/assets/icons/pencil_rectangle.svg);
 }
 
-.check{
+.check {
     background-size: 69px 69px;
     background-image: url(/assets/icons/check_rectangle.svg);
 }
 
-p{
+p {
     font-size: 16px;
     text-align: center;
 }
 
-#date{
+#date {
     font-weight: 700;
     font-size: 21px;
 }
 
-.date{
+.date {
     align-items: start;
     gap: 13px;
 }
 
-.inner_left{
+.inner_left {
     transform-origin: left center;
 }
 
-.inner_right{
+.inner_right {
     transform-origin: right center;
 }
 
@@ -161,7 +161,7 @@ p{
     gap: 3px;
 }
 
-#user-name{
+#user-name {
     font-weight: 700;
     color: rgba(41, 171, 226, 1);
     font-size: 64px;

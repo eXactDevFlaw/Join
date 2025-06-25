@@ -114,6 +114,10 @@ a {
     margin-left: 8px;
 }
 
+.max_width_1440_calc {
+    max-width: calc(1440px - 232px);
+}
+
 .max_width_960 {
     max-width: 960px;
     margin: 0 auto;

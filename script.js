@@ -103,8 +103,8 @@ function stopPropagation(event) {
 }
 
 function init() {
-    getContactsFromDatabase()
-    fetchUsers();
+    // getContactsFromDatabase()
+    // fetchUsers();
 }
 
 

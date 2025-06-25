@@ -9,13 +9,47 @@ window.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-function toggleSignIn() {
+const guestLoginBtn = document.querySelector('.guest_login_btn');
+guestLoginBtn.addEventListener('click', () => {
+  window.location = "./summary.html";
+})
+
+function showError(inputId, message) {
+  const inputRef = document.getElementById(inputId);
+  const errorRef = document.getElementById('error-wrapper');
+  errorRef.innerText = message;
+}
+
+const userNameInput = document.querySelector('#login-username');
+const userPasswordInput = document.querySelector('#login-userpassword');
+const loginBtn = document.querySelector('.login_btn');
+loginBtn.addEventListener('click', () => {
+  let userPassInp = userPasswordInput.value;
+  let userNameInp = userNameInput.value;
+  let OK = inputChecker(userNameInp, userPassInp);
+  if (OK) {
+    console.log("Check OK!!!");
+    resetInputFields();
+  } else {
+    resetInputFields();
+    console.log("ERROR LOGIN FAIL!!!!")
+  }
+})
+
+function resetInputFields() {
+    userPasswordInput.value = "";
+    userNameInput.value = "";
+};
+
+const toggleSignIn = document.querySelector(".btn_sign_up");
+toggleSignIn.addEventListener('click', () => {
   document.getElementById("login-form").classList.toggle("d_none");
   document.getElementById("signin-form").classList.toggle("d_none");
   document.getElementById("signin-container").classList.toggle("d_none");
-}
+})
 
-function signIn() {}
+
+function signIn() { }
 
 function togglePrivacyCheck() {
   let btnRef = document.getElementById("signin-btn-checkbox");
@@ -25,25 +59,6 @@ function togglePrivacyCheck() {
     imgRef.src = "./assets/icons/checkbox_active.svg";
   } else {
     imgRef.src = "./assets/icons/checkbox.svg";
-  }
-}
-
-function guestLogin() {
-  window.location = "./summary.html";
-}
-
-function showError(inputId, message) {
-  const inputRef = document.getElementById(inputId);
-  const errorRef = document.getElementById('error-wrapper');
-  errorRef.innerText = message;
-}
-
-async function login(data) {
-  const userName = document.getElementById('login-username').value.trim();
-  const userPassword = document.getElementById('login-userpassword').value ;
-
-  if (!userName || !userPassword) {
-    showError('login-userpassword', 'Check your email and password. Please try again.')
   }
 }
 
