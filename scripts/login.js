@@ -10,7 +10,9 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 const guestLoginBtn = document.querySelector('.guest_login_btn');
-guestLoginBtn.addEventListener('click', () => {
+guestLoginBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log("ich bin der Gast")
   window.location = "./summary.html";
 })
 
@@ -23,7 +25,9 @@ function showError(inputId, message) {
 const userNameInput = document.querySelector('#login-username');
 const userPasswordInput = document.querySelector('#login-userpassword');
 const loginBtn = document.querySelector('.login_btn');
-loginBtn.addEventListener('click', () => {
+loginBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  console.log("ich bin der Login")
   let userPassInp = userPasswordInput.value;
   let userNameInp = userNameInput.value;
   let OK = inputChecker(userNameInp, userPassInp);
@@ -35,6 +39,32 @@ loginBtn.addEventListener('click', () => {
     console.log("ERROR LOGIN FAIL!!!!")
   }
 })
+
+function inputChecker(userNameVal, userPassVal) {
+    return checkUsername(userNameVal) && checkUserPass(userPassVal)
+};
+
+function checkUsername(value) {
+    if (value.length <= 3) return false;
+    const dataArr = Object.entries(endpointData.Users);
+    for (let item of dataArr) {
+        if (item[0] === value) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkUserPass(value) {
+    if (value.length <= 3) return false;
+    const dataArr = Object.entries(endpointData.Users);
+    for (let item of dataArr) {
+        if (item[1].password === value) {
+            return true;
+        }
+    }
+    return false;
+}
 
 function resetInputFields() {
     userPasswordInput.value = "";

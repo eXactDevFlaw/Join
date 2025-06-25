@@ -91,7 +91,7 @@ a {
 }
 
 .overflow_auto {
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .no_hover {
