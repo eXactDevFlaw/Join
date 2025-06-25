@@ -195,3 +195,7 @@ a {
 .align_end{
     align-items: end;
 }
+
+.padding_right_96px {
+    padding-right: 96px;
+}
