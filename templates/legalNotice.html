@@ -1,180 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      href="../assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="../assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="icon"
-      href="../assets/icons/favicon_light.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../styles/responsive.css" />
-    <link rel="stylesheet" href="../styles/standart.css" />
-    <link rel="stylesheet" href="../styles/login.css" />
-    <link rel="stylesheet" href="../styles/summary.css" />
-    <title>Join - Legal Notice</title>
-  </head>
-  <body>
-    <div
-      class="position_absolute height_100 width_100 d_none"
-      id="overlay-small-logout-win"
-      onclick="toggleLogoutOverlay()"
-    >
-      <div
-        class="position_absolute small_logout_win d_flex_center"
-        onclick="stopPropagation(event)"
-      >
-        <div class="d_flex_center justify_around flex_column">
-          <a
-            class="d_flex_center justify_start small_logout_link"
-            href="legalNotice.html"
-            >Legal Notice</a
-          >
-          <a
-            class="d_flex_center justify_start small_logout_link"
-            href="privacyPolicy.html"
-            >Privacy Policy</a
-          >
-          <a class="d_flex_center justify_start small_logout_link" href="#"
-            >Log Out</a
-          >
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../assets/icons/favicon_dark.svg" type="image/x-icon" />
+  <link rel="icon" href="../assets/icons/favicon_dark.svg" type="image/x-icon" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="../assets/icons/favicon_light.svg" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/standart.css" />
+  <link rel="stylesheet" href="../styles/login.css" />
+  <link rel="stylesheet" href="../styles/summary.css" />
+  <title>Join - Legal Notice</title>
+</head>
+
+<body>
+  <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
+    onclick="toggleLogoutOverlay()">
+    <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
+      <div class="d_flex_center justify_around flex_column">
+        <a class="d_flex_center justify_start small_logout_link" href="legalNotice.html">Legal Notice</a>
+        <a class="d_flex_center justify_start small_logout_link" href="privacyPolicy.html">Privacy Policy</a>
+        <a class="d_flex_center justify_start small_logout_link" href="#">Log Out</a>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="header_container d_flex_center justify_between width_100">
+      <div class="margin_0">Kanban Project Management Tool</div>
+      <div class="d_flex_center margin_0 gap_16 v_hidden">
+        <a href="help.html">
+          <img src="../assets/icons/help.svg" class="help_icon" alt="" />
+        </a>
+        <div class="user_circle d_flex_center" onclick="toggleLogoutOverlay()">
+          <div class="position_absolute">LU</div>
         </div>
       </div>
     </div>
-    <header>
-      <div class="header_container d_flex_center justify_between width_100">
-        <div class="margin_0">Kanban Project Management Tool</div>
-        <div class="d_flex_center margin_0 gap_16 v_hidden">
-          <a href="help.html">
-            <img src="../assets/icons/help.svg" class="help_icon" alt="" />
-          </a>
-          <div
-            class="user_circle d_flex_center"
-            onclick="toggleLogoutOverlay()"
-          >
-            <div class="position_absolute">LU</div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <nav
-      class="height_100 position_absolute d_flex flex_column justify_between"
-    >
-      <div class="d_flex_center">
-        <img
-          src="../assets/img/logo_navbar.svg"
-          class="d_flex logo_navbar"
-          alt=""
-        />
-      </div>
-      <div class="d_flex_center_column justify_start nav_items margin_0">
-        <a href="../summary.html" class="margin_0 width_100">
+  </header>
+  <nav class="height_100 position_absolute d_flex flex_column justify_between">
+    <div class="d_flex_center">
+      <img src="../assets/img/logo_navbar.svg" class="d_flex logo_navbar" alt="" />
+    </div>
+    <div class="d_flex_center_column justify_start nav_items margin_0">
+      <a href="../summary.html" class="margin_0 width_100">
         <div class="d_flex_center justify_start nav_item">
-          <img
-            class="margin_0"
-            src="../assets/icons/icon_summary.svg"
-            alt="summary icon"
-          />Summary
+          <img class="margin_0" src="../assets/icons/icon_summary.svg" alt="summary icon" />Summary
         </div>
-        </a>
-        <a href="../addtask.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="../assets/icons/icon_add_task.svg"
-              alt="add task icon"
-            />Add Task
-          </div>
-        </a>
-        <a href="../board.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="../assets/icons/icon_board.svg"
-              alt="board icon"
-            />Board
-          </div>
-        </a>
-        <a href="../contacts.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="../assets/icons/icon_contacts.svg"
-              alt="contacts icon"
-            />Contacts
-          </div>
-        </a>
+      </a>
+      <a href="../addtask.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="../assets/icons/icon_add_task.svg" alt="add task icon" />Add Task
+        </div>
+      </a>
+      <a href="../board.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="../assets/icons/icon_board.svg" alt="board icon" />Board
+        </div>
+      </a>
+      <a href="../contacts.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="../assets/icons/icon_contacts.svg" alt="contacts icon" />Contacts
+        </div>
+      </a>
+    </div>
+    <div class="d_flex nav_privacy_legal margin_0">
+      <div class="pp_ln">
+        <a href="../templates/privacyPolicy.html"> Privacy Policy </a>
       </div>
-      <div class="d_flex nav_privacy_legal margin_0">
-        <div class="pp_ln">
-          <a href="../templates/privacyPolicy.html"> Privacy Policy </a>
-        </div>
-        <div class="pp_ln_active">
-          <a href="../templates/legalNotice.html"> Legal Notice </a>
-        </div>
+      <div class="pp_ln_active">
+        <a href="../templates/legalNotice.html"> Legal Notice </a>
       </div>
-    </nav>
-    <main class="position_absolute">
-      <div class="d_flex_center">
-        <div class="d_flex_jc_center_fd_column width_100">
-          <h1>Legal Notice</h1>
-          <br>
-          <h4>Imprint</h4>
-          <ul>
-           <li>Lutz Bölling, Christan Klemm, Lars Tieseler</li>
-           <li>Böttcherei 226</li>
-           <li>28844 Weyhe</li>
-          </ul>
-          <br>
-          <h4>Exploring the board</h4>
-          <span>Email: exactstack@gmail.com</span>
-          <br>
-          <h4>Acceptance of terms</h4>
-          <span>
-            By accessing and using Join (Product), you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions from time to time without notice.
-          </span>
-          <br>
-          <h4>Scope and ownership of the product</h4>
-          <span>
-            Join has been developed as part of a student group project in a web development bootcamp at the Developer Akademie GmbH. It has an educational purpose and is not intended for extensive personal & business usage. As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.
-          </span>
-          <br>
-          <span>
-            The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification, distribution, or replication of the design is strictly prohibited.</h4>
-          </span>
-          <br>
-          <h4>Proprietary rights</h4>
-          <span>Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary rights in Join, including any associated copyrighted material, trademarks, and other proprietary information.</span>
-          <br>
-          <h4>Use of the product</h4>
-          <span>Join is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your interactions with other users of Join.</span>
-          <br>
-          <h4>Disclaimer of warranties and limitation of liability</h4>
-          <span>Join is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising out of or in connection with the use or performance of Join.</span>
-          <br>
-          <h4>Indemnity</h4>
-          <span>You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss, damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of Join and/or your breach of this Legal Notice.</span>
-          <br>
-          <span>For any questions or notices, please contact us at exactstack@gmail.com .</span>
-          <br>
-          <span>Date: July 26, 2023</span>
-        </div>
+    </div>
+  </nav>
+  <main class="position_absolute">
+    <div class="d_flex_center">
+      <div class="d_flex_jc_center_fd_column width_100">
+        <h1>Legal Notice</h1>
+        <br>
+        <h4>Imprint</h4>
+        <ul>
+          <li>Lutz Bölling, Christan Klemm, Lars Tieseler</li>
+          <li>Böttcherei 226</li>
+          <li>28844 Weyhe</li>
+        </ul>
+        <br>
+        <h4>Exploring the board</h4>
+        <span>Email: exactstack@gmail.com</span>
+        <br>
+        <h4>Acceptance of terms</h4>
+        <span>
+          By accessing and using Join (Product), you acknowledge and agree to the following terms and conditions, and
+          any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the listed
+          students, may update or change the terms and conditions from time to time without notice.
+        </span>
+        <br>
+        <h4>Scope and ownership of the product</h4>
+        <span>
+          Join has been developed as part of a student group project in a web development bootcamp at the Developer
+          Akademie GmbH. It has an educational purpose and is not intended for extensive personal & business usage. As
+          such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality
+          regarding this Product.
+        </span>
+        <br>
+        <span>
+          The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification,
+          distribution, or replication of the design is strictly prohibited.</h4>
+        </span>
+        <br>
+        <h4>Proprietary rights</h4>
+        <span>Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary
+          rights in Join, including any associated copyrighted material, trademarks, and other proprietary
+          information.</span>
+        <br>
+        <h4>Use of the product</h4>
+        <span>Join is intended to be used for lawful purposes only, in accordance with all applicable laws and
+          regulations. Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another
+          person, is strictly prohibited. You are solely responsible for your interactions with other users of
+          Join.</span>
+        <br>
+        <h4>Disclaimer of warranties and limitation of liability</h4>
+        <span>Join is provided "as is" without warranty of any kind, whether express or implied, including but not
+          limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
+          In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,
+          incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of
+          profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of
+          such damages, arising out of or in connection with the use or performance of Join.</span>
+        <br>
+        <h4>Indemnity</h4>
+        <span>You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our
+          affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss,
+          damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of Join
+          and/or your breach of this Legal Notice.</span>
+        <br>
+        <span>For any questions or notices, please contact us at exactstack@gmail.com .</span>
+        <br>
+        <span>Date: July 26, 2023</span>
       </div>
-    </main>
-  </body>
-  <script src="../script.js"></script>
+    </div>
+  </main>
+</body>
+<script src="../script.js"></script>
+
 </html>
