@@ -202,3 +202,9 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 .add_task_button_container{
     height: 60px;
 }
+
+.cancel_vector{
+    background-image: url(/assets/icons/Close.svg);
+    width: 24px;
+    height: 24px;
+}
