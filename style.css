@@ -212,41 +212,6 @@ button {
     background-color: rgba(42, 61, 89, 1);
 }
 
-.help_icon {
-    height: 32px;
-    width: 32px;
-}
-
-.help_icon:hover {
-    transform: scale(1.2);
-}
-
-.help_wrapper {
-    max-width: calc(1440px - 232px);
-    padding-right: 96px;
-    padding-bottom: 110px;
-}
-
-.help_list {
-    list-style: decimal;
-}
-
-.help_btn_back {
-    background: none;
-    border: none;
-    position: sticky;
-    top: 503px;
-    left: 970px;
-    height: 32px;
-    width: 32px;
-    object-fit: cover;
-}
-
-.help_btn_back:hover {
-    border-radius: 50%;
-    background-color: gray;
-}
-
 .fc_blue {
     color: rgba(41, 171, 226, 1);
 }
@@ -302,6 +267,14 @@ button {
     height: 100vh;
 }
 
+.help_icon {
+    height: 32px;
+    width: 32px;
+}
+
+.help_icon:hover {
+    transform: scale(1.2);
+}
 
 .help_wrapper {
     padding-right: 96px;
@@ -316,8 +289,8 @@ button {
     background: none;
     border: none;
     position: sticky;
-    top: 194px;
-    left: 1307px;
+    top: 50px;
+    left: 970px;
     height: 32px;
     width: 32px;
     object-fit: cover;
@@ -325,7 +298,7 @@ button {
 
 .help_btn_back:hover {
     border-radius: 50%;
-    background-color: gray;
+    background: rgba(238, 238, 238, 1);
 }
 
 .fc_blue {
