@@ -6,7 +6,7 @@ const FIREBASE_URL ="https://join-19b54-default-rtdb.europe-west1.firebasedataba
  * @function
  * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
  */
-async function getUsers() {
+async function getContactsFromDatabase() {
   let users = await loadFromDatabase("users");
   console.log(users)
   return users;
@@ -18,7 +18,7 @@ async function getUsers() {
  * @function
  * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
  */
-async function getTasks() {
+async function getTasksFromDatabase() {
     let tasks = await loadFromDatabase("tasks");
     return tasks;
 }
@@ -103,7 +103,8 @@ function stopPropagation(event) {
 }
 
 function init() {
-    getUsers();
+    getContactsFromDatabase()
+    fetchUsers();
 }
 
 

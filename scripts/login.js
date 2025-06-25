@@ -1,5 +1,3 @@
-// import { getUsers, getTasks, postToDatabase, updateOnDatabase, deleteFromDatabase  } from "./database.js";
-
 window.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let hiddenItems = document.querySelectorAll(".fade_out");
@@ -49,4 +47,7 @@ async function login(data) {
   }
 }
 
-
+async function fetchUsers() {
+  const users = await getContactsFromDatabase();
+  console.log(users)
+}
