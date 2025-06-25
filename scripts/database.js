@@ -1,4 +1,5 @@
-const FIREBASE_URL ="https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
+const FIREBASE_URL =
+  "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Retrieves contacts from the database.
@@ -88,22 +89,4 @@ async function deleteFromDatabase(path) {
   return (responseToJson = await response.json());
 }
 
-function toggleLogoutOverlay() {
-  document
-    .getElementById("overlay-small-logout-win")
-    .classList.toggle("d_none");
-}
-
-// function closeLogoutOverlay(){
-//     document.getElementById("overlay-small-logout-win").classList.add("d_none");
-// }
-
-function stopPropagation(event) {
-  event.stopPropagation();
-}
-
-function init() {
-    getUsers();
-}
-
-
+export default { getUsers, getTasks, postToDatabase, updateOnDatabase, deleteFromDatabase };

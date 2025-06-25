@@ -144,6 +144,8 @@ button {
 }
 
 .nav_privacy_legal {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding-top: 243px;
     gap: 8px;
@@ -154,8 +156,10 @@ button {
 }
 
 .pp_ln {
+    width: 100%;
     display: flex;
     align-items: center;
+    padding-left: 60px;
 }
 
 .pp_ln_active {
@@ -217,6 +221,35 @@ button {
     transform: scale(1.2);
 }
 
+.help_wrapper {
+    padding-right: 96px;
+    padding-bottom: 110px;
+}
+
+.help_list {
+    list-style: decimal;
+}
+
+.help_btn_back {
+    background: none;
+    border: none;
+    position: sticky;
+    top: 194px;
+    left: 1307px;
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+}
+
+.help_btn_back:hover {
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.fc_blue {
+    color: rgba(41, 171, 226, 1);
+}
+
 #overlay-small-logout-win {
     z-index: 1;
     top: 0;
@@ -245,6 +278,7 @@ button {
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid rgba(209, 209, 209, 1);
+    font-family: 'Inter';
 }
 
 .input_icon_wrapper input::placeholder {
@@ -266,6 +300,7 @@ button {
     width: 100%;
     height: 100vh;
 }
+
 
 .help_wrapper {
     padding-right: 96px;
