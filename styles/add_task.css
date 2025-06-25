@@ -27,6 +27,22 @@
   gap: 24px;
 }
 
+.textarea_wrapper{
+  position: relative;
+  display: inline-block;
+}
+
+.resize_icon{
+  position: absolute;
+  bottom: 11px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  background: url('/assets/icons/resize_icon.svg') no-repeat center center;
+  background-size: contain;
+  pointer-events: none;
+}
+
 textarea {
   font-family: "Inter", "sans-serif";
   width: 100%;
@@ -36,6 +52,8 @@ textarea {
   font-weight: 400;
   border-radius: 10px;
   border: 1px solid rgba(209, 209, 209, 1);
+  resize: none;
+  padding-bottom: 20px; 
 }
 
 textarea::placeholder {
@@ -181,14 +199,44 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 14px;
 }
 
-.close {
+.close_add_task{
   position: absolute;
   left: 1044px;
   top: 64px;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
-.close:hover {
+
+.close_add_task:hover {
   cursor: pointer;
+  background-color: rgba(41, 171, 226, 1);
+}
+
+.close_add_task:before, .close_add_task:after {
+  position: absolute;
+  content: " ";
+  height: 16px;
+  width: 2px;
+  background-color: rgba(42, 54, 71, 1);
+  border-radius: 2px;
+}
+
+.close_add_task:before {
+  transform: rotate(45deg);
+}
+
+.close_add_task:after {
+  transform: rotate(-45deg);
+}
+
+.close_add_task:active::before,
+.close_add_task:active::after {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .add_task_button {
@@ -199,6 +247,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .add_task_button_container {
   height: 60px;
+  width: 334px;
 }
 
 .close_cross {
@@ -210,10 +259,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-.close_cross:before .close_cross:after {
+.close_cross:before, .close_cross:after {
   position: absolute;
   content: " ";
-  height: 18px;
+  height: 16px;
   width: 2px;
   background-color: rgba(42, 54, 71, 1);
   border-radius: 2px;
@@ -226,3 +275,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .close_cross:after {
   transform: rotate(-45deg);
 }
+
+.btn_white:hover .close_cross::before,
+.btn_white:hover .close_cross::after {
+    background-color: rgba(41, 171, 226, 1);
+}
+
+.btn_white:active .close_cross::before,
+.btn_white:active .close_cross::after {
+    background-color: rgba(9, 25, 49, 1);
+}
+
+ .add_task_footer {
+  z-index: 2;
+  position: absolute;
+  width: 988px;
+  top: 750px;
+ }

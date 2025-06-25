@@ -6,16 +6,18 @@ let category = ["Technical Task", "User Story"];
 function openTaskOverlay() {
     document.getElementById("task-overlay").classList.remove("d_none");;
     let add_task_entry = document.getElementById("add-task-entry");
-    document.getElementById("add-task-entry").innerHTML = addTaskTemplate();
+    
+    add_task_entry.innerHTML = addTaskTemplate();
+    // document.getElementById("add-task-entry").innerHTML = addTaskTemplate();
+    
     add_task_entry.classList.remove("d_none");
     
     void add_task_entry.offsetWidth;
     
-    
-    // addTaskTemplate();
     add_task_entry.classList.add("show");
-    add_task_entry.innerHtml = "";
-    console.log(add_task_entry);
+    // addTaskTemplate();
+    
+    // add_task_entry.innerHtml = "";
     
 }
 
