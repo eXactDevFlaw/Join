@@ -110,7 +110,7 @@ return     `<div>
         <button class="btn_white margin_0 add_task_button" onclick="closeTaskOverlay()">Cancel <div class="close_cross"></div>
         </button>
         </button>
-        <button class="btn_dark margin_0 add_task_button">Create Task <img src="./assets/icons/check.svg" alt="">
+        <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Create Task <img src="./assets/icons/check.svg" alt="">
         </button>
       </div>
     </div>`

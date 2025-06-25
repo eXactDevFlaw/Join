@@ -1,30 +1,36 @@
 let task = [];
 let taskDetails = {};
+let users = {};
 
 let category = ["Technical Task", "User Story"];
+
+async function getTestContactsFromDatabase() {
+  let users = await loadFromDatabase("testUsers");
+  console.log(users)
+  return users;
+}
+
+async function init(){
+    users = await getTestContactsFromDatabase();
+   for (let index = 0; index < users.length; index++) {
+        console.log(users[index].name);
+        
+   }
+}
+
+function test(){
+   
+}
 
 function openTaskOverlay() {
     document.getElementById("task-overlay").classList.remove("d_none");;
     let add_task_entry = document.getElementById("add-task-entry");
-    
     add_task_entry.innerHTML = addTaskTemplate();
-    // document.getElementById("add-task-entry").innerHTML = addTaskTemplate();
-    
     add_task_entry.classList.remove("d_none");
-    
     void add_task_entry.offsetWidth;
-    
     add_task_entry.classList.add("show");
-    // addTaskTemplate();
-    
-    // add_task_entry.innerHtml = "";
     
 }
-
-function deleteIt(){
-    document.getElementById("add-task-entry").innerHTML = "";
-}
-
 
 function closeTaskOverlay() {
     document.getElementById("task-overlay").classList.add("d_none");;
@@ -64,4 +70,21 @@ function setPriority(level) {
 
 function openAssignedToDropdown(){
 
+}
+
+function createTask(){
+    let title = document.getElementById('title-input-overlay').value;
+    let description = document.getElementById('description-input-overlay').value;
+    let dueDate = document.getElementById('datepicker').value;
+    let assignedTo = document.getElementById('assigned-to-dropdown').value;
+    // let category;
+    // let subtasks;
+    
+    taskDetails.title = title;
+    taskDetails.description = description;
+    taskDetails.dueDate = dueDate;
+    taskDetails.assignedTo = assignedTo;
+    
+    console.log(taskDetails);
+    
 }

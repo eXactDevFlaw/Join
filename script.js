@@ -11,7 +11,6 @@ async function getContactsFromDatabase() {
   console.log(users)
   return users;
 }
-
 /**
  * Retrieves contacts from the database.
  * @async
@@ -102,9 +101,9 @@ function stopPropagation(event) {
   event.stopPropagation();
 }
 
-function init() {
-    // getContactsFromDatabase()
-    // fetchUsers();
-}
+// function init() {
+//     // getContactsFromDatabase()
+//     // fetchUsers();
+// }
 
 
