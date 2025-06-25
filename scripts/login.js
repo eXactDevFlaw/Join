@@ -1,4 +1,4 @@
-import { getUsers, getTasks, postToDatabase, updateOnDatabase, deleteFromDatabase  } from "./database.js";
+// import { getUsers, getTasks, postToDatabase, updateOnDatabase, deleteFromDatabase  } from "./database.js";
 
 window.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
