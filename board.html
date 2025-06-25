@@ -1,454 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_dark.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="icon"
-      href="./assets/icons/favicon_light.svg"
-      type="image/x-icon"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-    <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/responsive.css" />
-    <link rel="stylesheet" href="./styles/standart.css" />
-    <link rel="stylesheet" href="./styles/add_task.css" />
-    <title>Join - Board</title>
-  </head>
-  <body>
-    <div
-      class="task_overlay position_absolute d_flex_center"
-      id="task-overlay"
-      onclick="closeTaskOverlay()"
-    ></div>
-    <div
-      class="add_task_entry show"
-      onclick="stopPropagation(event)"
-      id="add-task-entry"
-    >
-      <div>
-        <h1>Add Task</h1>
-        <div class="close">
-          <img src="./assets/icons/Close.svg" alt="close" />
-        </div>
-      </div>
-      <div class="add_task_content d_flex_row justify_between">
-        <div class="task_entries">
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Title</p>
-              <p class="red_star margin_0">*</p>
-            </div>
-            <div class="margin_0">
-              <input
-                type="text"
-                placeholder="Enter a title"
-                id="title-input-overlay"
-                required
-              />
-            </div>
-          </div>
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Description</p>
-            </div>
-            <div class="margin_0">
-              <textarea
-                placeholder="Enter a Description"
-                id="description-input-overlay"
-              ></textarea>
-            </div>
-          </div>
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Due Date</p>
-              <p class="red_star margin_0">*</p>
-            </div>
-            <div class="margin_0">
-              <input
-                class="date"
-                id="datepicker"
-                type="date"
-                placeholder="dd/mm/yyyy"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div class="vector_4 margin_0"></div>
-        <div class="task_entries">
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Priority</p>
-            </div>
-            <div
-              class="priority_button_container d_flex_center_row justify_between"
-            >
-              <div
-                class="priority_button d_flex_center_row"
-                id="urgent-button"
-                onclick="setPriority('urgent')"
-              >
-                <p class="margin_0">Urgent</p>
-                <img
-                  class=""
-                  src="./assets/icons/prio_high.svg"
-                  alt=""
-                  id="prio-urgent-icon"
-                />
-                <img
-                  class="d_none"
-                  src="./assets/icons/prio_high_active.svg"
-                  alt=""
-                  id="prio-urgent-icon-active"
-                />
-              </div>
-              <div
-                class="priority_button d_flex_center_row"
-                id="medium-button"
-                onclick="setPriority('medium')"
-              >
-                <p class="margin_0">Medium</p>
-                <img
-                  class=""
-                  src="./assets/icons/prio_medium.svg"
-                  alt=""
-                  id="prio-medium-icon"
-                />
-                <img
-                  class="d_none"
-                  src="./assets/icons/prio_medium_active.svg"
-                  alt=""
-                  id="prio-medium-icon-active"
-                />
-              </div>
-              <div
-                class="priority_button d_flex_center_row"
-                id="low-button"
-                onclick="setPriority('low')"
-              >
-                <p class="margin_0">Low</p>
-                <img
-                  class=""
-                  src="./assets/icons/prio_low.svg"
-                  alt=""
-                  id="prio-low-icon"
-                />
-                <img
-                  class="d_none"
-                  src="./assets/icons/prio_low_active.svg"
-                  alt=""
-                  id="prio-low-icon-active"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Assigned to</p>
-            </div>
-            <div
-              class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0"
-              onclick="openAssignedToDropdown()"
-            >
-              <input
-                class="assigned_to_dropdown"
-                type="text"
-                placeholder="Select contacts to assing"
-                id="assigned-to-dropdown"
-                required
-              />
-              <div class="input_icon_container d_flex_center">
-                <div class="arrow_drop up" id="arrow-drop-down">
-                  <img
-                    src="./assets/icons/arrow_drop_down.svg"
-                    alt="drop-down-arrow"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Category</p>
-              <p class="red_star margin_0">*</p>
-            </div>
-            <div
-              class="input_icon_wrapper width_100 d_flex_center margin_0"
-              onclick="openCategoryDropdown()"
-            >
-              <div
-                class="select_category_dropdown d_flex_center justify_between"
-              >
-                <div class="margin_0">Select task category</div>
-                <div class="input_icon_container d_flex_center">
-                  <div class="arrow_drop up margin_0" id="arrow-drop-down">
-                    <img
-                      src="./assets/icons/arrow_drop_down.svg"
-                      alt="drop-down-arrow"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="title_input margin_0 gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Subtasks</p>
-            </div>
-            <div class="input_icon_wrapper d_flex_center margin_0">
-              <div class="input_icon_container d_flex_center">
-                <div class="add_icon"></div>
-              </div>
-              <input
-                type="text"
-                placeholder="Add new subtasks"
-                id="add-subtasks"
-                required
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d_flex_center_row justify_between margin_0 align_end">
-        <div class="d_flex_center_row margin_0">
-          <p class="red_star margin_0">*</p>
-          <p class="margin_0">This field is required</p>
-        </div>
-        <div class="d_flex_center_row margin_0 add_task_button_container">
-          <button class="btn_white margin_0 add_task_button">Cancel <div class="cancel_vector"></div>
-          </button>
-          </button>
-          <button class="btn_dark margin_0 add_task_button">Create Task</button>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" />
+  <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="./assets/icons/favicon_light.svg" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="./styles/board.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./styles/responsive.css" />
+  <link rel="stylesheet" href="./styles/standart.css" />
+  <link rel="stylesheet" href="./styles/add_task.css" />
+  <title>Join - Board</title>
+</head>
+
+<body>
+  <div class="task_overlay position_absolute d_flex_center" id="task-overlay" onclick="closeTaskOverlay()"></div>
+  <div class="add_task_entry show" onclick="stopPropagation(event)" id="add-task-entry">
+    <div>
+      <h1>Add Task</h1>
+      <div class="close">
+        <img src="./assets/icons/Close.svg" alt="close" />
       </div>
     </div>
-    <div
-      class="position_absolute height_100 width_100 d_none"
-      id="overlay-small-logout-win"
-      onclick="toggleLogoutOverlay()"
-    >
-      <div
-        class="position_absolute small_logout_win d_flex_center"
-        onclick="stopPropagation(event)"
-      >
-        <div class="d_flex_center justify_around flex_column">
-          <a
-            class="d_flex_center justify_start small_logout_link"
-            href="./templates/legalNotice.html"
-            >Legal Notice</a
-          >
-          <a
-            class="d_flex_center justify_start small_logout_link"
-            href="./templates/privacyPolicy.html"
-            >Privacy Policy</a
-          >
-          <a class="d_flex_center justify_start small_logout_link" href="#"
-            >Log Out</a
-          >
+    <div class="add_task_content d_flex_row justify_between">
+      <div class="task_entries">
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Title</p>
+            <p class="red_star margin_0">*</p>
+          </div>
+          <div class="margin_0">
+            <input type="text" placeholder="Enter a title" id="title-input-overlay" required />
+          </div>
         </div>
-      </div>
-    </div>
-    <header>
-      <div class="header_container d_flex_center justify_between width_100">
-        <div class="margin_0">Kanban Project Management Tool</div>
-        <div class="d_flex_center margin_0 gap_16">
-          <a href="./templates/help.html">
-            <img src="./assets/icons/help.svg" class="help_icon" alt="" />
-          </a>
-          <div
-            class="user_circle d_flex_center"
-            onclick="toggleLogoutOverlay()"
-          >
-            <div class="position_absolute">LU</div>
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Description</p>
+          </div>
+          <div class="margin_0">
+            <textarea placeholder="Enter a Description" id="description-input-overlay"></textarea>
+          </div>
+        </div>
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Due Date</p>
+            <p class="red_star margin_0">*</p>
+          </div>
+          <div class="margin_0">
+            <input class="date" id="datepicker" type="date" placeholder="dd/mm/yyyy" required />
           </div>
         </div>
       </div>
-    </header>
-    <nav
-      class="height_100 position_absolute d_flex flex_column justify_between"
-    >
-      <div class="d_flex_center">
-        <img
-          src="./assets/img/logo_navbar.svg"
-          class="d_flex logo_navbar"
-          alt=""
-        />
-      </div>
-      <div class="d_flex_center_column justify_start nav_items margin_0">
-        <a href="./summary.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="./assets/icons/icon_summary.svg"
-              alt="summary icon"
-            />Summary
+      <div class="vector_4 margin_0"></div>
+      <div class="task_entries">
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Priority</p>
           </div>
-        </a>
-        <a href="./addtask.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="./assets/icons/icon_add_task.svg"
-              alt="add task icon"
-            />Add Task
+          <div class="priority_button_container d_flex_center_row justify_between">
+            <div class="priority_button d_flex_center_row" id="urgent-button" onclick="setPriority('urgent')">
+              <p class="margin_0">Urgent</p>
+              <img class="" src="./assets/icons/prio_high.svg" alt="" id="prio-urgent-icon" />
+              <img class="d_none" src="./assets/icons/prio_high_active.svg" alt="" id="prio-urgent-icon-active" />
+            </div>
+            <div class="priority_button d_flex_center_row" id="medium-button" onclick="setPriority('medium')">
+              <p class="margin_0">Medium</p>
+              <img class="" src="./assets/icons/prio_medium.svg" alt="" id="prio-medium-icon" />
+              <img class="d_none" src="./assets/icons/prio_medium_active.svg" alt="" id="prio-medium-icon-active" />
+            </div>
+            <div class="priority_button d_flex_center_row" id="low-button" onclick="setPriority('low')">
+              <p class="margin_0">Low</p>
+              <img class="" src="./assets/icons/prio_low.svg" alt="" id="prio-low-icon" />
+              <img class="d_none" src="./assets/icons/prio_low_active.svg" alt="" id="prio-low-icon-active" />
+            </div>
           </div>
-        </a>
-        <div class="d_flex_center justify_start nav_item_active">
-          <img
-            class="margin_0"
-            src="./assets/icons/icon_board_active.svg"
-            alt="board icon"
-          />Board
         </div>
-        <a href="./contacts.html" class="margin_0 width_100">
-          <div class="d_flex_center justify_start nav_item">
-            <img
-              class="margin_0"
-              src="./assets/icons/icon_contacts.svg"
-              alt="contacts icon"
-            />Contacts
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Assigned to</p>
           </div>
-        </a>
-      </div>
-      <div class="d_flex nav_privacy_legal margin_0">
-        <div class="pp_ln">
-          <a href="../templates/privacyPolicy.html"> Privacy Policy </a>
-        </div>
-        <div class="pp_ln">
-          <a href="../templates/legalNotice.html"> Legal Notice </a>
-        </div>
-      </div>
-    </nav>
-    <main class="position_absolute">
-      <div class="headline d_flex_center justify_between margin_0">
-        <h1>Board</h1>
-        <div class="find_add d_flex_center justify_between gap_32px">
-          <div class="input_icon_wrapper d_flex_center margin_0">
-            <img
-              src="./assets/icons/vector_3.svg"
-              class="vector"
-              alt="vector"
-            />
+          <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0"
+            onclick="openAssignedToDropdown()">
+            <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
+              id="assigned-to-dropdown" required />
             <div class="input_icon_container d_flex_center">
-              <div class="search_icon"></div>
+              <div class="arrow_drop up" id="arrow-drop-down">
+                <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
+              </div>
             </div>
-            <input
-              type="text"
-              placeholder="Find Task"
-              id="find-task"
-              required
-            />
           </div>
-          <button
-            class="btn_dark margin_0 d_flex_center"
-            onclick="openTaskOverlay()"
-          >
-            Add task<img src="/assets/icons/add.svg" alt="add" />
-          </button>
         </div>
-      </div>
-      <content class="d_flex">
-        <div class="board_column align_none">
-          <div class="board_column_head d_flex justify_between margin_0">
-            <p class="margin_0">To do</p>
-            <div class="plus_button margin_0"></div>
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Category</p>
+            <p class="red_star margin_0">*</p>
           </div>
-          <div class="card_column margin_0" id="column-todo">
-            <div class="task_card margin_0">
-              <div class="task_content">
-                <div class="card_label margin_0">User Story</div>
-                <div class="task_description margin_0">
-                  <div class="task_title margin_0" id="task-title">Title</div>
-                  <div class="task_content margin_0" id="task-content">
-                    Content...
-                  </div>
-                </div>
-                <div class="subtask_progress margin_0">
-                  <div class="progress_bar margin_0">
-                    <div
-                      class="progress_status margin_0"
-                      style="width: 75%"
-                    ></div>
-                  </div>
-                  <div class="subtasks margin_0">
-                    <p id="finised-subtasks">0</p>
-                    <p>/</p>
-                    <p id="subtasks-length">2</p>
-                    <p>&nbsp;Subtasks</p>
-                  </div>
-                </div>
-                <div class="task_card_footer d_flex_center_row justify_between">
-                  <div
-                    class="profile_badges d_flex_center_row margin_0 justify_start"
-                  >
-                    <div class="profile_badge">AM</div>
-                    <div class="profile_badge">AM</div>
-                    <div class="profile_badge">AM</div>
-                  </div>
-                  <div
-                    class="priority_symbol_container d_flex_center margin_0"
-                    id="priority_symbol"
-                  >
-                    <img src="./assets/icons/prio_medium.svg" alt="" />
-                  </div>
+          <div class="input_icon_wrapper width_100 d_flex_center margin_0" onclick="openCategoryDropdown()">
+            <div class="select_category_dropdown d_flex_center justify_between">
+              <div class="margin_0">Select task category</div>
+              <div class="input_icon_container d_flex_center">
+                <div class="arrow_drop up margin_0" id="arrow-drop-down">
+                  <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
                 </div>
               </div>
             </div>
-            <div class="no_task d_flex_center" id="no-tasks-to-do">
-              <p>No tasks To do</p>
-            </div>
           </div>
         </div>
-        <div class="board_column align_none">
-          <div class="board_column_head d_flex justify_between margin_0">
-            <p class="margin_0">In progress</p>
-            <div class="plus_button margin_0"></div>
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Subtasks</p>
           </div>
-          <div class="card_column margin_0" id="column-in-progress">
-            <div class="no_task d_flex_center" id="no-tasks-In-progress">
-              <p>No tasks In progress</p>
+          <div class="input_icon_wrapper d_flex_center margin_0">
+            <div class="input_icon_container d_flex_center">
+              <div class="add_icon"></div>
             </div>
+            <input type="text" placeholder="Add new subtasks" id="add-subtasks" required />
           </div>
         </div>
-        <div class="board_column align_none">
-          <div class="board_column_head d_flex justify_between margin_0">
-            <p class="margin_0">Await feedback</p>
-            <div class="plus_button margin_0"></div>
+      </div>
+    </div>
+    <div class="d_flex_center_row justify_between margin_0 align_end">
+      <div class="d_flex_center_row margin_0">
+        <p class="red_star margin_0">*</p>
+        <p class="margin_0">This field is required</p>
+      </div>
+      <div class="d_flex_center_row margin_0 add_task_button_container">
+        <button class="btn_white margin_0 add_task_button">Cancel <div class="close_cross">
           </div>
-          <div class="card_column margin_0" id="column-await-feedback">
-            <div class="no_task d_flex_center" id="no-task-awaiting-feedback">
-              <p>No tasks Awaiting feedback</p>
+        </button>
+        </button>
+        <button class="btn_dark margin_0 add_task_button">Create Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
+    onclick="toggleLogoutOverlay()">
+    <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
+      <div class="d_flex_center justify_around flex_column">
+        <a class="d_flex_center justify_start small_logout_link" href="./templates/legalNotice.html">Legal Notice</a>
+        <a class="d_flex_center justify_start small_logout_link" href="./templates/privacyPolicy.html">Privacy
+          Policy</a>
+        <a class="d_flex_center justify_start small_logout_link" href="#">Log Out</a>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="header_container d_flex_center justify_between width_100">
+      <div class="margin_0">Kanban Project Management Tool</div>
+      <div class="d_flex_center margin_0 gap_16">
+        <a href="./templates/help.html">
+          <img src="./assets/icons/help.svg" class="help_icon" alt="" />
+        </a>
+        <div class="user_circle d_flex_center" onclick="toggleLogoutOverlay()">
+          <div class="position_absolute">LU</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <nav class="height_100 position_absolute d_flex flex_column justify_between">
+    <div class="d_flex_center">
+      <img src="./assets/img/logo_navbar.svg" class="d_flex logo_navbar" alt="" />
+    </div>
+    <div class="d_flex_center_column justify_start nav_items margin_0">
+      <a href="./summary.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="./assets/icons/icon_summary.svg" alt="summary icon" />Summary
+        </div>
+      </a>
+      <a href="./addtask.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="./assets/icons/icon_add_task.svg" alt="add task icon" />Add Task
+        </div>
+      </a>
+      <div class="d_flex_center justify_start nav_item_active">
+        <img class="margin_0" src="./assets/icons/icon_board_active.svg" alt="board icon" />Board
+      </div>
+      <a href="./contacts.html" class="margin_0 width_100">
+        <div class="d_flex_center justify_start nav_item">
+          <img class="margin_0" src="./assets/icons/icon_contacts.svg" alt="contacts icon" />Contacts
+        </div>
+      </a>
+    </div>
+    <div class="d_flex nav_privacy_legal margin_0">
+      <div class="pp_ln">
+        <a href="../templates/privacyPolicy.html"> Privacy Policy </a>
+      </div>
+      <div class="pp_ln">
+        <a href="../templates/legalNotice.html"> Legal Notice </a>
+      </div>
+    </div>
+  </nav>
+  <main class="position_absolute">
+    <div class="headline d_flex_center justify_between margin_0">
+      <h1>Board</h1>
+      <div class="find_add d_flex_center justify_between gap_32px">
+        <div class="input_icon_wrapper d_flex_center margin_0">
+          <img src="./assets/icons/vector_3.svg" class="vector" alt="vector" />
+          <div class="input_icon_container d_flex_center">
+            <div class="search_icon"></div>
+          </div>
+          <input type="text" placeholder="Find Task" id="find-task" required />
+        </div>
+        <button class="btn_dark margin_0 d_flex_center" onclick="openTaskOverlay()">
+          Add task<img src="/assets/icons/add.svg" alt="add" />
+        </button>
+      </div>
+    </div>
+    <content class="d_flex">
+      <div class="board_column align_none">
+        <div class="board_column_head d_flex justify_between margin_0">
+          <p class="margin_0">To do</p>
+          <div class="plus_button margin_0"></div>
+        </div>
+        <div class="card_column margin_0" id="column-todo">
+          <div class="task_card margin_0">
+            <div class="task_content">
+              <div class="card_label margin_0">User Story</div>
+              <div class="task_description margin_0">
+                <div class="task_title margin_0" id="task-title">Title</div>
+                <div class="task_content margin_0" id="task-content">
+                  Content...
+                </div>
+              </div>
+              <div class="subtask_progress margin_0">
+                <div class="progress_bar margin_0">
+                  <div class="progress_status margin_0" style="width: 75%"></div>
+                </div>
+                <div class="subtasks margin_0">
+                  <p id="finised-subtasks">0</p>
+                  <p>/</p>
+                  <p id="subtasks-length">2</p>
+                  <p>&nbsp;Subtasks</p>
+                </div>
+              </div>
+              <div class="task_card_footer d_flex_center_row justify_between">
+                <div class="profile_badges d_flex_center_row margin_0 justify_start">
+                  <div class="profile_badge">AM</div>
+                  <div class="profile_badge">AM</div>
+                  <div class="profile_badge">AM</div>
+                </div>
+                <div class="priority_symbol_container d_flex_center margin_0" id="priority_symbol">
+                  <img src="./assets/icons/prio_medium.svg" alt="" />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="board_column align_none">
-          <div class="board_column_head d_flex justify_between margin_0">
-            <p class="margin_0">Done</p>
-          </div>
-          <div class="card_column margin_0" id="column-done">
-            <div class="no_task d_flex_center" id="no-tasks-done">
-              <p>No tasks Done</p>
-            </div>
+          <div class="no_task d_flex_center" id="no-tasks-to-do">
+            <p>No tasks To do</p>
           </div>
         </div>
-      </content>
-    </main>
-  </body>
-  <script src="./script.js"></script>
-  <script src="./scripts/add_task.js"></script>
-  <script src="./scripts/add_task_template.js"></script>
+      </div>
+      <div class="board_column align_none">
+        <div class="board_column_head d_flex justify_between margin_0">
+          <p class="margin_0">In progress</p>
+          <div class="plus_button margin_0"></div>
+        </div>
+        <div class="card_column margin_0" id="column-in-progress">
+          <div class="no_task d_flex_center" id="no-tasks-In-progress">
+            <p>No tasks In progress</p>
+          </div>
+        </div>
+      </div>
+      <div class="board_column align_none">
+        <div class="board_column_head d_flex justify_between margin_0">
+          <p class="margin_0">Await feedback</p>
+          <div class="plus_button margin_0"></div>
+        </div>
+        <div class="card_column margin_0" id="column-await-feedback">
+          <div class="no_task d_flex_center" id="no-task-awaiting-feedback">
+            <p>No tasks Awaiting feedback</p>
+          </div>
+        </div>
+      </div>
+      <div class="board_column align_none">
+        <div class="board_column_head d_flex justify_between margin_0">
+          <p class="margin_0">Done</p>
+        </div>
+        <div class="card_column margin_0" id="column-done">
+          <div class="no_task d_flex_center" id="no-tasks-done">
+            <p>No tasks Done</p>
+          </div>
+        </div>
+      </div>
+    </content>
+  </main>
+</body>
+<script src="./script.js"></script>
+<script src="./scripts/add_task.js"></script>
+<script src="./scripts/add_task_template.js"></script>
+
 </html>
