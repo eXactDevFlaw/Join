@@ -16,16 +16,16 @@
     <div class="form_layout">
       <div class="add_contact_icon"></div>
     </div>
-    <form id="addnew-contact-form" onsubmit="saveNewContact(); return false;">
-      <div class="input_container">
+    <form id="addnew-contact-form" onsubmit="postToDatabase(); return false;">
+      <div class="input_icon_wrapper">
         <input id="contact-namefield" type="text" placeholder="Name" required />
         <i class="input-icon user-icon"></i>
       </div>
-      <div class="input_container">
+      <div class="input_icon_wrapper">
         <input id="contact-emailfield" type="email" placeholder="Email" required />
         <i class="input-icon email-icon"></i>
       </div>
-      <div class="input_container">
+      <div class="input_icon_wrapper">
         <input id="contact-phonefield" type="tel" placeholder="Phone" required />
         <i class="input-icon phone-icon"></i>
       </div>
