@@ -8,7 +8,6 @@ const FIREBASE_URL ="https://join-19b54-default-rtdb.europe-west1.firebasedataba
  */
 async function getContactsFromDatabase() {
   let users = await loadFromDatabase("users");
-  console.log(users)
   return users;
 }
 /**
