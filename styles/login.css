@@ -175,6 +175,15 @@
 }
 
 .signin_btn_checkbox_img {
+    src: url(../assets/icons/checkbox.svg);
+    width: 24px;
+    margin-right: 8px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.signin_btn_checkbox_img:hover {
+    src: url(../assets/icons/checkbox_hover.svg);
     width: 24px;
     margin-right: 8px;
     user-select: none;

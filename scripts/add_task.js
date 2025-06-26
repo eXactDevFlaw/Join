@@ -4,22 +4,49 @@ let users = {};
 
 let category = ["Technical Task", "User Story"];
 
-async function getTestContactsFromDatabase() {
-  let users = await loadFromDatabase("testUsers");
-  console.log(users)
-  return users;
-}
 
-async function init(){
-    users = await getTestContactsFromDatabase();
-   for (let index = 0; index < users.length; index++) {
+
+
+async function init() {
+
+
+
+    users = await getContactsFromDatabase();
+    console.log(users)
+
+    Object.entries(users).forEach(daten => {
+        console.log(daten)
+
+    });
+
+    Object.keys(users).forEach(daten => {
+        console.log(daten)
+
+    });
+
+    Object.values(users).forEach(daten => {
+        console.log(daten)
+
+    });
+
+    for (let index = 0; index < users.length; index++) {
         console.log(users[index].name);
-        
-   }
+
+    }
+
+
+    for (const keys of Object.entries(users)) {
+        console.log(keys)
+
+        for (const values of keys) {
+            console.log(values.name)
+        }
+
+    }
 }
 
-function test(){
-   
+function test() {
+
 }
 
 function openTaskOverlay() {
@@ -29,7 +56,7 @@ function openTaskOverlay() {
     add_task_entry.classList.remove("d_none");
     void add_task_entry.offsetWidth;
     add_task_entry.classList.add("show");
-    
+
 }
 
 function closeTaskOverlay() {
@@ -68,23 +95,23 @@ function setPriority(level) {
     console.log(taskDetails);
 }
 
-function openAssignedToDropdown(){
+function openAssignedToDropdown() {
 
 }
 
-function createTask(){
+function createTask() {
     let title = document.getElementById('title-input-overlay').value;
     let description = document.getElementById('description-input-overlay').value;
     let dueDate = document.getElementById('datepicker').value;
     let assignedTo = document.getElementById('assigned-to-dropdown').value;
     // let category;
     // let subtasks;
-    
+
     taskDetails.title = title;
     taskDetails.description = description;
     taskDetails.dueDate = dueDate;
     taskDetails.assignedTo = assignedTo;
-    
+
     console.log(taskDetails);
-    
+
 }
