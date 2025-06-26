@@ -107,3 +107,6 @@ function stopPropagation(event) {
 // }
 
 
+function locationReload(){
+  location.reload();
+}
