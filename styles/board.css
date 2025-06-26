@@ -84,6 +84,10 @@ button {
     margin: 0;
 }
 
+.find_task_input{
+    width: 312px !important; 
+}
+
 content{
     position: absolute;
     width: 1208px;

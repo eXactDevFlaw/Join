@@ -160,11 +160,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: center;
   align-items: center;
-  rotate: 180deg;
+  rotate: 0deg;
   color: (42, 54, 71, 1);
 }
 
-.arrow_drop .up {
+.up {
   rotate: 180deg;
 }
 
@@ -214,6 +214,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .close_add_task:hover {
   cursor: pointer;
+  background-color: rgba(238, 238, 238, 1);
+}
+
+.close_add_task:active{
   background-color: rgba(41, 171, 226, 1);
 }
 
