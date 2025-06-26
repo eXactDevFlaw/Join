@@ -33,7 +33,7 @@
    ========================================== */
 #overlay-container {
   display: flex;
-  width: 886px;
+  width: 1000px;
   max-width: 90vw;
   height: 500px;
   background-color: #fff;
