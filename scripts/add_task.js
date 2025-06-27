@@ -116,24 +116,23 @@ function createTask() {
 
 }
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
 function openAssignedToDropdown() {
-  document.getElementById("contact_dropdown").classList.toggle("d_none");
-  document.getElementById("arrow-drop-down").classList.remove("up")
-  
+  document.getElementById("contact-dropdown").classList.remove("d_none");
+  document.getElementById("arrow-drop-down").classList.remove("up");
+  renderContacts();
 }
 
-// // Close the dropdown if the user clicks outside of it
-// window.onclick = function(event) {
-//   if (!event.target.matches('.dropbtn')) {
-//     var dropdowns = document.getElementsByClassName("dropdown-content");
-//     var i;
-//     for (i = 0; i < dropdowns.length; i++) {
-//       var openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains('show')) {
-//         openDropdown.classList.remove('show');
-//       }
-//     }
-//   }
-// }
+async function renderContacts(){
+    let newContacts = [];
+    contacts = await getContactsFromDatabase();
+    Object.values(contacts).forEach(daten => {
+        console.log(daten.name)
+        newContacts.push(daten.name);
+    });
+    
+    newContacts.sort();
+    console.log(newContacts);
+    
+
+    
+}

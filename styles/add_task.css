@@ -190,10 +190,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .input_assigned_to {
-  position: absolute;
   height: 45px;
   width: 440px !important;
-  top: 350px;
   z-index: 3;
   font-size: 20px;
   border-radius: 10px;
@@ -306,16 +304,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
  }
 
  .contact_dropdown{
-  /* position: absolute; */
+  position: relative;
   background-color: rgba(255, 255, 255, 1);
   width: 440px;
-  height: 100px;
-  max-height: 336px;
-  border-radius: 10px;
-  top: 360px;
+  height: 40px;
+  /* max-height: 336px; */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  top: -5px;
  }
-
-     position: absolute;
-    height: 45px;
-    width: 440px;
-    top: 350px;
