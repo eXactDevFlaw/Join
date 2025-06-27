@@ -199,3 +199,15 @@ a {
 .padding_right_96px {
     padding-right: 96px;
 }
+
+.z_1{
+    z-index: 1;
+}
+
+.z_2{
+    z-index: 2;
+}
+
+.z_3{
+    z-index: 3;
+}

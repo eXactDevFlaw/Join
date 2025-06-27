@@ -119,8 +119,9 @@ function createTask() {
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function openAssignedToDropdown() {
-//   document.getElementById("myDropdown").classList.toggle("d_none");
-  document.getElementById("arrow-drop-down").classList.toggle("up")
+  document.getElementById("contact_dropdown").classList.toggle("d_none");
+  document.getElementById("arrow-drop-down").classList.remove("up")
+  
 }
 
 // // Close the dropdown if the user clicks outside of it
