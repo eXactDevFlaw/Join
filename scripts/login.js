@@ -1,6 +1,5 @@
 const userNameInput = document.querySelector('#login-username');
 const userPasswordInput = document.querySelector('#login-userpassword');
-const passwordIcon = document.getElementById("password-icon");
 const loginBtn = document.querySelector('.login_btn');
 const guestLoginBtn = document.querySelector('.guest_login_btn');
 const toggleSignIn = document.querySelector('.btn_sign_up');
@@ -16,12 +15,8 @@ const signinEmailInput = document.getElementById("signin-username");
 const signinPasswordInput = document.getElementById("signin-userpassword");
 const signinPasswordCheckInput = document.getElementById("signin-userpassword-check");
 const signinCheckbox = document.getElementById("signin-btn-checkbox");
-const passwordRef = document.querySelectorAll('.pw_input')
-const lockIcon = "./assets/icons/lock.svg";
-const eyeIcon = "./assets/icons/visibility_off.svg";
-const eyeOffIcon = "./assets/icons/visibility.svg";
 
-let isPasswordVisible = false;
+
 signupBtn.disabled = true;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -33,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
       element.classList.remove("fade_out");
     });
   }, 1000);
-
-  updateIcon()
 });
 
 guestLoginBtn.addEventListener('click', (e) => {
@@ -103,7 +96,6 @@ function resetInputFields() {
 
   userNameInput.classList.remove('input_error_border');
   userPasswordInput.classList.remove('input_error_border');
-  updateIcon()
 };
 
 toggleSignIn.addEventListener('click', toggleFormLoginSignin);
@@ -136,43 +128,54 @@ signupBtn.addEventListener('click', () => {
   console.log("hier muss der push in die DB")
 })
 
-passwordRef.forEach(element => {
-    element.addEventListener("click", () => {
-      isPasswordVisible = !isPasswordVisible;
-      passwordRef.forEach((el) => {
-        checkIconState(el)
-      })
+const passwordIcon = document.querySelectorAll('.pw_icon')
+const passwordValue = document.querySelectorAll('.pw_input')
+const lockIcon = "./assets/icons/lock.svg";
+const eyeIcon = "./assets/icons/visibility_off.svg";
+const eyeOffIcon = "./assets/icons/visibility.svg";
+let isPasswordVisible = false;
+let isPasswordValue = false
+
+passwordValue.forEach(element => {
+  element.addEventListener('input', () =>{
+    if (element.value > 0) {
+      isPasswordValue = true
+    } else {
+      isPasswordValue = false
+    }
+    checkIconState();
+  })
+})
+
+passwordIcon.forEach(element => {
+  element.addEventListener("click", () => {
+    isPasswordVisible = !isPasswordVisible 
+    passwordValue.forEach((el) => {
+      console.log(element)
+      checkIconState(el, element)
     })
+  })
 });
 
-function checkIconState(element) {
-  if (isPasswordVisible){
-    element.type = "text";
+function checkIconState(input, icon) {
+  console.log(input, icon)
+  if (isPasswordVisible) {
+    input.type = "text";
   } else {
-    element.type = "password";
+    input.type = "password";
   };
+
+  if (isPasswordValue) {
+        console.log("pointer")
+    icon.src = isPasswordVisible ? eyeOffIcon : eyeIcon;
+    icon.style.cursor = "pointer";
+  } else {
+    console.log("default")
+    icon.src = lockIcon;
+    icon.style.cursor = "default";
+  }
 };
 
-
-// function updateIcon() {
-//   if (userPasswordInput.value) {
-//     passwordIcon.src = isPasswordVisible ? eyeOffIcon : eyeIcon;
-//     passwordIcon.style.cursor = "pointer";
-//   } else {
-//     passwordIcon.src = lockIcon;
-//     passwordIcon.style.cursor = "default";
-//   }
-// }
-
-// passwordIcon.addEventListener("click", function () {
-//   if (!userPasswordInput.value) return;
-
-//   isPasswordVisible = !isPasswordVisible;
-//   userPasswordInput.type = isPasswordVisible ? "text" : "password";
-//   updateIcon();
-// });
-
-// Validierungsfunktion für das Signin-Formular
 function validateSigninForm() {
   const nameValid = signinNameInput.value.trim().length > 0;
   const emailValid = isValidEmail(signinEmailInput.value.trim());
@@ -198,7 +201,6 @@ function cursorEventSigupBtn() {
   }
 }
 
-// Hilfsfunktion zum Setzen/Entfernen der Fehlerklasse
 function setInputError(input, isValid, errMsg) {
   if (!isValid && input.value.length > 0) {
     input.classList.add('input_error_border');
@@ -207,7 +209,6 @@ function setInputError(input, isValid, errMsg) {
   }
 }
 
-// Event Listener für Live-Validierung
 [
   signinNameInput,
   signinEmailInput,
