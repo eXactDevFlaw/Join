@@ -66,6 +66,7 @@ async function checkUserCredentials(email, password) {
   if (password.length <= 3) return false;
 
   const dataArr = await fetchUsers();
+  console.log(dataArr)
   for (let item of Object.values(dataArr)) {
     if (item.email === email && item.password === password) {
       return true;
@@ -80,6 +81,7 @@ loginBtn.addEventListener('click', async (e) => {
   let userNameInp = userNameInput.value;
 
   const OK = await checkUserCredentials(userNameInp, userPassInp);
+  console.log(OK)
   if (OK) {
     console.log("Check OK!!!");
     resetInputFields();
@@ -138,27 +140,27 @@ let isPasswordValue = false
 
 passwordValue.forEach(element => {
   element.addEventListener('input', () =>{
-    if (element.value > 0) {
+    if (element.value.length > 0) {
       isPasswordValue = true
     } else {
       isPasswordValue = false
     }
-    checkIconState();
+    passwordIcon.forEach((el) => {
+      checkIconState(element, el)
+    })
   })
 })
 
-passwordIcon.forEach(element => {
+passwordIcon.forEach((element) => {
   element.addEventListener("click", () => {
     isPasswordVisible = !isPasswordVisible 
     passwordValue.forEach((el) => {
-      console.log(element)
       checkIconState(el, element)
     })
   })
 });
 
 function checkIconState(input, icon) {
-  console.log(input, icon)
   if (isPasswordVisible) {
     input.type = "text";
   } else {
@@ -166,11 +168,11 @@ function checkIconState(input, icon) {
   };
 
   if (isPasswordValue) {
-        console.log("pointer")
+    console.log(isPasswordValue)
     icon.src = isPasswordVisible ? eyeOffIcon : eyeIcon;
     icon.style.cursor = "pointer";
   } else {
-    console.log("default")
+    console.log(isPasswordValue)
     icon.src = lockIcon;
     icon.style.cursor = "default";
   }
@@ -222,6 +224,6 @@ function setInputError(input, isValid, errMsg) {
 
 
 async function fetchUsers() {
-  const users = await getContactsFromDatabase();
+  const users = await getUsersFromDatabase();
   return users
 }
