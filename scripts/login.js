@@ -46,11 +46,29 @@ if(userPasswordInput.classList.contains('input_error_border')){
 }
 });
 
-loginBtn.addEventListener('click', (e) => {
+function isValidEmail(email) {
+  return /\S+@\S+\.\S+/.test(email);
+}
+
+async function checkUserCredentials(email, password) {
+  if (!isValidEmail(email)) return false;
+  if (password.length <= 3) return false;
+
+  const dataArr = await fetchUsers();
+  for (let item of Object.values(dataArr)) {
+    if (item.email === email && item.password === password) {
+      return true;
+    }
+  }
+  return false;
+}
+
+loginBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   let userPassInp = userPasswordInput.value;
   let userNameInp = userNameInput.value;
-  let OK = inputChecker(userNameInp, userPassInp);
+
+  const OK = await checkUserCredentials(userNameInp, userPassInp);
   if (OK) {
     console.log("Check OK!!!");
     resetInputFields();
@@ -59,50 +77,14 @@ loginBtn.addEventListener('click', (e) => {
     showError("Check your email and password. Please try again.");
     console.log("ERROR LOGIN FAIL!!!!")
   }
-})
-
-function inputChecker(userNameVal, userPassVal) {
-  return checkUsername(userNameVal) && checkUserPass(userPassVal);
-};
-
-async function checkUsername(value) {
-  console.log("das ist der username: " + value)
-  if (value.length <= 3) return false;
-  const dataArr = await fetchUsers();
-  console.log(dataArr);
-  for (let item of Object.values(dataArr)) {
-    console.log(item)
-    if (item.email === value) {
-      console.log("das hat geklappt")
-      return true;
-    }
-  }
-  console.log("nichts gefunden");
-  return false;
-}
-
-async function checkUserPass(value) {
-  console.log("das ist der userpassword: " + value)
-  if (value.length <= 3) return false;
-  const dataArr = await fetchUsers();
-  for (let item of Object.values(dataArr)) {
-    console.log(item.password)
-    if (item.password === value) {
-      console.log(value)
-      console.log("das password ist richtig")
-      return true;
-    }
-  }
-  console.log("das password ist flasch")
-  return false;
-}
+});
 
 function resetInputFields() {
   userPasswordInput.value = "";
   userNameInput.value = "";
 
-  userNameInput.classList.add('input_error_border');
-  userPasswordInput.classList.add('input_error_border');
+  userNameInput.classList.remove('input_error_border');
+  userPasswordInput.classList.remove('input_error_border');
 };
 
 toggleSignIn.addEventListener('click', toggleFormLoginSignin);
