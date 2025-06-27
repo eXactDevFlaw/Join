@@ -47,60 +47,59 @@
         <div class="input_error"></div>
       </div>
       <div class="input_icon_wrapper">
-        <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
+        <img src="./assets/icons/lock.svg" alt="lock" class="input_icon password_icon" id="password-icon" />
         <input type="password" placeholder="Password" name="userpassword" id="login-userpassword" required />
         <div id="error-wrapper" class="input_error"></div>
       </div>
-    </div>
-    <div class="login_btn_wrapper">
-      <button class="btn_dark login_btn">Log in</button>
-      <button class="btn_white guest_login_btn">Guest Log in</button>
-    </div>
-  </div>
-  <!-- SIGN-IN -->
-  <div id="signin-form" class="d_flex_center_column justify_evenly signin_main d_none">
-    <button id="signin-btn-back" class="signin_btn_back"><img src="./assets/icons/arrow_left.svg" alt=""
-        srcset=""></button>
-    <div class="login_head_wrapper">
-      <h1>Sign in</h1>
-      <div class="login_underline"></div>
-    </div>
-    <div class="d_grid gap_16">
-      <div class="d_flex_center_column">
-        <div class="input_icon_wrapper">
-          <img src="./assets/icons/person.svg" alt="name" class="input_icon" />
-          <input type="text" placeholder="Name" name="contactname" id="signin-contactname" required />
-          <div class="input_error"></div>
-        </div>
-        <div class="input_icon_wrapper">
-          <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
-          <input type="text" placeholder="Email" name="username" id="signin-username" required />
-          <div class="input_error"></div>
-        </div>
-        <div class="input_icon_wrapper">
-          <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
-          <input type="password" placeholder="Password" name="userpassword" id="signin-userpassword" required />
-          <div class="input_error"></div>
-        </div>
-        <div class="input_icon_wrapper">
-          <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
-          <input type="password" placeholder="Confirm Password" name="userpassword" id="signin-userpassword-check"
-            required />
-          <div class="input_error"></div>
-        </div>
-        <div class="d_flex_center_row margin_top_16px">
-          <label class="d_flex_ai_center curser_pointer" for="signin-btn-checkbox">
-            <input type="checkbox" id="signin-btn-checkbox" class="signin_btn_checkbox">
-            <img id="signin-btn-checkbox-img" class="signin_btn_checkbox_img" src="./assets/icons/checkbox.svg"
-              alt="empty checkbox">
-            <span class="signin_span">I accept the <a class="signin_pp_link"
-                href="./templates/privacyPolicy.html">Privacy Policy</a></span>
-          </label>
-        </div>
+      <div class="login_btn_wrapper">
+        <button class="btn_dark login_btn">Log in</button>
+        <button class="btn_white guest_login_btn">Guest Log in</button>
       </div>
     </div>
-    <button id="sign-up" class="btn_dark btn_sign_up">Sign in</button>
-  </div>
+    <!-- SIGN-IN -->
+    <div id="signin-form" class="d_flex_center_column justify_evenly signin_main d_none">
+      <button id="signin-btn-back" class="signin_btn_back"><img src="./assets/icons/arrow_left.svg" alt=""
+          srcset=""></button>
+      <div class="login_head_wrapper">
+        <h1>Sign in</h1>
+        <div class="login_underline"></div>
+      </div>
+      <div class="d_grid gap_16">
+        <div class="d_flex_center_column">
+          <div class="input_icon_wrapper">
+            <img src="./assets/icons/person.svg" alt="name" class="input_icon" />
+            <input type="text" placeholder="Name" name="contactname" id="signin-contactname" required />
+            <div class="input_error"></div>
+          </div>
+          <div class="input_icon_wrapper">
+            <img src="./assets/icons/mail.svg" alt="mail" class="input_icon" />
+            <input type="text" placeholder="Email" name="username" id="signin-username" required />
+            <div class="input_error"></div>
+          </div>
+          <div class="input_icon_wrapper">
+            <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
+            <input type="password" placeholder="Password" name="userpassword" id="signin-userpassword" required />
+            <div class="input_error"></div>
+          </div>
+          <div class="input_icon_wrapper">
+            <img src="./assets/icons/lock.svg" alt="lock" class="input_icon" />
+            <input type="password" placeholder="Confirm Password" name="userpassword" id="signin-userpassword-check"
+              required />
+            <div class="input_error"></div>
+          </div>
+          <div class="d_flex_center_row margin_top_16px">
+            <label class="d_flex_ai_center curser_pointer" for="signin-btn-checkbox">
+              <input type="checkbox" id="signin-btn-checkbox" class="signin_btn_checkbox">
+              <img id="signin-btn-checkbox-img" class="signin_btn_checkbox_img" src="./assets/icons/checkbox.svg"
+                alt="empty checkbox">
+              <span class="signin_span">I accept the <a class="signin_pp_link"
+                  href="./templates/privacyPolicy.html">Privacy Policy</a></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button id="sign-up" class="btn_dark btn_sign_up">Sign in</button>
+    </div>
 </body>
 <script src="./script.js"></script>
 <script src="./scripts/login.js"></script>

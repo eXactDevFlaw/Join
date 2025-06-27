@@ -7,8 +7,15 @@ const toggleLogIn = document.querySelector('#signin-btn-back');
 const togglePrivacyCheck = document.querySelector('#signin-btn-checkbox');
 const signupBtn = document.querySelector('#sign-up');
 const errorRef = document.getElementById('error-wrapper');
+const passwordInput = document.getElementById("login-userpassword");
+const passwordIcon = document.getElementById("password-icon");
+const lockIcon = "./assets/icons/lock.svg";
+const eyeIcon = "./assets/icons/visibility_off.svg";
+const eyeOffIcon = "./assets/icons/visibility.svg";
 
-window.addEventListener("DOMContentLoaded", function () {
+let isPasswordVisible = false;
+
+document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let hiddenItems = document.querySelectorAll(".fade_out");
 
@@ -17,6 +24,8 @@ window.addEventListener("DOMContentLoaded", function () {
       element.classList.remove("fade_out");
     });
   }, 1000);
+
+  updateIcon()
 });
 
 guestLoginBtn.addEventListener('click', (e) => {
@@ -31,19 +40,19 @@ function showError(message) {
 }
 
 userNameInput.addEventListener('input', () => {
-if(userNameInput.classList.contains('input_error_border')){
-  userNameInput.classList.remove('input_error_border');
-  userPasswordInput.classList.remove('input_error_border');
-  errorRef.innerText = "";
-}
+  if (userNameInput.classList.contains('input_error_border')) {
+    userNameInput.classList.remove('input_error_border');
+    userPasswordInput.classList.remove('input_error_border');
+    errorRef.innerText = "";
+  }
 });
 
 userPasswordInput.addEventListener('input', () => {
-if(userPasswordInput.classList.contains('input_error_border')){
-  userNameInput.classList.remove('input_error_border');
-  userPasswordInput.classList.remove('input_error_border');
-  errorRef.innerText = "";
-}
+  if (userPasswordInput.classList.contains('input_error_border')) {
+    userNameInput.classList.remove('input_error_border');
+    userPasswordInput.classList.remove('input_error_border');
+    errorRef.innerText = "";
+  }
 });
 
 function isValidEmail(email) {
@@ -85,6 +94,7 @@ function resetInputFields() {
 
   userNameInput.classList.remove('input_error_border');
   userPasswordInput.classList.remove('input_error_border');
+  updateIcon()
 };
 
 toggleSignIn.addEventListener('click', toggleFormLoginSignin);
@@ -110,6 +120,27 @@ togglePrivacyCheck.addEventListener('click', () => {
 signupBtn.addEventListener('click', () => {
   console.log("hier muss der push in die DB")
 })
+
+
+function updateIcon() {
+  if (passwordInput.value) {
+    passwordIcon.src = isPasswordVisible ? eyeOffIcon : eyeIcon;
+    passwordIcon.style.cursor = "pointer";
+  } else {
+    passwordIcon.src = lockIcon;
+    passwordIcon.style.cursor = "default";
+  }
+}
+
+passwordInput.addEventListener("input", updateIcon);
+
+passwordIcon.addEventListener("click", function () {
+  if (!passwordInput.value) return; // Nichts tun, wenn Feld leer
+
+  isPasswordVisible = !isPasswordVisible;
+  passwordInput.type = isPasswordVisible ? "text" : "password";
+  updateIcon();
+});
 
 async function fetchUsers() {
   const users = await getContactsFromDatabase();
