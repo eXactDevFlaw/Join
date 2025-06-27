@@ -74,6 +74,11 @@
     font-size: 20px;
 }
 
+.btn_sign_up_disable:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5; 
+}
+
 .login_bottom {
     height: 40px;
     display: flex;
@@ -84,7 +89,6 @@
     left: 50%;
     transform: translate(-50%);
 }
-
 
 .login_bottom a {
     display: flex;
@@ -123,7 +127,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 
 .login_btn {
     height: 50px;
@@ -190,7 +193,7 @@
     pointer-events: none;
 }
 
-.signin_pp_link{
+.signin_pp_link {
     color: rgba(41, 171, 226, 1);
 }
 
@@ -212,4 +215,8 @@
     height: 100vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.pw_input {
+    
 }

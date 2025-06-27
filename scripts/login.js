@@ -1,5 +1,6 @@
 const userNameInput = document.querySelector('#login-username');
 const userPasswordInput = document.querySelector('#login-userpassword');
+const passwordIcon = document.getElementById("password-icon");
 const loginBtn = document.querySelector('.login_btn');
 const guestLoginBtn = document.querySelector('.guest_login_btn');
 const toggleSignIn = document.querySelector('.btn_sign_up');
@@ -7,13 +8,21 @@ const toggleLogIn = document.querySelector('#signin-btn-back');
 const togglePrivacyCheck = document.querySelector('#signin-btn-checkbox');
 const signupBtn = document.querySelector('#sign-up');
 const errorRef = document.getElementById('error-wrapper');
-const passwordInput = document.getElementById("login-userpassword");
-const passwordIcon = document.getElementById("password-icon");
+const loginForm = document.getElementById("login-form");
+const signinForm = document.getElementById("signin-form");
+const signinContainer = document.getElementById("signin-container");
+const signinNameInput = document.getElementById("signin-contactname");
+const signinEmailInput = document.getElementById("signin-username");
+const signinPasswordInput = document.getElementById("signin-userpassword");
+const signinPasswordCheckInput = document.getElementById("signin-userpassword-check");
+const signinCheckbox = document.getElementById("signin-btn-checkbox");
+const passwordRef = document.querySelectorAll('.pw_input')
 const lockIcon = "./assets/icons/lock.svg";
 const eyeIcon = "./assets/icons/visibility_off.svg";
 const eyeOffIcon = "./assets/icons/visibility.svg";
 
 let isPasswordVisible = false;
+signupBtn.disabled = true;
 
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
@@ -33,10 +42,10 @@ guestLoginBtn.addEventListener('click', (e) => {
   window.location = "./summary.html";
 })
 
-function showError(message) {
+function showError(input, errMsg) {
   userNameInput.classList.add('input_error_border');
   userPasswordInput.classList.add('input_error_border');
-  errorRef.innerText = message;
+  errorRef.innerText = errMsg;
 }
 
 userNameInput.addEventListener('input', () => {
@@ -83,7 +92,7 @@ loginBtn.addEventListener('click', async (e) => {
     resetInputFields();
   } else {
     resetInputFields();
-    showError("Check your email and password. Please try again.");
+    showError(userPassInp, "Check your email and password. Please try again.");
     console.log("ERROR LOGIN FAIL!!!!")
   }
 });
@@ -101,9 +110,15 @@ toggleSignIn.addEventListener('click', toggleFormLoginSignin);
 toggleLogIn.addEventListener('click', toggleFormLoginSignin);
 
 function toggleFormLoginSignin() {
-  document.getElementById("login-form").classList.toggle("d_none");
-  document.getElementById("signin-form").classList.toggle("d_none");
-  document.getElementById("signin-container").classList.toggle("d_none");
+  if (loginForm.classList.contains("d_none")) {
+    loginForm.classList.remove("d_none");
+    signinForm.classList.add("d_none");
+    signinContainer.classList.remove("d_none");
+  } else {
+    loginForm.classList.add("d_none");
+    signinForm.classList.remove("d_none");
+    signinContainer.classList.add("d_none");
+  }
 }
 
 togglePrivacyCheck.addEventListener('click', () => {
@@ -121,26 +136,89 @@ signupBtn.addEventListener('click', () => {
   console.log("hier muss der push in die DB")
 })
 
+passwordRef.forEach(element => {
+    element.addEventListener("click", () => {
+      isPasswordVisible = !isPasswordVisible;
+      passwordRef.forEach((el) => {
+        checkIconState(el)
+      })
+    })
+});
 
-function updateIcon() {
-  if (passwordInput.value) {
-    passwordIcon.src = isPasswordVisible ? eyeOffIcon : eyeIcon;
-    passwordIcon.style.cursor = "pointer";
+function checkIconState(element) {
+  if (isPasswordVisible){
+    element.type = "text";
   } else {
-    passwordIcon.src = lockIcon;
-    passwordIcon.style.cursor = "default";
+    element.type = "password";
+  };
+};
+
+
+// function updateIcon() {
+//   if (userPasswordInput.value) {
+//     passwordIcon.src = isPasswordVisible ? eyeOffIcon : eyeIcon;
+//     passwordIcon.style.cursor = "pointer";
+//   } else {
+//     passwordIcon.src = lockIcon;
+//     passwordIcon.style.cursor = "default";
+//   }
+// }
+
+// passwordIcon.addEventListener("click", function () {
+//   if (!userPasswordInput.value) return;
+
+//   isPasswordVisible = !isPasswordVisible;
+//   userPasswordInput.type = isPasswordVisible ? "text" : "password";
+//   updateIcon();
+// });
+
+// Validierungsfunktion für das Signin-Formular
+function validateSigninForm() {
+  const nameValid = signinNameInput.value.trim().length > 0;
+  const emailValid = isValidEmail(signinEmailInput.value.trim());
+  const passwordValid = signinPasswordInput.value.length > 3;
+  const passwordMatch = signinPasswordInput.value === signinPasswordCheckInput.value && signinPasswordInput.value.length > 0;
+  const checkboxChecked = signinCheckbox.checked;
+
+  console.log(nameValid)
+  signupBtn.disabled = !(nameValid && emailValid && passwordValid && passwordMatch && checkboxChecked);
+  cursorEventSigupBtn();
+  console.log(nameValid, signinNameInput)
+  setInputError(signinNameInput, nameValid);
+  setInputError(signinEmailInput, emailValid, "This is not a valid e-mail adress.");
+  setInputError(signinPasswordInput, passwordValid);
+  setInputError(signinPasswordCheckInput, passwordMatch);
+}
+
+function cursorEventSigupBtn() {
+  if (signupBtn.disabled) {
+    signupBtn.style.cursor = "not-allowed";
+  } else {
+    signupBtn.style.cursor = "pointer";
   }
 }
 
-passwordInput.addEventListener("input", updateIcon);
+// Hilfsfunktion zum Setzen/Entfernen der Fehlerklasse
+function setInputError(input, isValid, errMsg) {
+  if (!isValid && input.value.length > 0) {
+    input.classList.add('input_error_border');
+  } else {
+    input.classList.remove('input_error_border');
+  }
+}
 
-passwordIcon.addEventListener("click", function () {
-  if (!passwordInput.value) return; // Nichts tun, wenn Feld leer
-
-  isPasswordVisible = !isPasswordVisible;
-  passwordInput.type = isPasswordVisible ? "text" : "password";
-  updateIcon();
+// Event Listener für Live-Validierung
+[
+  signinNameInput,
+  signinEmailInput,
+  signinPasswordInput,
+  signinPasswordCheckInput,
+  signinCheckbox
+].forEach(el => {
+  el.addEventListener('input', validateSigninForm);
+  el.addEventListener('change', validateSigninForm);
 });
+
 
 async function fetchUsers() {
   const users = await getContactsFromDatabase();
