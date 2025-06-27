@@ -44,3 +44,7 @@ function closeOverlay() {
 // Klick aufs halbdurchsichtige Overlay schließt das Modal
 document.getElementById("overlay")?.addEventListener("click", closeOverlay);
 
+// **Alles, was INSIDE des Containers angeklickt wird, darf nicht schließen**
+document.getElementById("overlay-container")?.addEventListener("click", e => {
+  e.stopPropagation();
+});
