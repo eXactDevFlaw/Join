@@ -75,8 +75,8 @@
 }
 
 .btn_sign_up_disable:disabled {
-  cursor: not-allowed !important;
-  opacity: 0.5; 
+    cursor: not-allowed !important;
+    opacity: 0.5;
 }
 
 .login_bottom {
@@ -208,15 +208,28 @@
 }
 
 .dialog_signin {
-    z-index: 3;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pw_input, .pw_input_value {
-    /*placeholder*/
+.show_dialog_signin {
+  animation: slideUpDialogSignin 0.5s cubic-bezier(.22,.68,.62,1.13) forwards;
+  opacity: 1;
+}
+.hide_dialog_signin {
+  opacity: 0;
+  transform: translateY(120%);
+}
+
+@keyframes slideUpDialogSignin {
+  from { transform: translateY(120%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
