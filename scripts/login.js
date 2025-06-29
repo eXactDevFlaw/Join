@@ -188,6 +188,8 @@ async function handleLogin(event) {
     userNameInput.value = "";
     clearLoginError();
     updatePwIcons();
+    isUserLogin = true;
+    //Hier muss dann die weiterlitung rein !
   } else {
     showLoginErrorBothRed("Check your email and password. Please try again.");
     userPasswordInput.value = "";

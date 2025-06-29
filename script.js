@@ -1,4 +1,4 @@
-const FIREBASE_URL ="https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
+const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Retrieves contacts from the database.
@@ -22,8 +22,8 @@ async function getContactsFromDatabase() {
  * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
  */
 async function getTasksFromDatabase() {
-    let tasks = await loadFromDatabase("tasks");
-    return tasks;
+  let tasks = await loadFromDatabase("tasks");
+  return tasks;
 }
 
 /**
@@ -110,7 +110,32 @@ function stopPropagation(event) {
 //     // fetchUsers();
 // }
 
+const navLogin = document.getElementById('#nav-login');
+const navSummary = document.getElementById('#nav-summary');
+const navAddTask = document.getElementById('#nav-add-task');
+const navBoard = document.getElementById('#nav-board');
+const navContacts = document.getElementById('#nav-contacts');
 
-function locationReload(){
+let isUserLogin = false;
+function renderNavbar() {
+  console.log(isUserLogin)
+  if (isUserLogin) {
+    console.log(isUserLogin)
+    navLogin.classList.add('d_none');
+    navSummary.classList.remove('d_none');
+    navAddTask.classList.remove('d_none');
+    navBoard.classList.remove('d_none');
+    navContacts.classList.remove('d_none');
+  } else {
+    navLogin.classList.remove('d_none');
+    navSummary.classList.add('d_none');
+    navAddTask.classList.add('d_none');
+    navBoard.classList.add('d_none');
+    navContacts.classList.add('d_none');
+  }
+}
+renderNavbar();
+
+function locationReload() {
   location.reload();
 }
