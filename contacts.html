@@ -27,7 +27,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-  <script src="script.js"></script>
+  <script type="module" src="./script.js"></script>
 
   <!-- 4. Hauptlogik (verwendet Funktionen aus database.js) -->
   <script type="module" src="./scripts/contacts.js"></script>
@@ -156,6 +156,7 @@
       <div id="overlay-content" class="overlay_content"></div>
     </div>
   </div>
+    <div id="toast-container" class="toast-container"></div>
 </body>
 
 </html>

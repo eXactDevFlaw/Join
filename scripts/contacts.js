@@ -42,11 +42,27 @@ export async function fetchContacts() {
 }
 
 /**
- * Create new contact
- * @param {object} contacts
+ * Create new contact in Firebase
+ * @param {{name:string,email:string,phone:string}} contact
+ * @returns {Promise<{name:string}>} Das Objekt mit dem neuen Key
  */
-export async function createContact(contacts) {
-  await postToDatabase(DB_PATH, contacts);
+export async function createContact(contact) {
+  // gebe das Ergebnis zurück, damit wir res.name bekommen
+  return await postToDatabase(DB_PATH, contact);
+}
+
+/**
+ * Zeigt einen kurzen Hinweistoast.
+ * @param {string} message
+ */
+function showToast(message) {
+  const container = document.getElementById("toast-container");
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = message;
+  container.appendChild(t);
+  // nach Animation entfernen
+  setTimeout(() => container.removeChild(t), 3000);
 }
 
 /**
@@ -130,6 +146,7 @@ export async function renderContacts() {
     grouped[L].forEach(c => {
       const item = document.createElement("div");
       item.className = "contact-list-item";
+      item.dataset.id = c.id;
       item.innerHTML = `
         <div class="contact_left">
           <div class="contact_circle">${getInitials(c.name)}</div>
@@ -289,6 +306,45 @@ export async function openEditContactOverlay(contact) {
       closeOverlay();
       hideContactDetailsArea();
       await renderContacts();
+    }
+  };
+}
+/**
+ * Öffnet das „Add Contact“ Overlay, speichert den neuen Kontakt
+ * und öffnet danach direkt seine Detail‑Ansicht.
+ * @async
+ * @function openAddContactOverlay
+ */
+export async function openAddContactOverlay() {
+  await loadFormIntoOverlay("./templates/new_contact.html");
+  slideInOverlay();
+
+  document.getElementById("addnew-contact-form").onsubmit = async e => {
+    e.preventDefault();
+    const contact = {
+      name: document.getElementById("contact-namefield").value,
+      email: document.getElementById("contact-emailfield").value,
+      phone: document.getElementById("contact-phonefield").value
+    };
+
+    try {
+      const res = await createContact(contact);  
+      const newId = res.name;                       // Firebase gibt den neuen Key zurück
+
+      closeOverlay();
+      await renderContacts();
+      showToast("Contact successfully created");
+
+      // sofort Detail‑Ansicht öffnen:
+      contact.id = newId;
+      const newItem = document.querySelector(
+        `.contact-list-item[data-id="${newId}"]`
+      );
+      if (newItem) showContactDetails(contact, newItem);
+
+    } catch (err) {
+      console.error("Create contact failed:", err);
+      showToast("Error creating contact");
     }
   };
 }

@@ -1,5 +1,4 @@
 const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
-
 /**
  * Retrieves contacts from the database.
  * @async
@@ -8,7 +7,7 @@ const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatab
  */
 async function getUsersFromDatabase() {
   let users = await loadFromDatabase("users");
-  console.log(typeof(users))
+  console.log(typeof (users))
   return users;
 }
 
@@ -37,27 +36,36 @@ async function getTasksFromDatabase() {
 async function loadFromDatabase(path) {
   let response = await fetch(FIREBASE_URL + path + ".json");
   let responseToJson = await response.json();
-  console.log(typeof(responseToJson));
+  console.log(typeof (responseToJson));
   return responseToJson;
 }
-
 /**
  * Posts new data to the specified path in the Firebase Realtime Database.
  * @async
- * @function
- * @param {string} path - The path where the data should be posted.
- * @param {object} data - The data to be posted.
- * @returns {Promise<object>} A promise that resolves to the response data from the database.
+ * @function postToDatabase
+ * @param {string} path – Firebase-Pfad (z. B. "contacts")
+ * @param {object} data – Das zu speichernde Objekt
+ * @returns {Promise<{name: string}>} – Das JSON mit dem generierten Key
  */
 async function postToDatabase(path, data) {
-  let response = await fetch(FIREBASE_URL + path + ".json", {
+  const res = await fetch(`${FIREBASE_URL}${path}.json`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return (responseToJson = await response.json());
+  if (!res.ok) throw new Error(`POST ${path} failed (${res.status})`);
+  return await res.json();  // <-- hier kommt { name: "-Mx123ABC" }
+}
+
+/**
+ * Legt einen neuen Kontakt an und gibt das gesamte Ergebnis zurück.
+ * @async
+ * @function createContact
+ * @param {object} contact
+ * @returns {Promise<{name: string}>}
+ */
+export async function createContact(contact) {
+  return await postToDatabase("contacts", contact);
 }
 
 /**
