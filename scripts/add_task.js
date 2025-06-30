@@ -1,53 +1,45 @@
 let task = [];
 let taskDetails = {};
 let users = {};
+let categorys = ["Technical Task", "User Story"];
 
-let category = ["Technical Task", "User Story"];
-
-
-
-
-async function init() {
+// async function init() {
 
 
 
-    users = await getContactsFromDatabase();
-    console.log(users)
+//     users = await getContactsFromDatabase();
+//     console.log(users)
 
-    Object.entries(users).forEach(daten => {
-        console.log(daten)
+//     Object.entries(users).forEach(daten => {
+//         console.log(daten)
 
-    });
+//     });
 
-    Object.keys(users).forEach(daten => {
-        console.log(daten)
+//     Object.keys(users).forEach(daten => {
+//         console.log(daten)
 
-    });
+//     });
 
-    Object.values(users).forEach(daten => {
-        console.log(daten)
+//     Object.values(users).forEach(daten => {
+//         console.log(daten)
 
-    });
+//     });
 
-    for (let index = 0; index < users.length; index++) {
-        console.log(users[index].name);
+//     for (let index = 0; index < users.length; index++) {
+//         console.log(users[index].name);
 
-    }
+//     }
 
 
-    for (const keys of Object.entries(users)) {
-        console.log(keys)
+//     for (const keys of Object.entries(users)) {
+//         console.log(keys)
 
-        for (const values of keys) {
-            console.log(values.name)
-        }
+//         for (const values of keys) {
+//             console.log(values.name)
+//         }
 
-    }
-}
-
-function test() {
-
-}
+//     }
+// }
 
 function openTaskOverlay() {
     document.getElementById("task-overlay").classList.remove("d_none");;
@@ -95,44 +87,42 @@ function setPriority(level) {
     console.log(taskDetails);
 }
 
-function openAssignedToDropdown() {
-
-}
-
 function createTask() {
     let title = document.getElementById('title-input-overlay').value;
     let description = document.getElementById('description-input-overlay').value;
     let dueDate = document.getElementById('datepicker').value;
     let assignedTo = document.getElementById('assigned-to-dropdown').value;
-    // let category;
+    let selectedCategory = document.getElementById("selected-category");
+    let category = selectedCategory.innerHTML
     // let subtasks;
 
     taskDetails.title = title;
     taskDetails.description = description;
     taskDetails.dueDate = dueDate;
     taskDetails.assignedTo = assignedTo;
+    taskDetails.category = category;
 
     console.log(taskDetails);
 
 }
 
 function openAssignedToDropdown() {
-  document.getElementById("contact-dropdown").classList.remove("d_none");
-  document.getElementById("arrow-drop-down").classList.remove("up");
-  renderContacts();
+  document.getElementById("contacts-list").classList.toggle("d_none");
+  document.getElementById("arrow-drop-down-assign").classList.toggle("up");
+//   renderContacts();
 }
 
-async function renderContacts(){
-    let newContacts = [];
-    contacts = await getContactsFromDatabase();
-    Object.values(contacts).forEach(daten => {
-        console.log(daten.name)
-        newContacts.push(daten.name);
-    });
-    
-    newContacts.sort();
-    console.log(newContacts);
-    
+function openCategoryDropdown(){
+    document.getElementById("category-list").classList.toggle("d_none");
+    document.getElementById("arrow-drop-down-category").classList.toggle("up");
+}
 
-    
+function setCategory(number){
+   let category = document.getElementById("category" + number).innerHTML;
+   let selectedCategory = document.getElementById("selected-category");
+   selectedCategory.innerHTML = category;
+    document.getElementById("category-list").classList.toggle("d_none");
+    document.getElementById("arrow-drop-down-category").classList.toggle("up");
+   console.log(selectedCategory);
+   
 }
