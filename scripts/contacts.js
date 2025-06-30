@@ -1,166 +1,309 @@
-(function () {
-  const DB_PATH = "users";
+/**
+ * Firebase Realtime Database contact utilities
+ * @module contacts
+ */
 
-  let contacts = [];
-  let lastSelectedItem = null;
-  const listEl = document.getElementById("contacts-list");
-  const detailBox = document.getElementById("contact-detail");
+const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
+const DB_PATH = "contacts";
 
-  function getInitials(name) {
-    return name.split(" ").map((p) => p[0].toUpperCase()).join("");
+let contacts = [];
+let lastSelectedItem = null;
+
+const listEl = document.getElementById("contacts-list");
+const detailBox = document.getElementById("contact-detail");
+
+/**
+ * Returns initials from a full name
+ * @param {string} name 
+ * @returns {string}
+ */
+function getInitials(name) {
+  return name.split(" ").map(p => p[0].toUpperCase()).join("");
+}
+
+/**
+ * Generates a color string from a string input
+ * @param {string} str
+ * @returns {string}
+ */
+function stringToColor(str) {
+  let hash = 0;
+  for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
+  return `hsl(${hash % 360}, 70%, 50%)`;
+}
+
+/**
+ * Fetch contacts from the database
+ * @returns {Promise<Array>} contacts
+ */
+export async function fetchContacts() {
+  const data = await loadFromDatabase(DB_PATH);
+  return Object.entries(data || {}).map(([id, entry]) => ({ id, ...entry }));
+}
+
+/**
+ * Create new contact
+ * @param {object} contacts
+ */
+export async function createContact(contacts) {
+  await postToDatabase(DB_PATH, contacts);
+}
+
+/**
+ * Update existing contact
+ * @param {string} id
+ * @param {object} data
+ */
+export async function updateContact(id, data) {
+  await updateOnDatabase(`${DB_PATH}/${id}`, data);
+}
+
+/**
+ * Delete contact
+ * @param {string} id
+ */
+export async function deleteContact(id) {
+  await deleteFromDatabase(`${DB_PATH}/${id}`);
+}
+
+/**
+ * Load JSON data from database
+ * @param {string} path
+ * @returns {Promise<object>}
+ */
+async function loadFromDatabase(path) {
+  const res = await fetch(`${FIREBASE_URL}${path}.json`);
+  return await res.json();
+}
+
+/**
+ * Post data to database
+ * @param {string} path
+ * @param {object} data
+ * @returns {Promise<object>}
+ */
+async function postToDatabase(path, data) {
+  const res = await fetch(`${FIREBASE_URL}${path}.json`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return await res.json();
+}
+
+/**
+ * Put (overwrite) data in database
+ * @param {string} path
+ * @param {object} data
+ * @returns {Promise<object>}
+ */
+async function updateOnDatabase(path, data) {
+  const res = await fetch(`${FIREBASE_URL}${path}.json`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return await res.json();
+}
+
+/**
+ * Delete data from database
+ * @param {string} path
+ * @returns {Promise<object>}
+ */
+async function deleteFromDatabase(path) {
+  const res = await fetch(`${FIREBASE_URL}${path}.json`, { method: "DELETE" });
+  return await res.json();
+}
+
+/**
+ * Renders contact list into DOM
+ */
+export async function renderContacts() {
+  contacts = await fetchContacts();
+  listEl.innerHTML = "";
+  const grouped = groupContacts();
+  for (const L in grouped) {
+    const section = document.createElement("div");
+    section.className = "contact_section";
+    section.innerHTML = `<div class="contact_initial">${L}</div>`;
+    grouped[L].forEach(c => {
+      const item = document.createElement("div");
+      item.className = "contact-list-item";
+      item.innerHTML = `
+        <div class="contact_left">
+          <div class="contact_circle">${getInitials(c.name)}</div>
+          <div class="contact_details">
+            <div class="contact_name">${c.name}</div>
+            <div class="contact_email">${c.email}</div>
+          </div>
+        </div>`;
+      item.querySelector(".contact_circle").style.backgroundColor = stringToColor(c.name);
+      item.addEventListener("click", () => showContactDetails(c, item));
+      section.appendChild(item);
+    });
+    listEl.appendChild(section);
   }
+}
 
-  function stringToColor(str) {
-    let hash = 0;
-    for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
-    return `hsl(${hash % 360}, 70%, 50%)`;
-  }
+/**
+ * Groups contacts by initial letter
+ * @returns {object}
+ */
+function groupContacts() {
+  return contacts.slice().sort((a, b) => a.name.localeCompare(b.name)).reduce((acc, c) => {
+    const L = c.name[0].toUpperCase();
+    (acc[L] ||= []).push(c);
+    return acc;
+  }, {});
+}
 
-  function groupContacts() {
-    const g = {};
-    contacts
-      .slice()
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .forEach((c) => {
-        const L = c.name[0].toUpperCase();
-        (g[L] ||= []).push(c);
-      });
-    return g;
-  }
+/**
+ * Shows contact details
+ * @param {object} contact 
+ * @param {HTMLElement} itemEl 
+ */
+export async function showContactDetails(contact, itemEl) {
+  if (lastSelectedItem) lastSelectedItem.classList.remove("contact_list_item_active");
+  itemEl.classList.add("contact_list_item_active");
+  lastSelectedItem = itemEl;
+  detailBox.classList.remove("d_none");
+  document.getElementById("detail-initials").textContent = getInitials(contact.name);
+  document.getElementById("detail-initials").style.backgroundColor = stringToColor(contact.name);
+  document.getElementById("detail-name").textContent = contact.name;
+  const emailEl = document.getElementById("detail-email");
+  emailEl.textContent = contact.email;
+  emailEl.href = `mailto:${contact.email}`;
+  document.getElementById("detail-phone").textContent = contact.phone;
+  setupEditDeleteButtons(contact);
+}
 
-  async function fetchContacts() {
-    const raw = await getContactsFromDatabase();
-    if (!raw) return [];
-    return Object.entries(raw).map(([id, data]) => ({ id, ...data }));
-  }
-
-  async function createContact(contact) {
-    await postToDatabase(DB_PATH, contact);
-  }
-
-  async function updateContact(id, data) {
-    await updateOnDatabase(`${DB_PATH}/${id}`, data);
-  }
-
-  async function deleteContact(id) {
-    await deleteFromDatabase(`${DB_PATH}/${id}`);
-  }
-
-  async function renderContacts() {
-    contacts = await fetchContacts();
-    listEl.innerHTML = "";
-    const groups = groupContacts();
-    for (const L in groups) {
-      const sec = document.createElement("div");
-      sec.className = "contact_section";
-      sec.innerHTML = `<div class="contact_initial">${L}</div>`;
-      groups[L].forEach((c) => {
-        const item = document.createElement("div");
-        item.className = "contact-list-item";
-        item.innerHTML = `
-          <div class="contact_left">
-            <div class="contact_circle">${getInitials(c.name)}</div>
-            <div class="contact_details">
-              <div class="contact_name">${c.name}</div>
-              <div class="contact_email">${c.email}</div>
-            </div>
-          </div>`;
-        item.querySelector(".contact_circle").style.backgroundColor = stringToColor(c.name);
-        item.addEventListener("click", () => showContactDetails(c, item));
-        sec.appendChild(item);
-      });
-      listEl.appendChild(sec);
-    }
-  }
-
-  window.showContactDetails = async function (contact, itemEl) {
-    if (lastSelectedItem)
-      lastSelectedItem.classList.remove("contact_list_item_active");
-    itemEl.classList.add("contact_list_item_active");
-    lastSelectedItem = itemEl;
-
-    detailBox.classList.remove("d_none");
-
-    document.getElementById("detail-initials").textContent = getInitials(contact.name);
-    document.getElementById("detail-initials").style.backgroundColor = stringToColor(contact.name);
-    document.getElementById("detail-name").textContent = contact.name;
-    const emailEl = document.getElementById("detail-email");
-    emailEl.textContent = contact.email;
-    emailEl.href = `mailto:${contact.email}`;
-    document.getElementById("detail-phone").textContent = contact.phone;
-
-    const editBtn = document.getElementById("btn-edit-detail");
-    if (editBtn) {
-      editBtn.onclick = async () => {
-        await loadFormIntoOverlay("./templates/edit_Contacts.html");
-        slideInOverlay();
-        document.getElementById("contact-namefield").value = contact.name;
-        document.getElementById("contact-emailfield").value = contact.email;
-        document.getElementById("contact-phonefield").value = contact.phone;
-        const initialsCircle = document.getElementById("edit-contact-initials");
-        initialsCircle.textContent = getInitials(contact.name);
-        initialsCircle.style.backgroundColor = stringToColor(contact.name);
-
-        document.getElementById("edit-contact-form").onsubmit = async (e) => {
-          e.preventDefault();
-          const updated = {
-            name: document.getElementById("contact-namefield").value,
-            email: document.getElementById("contact-emailfield").value,
-            phone: document.getElementById("contact-phonefield").value,
-          };
-          await updateContact(contact.id, updated);
-          closeOverlay();
-          await renderContacts();
-        };
-
-        const deleteBtn = document.querySelector(".btn_clear");
-        if (deleteBtn) {
-          deleteBtn.onclick = async () => {
-            if (confirm("Kontakt wirklich löschen?")) {
-              await deleteContact(contact.id);
-              closeOverlay();
-              hideContactDetailsArea();
-              await renderContacts();
-            }
-          };
-        }
-      };
-    }
-
-    const deleteBtn = document.getElementById("btn-delete-detail");
-    if (deleteBtn) {
-      deleteBtn.onclick = async () => {
-        if (confirm("Kontakt wirklich löschen?")) {
-          await deleteContact(contact.id);
-          detailBox.classList.add("d_none");
-          await renderContacts();
-        }
-      };
-    }
-  };
-
-  window.openAddContactOverlay = async function () {
-    await loadFormIntoOverlay("./templates/new_contact.html");
+/**
+ * Binds the click on the pencil to open the edit-overlay and handle save.
+ * @param {{id:string,name:string,email:string,phone:string}} c
+ */
+function bindEditButton(c) {
+  const btn = document.getElementById("btn-edit-detail");
+  if (!btn) return;
+  btn.onclick = async () => {
+    await loadFormIntoOverlay("./templates/edit_Contacts.html");
     slideInOverlay();
-    document.getElementById("addnew-contact-form").onsubmit = async () => {
-      const contact = {
+    ["name", "email", "phone"].forEach(f =>
+      document.getElementById(`contact-${f}field`).value = c[f]
+    );
+    const ic = document.getElementById("edit-contact-initials");
+    ic.textContent = getInitials(c.name);
+    ic.style.backgroundColor = stringToColor(c.name);
+    document.getElementById("edit-contact-form").onsubmit = async e => {
+      e.preventDefault();
+      await updateContact(c.id, {
         name: document.getElementById("contact-namefield").value,
         email: document.getElementById("contact-emailfield").value,
-        phone: document.getElementById("contact-phonefield").value,
-      };
-      await createContact(contact);
+        phone: document.getElementById("contact-phonefield").value
+      });
       closeOverlay();
       await renderContacts();
     };
   };
+}
 
-  window.hideContactDetailsArea = function () {
-    detailBox.classList.add("d_none");
-    if (lastSelectedItem) {
-      lastSelectedItem.classList.remove("contact_list_item_active");
-      lastSelectedItem = null;
-    }
+/**
+ * Binds the delete button inside the edit-overlay.
+ * @param {{id:string}} c
+ */
+function bindOverlayDelete(c) {
+  const btn = document.querySelector(".btn_clear");
+  if (!btn) return;
+  btn.onclick = async () => {
+    if (!confirm("Kontakt wirklich löschen?")) return;
+    await deleteContact(c.id);
+    closeOverlay();
+    hideContactDetailsArea();
+    await renderContacts();
+  };
+}
+
+/**
+ * Binds the delete icon in the detail pane (outside overlay).
+ * @param {{id:string}} c
+ */
+function bindDetailDelete(c) {
+  const btn = document.getElementById("btn-delete-detail");
+  if (!btn) return;
+  btn.onclick = async () => {
+    if (!confirm("Kontakt wirklich löschen?")) return;
+    await deleteContact(c.id);
+    document.getElementById("contact-detail").classList.add("d_none");
+    await renderContacts();
+  };
+}
+
+/**
+ * Sets up edit & delete for a given contact.
+ * @param {{id:string,name:string,email:string,phone:string}} c
+ */
+function setupEditDeleteButtons(c) {
+  bindEditButton(c);
+  bindOverlayDelete(c);
+  bindDetailDelete(c);
+}
+
+/**
+ * Opens the edit-contact overlay, pre-fills the form and binds save/delete handlers.
+ * @param {{ id: string, name: string, email: string, phone: string }} contact
+ */
+export async function openEditContactOverlay(contact) {
+  // 1) Template laden und einblenden
+  await loadFormIntoOverlay("./templates/edit_contacts.html");
+  slideInOverlay();
+
+  // 2) Felder vorausfüllen
+  document.getElementById("contact-namefield").value = contact.name;
+  document.getElementById("contact-emailfield").value = contact.email;
+  document.getElementById("contact-phonefield").value = contact.phone;
+
+  // 3) Initialen-Kreis setzen
+  const initialsCircle = document.getElementById("edit-contact-initials");
+  initialsCircle.textContent = getInitials(contact.name);
+  initialsCircle.style.backgroundColor = stringToColor(contact.name);
+
+  // 4) Save‑Button binden (in Deinem HTML: <button id="btnSaveContact">Save</button>)
+  const saveBtn = document.getElementById("btnSaveContact");
+  saveBtn.onclick = async (e) => {
+    e.preventDefault();
+    const updated = {
+      name: document.getElementById("contact-namefield").value,
+      email: document.getElementById("contact-emailfield").value,
+      phone: document.getElementById("contact-phonefield").value,
+    };
+    await updateContact(contact.id, updated);
+    closeOverlay();
+    await renderContacts();
   };
 
-  window.addEventListener("DOMContentLoaded", renderContacts);
-})();
+  // 5) Delete‑Button binden (in Deinem HTML: <button id="btnDeleteContact">Delete</button>)
+  const deleteBtn = document.getElementById("btnDeleteContact");
+  deleteBtn.onclick = async () => {
+    if (confirm("Kontakt wirklich löschen?")) {
+      await deleteContact(contact.id);
+      closeOverlay();
+      hideContactDetailsArea();
+      await renderContacts();
+    }
+  };
+}
+
+/**
+ * Hides contact detail panel
+ */
+export function hideContactDetailsArea() {
+  detailBox.classList.add("d_none");
+  if (lastSelectedItem) {
+    lastSelectedItem.classList.remove("contact_list_item_active");
+    lastSelectedItem = null;
+  }
+}
+
+window.addEventListener("DOMContentLoaded", renderContacts);
+// Exponiere das Overlay-Öffnen global:
+window.openAddContactOverlay = openAddContactOverlay;
