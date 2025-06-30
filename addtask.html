@@ -142,27 +142,31 @@
               <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
                 id="assigned-to-dropdown" required />
               <div class="input_icon_container z_3 d_flex_center">
-                <div class="arrow_drop up" id="arrow-drop-down">
+                <div class="arrow_drop up" id="arrow-drop-down-assign">
                   <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
                 </div>
               </div>
             </div>
           </div>
-          <div class="contact_dropdown d_none" id="contact-dropdown"></div>
+          <div class="dropdown d_none" id="contacts-list"></div>
         </div>
         <div class="title_input margin_0 gap_8">
           <div class="d_flex_center_row justify_start margin_0">
             <p class="margin_0">Category</p>
             <p class="red_star margin_0">*</p>
           </div>
-          <div class="input_icon_wrapper width_100 d_flex_center margin_0" onclick="openCategoryDropdown()">
-            <div class="select_category_dropdown d_flex_center justify_between">
-              <div class="margin_0 task_category">Select task category</div>
+          <div class="input_icon_wrapper width_100 d_flex_center_column margin_0">
+            <div class="select_category_dropdown d_flex_center justify_between z_3" onclick="openCategoryDropdown()">
+              <div class="margin_0 task_category" id="selected-category">Select task category</div>
               <div class="input_icon_container d_flex_center">
-                <div class="arrow_drop up margin_0" id="arrow-drop-down">
+                <div class="arrow_drop up margin_0" id="arrow-drop-down-category">
                   <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
                 </div>
               </div>
+            </div>
+            <div class="dropdown d_none" id="category-list">
+              <div class="category" id="category1" onclick="setCategory('1')">Technical Task</div>
+              <div class="category" id="category2" onclick="setCategory('2')">User Story</div> 
             </div>
           </div>
         </div>
@@ -197,6 +201,7 @@
   </main>
 </body>
 <script src="./script.js"></script>
+<script src="./scripts/contacts.js"></script>
 <script src="./scripts/add_task.js"></script>
 
 </html>
