@@ -180,14 +180,16 @@
             </div>
             <div class="add_or_remove d_flex_center_row gap_4 d_none">
               <div class="input_icon_container position_unset">
-                <img src="./assets/icons/subtask_close.svg" alt="subtask_close">
+                <img src="./assets/icons/subtask_close.svg" alt="subtask_close" onclick="clearSubTaskValue()">
               </div>
               <img src="./assets/icons/vector_3.svg" alt="vector">
               <div class="input_icon_container position_unset">
-                <img src="./assets/icons/subtask_check.svg" alt="subtask_check">
+                <img src="./assets/icons/subtask_check.svg" alt="subtask_check" onclick="addNewSubTask()">
               </div>
             </div>
             <input type="text" placeholder="Add new subtasks" id="add-subtasks" required onclick="activateSubtask()" />
+          </div>
+          <div class="added_subtask_list margin_0">
           </div>
         </div>
       </div>
