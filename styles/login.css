@@ -164,6 +164,14 @@
     height: 32px;
     width: 32px;
     object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signin_btn_back:hover{
+    border-radius: 50%;
+    background-color: rgba(238, 238, 238, 1);
 }
 
 .signin_btn_checkbox {
@@ -194,6 +202,10 @@
 }
 
 .signin_pp_link {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    height: 30px;
     color: rgba(41, 171, 226, 1);
 }
 
@@ -203,6 +215,9 @@
 }
 
 .signin_span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     color: rgba(168, 168, 168, 1);
 
 }

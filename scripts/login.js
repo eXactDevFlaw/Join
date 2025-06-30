@@ -1,3 +1,7 @@
+/**
+ * Selects const that are used for workflow.
+ * @type {NodeListOf<HTMLImageElement>}
+ */
 const pwIcons = document.querySelectorAll('.pw_icon');
 const pwInputs = document.querySelectorAll('.pw_input');
 const lockIcon = "./assets/icons/lock.svg";
@@ -21,6 +25,11 @@ const toggleLogIn = document.querySelector('#signin-btn-back');
 const togglePrivacyCheck = document.querySelector('#signin-btn-checkbox');
 let isPasswordVisible = false;
 
+/**
+ * Displays an error message for a given input field.
+ * @param {HTMLInputElement} input - The input element.
+ * @param {string} message - The error message to display.
+ */
 function showInputError(input, message) {
   const wrapper = input.closest('.input_icon_wrapper');
   let errorDiv = wrapper ? wrapper.querySelector('.input_error') : null;
@@ -29,6 +38,10 @@ function showInputError(input, message) {
   updatePwIcons();
 }
 
+/**
+ * Clears the error message from a given input field.
+ * @param {HTMLInputElement} input - The input element.
+ */
 function clearInputError(input) {
   const wrapper = input.closest('.input_icon_wrapper');
   let errorDiv = wrapper ? wrapper.querySelector('.input_error') : null;
@@ -37,11 +50,18 @@ function clearInputError(input) {
   updatePwIcons();
 }
 
+/**
+ * Enables or disables the sign-up button.
+ * @param {boolean} isDisabled - If true, disables the button.
+ */
 function setSignupBtnState(isDisabled) {
   signupBtn.disabled = isDisabled;
   signupBtn.style.cursor = isDisabled ? "not-allowed" : "pointer";
 }
 
+/**
+ * Updates all password icons based on the current state of the input fields.
+ */
 function updatePwIcons() {
   for (let i = 0; i < pwInputs.length; i++) {
     if (pwInputs[i].value.length === 0) {
@@ -61,6 +81,10 @@ function updatePwIcons() {
   }
 }
 
+/**
+ * Displays a login error and marks both login fields as erroneous.
+ * @param {string} message - The error message to display.
+ */
 function showLoginErrorBothRed(message) {
   userNameInput.classList.add('input_error_border');
   userPasswordInput.classList.add('input_error_border');
@@ -69,6 +93,11 @@ function showLoginErrorBothRed(message) {
   updatePwIcons();
 }
 
+/**
+ * Sets the error message for a specific login input field.
+ * @param {HTMLInputElement} input - The input element.
+ * @param {string} message - The error message to display.
+ */
 function setLoginErrorMessage(input, message) {
   const wrapper = input.closest('.input_icon_wrapper');
   if (wrapper) {
@@ -77,16 +106,29 @@ function setLoginErrorMessage(input, message) {
   }
 }
 
+/**
+ * Clears login errors from both login fields.
+ */
 function clearLoginError() {
   clearInputError(userNameInput);
   clearInputError(userPasswordInput);
 }
 
+/**
+ * Validates if a given email is in a valid format.
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} True if the email is valid.
+ */
 function isValidEmail(email) {
   let trimmedEmail = email.trim();
   return checkEmailAt(trimmedEmail) && checkEmailDot(trimmedEmail) && checkEmailNoSpace(trimmedEmail);
 }
 
+/**
+ * Checks if the email contains a single @ and it's not the first character.
+ * @param {string} email - The email address.
+ * @returns {boolean}
+ */
 function checkEmailAt(email) {
   const atIndex = email.indexOf('@');
   if (atIndex === -1) return false;
@@ -96,6 +138,11 @@ function checkEmailAt(email) {
   return true;
 }
 
+/**
+ * Checks if the email contains a dot after the @.
+ * @param {string} email - The email address.
+ * @returns {boolean}
+ */
 function checkEmailDot(email) {
   const atIndex = email.indexOf('@');
   const dotIndex = email.indexOf('.', atIndex);
@@ -103,10 +150,20 @@ function checkEmailDot(email) {
   return true;
 }
 
+/**
+ * Checks if the email does not contain spaces.
+ * @param {string} email - The email address.
+ * @returns {boolean}
+ */
 function checkEmailNoSpace(email) {
   return !email.includes(' ');
 }
 
+/**
+ * Checks if a given string is a valid full name (first and last name).
+ * @param {string} name - The full name.
+ * @returns {boolean}
+ */
 function isValidFullName(name) {
   let trimmedName = name.trim();
   const parts = trimmedName.split(/\s+/);
@@ -114,6 +171,11 @@ function isValidFullName(name) {
   return checkNameParts(parts);
 }
 
+/**
+ * Checks if all name parts contain only letters (including German umlauts and ß).
+ * @param {string[]} parts - The name parts.
+ * @returns {boolean}
+ */
 function checkNameParts(parts) {
   const letterRegex = /^[A-Za-zÄÖÜäöüß]+$/;
   for (let i = 0; i < parts.length; i++) {
@@ -122,6 +184,11 @@ function checkNameParts(parts) {
   return true;
 }
 
+/**
+ * Formats a full name (capitalizes first letter of each part).
+ * @param {string} name - The full name.
+ * @returns {string}
+ */
 function formatFullName(name) {
   let trimmedName = name.trim();
   let nameParts = trimmedName.split(/\s+/);
@@ -134,6 +201,10 @@ function formatFullName(name) {
   return formattedParts.join(' ');
 }
 
+/**
+ * Checks if both password fields match and are not empty.
+ * @returns {boolean}
+ */
 function doPasswordsMatch() {
   if (!signinPasswordInput || !signinPasswordCheckInput) return false;
   if (signinPasswordInput.value !== signinPasswordCheckInput.value) return false;
@@ -141,6 +212,12 @@ function doPasswordsMatch() {
   return true;
 }
 
+/**
+ * Asynchronously checks user credentials against the database.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @returns {Promise<boolean>}
+ */
 async function checkUserCredentials(email, password) {
   if (!isValidEmail(email)) return false;
   if (password.length <= 3) return false;
@@ -148,6 +225,13 @@ async function checkUserCredentials(email, password) {
   return findMatchingUser(users, email, password);
 }
 
+/**
+ * Finds a matching user in the users object.
+ * @param {Object} users - The users object.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @returns {boolean}
+ */
 function findMatchingUser(users, email, password) {
   const userValues = Object.values(users);
   for (let i = 0; i < userValues.length; i++) {
@@ -158,6 +242,11 @@ function findMatchingUser(users, email, password) {
   return false;
 }
 
+/**
+ * Asynchronously checks if an email is already registered.
+ * @param {string} email - The email to check.
+ * @returns {Promise<boolean>}
+ */
 async function emailExists(email) {
   const users = await fetchUsers();
   const userValues = Object.values(users);
@@ -167,10 +256,17 @@ async function emailExists(email) {
   return false;
 }
 
+/**
+ * Displays an error indicating the email is already in use.
+ */
 function showEmailExistsError() {
   showInputError(signinEmailInput, "Email already in use.");
 }
 
+/**
+ * Handles the login process on form submission.
+ * @param {Event} event - The form submit event.
+ */
 async function handleLogin(event) {
   event.preventDefault();
   clearLoginError();
@@ -189,7 +285,7 @@ async function handleLogin(event) {
     clearLoginError();
     updatePwIcons();
     isUserLogin = true;
-    //Hier muss dann die weiterlitung rein !
+    // Place redirect logic here if needed!
   } else {
     showLoginErrorBothRed("Check your email and password. Please try again.");
     userPasswordInput.value = "";
@@ -198,6 +294,9 @@ async function handleLogin(event) {
   }
 }
 
+/**
+ * Validates the sign-in (registration) form and displays corresponding errors.
+ */
 function validateSigninForm() {
   let nameValid = isValidFullName(signinNameInput.value);
   let emailValid = isValidEmail(signinEmailInput.value.trim());
@@ -205,186 +304,21 @@ function validateSigninForm() {
   let passwordMatch = doPasswordsMatch();
   let checkboxChecked = signinCheckbox.checked;
   showInputErrorIfInvalid(signinNameInput, nameValid, "Please enter your first and last name.");
-  showInputErrorIfInvalid(signinEmailInput, emailValid, "Please enter a viald email-adress.");
-  showInputErrorIfInvalid(signinPasswordInput, passwordValid, "Please enter atleast 4 letters.");
-  showInputErrorIfInvalid(signinPasswordCheckInput, passwordMatch, "The password didn't match.");
+  showInputErrorIfInvalid(signinEmailInput, emailValid, "Please enter a valid email address.");
+  showInputErrorIfInvalid(signinPasswordInput, passwordValid, "Please enter at least 4 characters.");
+  showInputErrorIfInvalid(signinPasswordCheckInput, passwordMatch, "The passwords did not match.");
   let disabled = !(nameValid && emailValid && passwordValid && passwordMatch && checkboxChecked);
   setSignupBtnState(disabled);
 }
 
+/**
+ * Shows or clears input error based on validation state.
+ * @param {HTMLInputElement} input - The input element.
+ * @param {boolean} isValid - Whether the input is valid.
+ * @param {string} msg - The error message to display if invalid.
+ */
 function showInputErrorIfInvalid(input, isValid, msg) {
   if (!input) return;
   if (!isValid && input.value.length > 0) showInputError(input, msg);
   else clearInputError(input);
 }
-
-async function handleSignup(event) {
-  event.preventDefault();
-  validateSigninForm();
-  if (signupBtn.disabled) return;
-  const name = formatFullName(signinNameInput.value);
-  const email = signinEmailInput.value.trim();
-  const password = signinPasswordInput.value;
-
-  if (await emailExists(email)) {
-    showEmailExistsError();
-    return;
-  }
-
-  const userData = { name, email, password };
-  const contactData = { name, email };
-  await saveUserAndContact(userData, contactData);
-  showSigninSuccessDialog();
-}
-
-function showSigninSuccessDialog() {
-  if (!dialogSignin) return;
-  dialogSignin.classList.remove("d_none");
-  const innerBox = document.getElementById('dialog_signin_inner');
-  if (innerBox) {
-    innerBox.classList.remove('hide_dialog_signin');
-    innerBox.classList.add('show_dialog_signin');
-  }
-  clearSigninInputs();
-  setTimeout(function () {
-    hideSigninSuccessDialog();
-    showLoginAfterSignin();
-  }, 1800);
-}
-
-function hideSigninSuccessDialog() {
-  if (!dialogSignin) return;
-  dialogSignin.classList.add("d_none");
-  const innerBox = document.getElementById('dialog_signin_inner');
-  if (innerBox) {
-    innerBox.classList.remove('show_dialog_signin');
-    innerBox.classList.add('hide_dialog_signin');
-  }
-}
-
-function showLoginAfterSignin() {
-  const loginForm = document.getElementById("login-form");
-  if (!loginForm || !signinForm || !signinContainer) return;
-  loginForm.classList.remove("d_none");
-  signinForm.classList.add("d_none");
-  signinContainer.classList.remove("d_none");
-}
-
-function clearSigninInputs() {
-  if (signinNameInput) signinNameInput.value = "";
-  if (signinEmailInput) signinEmailInput.value = "";
-  if (signinPasswordInput) signinPasswordInput.value = "";
-  if (signinPasswordCheckInput) signinPasswordCheckInput.value = "";
-  if (signinCheckbox) signinCheckbox.checked = false;
-}
-
-
-async function fetchUsers() {
-  return await getUsersFromDatabase();
-}
-async function saveUserAndContact(userData, contactData) {
-  await postToDatabase('/users', userData);
-  await postToDatabase('/contacts', contactData);
-}
-
-function setupPasswordToggle() {
-  for (let i = 0; i < pwIcons.length; i++) {
-    pwIcons[i].addEventListener('click', function () {
-      if (pwInputs[i].value.length === 0) return;
-      isPasswordVisible = !isPasswordVisible;
-      updatePwIcons();
-    });
-  }
-  updatePwIcons();
-}
-
-function runFadeInOut() {
-  setTimeout(function () {
-    const elements = document.querySelectorAll(".fade_out");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].classList.add("fade_in");
-      elements[i].classList.remove("fade_out");
-    }
-  }, 1000);
-}
-
-function setupLoginListeners() {
-  if (loginBtn) loginBtn.addEventListener('click', handleLogin);
-  if (guestLoginBtn) {
-    guestLoginBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.location = "./summary.html";
-    });
-  }
-  if (userNameInput) userNameInput.addEventListener('input', clearLoginError);
-  if (userPasswordInput) userPasswordInput.addEventListener('input', function () {
-    clearLoginError();
-    updatePwIcons();
-  });
-}
-
-function setupSigninListeners() {
-  if (signupBtn) signupBtn.addEventListener('click', handleSignup);
-  [
-    signinNameInput,
-    signinEmailInput,
-    signinPasswordInput,
-    signinPasswordCheckInput,
-    signinCheckbox
-  ].forEach(function (el) {
-    if (el) {
-      el.addEventListener('input', function () {
-        validateSigninForm();
-        updatePwIcons();
-      });
-      el.addEventListener('change', function () {
-        validateSigninForm();
-        updatePwIcons();
-      });
-    }
-  });
-}
-
-function setupToggleListeners() {
-  if (toggleSignIn && toggleLogIn) {
-    toggleSignIn.addEventListener('click', toggleFormLoginSignin);
-    toggleLogIn.addEventListener('click', toggleFormLoginSignin);
-  }
-  function toggleFormLoginSignin() {
-    const loginForm = document.getElementById("login-form");
-    if (!loginForm || !signinForm || !signinContainer) return;
-    const loginHidden = loginForm.classList.contains("d_none");
-    if (!loginHidden) {
-      loginForm.classList.add("d_none");
-      signinForm.classList.remove("d_none");
-      signinContainer.classList.add("d_none");
-    } else {
-      loginForm.classList.remove("d_none");
-      signinForm.classList.add("d_none");
-      signinContainer.classList.remove("d_none");
-    }
-  }
-}
-
-function setupPrivacyCheckboxListener() {
-  if (togglePrivacyCheck) {
-    togglePrivacyCheck.addEventListener('click', function () {
-      let btnRef = document.getElementById("signin-btn-checkbox");
-      let imgRef = document.getElementById("signin-btn-checkbox-img");
-      if (btnRef && imgRef) {
-        imgRef.src = btnRef.checked
-          ? "./assets/icons/checkbox_active.svg"
-          : "./assets/icons/checkbox.svg";
-      }
-    });
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  runFadeInOut();
-  setupLoginListeners();
-  setupSigninListeners();
-  setupToggleListeners();
-  setupPrivacyCheckboxListener();
-  setupPasswordToggle();
-});

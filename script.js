@@ -8,6 +8,7 @@ const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatab
  */
 async function getUsersFromDatabase() {
   let users = await loadFromDatabase("users");
+  console.log(typeof(users))
   return users;
 }
 
@@ -36,6 +37,7 @@ async function getTasksFromDatabase() {
 async function loadFromDatabase(path) {
   let response = await fetch(FIREBASE_URL + path + ".json");
   let responseToJson = await response.json();
+  console.log(typeof(responseToJson));
   return responseToJson;
 }
 
@@ -119,7 +121,7 @@ const navContacts = document.getElementById('#nav-contacts');
 let isUserLogin = false;
 function renderNavbar() {
   console.log(isUserLogin)
-  if (isUserLogin) {
+  if (!isUserLogin) {
     console.log(isUserLogin)
     navLogin.classList.add('d_none');
     navSummary.classList.remove('d_none');
@@ -127,6 +129,7 @@ function renderNavbar() {
     navBoard.classList.remove('d_none');
     navContacts.classList.remove('d_none');
   } else {
+    console(isUserLogin)
     navLogin.classList.remove('d_none');
     navSummary.classList.add('d_none');
     navAddTask.classList.add('d_none');
