@@ -315,6 +315,10 @@ button {
     justify-content: flex-start;
 }
 
+.nav_login a {
+    max-height: fit-content;
+}
+
 /* .link_container{
     width: 133px;
 } */

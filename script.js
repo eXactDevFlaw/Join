@@ -1,12 +1,13 @@
 /**
- * 
+ * Selects const that are used for workflow.
+ * @type {NodeListOf<HTMLImageElement>}
  */
 const navLogin = document.getElementById('nav-login');
-const navSummary = document.getElementById('nav-summary');
-const navAddTask = document.getElementById('nav-add-task');
-const navBoard = document.getElementById('nav-board');
-const navContacts = document.getElementById('nav-contacts');
+const navBar = document.querySelector('.nav_items');
+const btnLogOut = document.getElementById('btn-log-out');
+const fadeOutRef = document.querySelectorAll('.fade_out');
 const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
+let isUserLogin = false;
 /**
  * Retrieves contacts from the database.
  * @async
@@ -72,7 +73,7 @@ async function postToDatabase(path, data) {
  * @param {object} contact
  * @returns {Promise<{name: string}>}
  */
-export async function createContact(contact) {
+async function createContact(contact) {
   return await postToDatabase("contacts", contact);
 }
 
@@ -115,37 +116,26 @@ function toggleLogoutOverlay() {
     .classList.toggle("d_none");
 }
 
-// function closeLogoutOverlay(){
-//     document.getElementById("overlay-small-logout-win").classList.add("d_none");
-// }
+if(btnLogOut){
+  btnLogOut.addEventListener('click', () => {
+    isUserLogin = false;
+    window.location = "./index.html";
+  })
+};
 
 function stopPropagation(event) {
   event.stopPropagation();
 }
 
-// function init() {
-//     // getContactsFromDatabase()
-//     // fetchUsers();
-// }
-
-
-let isUserLogin = true;
 function renderNavbar() {
-  console.log(isUserLogin)
-  if (!isUserLogin) {
+  if (isUserLogin && navLogin && navBar) {
     console.log(isUserLogin)
     navLogin.classList.add('d_none');
-    navSummary.classList.remove('d_none');
-    navAddTask.classList.remove('d_none');
-    navBoard.classList.remove('d_none');
-    navContacts.classList.remove('d_none');
-  } else {
+    navBar.classList.remove('d_none');
+  } else if (!isUserLogin && navLogin && navBar) {
     console.log(isUserLogin)
     navLogin.classList.remove('d_none');
-    navSummary.classList.add('d_none');
-    navAddTask.classList.add('d_none');
-    navBoard.classList.add('d_none');
-    navContacts.classList.add('d_none');
+    navBar.classList.add('d_none');
   }
 }
 renderNavbar();

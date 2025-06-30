@@ -280,6 +280,7 @@ async function handleLogin(event) {
   }
   const isOk = await checkUserCredentials(email, password);
   if (isOk) {
+    console.log(isUserLogin)
     userPasswordInput.value = "";
     userNameInput.value = "";
     clearLoginError();
@@ -287,6 +288,7 @@ async function handleLogin(event) {
     isUserLogin = true;
     // Place redirect logic here if needed!
   } else {
+    console.log(isUserLogin)
     showLoginErrorBothRed("Check your email and password. Please try again.");
     userPasswordInput.value = "";
     userNameInput.value = "";
