@@ -325,3 +325,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   background-color: rgba(209, 209, 209, 1);;
  }
+
+ .add_or_remove{
+  position: absolute;
+  right: 10px;
+ }
+
+ .add_or_remove img{
+  height: 24px;
+ }
+

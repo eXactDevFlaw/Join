@@ -2,6 +2,7 @@ let task = [];
 let taskDetails = {};
 let users = {};
 let categorys = ["Technical Task", "User Story"];
+let subtasks = [];
 
 // async function init() {
 
@@ -124,5 +125,16 @@ function setCategory(number){
     document.getElementById("category-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-category").classList.toggle("up");
    console.log(selectedCategory);
-   
+}
+
+function activateSubtask(){
+    document.querySelector(".add").classList.add("d_none");
+    document.getElementById("add-subtasks").focus();
+
+}
+
+function addNewSubtask(){
+    let subTaskValue = document.getElementById("add-subtasks").value;
+    console.log(subTaskValue);
+    
 }
