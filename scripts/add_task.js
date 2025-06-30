@@ -2,6 +2,7 @@ let task = [];
 let taskDetails = {};
 let users = {};
 let categorys = ["Technical Task", "User Story"];
+let subTasks = [];
 
 // async function init() {
 
@@ -124,5 +125,39 @@ function setCategory(number){
     document.getElementById("category-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-category").classList.toggle("up");
    console.log(selectedCategory);
-   
+}
+
+function activateSubtask(){
+    document.querySelector(".add").classList.add("d_none");
+    document.getElementById("add-subtasks").focus();
+    document.querySelector(".add_or_remove").classList.remove("d_none");
+}
+
+function addNewSubTask(){
+    let subTask = document.getElementById("add-subtasks");
+    if (subTask.value > "") {
+        subTasks.push(subTask.value);
+        renderSubTasks();
+    }
+    subTask.value = "";
+    document.querySelector(".add").classList.remove("d_none");
+    document.querySelector(".add_or_remove").classList.add("d_none");
+    console.log(subTasks);
+}
+
+function renderSubTasks(){
+    let addSubtaskList = document.querySelector(".added_subtask_list");
+    addSubtaskList.innerHTML = "";
+    subTasks.forEach(subTask => {
+        addSubtaskList.innerHTML += `<div class="added_subtask d_flex_center justify_start">
+                <li class="margin_0">${subTask}</li>
+            </div>`
+    })
+}
+
+function clearSubTaskValue(){
+    let subTask = document.getElementById("add-subtasks");
+    subTask.value = "";
+    document.querySelector(".add").classList.remove("d_none");
+    document.querySelector(".add_or_remove").classList.add("d_none");
 }

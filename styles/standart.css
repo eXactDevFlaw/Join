@@ -172,6 +172,10 @@ a {
     flex-direction: column;
 }
 
+.gap_4 {
+    gap: 4px;
+}
+
 .gap_8{
     gap: 8px;
 }
@@ -210,4 +214,8 @@ a {
 
 .z_3{
     z-index: 3;
+}
+
+.position_unset{
+    position: unset;
 }
