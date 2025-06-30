@@ -1,3 +1,11 @@
+/**
+ * 
+ */
+const navLogin = document.getElementById('nav-login');
+const navSummary = document.getElementById('nav-summary');
+const navAddTask = document.getElementById('nav-add-task');
+const navBoard = document.getElementById('nav-board');
+const navContacts = document.getElementById('nav-contacts');
 const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
@@ -112,13 +120,8 @@ function stopPropagation(event) {
 //     // fetchUsers();
 // }
 
-const navLogin = document.getElementById('#nav-login');
-const navSummary = document.getElementById('#nav-summary');
-const navAddTask = document.getElementById('#nav-add-task');
-const navBoard = document.getElementById('#nav-board');
-const navContacts = document.getElementById('#nav-contacts');
 
-let isUserLogin = false;
+let isUserLogin = true;
 function renderNavbar() {
   console.log(isUserLogin)
   if (!isUserLogin) {
@@ -129,7 +132,7 @@ function renderNavbar() {
     navBoard.classList.remove('d_none');
     navContacts.classList.remove('d_none');
   } else {
-    console(isUserLogin)
+    console.log(isUserLogin)
     navLogin.classList.remove('d_none');
     navSummary.classList.add('d_none');
     navAddTask.classList.add('d_none');
