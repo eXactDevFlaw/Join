@@ -208,6 +208,7 @@ function setupPrivacyCheckboxListener() {
 }
 
 /**
+ * Hover effect on an div box while effected only in the img inside
  * @type {HTMLElement}
  * */
 function setupHoverPrivacyCheckboxListener(){
@@ -225,6 +226,7 @@ function setupHoverPrivacyCheckboxListener(){
 // Initialization after document is loaded
 document.addEventListener('DOMContentLoaded', function () {
   runFadeInOut();
+  validateSigninForm();
   setupLoginListeners();
   setupSigninListeners();
   setupToggleListeners();
