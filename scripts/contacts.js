@@ -309,33 +309,44 @@ export async function openEditContactOverlay(contact) {
     }
   };
 }
+
 /**
- * Öffnet das „Add Contact“ Overlay, speichert den neuen Kontakt
- * und öffnet danach direkt seine Detail‑Ansicht.
+ * Öffnet das „Add Contact“ Overlay und verarbeitet das Formular.
  * @async
  * @function openAddContactOverlay
  */
-export async function openAddContactOverlay() {
+async function openAddContactOverlay() {
   await loadFormIntoOverlay("./templates/new_contact.html");
   slideInOverlay();
 
+  // Formular‑Handler
   document.getElementById("addnew-contact-form").onsubmit = async e => {
     e.preventDefault();
+
+    // Name und Email aus den Feldern auslesen
+    const nameRaw = document.getElementById("contact-namefield").value.trim();
+    const emailRaw = document.getElementById("contact-emailfield").value.trim();
+    const phoneRaw = document.getElementById("contact-phonefield").value.trim();
+
+    // Telefonnummer normalisieren (siehe normalizePhone weiter unten)
+    const phone = normalizePhone(phoneRaw);
+
+    // Kontakt‑Objekt bauen
     const contact = {
-      name: document.getElementById("contact-namefield").value,
-      email: document.getElementById("contact-emailfield").value,
-      phone: document.getElementById("contact-phonefield").value
+      name: nameRaw,
+      email: emailRaw,
+      phone
     };
 
     try {
-      const res = await createContact(contact);  
-      const newId = res.name;                       // Firebase gibt den neuen Key zurück
+      const res = await createContact(contact);     // anlegen in Firebase
+      const newId = res.name;                         // key aus der Antwort
 
       closeOverlay();
       await renderContacts();
       showToast("Contact successfully created");
 
-      // sofort Detail‑Ansicht öffnen:
+      // Automatisch Detail‑View öffnen
       contact.id = newId;
       const newItem = document.querySelector(
         `.contact-list-item[data-id="${newId}"]`
@@ -347,6 +358,20 @@ export async function openAddContactOverlay() {
       showToast("Error creating contact");
     }
   };
+}
+
+/**
+ * Normalisiert eine Telefonnummer
+ * @param {string} rawRaw
+ * @returns {string}
+ */
+function normalizePhone(rawRaw) {
+  let s = rawRaw.replace(/[^\d+]/g, ""); // alles außer Ziffern und '+' weg
+  if (s.startsWith("00")) s = "+" + s.slice(2);
+  if (s.startsWith("+")) return s;
+  if (s.startsWith("0")) s = s.slice(1);
+  // hänge deutsche Ländervorwahl an
+  return "+49" + s;
 }
 
 /**

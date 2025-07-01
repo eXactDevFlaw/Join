@@ -17,7 +17,9 @@
     </div>
     <form id="addnew-contact-form">
       <div class="input_icon_wrapper">
-        <input id="contact-namefield" type="text" placeholder="Name" required />
+        <input id="contact-namefield" type="text" placeholder="Name" required
+          pattern="^(?=.{3,})([A-Za-zÄÖÜäöüß]+(?:\s+[A-Za-zÄÖÜäöüß]+)+)$"  
+          title="Gib mindestens Vor‑ und Nachname nur mit Buchstaben ein." />
         <i class="input-icon user-icon"></i>
       </div>
       <div class="input_icon_wrapper">
@@ -25,7 +27,9 @@
         <i class="input-icon email-icon"></i>
       </div>
       <div class="input_icon_wrapper">
-        <input id="contact-phonefield" type="tel" placeholder="Phone" required />
+        </select>
+        <input id="contact-phonefield" type="tel" placeholder="Phone" required pattern="^[0-9]{4,15}$"
+          title="Gib nur Ziffern ein (ohne führende Null)." />
         <i class="input-icon phone-icon"></i>
       </div>
       <div class="overlay_buttons">
