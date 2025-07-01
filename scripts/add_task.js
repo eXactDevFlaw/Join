@@ -148,9 +148,15 @@ function addNewSubTask(){
 function renderSubTasks(){
     let addSubtaskList = document.querySelector(".added_subtask_list");
     addSubtaskList.innerHTML = "";
-    subTasks.forEach(subTask => {
-        addSubtaskList.innerHTML += `<div class="added_subtask d_flex_center justify_start">
+    subTasks.forEach((subTask, index) => {
+        addSubtaskList.innerHTML += `
+                        <div class="added_subtask d_flex_center justify_between">
                 <li class="margin_0">${subTask}</li>
+                <div class="subtask_edit_icons d_flex_center_row margin_0 gap_4 justify_between">
+                <div onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
+                <div> <img src="./assets/icons/vector_3.svg" alt=""></div>
+                <div onclick="editSubTask(${index})"> <img src="./assets/icons/edit.svg" alt=""></div>
+                </div>
             </div>`
     })
 }
@@ -170,10 +176,14 @@ function clearSubTaskValue(){
     document.querySelector(".add_or_remove").classList.add("d_none");
 }
 
-var element = document.getElementById("testMouse");
-
-element.addEventListener("mouseover", function(){
-    element.innerHTML = "Task";
-    console.log("moause");
+function deleteSubTask(index) {
+    subTasks.splice(index, 1);
+    renderSubTasks();
+    console.log(subTasks);
     
-})
+}
+
+function editSubTask(){
+    console.log("edit");
+    
+}

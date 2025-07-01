@@ -307,7 +307,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   background-color: rgba(255, 255, 255, 1);
   width: 440px;
-  /* height: 40px; */
   max-height: 336px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -342,15 +341,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 32px;
  }
 
-.added_subtask:hover {
+ .subtask_edit_icons{
+  display: none;
+ }
+
+.added_subtask:hover{
   cursor: pointer;
   background-color: rgba(238, 238, 238, 1);
  }
+
+.added_subtask:hover .subtask_edit_icons{
+  display: flex;
+}
 
  ul{
   padding: 0;
  }
 
- .blackColor{
-  background-color: black;
- }
