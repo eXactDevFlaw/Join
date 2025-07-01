@@ -172,10 +172,10 @@ function setUserIsLoggedOut() {
 /**
  * Get the userloginstate from localstorage
  * false by default
+ * 
  */
 function getUserLogState() {
   let data = JSON.parse(localStorage.getItem("isJoinUserLogin"))
-  console.log(data)
   if(data){
     switch (data.loginstate) {
       case true:
