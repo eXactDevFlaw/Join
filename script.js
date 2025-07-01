@@ -110,36 +110,58 @@ async function deleteFromDatabase(path) {
   return (responseToJson = await response.json());
 }
 
+/**
+ * Toggles the visibility of the logout overlay by adding or removing the 'd_none' class.
+ */
 function toggleLogoutOverlay() {
   document
     .getElementById("overlay-small-logout-win")
     .classList.toggle("d_none");
 }
 
-if(btnLogOut){
+/**
+ * Event listener for the logout button.
+ * Sets the isUserLogin variable to false and redirects the user to the index page.
+ * 
+ * @type {HTMLButtonElement|null}
+ */
+if (btnLogOut) {
   btnLogOut.addEventListener('click', () => {
     isUserLogin = false;
     window.location = "./index.html";
-  })
-};
+  });
+}
 
+/**
+ * Stops the propagation of the given event.
+ * 
+ * @param {Event} event - The event whose propagation should be stopped.
+ */
 function stopPropagation(event) {
   event.stopPropagation();
 }
 
+/**
+ * Renders the navigation bar based on the user's login status.
+ * If the user is logged in, hides the login navigation and shows the main navigation bar.
+ * If the user is not logged in, does the opposite.
+ */
 function renderNavbar() {
   if (isUserLogin && navLogin && navBar) {
-    console.log(isUserLogin)
+    console.log(isUserLogin);
     navLogin.classList.add('d_none');
     navBar.classList.remove('d_none');
   } else if (!isUserLogin && navLogin && navBar) {
-    console.log(isUserLogin)
+    console.log(isUserLogin);
     navLogin.classList.remove('d_none');
     navBar.classList.add('d_none');
   }
 }
 renderNavbar();
 
+/**
+ * Reloads the current page.
+ */
 function locationReload() {
   location.reload();
 }
