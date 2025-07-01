@@ -143,22 +143,30 @@ function stopPropagation(event) {
  * Set the userloginstate in localstorage
  */
 function setUserIsLoggedIn(email, password) {
-  localStorage.setItem("isJoinUserLogin", {
-    loginstate: true,
-    userName: email,
-    userPassword: password,
-  });
+  if (email && password) {
+    localStorage.setItem("isJoinUserLogin", JSON.stringify({
+      loginstate: true,
+      userName: email,
+      userPassword: password,
+    }));
+  } else {
+    localStorage.setItem("isJoinUserLogin", JSON.stringify({
+      loginstate: true,
+      userName: "Guest User",
+      userPassword: "password",
+    }));
+  }
 }
 
 /**
  * Set the userloginstate in localstorage
  */
 function setUserIsLoggedOut() {
-  localStorage.setItem("isJoinUserLogin", {
+  localStorage.setItem("isJoinUserLogin", JSON.stringify({
     loginstate: false,
     userName: null,
     userPassword: null,
-  });
+  }));
 }
 
 /**
@@ -166,19 +174,24 @@ function setUserIsLoggedOut() {
  * false by default
  */
 function getUserLogState() {
-  let data = localStorage.getItem("isJoinUserLogin")
-  switch (data) {
-    case "true":
-      isUserLogin = true;
-      break;
-
-    case "false":
-      isUserLogin = false;
-      break;
-
-    default:
-      isUserLogin = false;
-      break;
+  let data = JSON.parse(localStorage.getItem("isJoinUserLogin"))
+  console.log(data)
+  if(data){
+    switch (data.loginstate) {
+      case true:
+        isUserLogin = true;
+        break;
+  
+      case false:
+        isUserLogin = false;
+        break;
+  
+      default:
+        isUserLogin = false;
+        break;
+      }
+  } else {
+    isUserLogin = false;
   }
 }
 
@@ -211,6 +224,6 @@ function locationReload() {
  */
 document.addEventListener('DOMContentLoaded', () => {
   getUserLogState();
- console.log(isUserLogin);
+  console.log(isUserLogin);
   renderNavbar();
 })
