@@ -350,3 +350,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
  ul{
   padding: 0;
  }
+
+ .blackColor{
+  background-color: black;
+ }

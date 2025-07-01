@@ -155,9 +155,25 @@ function renderSubTasks(){
     })
 }
 
+let addSubTaskInput = document.getElementById("add-subtasks");
+addSubTaskInput.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    addNewSubTask();
+  }
+});
+
 function clearSubTaskValue(){
     let subTask = document.getElementById("add-subtasks");
     subTask.value = "";
     document.querySelector(".add").classList.remove("d_none");
     document.querySelector(".add_or_remove").classList.add("d_none");
 }
+
+var element = document.getElementById("testMouse");
+
+element.addEventListener("mouseover", function(){
+    element.innerHTML = "Task";
+    console.log("moause");
+    
+})
