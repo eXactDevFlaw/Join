@@ -142,15 +142,23 @@ function stopPropagation(event) {
 /**
  * Set the userloginstate in localstorage
  */
-function setUserIsLoggedIn() {
-  localStorage.setItem("isJoinUserLogin", true);
+function setUserIsLoggedIn(email, password) {
+  localStorage.setItem("isJoinUserLogin", {
+    loginstate: true,
+    userName: email,
+    userPassword: password,
+  });
 }
 
 /**
  * Set the userloginstate in localstorage
  */
 function setUserIsLoggedOut() {
-  localStorage.setItem("isJoinUserLogin", false);
+  localStorage.setItem("isJoinUserLogin", {
+    loginstate: false,
+    userName: null,
+    userPassword: null,
+  });
 }
 
 /**

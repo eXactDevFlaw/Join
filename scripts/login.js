@@ -278,8 +278,12 @@ async function handleLogin(event) {
   if (!isValidLoginInput(email, password)) return handleLoginError();
 
   const isOk = await checkUserCredentials(email, password);
-  if (isOk) return handleLoginSuccess();
-  handleLoginError();
+  if (isOk) {
+    setUserIsLoggedIn(email, password);
+    return handleLoginSuccess()
+  }else{
+    handleLoginError();
+  }
 }
 
 /** Returns true if email and password are valid. */
@@ -301,7 +305,6 @@ function handleLoginSuccess() {
   userNameInput.value = "";
   clearLoginError();
   updatePwIcons();
-  setUserIsLoggedIn();
   // Place redirect logic here if needed!
 }
 
