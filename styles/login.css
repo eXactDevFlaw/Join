@@ -1,7 +1,8 @@
 .login_content {
     position: fixed;
-    width: 1440px;
-    height: 100vh;
+    max-width: 1440px;
+    width: 100%;
+    height: 100%;
 }
 
 .login_container {
@@ -169,7 +170,7 @@
     justify-content: center;
 }
 
-.signin_btn_back:hover{
+.signin_btn_back:hover {
     border-radius: 50%;
     background-color: rgba(238, 238, 238, 1);
 }
@@ -185,10 +186,17 @@
     border: none;
 }
 
+.signin_btn_checkbox_img_wrapper {
+    margin: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .signin_btn_checkbox_img {
     src: url(../assets/icons/checkbox.svg);
     width: 24px;
-    margin-right: 8px;
+    padding: 2px;
     user-select: none;
     pointer-events: none;
 }
@@ -223,28 +231,36 @@
 }
 
 .dialog_signin {
-  z-index: 3;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .show_dialog_signin {
-  animation: slideUpDialogSignin 0.5s cubic-bezier(.22,.68,.62,1.13) forwards;
-  opacity: 1;
+    animation: slideUpDialogSignin 0.5s cubic-bezier(.22, .68, .62, 1.13) forwards;
+    opacity: 1;
 }
+
 .hide_dialog_signin {
-  opacity: 0;
-  transform: translateY(120%);
+    opacity: 0;
+    transform: translateY(120%);
 }
 
 @keyframes slideUpDialogSignin {
-  from { transform: translateY(120%); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+    from {
+        transform: translateY(120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

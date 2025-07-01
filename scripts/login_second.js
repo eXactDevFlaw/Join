@@ -126,8 +126,8 @@ function runFadeInOut() {
 function setupLoginListeners() {
   if (loginBtn) loginBtn.addEventListener('click', handleLogin);
   if (guestLoginBtn) {
-    guestLoginBtn.addEventListener('click', function (e) {
-      e.preventDefault();
+    guestLoginBtn.addEventListener('click', () => {
+      setUserIsLoggedIn();
       window.location = "./summary.html";
     });
   }
@@ -207,12 +207,28 @@ function setupPrivacyCheckboxListener() {
   }
 }
 
+/**
+ * @type {HTMLElement}
+ * */
+function setupHoverPrivacyCheckboxListener(){
+  signupBtnHover.addEventListener('mouseover', () => {
+    labelHover.style.borderRadius = "50%"; 
+    labelHover.style.background = "rgba(237, 242, 250, 1)";
+  })
+
+  signupBtnHover.addEventListener('mouseout', () => {
+    labelHover.style.borderRadius = null;
+    labelHover.style.background = null;
+  })
+}
+
 // Initialization after document is loaded
 document.addEventListener('DOMContentLoaded', function () {
   runFadeInOut();
   setupLoginListeners();
   setupSigninListeners();
   setupToggleListeners();
-  setupPrivacyCheckboxListener();
   setupPasswordToggle();
+  setupPrivacyCheckboxListener();
+  setupHoverPrivacyCheckboxListener();
 });

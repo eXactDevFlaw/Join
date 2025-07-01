@@ -7,7 +7,7 @@ const navBar = document.querySelector('.nav_items');
 const btnLogOut = document.getElementById('btn-log-out');
 const fadeOutRef = document.querySelectorAll('.fade_out');
 const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
-let isUserLogin = false;
+let isUserLogin;
 /**
  * Retrieves contacts from the database.
  * @async
@@ -16,7 +16,6 @@ let isUserLogin = false;
  */
 async function getUsersFromDatabase() {
   let users = await loadFromDatabase("users");
-  console.log(typeof (users))
   return users;
 }
 
@@ -45,7 +44,6 @@ async function getTasksFromDatabase() {
 async function loadFromDatabase(path) {
   let response = await fetch(FIREBASE_URL + path + ".json");
   let responseToJson = await response.json();
-  console.log(typeof (responseToJson));
   return responseToJson;
 }
 /**
@@ -127,7 +125,7 @@ function toggleLogoutOverlay() {
  */
 if (btnLogOut) {
   btnLogOut.addEventListener('click', () => {
-    isUserLogin = false;
+    setUserIsLoggedOut()
     window.location = "./index.html";
   });
 }
@@ -139,6 +137,41 @@ if (btnLogOut) {
  */
 function stopPropagation(event) {
   event.stopPropagation();
+}
+
+/**
+ * Set the userloginstate in localstorage
+ */
+function setUserIsLoggedIn() {
+  localStorage.setItem("isJoinUserLogin", true);
+}
+
+/**
+ * Set the userloginstate in localstorage
+ */
+function setUserIsLoggedOut() {
+  localStorage.setItem("isJoinUserLogin", false);
+}
+
+/**
+ * Get the userloginstate from localstorage
+ * false by default
+ */
+function getUserLogState() {
+  let data = localStorage.getItem("isJoinUserLogin")
+  switch (data) {
+    case "true":
+      isUserLogin = true;
+      break;
+
+    case "false":
+      isUserLogin = false;
+      break;
+
+    default:
+      isUserLogin = false;
+      break;
+  }
 }
 
 /**
@@ -157,7 +190,6 @@ function renderNavbar() {
     navBar.classList.add('d_none');
   }
 }
-renderNavbar();
 
 /**
  * Reloads the current page.
@@ -165,3 +197,12 @@ renderNavbar();
 function locationReload() {
   location.reload();
 }
+
+/**
+ * Event listener for the DOM to be loaded to start the inital functions
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  getUserLogState();
+ console.log(isUserLogin);
+  renderNavbar();
+})

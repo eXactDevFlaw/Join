@@ -19,10 +19,12 @@ const signinPasswordInput = document.getElementById("signin-userpassword");
 const signinPasswordCheckInput = document.getElementById("signin-userpassword-check");
 const signinCheckbox = document.getElementById("signin-btn-checkbox");
 const signupBtn = document.querySelector('#sign-up');
+const signupBtnHover = document.querySelector('.curser_pointer');
+const labelHover = document.querySelector('.signin_btn_checkbox_img_wrapper');
 const dialogSignin = document.getElementById("dialog_signin");
 const toggleSignIn = document.querySelector('.btn_sign_up');
 const toggleLogIn = document.querySelector('#signin-btn-back');
-const togglePrivacyCheck = document.querySelector('#signin-btn-checkbox');
+const togglePrivacyCheck = document.getElementById('sign-up-label');
 let isPasswordVisible = false;
 
 /**
@@ -264,36 +266,43 @@ function showEmailExistsError() {
 }
 
 /**
- * Handles the login process on form submission.
- * @param {Event} event - The form submit event.
+ * Handles the login form submission, validating input and processing authentication.
+ * @param {Event} event - The form submission event.
  */
 async function handleLogin(event) {
   event.preventDefault();
   clearLoginError();
   const email = userNameInput.value;
   const password = userPasswordInput.value;
-  let emailValid = isValidEmail(email);
-  let passwordValid = password.length > 3;
-  if (!emailValid || !passwordValid) {
-    showLoginErrorBothRed("Check your email and password. Please try again.");
-    return;
-  }
+
+  if (!isValidLoginInput(email, password)) return handleLoginError();
+
   const isOk = await checkUserCredentials(email, password);
-  if (isOk) {
-    console.log(isUserLogin)
-    userPasswordInput.value = "";
-    userNameInput.value = "";
-    clearLoginError();
-    updatePwIcons();
-    isUserLogin = true;
-    // Place redirect logic here if needed!
-  } else {
-    console.log(isUserLogin)
-    showLoginErrorBothRed("Check your email and password. Please try again.");
-    userPasswordInput.value = "";
-    userNameInput.value = "";
-    updatePwIcons();
-  }
+  if (isOk) return handleLoginSuccess();
+  handleLoginError();
+}
+
+/** Returns true if email and password are valid. */
+function isValidLoginInput(email, password) {
+  return isValidEmail(email) && password.length > 3;
+}
+
+/** Handles login error UI updates. */
+function handleLoginError() {
+  showLoginErrorBothRed("Check your email and password. Please try again.");
+  userPasswordInput.value = "";
+  userNameInput.value = "";
+  updatePwIcons();
+}
+
+/** Handles successful login UI updates. */
+function handleLoginSuccess() {
+  userPasswordInput.value = "";
+  userNameInput.value = "";
+  clearLoginError();
+  updatePwIcons();
+  setUserIsLoggedIn();
+  // Place redirect logic here if needed!
 }
 
 /**
