@@ -27,7 +27,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-  <script type="module" src="./script.js"></script>
+  <script src="./script.js" defer></script>
 
   <!-- 4. Hauptlogik (verwendet Funktionen aus database.js) -->
   <script type="module" src="./scripts/contacts.js"></script>
@@ -35,7 +35,7 @@
 
 <body>
   <!-- Logout Overlay -->
-  <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
+ <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
     onclick="toggleLogoutOverlay()">
     <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
       <div class="d_flex_center justify_around flex_column">

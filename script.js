@@ -7,6 +7,7 @@ const navBar = document.querySelector('.nav_items');
 const btnLogOut = document.getElementById('btn-log-out');
 const fadeOutRef = document.querySelectorAll('.fade_out');
 const userInitials = document.getElementById('header-user-short-latters');
+const userNameRef = document.getElementById('user-name');
 const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
 let isUserLogin;
 let userDataFromLocalStorage = getUserLogState();
@@ -126,10 +127,9 @@ function toggleLogoutOverlay() {
  * 
  * @type {HTMLButtonElement|null}
  */
-console.log(btnLogOut)
+
 if (btnLogOut) {
   btnLogOut.addEventListener('click', () => {
-    console.log("du clickst mich")
     setUserIsLoggedOut()
     window.location = "/index.html";
   });
@@ -233,6 +233,9 @@ function locationReload() {
 function getUserInitials() {
   if (!userDataFromLocalStorage || !userDataFromLocalStorage.userFullName) {
     return
+  }
+  if(userNameRef){
+    userNameRef.innerText = userDataFromLocalStorage.userFullName
   }
   let userName = userDataFromLocalStorage.userFullName.trim().split(' ');
   let firstInitial = userName[0][0].toUpperCase();
