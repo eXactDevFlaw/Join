@@ -200,10 +200,10 @@
             </div>
             <div class="subtask_edit_input d_flex_center justify_between">
               <input type="text" value="${subTask}">
-               <div class="subtask_edit_icons d_flex d_flex_center_row margin_0 gap_4 justify_between">
-                <div class="input_icon" onclick="editSubTask(${index})"> <img src="./assets/icons/check.svg" alt=""></div>
+               <div class="subtask_edit_icons edit_check_delete position_absolute d_flex d_flex_center_row margin_0 gap_4 justify_between">
+                <div class="hover_container d_flex_center" onclick="editSubTask(${index})"> <img src="./assets/icons/check_dark.svg" alt=""></div>
                 <div> <img src="./assets/icons/vector_3.svg" alt="" id="vector-subtask"></div>
-                <div class="input_icon" onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
+                <div class="hover_container d_flex_center" onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
               </div>
             </div>
           </div>

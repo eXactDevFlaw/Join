@@ -85,6 +85,14 @@ input:focus {
   outline-color: rgba(41, 171, 226, 1);
 }
 
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: rgba(209, 209, 209, 1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url(/assets/icons/calender.svg) no-repeat;
+}
+
 .input_icon_wrapper {
   width: 440px;
 }
@@ -263,6 +271,7 @@ input:focus {
   height: 24px;
 }
 
+
 .close_cross:before, .close_cross:after {
   position: absolute;
   content: " ";
@@ -338,17 +347,10 @@ input:focus {
 
  .subtask_edit_icons{
   display: none;
-  
- }
-
- .subtask_edit_icons img{
-  height: 24px;
-  padding: 4px;
  }
 
  #vector-subtask{
   height: 24px;
-  padding: unset;
  }
 
 .added_subtask:hover{
@@ -359,14 +361,13 @@ input:focus {
 .added_subtask:hover .subtask_edit_icons{
   display: flex;
   cursor: pointer;
-  
 }
 
-.subtask_edit_icons img:hover {
-  background-color: rgba(217, 217, 217, 1);
-}
+ ul{
+  padding: 0;
+ }
 
-.subtask_edit_input input{
+ .subtask_edit_input input{
   height: 32px;
   font-size: 16px;
   padding: 4px 16px 4px 16px;
@@ -379,5 +380,19 @@ input:focus {
 
 .subtask_edit_input input:focus{
   outline: unset;
-  /* border-bottom: 3px rgba(0, 93, 255, 1); */
+}
+
+.hover_container{
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.hover_container:hover {
+  background-color: rgba(238, 238, 238, 1);;
+}
+
+.edit_check_delete{
+  right: 77px;
 }
