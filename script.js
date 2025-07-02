@@ -6,8 +6,11 @@ const navLogin = document.getElementById('nav-login');
 const navBar = document.querySelector('.nav_items');
 const btnLogOut = document.getElementById('btn-log-out');
 const fadeOutRef = document.querySelectorAll('.fade_out');
+const userInitials = document.getElementById('header-user-short-latters');
 const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
 let isUserLogin;
+let userDataFromLocalStorage = getUserLogState();
+
 /**
  * Retrieves contacts from the database.
  * @async
@@ -142,18 +145,20 @@ function stopPropagation(event) {
 /**
  * Set the userloginstate in localstorage
  */
-function setUserIsLoggedIn(email, password) {
+function setUserIsLoggedIn(email, password, name) {
   if (email && password) {
     localStorage.setItem("isJoinUserLogin", JSON.stringify({
       loginstate: true,
       userName: email,
       userPassword: password,
+      userFullName: name
     }));
   } else {
     localStorage.setItem("isJoinUserLogin", JSON.stringify({
       loginstate: true,
-      userName: "Guest User",
+      userName: "Guestuser@test.com",
       userPassword: "password",
+      userFullName: "Guest User",
     }));
   }
 }
@@ -166,6 +171,7 @@ function setUserIsLoggedOut() {
     loginstate: false,
     userName: null,
     userPassword: null,
+    userFullName: null,
   }));
 }
 
@@ -176,23 +182,23 @@ function setUserIsLoggedOut() {
  */
 function getUserLogState() {
   let data = JSON.parse(localStorage.getItem("isJoinUserLogin"))
-  if(data){
+  if (data) {
     switch (data.loginstate) {
       case true:
         isUserLogin = true;
         break;
-  
+
       case false:
         isUserLogin = false;
         break;
-  
+
       default:
         isUserLogin = false;
         break;
-      }
+    }
   } else {
     isUserLogin = false;
-  }
+  } return data
 }
 
 /**
@@ -220,10 +226,29 @@ function locationReload() {
 }
 
 /**
+ * Function to set capital letters for usercontrol
+ */
+function getUserInitials() {
+  if (!userDataFromLocalStorage || !userDataFromLocalStorage.userFullName) {
+    return
+  }
+  let userName = userDataFromLocalStorage.userFullName.trim().split(' ');
+  console.log(userName)
+  let firstInitial = userName[0][0].toUpperCase();
+  let lastInitial = userName[userName.length - 1][0].toUpperCase();
+  if (userInitials) {
+    userInitials.innerText = firstInitial + lastInitial;
+  }
+}
+
+
+
+/**
  * Event listener for the DOM to be loaded to start the inital functions
  */
 document.addEventListener('DOMContentLoaded', () => {
   getUserLogState();
   console.log(isUserLogin);
   renderNavbar();
+  getUserInitials()
 })
