@@ -46,9 +46,15 @@ async function getTasksFromDatabase() {
  * @returns {Promise<object>} A promise that resolves to the data from the database.
  */
 async function loadFromDatabase(path) {
-  let response = await fetch(FIREBASE_URL + path + ".json");
-  let responseToJson = await response.json();
-  return responseToJson;
+  try {
+    let response = await fetch(FIREBASE_URL + path + ".json");
+    let responseToJson = await response.json();
+    return responseToJson
+  } catch (error) {
+    throw new Error("Failed to fetch firebase url", error)
+  }
+  
+ ;
 }
 /**
  * Posts new data to the specified path in the Firebase Realtime Database.

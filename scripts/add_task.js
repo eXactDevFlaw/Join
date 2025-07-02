@@ -154,12 +154,14 @@ function renderSubTasks(){
 }
 
 let addSubTaskInput = document.getElementById("add-subtasks");
-addSubTaskInput.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    addNewSubTask();
-  }
-});
+if(addSubTaskInput){
+    addSubTaskInput.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        addNewSubTask();
+      }
+    });
+}
 
 function clearSubTaskValue(){
     let subTask = document.getElementById("add-subtasks");
