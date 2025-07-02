@@ -13,12 +13,19 @@ const listEl = document.getElementById("contacts-list");
 const detailBox = document.getElementById("contact-detail");
 
 /**
- * Returns initials from a full name
+ * Returns initials from a full name ... funktion prüft ob es ein String ist und gibt die ersten beiden Buchstaben zurück.
+ * Falls der Name leer ist oder kein String, gibt es "??" zurück.
  * @param {string} name 
  * @returns {string}
  */
 function getInitials(name) {
-  return name.split(" ").map(p => p[0].toUpperCase()).join("");
+  if (!name || typeof name !== "string") return "??";
+  return name
+    .trim()
+    .split(/\s+/)
+    .map(p => p[0]?.toUpperCase() || "")
+    .join("")
+    .substring(0, 2); // z. B. "M" oder "MM"
 }
 
 /**
