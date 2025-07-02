@@ -126,10 +126,12 @@ function toggleLogoutOverlay() {
  * 
  * @type {HTMLButtonElement|null}
  */
+console.log(btnLogOut)
 if (btnLogOut) {
   btnLogOut.addEventListener('click', () => {
+    console.log("du clickst mich")
     setUserIsLoggedOut()
-    window.location = "./index.html";
+    window.location = "/index.html";
   });
 }
 
@@ -233,7 +235,6 @@ function getUserInitials() {
     return
   }
   let userName = userDataFromLocalStorage.userFullName.trim().split(' ');
-  console.log(userName)
   let firstInitial = userName[0][0].toUpperCase();
   let lastInitial = userName[userName.length - 1][0].toUpperCase();
   if (userInitials) {
@@ -248,7 +249,6 @@ function getUserInitials() {
  */
 document.addEventListener('DOMContentLoaded', () => {
   getUserLogState();
-  console.log(isUserLogin);
   renderNavbar();
   getUserInitials()
 })
