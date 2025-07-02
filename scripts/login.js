@@ -238,7 +238,8 @@ function findMatchingUser(users, email, password) {
   const userValues = Object.values(users);
   for (let i = 0; i < userValues.length; i++) {
     if (userValues[i].email === email && userValues[i].password === password) {
-      return true;
+      let userFullName = userValues[i].name
+      return {state: true, userFullName};
     }
   }
   return false;
@@ -275,13 +276,16 @@ async function handleLogin(event) {
   const email = userNameInput.value;
   const password = userPasswordInput.value;
 
+
   if (!isValidLoginInput(email, password)) return handleLoginError();
 
-  const isOk = await checkUserCredentials(email, password);
-  if (isOk) {
-    setUserIsLoggedIn(email, password);
+  let {state, userFullName} = await checkUserCredentials(email, password);
+  console.log(state, userFullName);
+  
+  if (state) {
+    setUserIsLoggedIn(email, password, userFullName);
     return handleLoginSuccess()
-  }else{
+  } else {
     handleLoginError();
   }
 }
@@ -305,7 +309,7 @@ function handleLoginSuccess() {
   userNameInput.value = "";
   clearLoginError();
   updatePwIcons();
-  // Place redirect logic here if needed!
+  window.location = "./summary.html";
 }
 
 /**

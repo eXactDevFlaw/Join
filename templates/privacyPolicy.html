@@ -22,19 +22,19 @@
       <div class="d_flex_center justify_around flex_column">
         <a class="d_flex_center justify_start small_logout_link" href="legalNotice.html">Legal Notice</a>
         <a class="d_flex_center justify_start small_logout_link" href="privacyPolicy.html">Privacy Policy</a>
-        <a class="d_flex_center justify_start small_logout_link" href="#">Log Out</a>
+        <a class="d_flex_center justify_start small_logout_link" id="btn-log-out">Log Out</a>
       </div>
     </div>
   </div>
   <header>
     <div class="header_container d_flex_center justify_between width_100">
       <div class="margin_0">Kanban Project Management Tool</div>
-      <div class="d_flex_center margin_0 gap_16 v_hidden">
+      <div class="d_flex_center margin_0 gap_16">
         <a href="help.html">
           <img src="../assets/icons/help.svg" class="help_icon" alt="" />
         </a>
         <div class="user_circle d_flex_center" onclick="toggleLogoutOverlay()">
-          <div class="position_absolute">LU</div>
+          <div id="header-user-short-latters" class="position_absolute"></div>
         </div>
       </div>
     </div>
