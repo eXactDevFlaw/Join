@@ -21,8 +21,9 @@ a {
 }
 
 .d_flex {
-    display: flex;
+    display: flex !important;
 }
+
 .d_flex_bw_st {
   display: flex;
   justify-content: space-between;
@@ -218,4 +219,16 @@ a {
 
 .position_unset{
     position: unset;
+}
+
+ ul{
+  padding: 0;
+ }
+
+ input[type="date"]:invalid::-webkit-datetime-edit {
+  color: rgba(209, 209, 209, 1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url(/assets/icons/calender.svg) no-repeat;
 }
