@@ -43,6 +43,7 @@ h1{
 }
 
 .input_icon_container:hover{
+    cursor: pointer;
     background-color: rgba(238, 238, 238, 1);
     border-radius: 50%;
 }

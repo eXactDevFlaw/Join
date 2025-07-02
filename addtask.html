@@ -190,6 +190,15 @@
             <input type="text" placeholder="Add new subtasks" id="add-subtasks" required onclick="activateSubtask()" />
           </div>
           <div class="added_subtask_list margin_0">
+            <div class="added_subtask d_flex_center justify_between d_none">
+              <li class="margin_0">${subTask}</li>
+              <div class="subtask_edit_icons d_flex_center_row margin_0 gap_4 justify_between">
+                <div onclick="editSubTask(${index})"> <img src="./assets/icons/edit.svg" alt=""></div>
+                <div> <img src="./assets/icons/vector_3.svg" alt="" id="vector-subtask"></div>
+                <div onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
+              </div>
+            </div>
+            <input type="text" value="${subTask}" class=" subtask_edit_input">
           </div>
         </div>
       </div>
@@ -214,5 +223,6 @@
 <script src="./script.js"></script>
 <!-- <script src="./scripts/contacts.js"></script> -->
 <script src="./scripts/add_task.js"></script>
+<script src="./scripts/add_task_template.js"></script>
 
 </html>

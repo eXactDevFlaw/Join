@@ -137,6 +137,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .urgent_set:hover {
   box-shadow: unset;
+  cursor: pointer;
 }
 
 .medium_set {
@@ -147,6 +148,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .medium_set:hover {
   box-shadow: unset;
+  cursor: pointer;
 }
 
 .low_set {
@@ -157,6 +159,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .low_set:hover {
   box-shadow: unset;
+  cursor: pointer;
 }
 
 .arrow_drop {
@@ -289,6 +292,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .btn_white:hover .close_cross::before,
 .btn_white:hover .close_cross::after {
     background-color: rgba(41, 171, 226, 1);
+    cursor: pointer;
 }
 
 .btn_white:active .close_cross::before,
@@ -345,6 +349,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
  }
 
+ .subtask_edit_icons img{
+  height: 18px;
+ }
+
+ #vector-subtask{
+  height: 24px;
+ }
+
 .added_subtask:hover{
   cursor: pointer;
   background-color: rgba(238, 238, 238, 1);
@@ -352,9 +364,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .added_subtask:hover .subtask_edit_icons{
   display: flex;
+  cursor: pointer;
 }
 
  ul{
   padding: 0;
  }
 
+ .subtask_edit_input{
+  height: 32px;
+  padding: 4px 16px 4px 16px;
+  border: unset;
+  border-radius: unset;
+ }
+
+.subtask_edit_input:focus{
+  border: unset;
+}
+ 
