@@ -118,12 +118,20 @@ return     `<div>
 
 function addSubTaskTemplate (subTask, index){
   return `
-                        <div class="added_subtask d_flex_center justify_between">
-                <li class="margin_0">${subTask}</li>
-                <div class="subtask_edit_icons d_flex_center_row margin_0 gap_4 justify_between">
-                <div onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
-                <div> <img src="./assets/icons/vector_3.svg" class="vector-subtask" alt=""></div>
-                <div onclick="editSubTask(${index})"> <img src="./assets/icons/edit.svg" alt=""></div>
-                </div>
+                 <div class="added_subtask d_flex_center justify_between" id="subtask${index}" ondblclick="editSubTask(${index})">
+              <li class="margin_0">${subTask}</li>
+              <div class="subtask_edit_icons d_flex_center_row margin_0 gap_4 justify_between">
+                <div onclick="editSubTask(${index})" class="input_icon_container edit_check_delete d_flex_center"> <img src="./assets/icons/edit.svg" alt=""></div>
+                <div> <img src="./assets/icons/vector_3.svg" alt="" class="vector-subtask"></div>
+                <div onclick="deleteSubTask(${index})" class="input_icon_container edit_check_delete d_flex_center"> <img src="./assets/icons/delete.svg" alt=""></div>
+              </div>
+            </div>
+            <div class="input_icon_wrapper subtask_edit_input d_flex_center justify_between d_none" id="edit-subtask${index}">
+              <input class="edit_input" type="text" value="${subTask}" id="edit-value${index}">
+               <div class="subtask_edit_icons edit_check_delete_container position_absolute d_flex d_flex_center_row margin_0 gap_4 justify_between">
+                <div class="input_icon_container edit_check_delete  d_flex_center" onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
+                <div> <img src="./assets/icons/vector_3.svg" alt="" class="vector-subtask"></div>
+                <div class="input_icon_container edit_check_delete d_flex_center" onclick="editCheck(${index})"> <img src="./assets/icons/check_dark.svg" alt=""></div>
+              </div>
             </div>`
 }

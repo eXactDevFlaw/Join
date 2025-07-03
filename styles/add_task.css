@@ -345,8 +345,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 32px;
  }
 
+ .added_subtask_list {
+  max-height: 150px;
+ }
+
  .subtask_edit_icons{
-  /* display: none; */
+  display: none;
 
  }
 
@@ -389,4 +393,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .edit_check_delete_container {
   right: 16px;
+}
+
+.edit_input{
+  padding-right: 75px !important;
 }

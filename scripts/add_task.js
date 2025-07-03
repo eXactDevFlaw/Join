@@ -173,12 +173,17 @@ function clearSubTaskValue(){
 function deleteSubTask(index) {
     subTasks.splice(index, 1);
     renderSubTasks();
-    console.log(subTasks);
-    
 }
 
 function editSubTask(index){
-    // document.getElementById
+   document.getElementById('subtask' + index).classList.add('d_none');
+   document.getElementById('edit-subtask' + index).classList.remove('d_none');
     console.log(subTasks[index]);
-    
+}
+
+function editCheck(index){
+   let editCheck = document.getElementById("edit-value" + index)
+    let editCheckValue = editCheck.value;
+    subTasks[index] = editCheckValue;
+    renderSubTasks()
 }
