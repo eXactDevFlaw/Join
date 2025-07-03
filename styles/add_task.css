@@ -346,10 +346,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
  }
 
  .subtask_edit_icons{
-  display: none;
+  /* display: none; */
+
  }
 
- #vector-subtask{
+ .vector-subtask{
   height: 24px;
  }
 
@@ -382,17 +383,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   outline: unset;
 }
 
-.hover_container{
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  padding: 4px;
+.edit_check_delete {
+  position: unset;
 }
 
-.hover_container:hover {
-  background-color: rgba(238, 238, 238, 1);;
-}
-
-.edit_check_delete{
-  right: 77px;
+.edit_check_delete_container {
+  right: 16px;
 }

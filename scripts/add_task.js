@@ -178,6 +178,7 @@ function deleteSubTask(index) {
 }
 
 function editSubTask(index){
-    console.log("edit" + index);
+    // document.getElementById
+    console.log(subTasks[index]);
     
 }

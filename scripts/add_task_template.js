@@ -122,7 +122,7 @@ function addSubTaskTemplate (subTask, index){
                 <li class="margin_0">${subTask}</li>
                 <div class="subtask_edit_icons d_flex_center_row margin_0 gap_4 justify_between">
                 <div onclick="deleteSubTask(${index})"> <img src="./assets/icons/delete.svg" alt=""></div>
-                <div> <img src="./assets/icons/vector_3.svg" alt=""></div>
+                <div> <img src="./assets/icons/vector_3.svg" class="vector-subtask" alt=""></div>
                 <div onclick="editSubTask(${index})"> <img src="./assets/icons/edit.svg" alt=""></div>
                 </div>
             </div>`
