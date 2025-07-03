@@ -4,7 +4,6 @@ const inProgressRef = document.getElementById('no-tasks-In-progress');
 const awaitFeedbackRef = document.getElementById('no-task-awaiting-feedback');
 const doneRef = document.getElementById('no-tasks-done')
 
-
 async function loadTasks() {
     let allTasks = Object.values(await getTasksFromDatabase())
     allTasks.forEach((singleTask) => {
@@ -26,9 +25,9 @@ function renderAllTasks() {
     
 }
 
-
 document.addEventListener('DOMContentLoaded', async () => {
     getUserLogState()
    await loadTasks()
     renderAllTasks()
+    console.log(dataPool)
 })

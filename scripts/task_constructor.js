@@ -19,7 +19,7 @@ class TaskClass {
     constructHTMLElements() {
         // Äußere Karte
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'task_card margin_0';
+        cardDiv.className = 'task_card';
 
         // task_content
         const taskContentDiv = document.createElement('div');
@@ -44,7 +44,7 @@ class TaskClass {
         const taskContentInnerDiv = document.createElement('div');
         taskContentInnerDiv.className = 'task_content margin_0';
         taskContentInnerDiv.id = 'task-content';
-        taskContentInnerDiv.innerText = this.taskDescription|| "Content...";
+        taskContentInnerDiv.innerText = this.taskDescription;
 
         // Description zusammenbauen
         taskDescriptionDiv.append(taskTitleDiv, taskContentInnerDiv);
