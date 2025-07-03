@@ -244,21 +244,36 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.closebutton_blue .closebutton_icon_white {
-  display: none;
-}
-
-.closebutton_blue:hover {
-  background-color: rgb(41, 171, 226);
   border-radius: 50%;
 }
 
-.closebutton_blue:hover .closebutton_icon {
-  display: none;
+.closebutton_blue:hover {
+  cursor: pointer;
+  background-color: rgba(238, 238, 238, 1);
 }
 
-.closebutton_blue:hover .closebutton_icon_white {
-  display: block;
+.closebutton_blue:active{
+  background-color: rgba(41, 171, 226, 1);
+}
+
+.closebutton_blue:before, .closebutton_blue:after {
+  position: absolute;
+  content: " ";
+  height: 16px;
+  width: 2px;
+  background-color: rgba(42, 54, 71, 1);
+  border-radius: 2px;
+}
+
+.closebutton_blue:before {
+  transform: rotate(45deg);
+}
+
+.closebutton_blue:after {
+  transform: rotate(-45deg);
+}
+
+.closebutton_blue:active::before,
+.closebutton_blue:active::after {
+  background-color: rgba(255, 255, 255, 1);
 }

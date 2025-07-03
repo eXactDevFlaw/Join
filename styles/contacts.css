@@ -63,7 +63,7 @@ main {
 }
 
 .add_contact_btn:hover {
-  background-color: rgb(31, 50, 67);
+  background-color: rgba(41, 171, 226, 1);
 }
 
 /* Scrollbare Liste */
