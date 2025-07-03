@@ -16,7 +16,7 @@
   <title>Join - Board</title>
 </head>
 
-<body onload="init()">
+<body>
   <div class="task_overlay position_absolute d_flex_center d_none" id="task-overlay" onclick="closeTaskOverlay()"></div>
   <div class="add_task_entry d_none" onclick="stopPropagation(event)" id="add-task-entry">
 
@@ -173,9 +173,9 @@
     </content>
   </main>
 </body>
+<script src="./scripts/task_constructor.js"></script>
 <script src="./script.js" defer></script>
 <script src="./scripts/add_task.js"></script>
 <script src="./scripts/add_task_template.js"></script>
 <script src="./scripts/board.js"></script>
-
 </html>

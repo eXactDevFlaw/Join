@@ -94,11 +94,13 @@ async function createTask() {
 }
 
 let contactDropdown = document.querySelector(".input_assigned_to");
-document.addEventListener("click", function (event) {
+if(contactDropdown){
+    document.addEventListener("click", function (event) {
     if (!contactDropdown.contains(event.target)) {
         closeAssignedToDropdown();
-    }
-});
+        }
+    });
+}
 
 function closeAssignedToDropdown() {
     document.getElementById("add-task-contacts-list").classList.add("d_none");
@@ -122,11 +124,13 @@ async function renderContacts(){
 )}
 
 let categoryDropdown = document.querySelector(".select_category_dropdown");
-document.addEventListener("click", function (event) {
-    if (!categoryDropdown.contains(event.target)) {
-        closeCategoryDropdown();
-    }
-});
+if(categoryDropdown){
+    document.addEventListener("click", function (event) {
+        if (!categoryDropdown.contains(event.target)) {
+            closeCategoryDropdown();
+        }
+    });
+}
 
 function closeCategoryDropdown() {
     document.getElementById("category-list").classList.add("d_none");
@@ -154,13 +158,15 @@ function activateSubtask() {
 }
 
 let subtaskInput = document.getElementById("add-subtasks");
-document.addEventListener("click", function (event) {
+if(subtaskInput){
+    document.addEventListener("click", function (event) {
     if (!subtaskInput.contains(event.target)) {
-        if (subtaskInput.value === "") {
-            unActivateSubtask();
+            if (subtaskInput.value === "") {
+                unActivateSubtask();
+            }
         }
-    }
-});
+    });
+}
 
 function unActivateSubtask() {
     document.querySelector(".add").classList.remove("d_none");
