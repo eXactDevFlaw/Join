@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./styles/responsive.css" />
   <link rel="stylesheet" href="./styles/standart.css" />
   <link rel="stylesheet" href="./styles/add_task.css" />
+  <link rel="stylesheet" href="./styles/contact_dropdown.css" />
   <title>Join - Add Task</title>
 </head>
 
@@ -148,7 +149,16 @@
               </div>
             </div>
           </div>
-          <div class="dropdown d_none" id="contacts-list"></div>
+          <div class="contact_dropdown" id="add-task-contacts-list">
+            <div class="list_contact">
+              <div class="contact_circle"></div>
+              <div class="contact_name">Lutz Bölling</div>
+              <div class="signin_btn_checkbox_img_wrapper">
+              <img id="signin-btn-checkbox-img" class="signin_btn_checkbox_img" src="./assets/icons/checkbox.svg"
+                alt="empty checkbox">
+            </div>
+            </div>
+          </div>
         </div>
         <div class="title_input margin_0 gap_8">
           <div class="d_flex_center_row justify_start margin_0">
@@ -212,7 +222,7 @@
   </main>
 </body>
 <script src="./script.js"></script>
-<script src="./scripts/contacts.js"></script>
+<!-- <script type="module" src="./scripts/contacts.js"></script> -->
 <script src="./scripts/add_task.js"></script>
 <script src="./scripts/add_task_template.js"></script>
 
