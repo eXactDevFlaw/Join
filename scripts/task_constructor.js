@@ -1,15 +1,17 @@
 class TaskClass {
-    constructor(item) {
-        this.taskData = item;
-        this.taskName = item.title;
-        this.taskDescription = item.description;
-        this.taskCategory = item.category;
-        this.taskPriority = item.priority
-        // Füge weitere Felder hinzu, falls benötigt
+    constructor(key,data) {
+        this.taskKey = key;
+        this.taskData = data;
+        this.taskName = data.title;
+        this.taskDescription = data.description;
+        this.taskCategory = data.category;
+        this.taskPriority = data.priority;
+        this.taskStatus = data.status;
     }
 
     logger() {
         if (this.taskData) {
+            console.log(this.taskKey)
             console.table(this.taskData);
         } else {
             console.log("Error on loading of data!");
@@ -20,6 +22,7 @@ class TaskClass {
         // Äußere Karte
         const cardDiv = document.createElement('div');
         cardDiv.className = 'task_card';
+        cardDiv.draggable = true
 
         // task_content
         const taskContentDiv = document.createElement('div');
