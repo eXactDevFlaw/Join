@@ -347,6 +347,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
  .added_subtask_list {
   max-height: 150px;
+  overflow-x: scroll;
  }
 
  .subtask_edit_icons{

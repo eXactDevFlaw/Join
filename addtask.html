@@ -138,7 +138,7 @@
               <p class="margin_0">Assigned to</p>
             </div>
             <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0"
-              onclick="openAssignedToDropdown()">
+              onclick="toggleAssignedToDropdown()">
               <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
                 id="assigned-to-dropdown" required />
               <div class="input_icon_container z_3 d_flex_center">
@@ -156,7 +156,7 @@
             <p class="red_star margin_0">*</p>
           </div>
           <div class="input_icon_wrapper width_100 d_flex_center_column margin_0">
-            <div class="select_category_dropdown d_flex_center justify_between z_3" onclick="openCategoryDropdown()">
+            <div class="select_category_dropdown d_flex_center justify_between z_3" onclick="toggleCategoryDropdown()">
               <div class="margin_0 task_category" id="selected-category">Select task category</div>
               <div class="input_icon_container d_flex_center">
                 <div class="arrow_drop up margin_0" id="arrow-drop-down-category">
@@ -212,7 +212,7 @@
   </main>
 </body>
 <script src="./script.js"></script>
-<!-- <script src="./scripts/contacts.js"></script> -->
+<script src="./scripts/contacts.js"></script>
 <script src="./scripts/add_task.js"></script>
 <script src="./scripts/add_task_template.js"></script>
 
