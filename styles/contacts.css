@@ -281,28 +281,31 @@ main {
   font-weight: 400;
 }
 
-.detail_actions_btn {
+/* Klar strukturierte, link‑ähnliche Action‐Buttons */
+.action_button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: none;
   border: none;
-  font-size: 14px;
-  color: rgb(42, 54, 71);
+  padding: 0;
+  font: inherit;                /* übernimm Schriftfamilie/-größe */
+  color: rgb(42, 54, 71);       /* dunkles Grau/Schwarz */
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background 0.2s;
 }
 
-.detail_actions_btn img {
-  width: 20px;
-  height: 20px;
+.action_button .icon {
+  width: 16px;
+  height: 16px;
+  transition: filter 0.2s ease;
+  /* am Anfang leicht abgedunkelt */
+  filter: brightness(0) saturate(100%) invert(10%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(80%) contrast(80%);
 }
 
-.detail_actions_btn span {
-  margin-left: 4px;
-}
-
-.detail_actions_btn:hover {
-  background-color: rgba(41, 171, 226, 0.1);
+.action_button:hover span,
+.action_button:hover .icon {
+  color: rgb(41, 171, 226);     /* blau beim Hover */
+  filter: brightness(1.2);      /* Icon aufhellen */
 }
 
 .contact_circle_large {
@@ -510,7 +513,7 @@ main {
 }
 
 .icon_button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(41, 171, 226, 1);
 }
 
 .icon_button img {

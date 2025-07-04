@@ -23,10 +23,6 @@
   <!-- 1. Overlay-Logik -->
   <script src="./scripts/overlay.js" defer></script>
 
-  <!-- 2. Firebase SDKs -->
-  <!-- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script> -->
-
   <script src="./script.js" defer></script>
 
   <!-- 4. Hauptlogik (verwendet Funktionen aus database.js) -->
@@ -35,7 +31,7 @@
 
 <body>
   <!-- Logout Overlay -->
- <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
+  <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
     onclick="toggleLogoutOverlay()">
     <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
       <div class="d_flex_center justify_around flex_column">
@@ -124,12 +120,12 @@
             <div class="detail_header_text">
               <h2 id="detail-name"></h2>
               <div class="detail_actions d_flex_ac gap16">
-                <button id="btn-edit-detail" class="icon_button d_flex_ac gap8">
-                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                <button id="btn-edit-detail" class="action_button">
+                  <img src="./assets/icons/edit.svg" alt="Edit" class="icon" />
                   <span>Edit</span>
                 </button>
-                <button id="btn-delete-detail" class="icon_button d_flex_ac gap8">
-                  <img src="./assets/icons/delete.svg" alt="Delete" />
+                <button id="btn-delete-detail" class="action_button">
+                  <img src="./assets/icons/delete.svg" alt="Delete" class="icon" />
                   <span>Delete</span>
                 </button>
               </div>
@@ -156,7 +152,7 @@
       <div id="overlay-content" class="overlay_content"></div>
     </div>
   </div>
-    <div id="toast-container" class="toast-container"></div>
+  <div id="toast-container" class="toast-container"></div>
 </body>
 
 </html>
