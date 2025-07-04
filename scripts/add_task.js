@@ -30,14 +30,20 @@ function closeTaskOverlay() {
 function setPriority(level) {
     const priorities = ['urgent', 'medium', 'low'];
     priorities.forEach(priority => {
-        document.getElementById(`${priority}-button`).classList.toggle(`${priority}_set`, priority === level);
+        if(document.getElementById(`${priority}-button`)){
+            document.getElementById(`${priority}-button`).classList.toggle(`${priority}_set`, priority === level);
+        }
     });
     priorities.forEach(priority => {
-        document.getElementById(`prio-${priority}-icon`).classList.remove('d_none');
-        document.getElementById(`prio-${priority}-icon-active`).classList.add('d_none');
+        if(document.getElementById(`prio-${priority}-icon`)){
+            document.getElementById(`prio-${priority}-icon`).classList.remove('d_none');
+            document.getElementById(`prio-${priority}-icon-active`).classList.add('d_none');
+        }
     });
-    document.getElementById(`prio-${level}-icon`).classList.add('d_none');
-    document.getElementById(`prio-${level}-icon-active`).classList.remove('d_none');
+    if(document.getElementById(`prio-${level}-icon`)){
+        document.getElementById(`prio-${level}-icon`).classList.add('d_none');
+        document.getElementById(`prio-${level}-icon-active`).classList.remove('d_none');
+    }
     taskDetails.priority = level;
 }
 

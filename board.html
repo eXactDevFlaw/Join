@@ -78,67 +78,69 @@
       </div>
     </div>
   </nav>
-  <main class="position_absolute overflow_auto">
-    <div class="headline d_flex_center justify_between margin_0">
-      <h1>Board</h1>
-      <div class="find_add d_flex_center justify_between gap_32px">
-        <div class="input_icon_wrapper find_task_input d_flex_center margin_0">
-          <img src="./assets/icons/vector_3.svg" class="vector" alt="vector" />
-          <div class="input_icon_container d_flex_center">
-            <div class="search_icon"></div>
+  <main class="position_absolute">
+    <div class="board_wrapper max_width_1440_calc">
+      <div class="headline d_flex_center justify_between margin_0">
+        <h1>Board</h1>
+        <div class="find_add d_flex_center justify_between gap_32px">
+          <div class="input_icon_wrapper find_task_input d_flex_center margin_0">
+            <img src="./assets/icons/vector_3.svg" class="vector" alt="vector" />
+            <div class="input_icon_container d_flex_center">
+              <div class="search_icon"></div>
+            </div>
+            <input type="text" placeholder="Find Task" id="find-task" required />
           </div>
-          <input type="text" placeholder="Find Task" id="find-task" required />
+          <button class="btn_dark margin_0 d_flex_center" onclick="openTaskOverlay()">
+            Add task<img src="/assets/icons/add.svg" alt="add" />
+          </button>
         </div>
-        <button class="btn_dark margin_0 d_flex_center" onclick="openTaskOverlay()">
-          Add task<img src="/assets/icons/add.svg" alt="add" />
-        </button>
       </div>
+      <content class="d_flex">
+        <div class="board_column align_none">
+          <div class="board_column_head d_flex justify_between margin_0">
+            <p class="margin_0">To do</p>
+            <div class="plus_button margin_0"></div>
+          </div>
+          <div class="card_column margin_0" id="column-todo" name="todo">
+            <div class="no_task d_flex_center" id="no-tasks-to-do">
+              <p>No tasks To do</p>
+            </div>
+          </div>
+        </div>
+        <div class="board_column align_none">
+          <div class="board_column_head d_flex justify_between margin_0">
+            <p class="margin_0">In progress</p>
+            <div class="plus_button margin_0"></div>
+          </div>
+          <div class="card_column margin_0" id="column-in-progress" name="in progress">
+            <div class="no_task d_flex_center" id="no-tasks-in-progress">
+              <p>No tasks In progress</p>
+            </div>
+          </div>
+        </div>
+        <div class="board_column align_none">
+          <div class="board_column_head d_flex justify_between margin_0">
+            <p class="margin_0">Await feedback</p>
+            <div class="plus_button margin_0"></div>
+          </div>
+          <div class="card_column margin_0" id="column-await-feedback" name="await feedback">
+            <div class="no_task d_flex_center" id="no-tasks-awaiting-feedback">
+              <p>No tasks Awaiting feedback</p>
+            </div>
+          </div>
+        </div>
+        <div class="board_column align_none">
+          <div class="board_column_head d_flex justify_between margin_0">
+            <p class="margin_0">Done</p>
+          </div>
+          <div class="card_column margin_0" id="column-done" name="done">
+            <div class="no_task d_flex_center" id="no-tasks-done">
+              <p>No tasks Done</p>
+            </div>
+          </div>
+        </div>
+      </content>
     </div>
-    <content class="d_flex">
-      <div class="board_column align_none">
-        <div class="board_column_head d_flex justify_between margin_0">
-          <p class="margin_0">To do</p>
-          <div class="plus_button margin_0"></div>
-        </div>
-        <div class="card_column margin_0" id="column-todo" name="todo">
-          <div class="no_task d_flex_center" id="no-tasks-to-do">
-            <p>No tasks To do</p>
-          </div>
-        </div>
-      </div>
-      <div class="board_column align_none">
-        <div class="board_column_head d_flex justify_between margin_0">
-          <p class="margin_0">In progress</p>
-          <div class="plus_button margin_0"></div>
-        </div>
-        <div class="card_column margin_0" id="column-in-progress" name="in progress">
-          <div class="no_task d_flex_center" id="no-tasks-In-progress">
-            <p>No tasks In progress</p>
-          </div>
-        </div>
-      </div>
-      <div class="board_column align_none">
-        <div class="board_column_head d_flex justify_between margin_0">
-          <p class="margin_0">Await feedback</p>
-          <div class="plus_button margin_0"></div>
-        </div>
-        <div class="card_column margin_0" id="column-await-feedback" name="await feedback">
-          <div class="no_task d_flex_center" id="no-task-awaiting-feedback">
-            <p>No tasks Awaiting feedback</p>
-          </div>
-        </div>
-      </div>
-      <div class="board_column align_none">
-        <div class="board_column_head d_flex justify_between margin_0">
-          <p class="margin_0">Done</p>
-        </div>
-        <div class="card_column margin_0" id="column-done" name="done">
-          <div class="no_task d_flex_center" id="no-tasks-done">
-            <p>No tasks Done</p>
-          </div>
-        </div>
-      </div>
-    </content>
   </main>
 </body>
 <script src="./scripts/task_constructor.js"></script>
@@ -146,4 +148,5 @@
 <script src="./scripts/add_task.js"></script>
 <script src="./scripts/add_task_template.js"></script>
 <script src="./scripts/board.js"></script>
+
 </html>
