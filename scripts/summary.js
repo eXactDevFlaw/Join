@@ -9,6 +9,13 @@ const awaitingFeedbackRef = document.getElementById('awaiting-feedback');
 
 let tasks;
 
+let tasksAmount = 0;
+let tasksDone = 0;
+let tasksToDo = 0;
+let tasksUrgent = 0;
+let tasksFeedback = 0;
+let tasksProgress = 0;
+
 function setGreetingConditions(){
     let currentDate = new Date();
     let currentHours = currentDate.getHours();
@@ -26,23 +33,25 @@ function setGreetingTime(hours){
     }
 }
 
-
 function getTasksDetails() {
-    let tasksAmount = 0;
-    let tasksOpen = 0;
-    let tasksActive = 0;
-    let tasksClosed = 0;
-    let tasksUrgent = 0;
-    let tasksFeedback = 0;
-
-    Object.values(tasks).forEach(element => {
-        tasksAmount++
-        if(element.priority = "urgent"){
-            console.log("ich bin urgent")
-        }
+    Object.values(tasks).forEach(task => {
+        tasksAmount++;
+      if (task.priority === "urgent") tasksUrgent++;
+        task.status === "todo"        ? tasksToDo++     :
+        task.status === "done"        ? tasksDone++     :
+        task.status === "in progress" ? tasksProgress++ :
+        tasksFeedback++;
     });
-    console.log(tasksAmount)
-    return {tasksAmount, tasksOpen, tasksActive, tasksClosed, tasksUrgent, tasksFeedback}
+    renderTasksNumbers();
+}
+
+function renderTasksNumbers(){
+    document.getElementById("urgents").innerHTML = tasksUrgent;
+    document.getElementById("tasks-in-board").innerHTML = tasksAmount;
+    document.getElementById("to-dos").innerHTML = tasksToDo;
+    document.getElementById("dones").innerHTML = tasksDone;
+    document.getElementById("tasks-in-progress").innerHTML = tasksProgress;
+    document.getElementById("awaiting-feedback").innerHTML = tasksFeedback;
 }
 
 async function getTasks() {
