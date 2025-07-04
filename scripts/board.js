@@ -1,7 +1,7 @@
 let rawTasksData = [];
 let dataPool = [];
 let cardPools = {
-    dataTopDo: [],
+    dataToDo: [],
     dataInProgress: [],
     dataAwaitFeedback: [],
     dataDone: [],
@@ -12,10 +12,17 @@ const todoEmptyRef = document.getElementById('no-tasks-to-do');
 const inProgressRef = document.getElementById('column-in-progress');
 const inProgressEmptyRef = document.getElementById('no-tasks-in-progress');
 const awaitFeedbackRef = document.getElementById('column-await-feedback');
-const awaitFeedbackEmptyRef = document.getElementById('no-task-awaiting-feedback');
+const awaitFeedbackEmptyRef = document.getElementById('no-tasks-awaiting-feedback');
 const doneRef = document.getElementById('column-done');
 const doneEmptyRef = document.getElementById('no-tasks-done');
 const dragRef = document.querySelectorAll('.card_column');
+
+const emptyRefs = {
+    dataToDo: todoEmptyRef,
+    dataInProgress: inProgressEmptyRef,
+    dataAwaitFeedback: awaitFeedbackEmptyRef,
+    dataDone: doneEmptyRef,
+};
 
 async function loadTasks() {
     rawTasksData = Object.entries(await getTasksFromDatabase())
@@ -38,17 +45,60 @@ function renderAllTasks() {
         htmlel.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', item.taskName);
         })
+        pushCardsToCardsPool(item.taskStatus, htmlel)
+    });
+}
 
-        if(item.taskStatus === "todo"){
+function pushCardsToCardsPool(taskStatus, htmlel){
+        if(taskStatus === "todo"){
             todoRef.append(htmlel)
-        } else if(item.taskStatus === "in progress"){
+            cardPools.dataToDo.push(htmlel)
+        } else if(taskStatus === "in progress"){
             inProgressRef.append(htmlel)
-        } else if(item.taskStatus === "await feedback"){
+            cardPools.dataInProgress.push(htmlel)
+        } else if(taskStatus === "await feedback"){
             awaitFeedbackRef.append(htmlel)
+            cardPools.dataAwaitFeedback.push(htmlel)
         } else {
             doneRef.append(htmlel)
+            cardPools.dataDone.push(htmlel)
+        }
+}
+
+function checkColumnContent() {
+    Object.keys(cardPools).forEach((key) => {
+        const pool = cardPools[key];
+        const ref = emptyRefs[key];
+        if (pool.length === 0) {
+            ref.classList.remove('d_none');
+            console.log(`${key} ist leer`);
+        } else {
+            ref.classList.add('d_none');
+            console.log(`${key} hat Inhalt`);
         }
     });
+}
+
+function refreshBoard() {
+    todoRef.innerHTML = "";
+    inProgressRef.innerHTML = "";
+    awaitFeedbackRef.innerHTML = "";
+
+    let testarr = doneRef.querySelectorAll('.task_card')
+    console.log(testarr)
+    if(testarr.length > 0){
+        testarr.forEach((item) => {
+            doneRef.removeChild(item)
+        })
+    }
+
+    cardPools.dataToDo = [];
+    cardPools.dataInProgress = [];
+    cardPools.dataAwaitFeedback = [];
+    cardPools.dataDone = [];
+
+    renderAllTasks();
+    checkColumnContent();
 }
 
 dragRef.forEach(element => {
@@ -64,6 +114,8 @@ dragRef.forEach(element => {
         const [cardIdentifyer] = [...dataPool.filter(item => item.taskName == cardTaskName)]
         cardIdentifyer.taskStatus = element.getAttribute("name");
         updateOnCardsStatus(cardIdentifyer)
+        checkColumnContent();
+        refreshBoard()
     })
 });
 
@@ -100,4 +152,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     getUserLogState()
     await loadTasks()
     renderAllTasks()
+    checkColumnContent()
 })
