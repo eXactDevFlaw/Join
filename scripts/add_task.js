@@ -4,44 +4,10 @@ let users = {};
 let categorys = ["Technical Task", "User Story"];
 let subTasks = [];
 
-// async function init() {
 
-
-
-//     users = await getContactsFromDatabase();
-//     console.log(users)
-
-//     Object.entries(users).forEach(daten => {
-//         console.log(daten)
-
-//     });
-
-//     Object.keys(users).forEach(daten => {
-//         console.log(daten)
-
-//     });
-
-//     Object.values(users).forEach(daten => {
-//         console.log(daten)
-
-//     });
-
-//     for (let index = 0; index < users.length; index++) {
-//         console.log(users[index].name);
-
-//     }
-
-
-//     for (const keys of Object.entries(users)) {
-//         console.log(keys)
-
-//         for (const values of keys) {
-//             console.log(values.name)
-//         }
-
-//     }
-// }
-
+document.addEventListener("DOMContentLoaded", () => {
+    setPriority("medium");
+})
 
 function openTaskOverlay() {
     document.getElementById("task-overlay").classList.remove("d_none");;
@@ -63,11 +29,9 @@ function closeTaskOverlay() {
 
 function setPriority(level) {
     const priorities = ['urgent', 'medium', 'low'];
-
     priorities.forEach(priority => {
         document.getElementById(`${priority}-button`).classList.toggle(`${priority}_set`, priority === level);
     });
-
     priorities.forEach(priority => {
         document.getElementById(`prio-${priority}-icon`).classList.remove('d_none');
         document.getElementById(`prio-${priority}-icon-active`).classList.add('d_none');
@@ -75,7 +39,6 @@ function setPriority(level) {
     document.getElementById(`prio-${level}-icon`).classList.add('d_none');
     document.getElementById(`prio-${level}-icon-active`).classList.remove('d_none');
     taskDetails.priority = level;
-    console.log(taskDetails.priority);
 }
 
 async function createTask() {
@@ -89,8 +52,25 @@ async function createTask() {
     if (taskDetails.title > "" && taskDetails.dueDate > "" && taskDetails.category != "Select task category"){
       await postToDatabase("tasks", taskDetails);
       locationReload();
-    }
+    } else {
+        validationHandling();
+    } 
     
+}
+
+function validationHandling(){
+    if (taskDetails.title === ""){
+        document.getElementById('title-input-overlay').classList.add("input_error_border");
+        document.getElementById('required-title').classList.remove("d_none");
+    }
+    if (taskDetails.dueDate === "") {
+        document.getElementById('datepicker').classList.add("input_error_border");
+        document.getElementById('required-date').classList.remove("d_none");
+    }
+    if (taskDetails.category === "Select task category"){
+        document.getElementById("select-task-category").classList.add("input_error_border");
+        document.getElementById('required-category').classList.remove("d_none");
+    }
 }
 
 let contactDropdown = document.querySelector(".input_assigned_to");
@@ -119,7 +99,6 @@ async function renderContacts(){
   users = await getUsersFromDatabase();
   Object.values(users).forEach((user) => {
     addTaskContactsList.innerHTML += user.name;
-  console.log(user.name);
   }
 )}
 
@@ -140,6 +119,8 @@ function closeCategoryDropdown() {
 function toggleCategoryDropdown() {
     document.getElementById("category-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-category").classList.toggle("up");
+    document.getElementById("required-category").classList.add("d_none");
+    document.getElementById("required-category-container").classList.add("d_none");
 }
 
 function setCategory(number) {
@@ -148,7 +129,6 @@ function setCategory(number) {
     selectedCategory.innerHTML = category;
     document.getElementById("category-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-category").classList.toggle("up");
-    console.log(selectedCategory);
 }
 
 function activateSubtask() {
@@ -182,7 +162,6 @@ function addNewSubTask() {
     subTask.value = "";
     document.querySelector(".add").classList.remove("d_none");
     document.querySelector(".add_or_remove").classList.add("d_none");
-    console.log(subTasks);
 }
 
 function renderSubTasks() {
@@ -227,3 +206,4 @@ function editCheck(index) {
     subTasks[index] = editCheckValue;
     renderSubTasks()
 }
+
