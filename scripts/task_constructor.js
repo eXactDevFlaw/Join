@@ -1,5 +1,5 @@
 class TaskClass {
-    constructor(key,data) {
+    constructor(key, data) {
         this.taskKey = key;
         this.taskData = data;
         this.taskName = data.title;
@@ -7,11 +7,12 @@ class TaskClass {
         this.taskCategory = data.category;
         this.taskPriority = data.priority;
         this.taskStatus = data.status;
+        this.taskSubTasks = data.subTasks;
+        this.taskAssigendTo = data.assigendTo;
     }
 
     logger() {
         if (this.taskData) {
-            console.log(this.taskKey)
             console.table(this.taskData);
         } else {
             console.log("Error on loading of data!");
@@ -31,6 +32,14 @@ class TaskClass {
         // card_label
         const cardLabelDiv = document.createElement('div');
         cardLabelDiv.className = 'card_label margin_0';
+        switch (this.taskCategory) {
+            case "Technical Task":
+                cardLabelDiv.style.backgroundColor =  'rgba(31, 215, 193, 1)'
+                break;
+            default:
+                cardLabelDiv.style.backgroundColor =  'rgba(0, 56, 255, 1)'
+                break;
+        }
         cardLabelDiv.innerText = this.taskCategory;
 
         // task_description
@@ -109,9 +118,19 @@ class TaskClass {
         priorityDiv.id = 'priority_symbol';
 
         const prioImg = document.createElement('img');
-        prioImg.src = './assets/icons/prio_medium.svg';
-        prioImg.alt = '';
-
+        switch (this.taskPriority) {
+            case "urgent":
+                prioImg.src = './assets/icons/prio_high.svg';
+                break;
+            case "mid":
+                prioImg.src = './assets/icons/prio_medium.svg';
+                break;
+            case "low":
+                prioImg.src = './assets/icons/prio_low.svg';
+                break;
+            default:
+                break;
+        }
         priorityDiv.append(prioImg);
 
         footerDiv.append(profileBadgesDiv, priorityDiv);

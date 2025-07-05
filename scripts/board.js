@@ -17,6 +17,13 @@ const doneRef = document.getElementById('column-done');
 const doneEmptyRef = document.getElementById('no-tasks-done');
 const dragRef = document.querySelectorAll('.card_column');
 
+const columnRefs = {
+    dataToDo: todoRef,
+    dataInProgress: inProgressRef,
+    dataAwaitFeedback: awaitFeedbackRef,
+    dataDone: doneRef,
+}
+
 const emptyRefs = {
     dataToDo: todoEmptyRef,
     dataInProgress: inProgressEmptyRef,
@@ -32,7 +39,7 @@ async function loadTasks() {
     })
 
     dataPool.forEach((task) => {
-        // task.logger()
+        task.logger()
     })
 }
 
@@ -71,26 +78,22 @@ function checkColumnContent() {
         const ref = emptyRefs[key];
         if (pool.length === 0) {
             ref.classList.remove('d_none');
-            console.log(`${key} ist leer`);
         } else {
             ref.classList.add('d_none');
-            console.log(`${key} hat Inhalt`);
         }
     });
 }
 
 function refreshBoard() {
-    todoRef.innerHTML = "";
-    inProgressRef.innerHTML = "";
-    awaitFeedbackRef.innerHTML = "";
-
-    let testarr = doneRef.querySelectorAll('.task_card')
-    console.log(testarr)
-    if(testarr.length > 0){
-        testarr.forEach((item) => {
-            doneRef.removeChild(item)
-        })
-    }
+    Object.keys(cardPools).forEach((key) => {
+        const ref = columnRefs[key];
+        let refTasks = ref.querySelectorAll('.task_card')  
+        if (refTasks.length > 0) {
+            refTasks.forEach((item) => {
+                ref.removeChild(item);
+            })
+        }
+    });
 
     cardPools.dataToDo = [];
     cardPools.dataInProgress = [];
