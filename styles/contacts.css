@@ -344,6 +344,11 @@ main {
   color: rgb(0, 123, 255);
 }
 
+.contact_info .info_value_phone {
+  font-size: 16px;
+  color: rgb(29, 29, 29);
+}
+
 .edit_contacts_window {
   position: absolute;
   top: 0;
@@ -476,30 +481,71 @@ main {
   height: 20px;
 }
 
-.btn_cancel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 400;
-  font-size: 21px;
-  padding: 12px 16px;
-  background-color: transparent;
-  color: rgb(42, 54, 71);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+.btn_cancel{
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    gap: 4px;
+    height: 56px;
+    width: 126px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    border: 1px solid rgba(42, 54, 71, 1);
+    color: rgba(42, 54, 71, 1);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .btn_cancel:hover {
-  border: 2px solid rgba(41, 171, 226, 1);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: rgba(41, 171, 226, 1);
+    border: 2px solid rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: rgba(41, 171, 226, 1);
 }
 
-.btn_cancel img.cancel_icon {
-  width: 20px;
-  height: 20px;
+.btn_cancel:active {
+    border: 1px solid rgba(9, 25, 49, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: rgba(9, 25, 49, 1);
 }
+
+.btn_cancel:hover .close_cross::before,
+.btn_cancel:hover .close_cross::after {
+    background-color: rgba(41, 171, 226, 1);
+    cursor: pointer;
+}
+
+.btn_cancel:active .close_cross::before,
+.btn_cancel:active .close_cross::after {
+    background-color: rgba(9, 25, 49, 1);
+}
+
+.close_cross {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+
+.close_cross:before, .close_cross:after {
+  position: absolute;
+  content: " ";
+  height: 16px;
+  width: 2px;
+  background-color: rgba(42, 54, 71, 1);
+  border-radius: 2px;
+}
+
+.close_cross:before {
+  transform: rotate(45deg);
+}
+
+.close_cross:after {
+  transform: rotate(-45deg);
+}
+
 
 /* Icon-Buttons unter dem Namen */
 .icon_button {
