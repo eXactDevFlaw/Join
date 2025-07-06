@@ -20,12 +20,15 @@ function slideInOverlay() {
     return;
   }
 
-  // Grauen Hintergrund anzeigen
+  // Hintergrund und Modal einblenden
   overlay.classList.add("show");
-  // Modal hereinschieben
   container.classList.add("show");
 
-  // Klicks **im** Container nicht weiterreichen, damit es nicht sofort wieder schließt
+  // Add‑Button deaktivieren
+  const addBtn = document.querySelector(".add_contact_btn");
+  if (addBtn) addBtn.disabled = true;
+
+  // Klicks im Container nicht weiterreichen
   container.addEventListener("click", e => e.stopPropagation(), { once: true });
 }
 
@@ -35,16 +38,21 @@ function closeOverlay() {
   const container = document.getElementById("overlay-container");
   if (!overlay || !container) return;
 
-  // Container herausfahren lassen
+  // Modal herausfahren
   container.classList.remove("show");
-  // nach der Animation den Hintergrund ausblenden
-  setTimeout(() => overlay.classList.remove("show"), 250);
+
+  // nach Animation den Hintergrund ausblenden & Button wieder aktivieren
+  setTimeout(() => {
+    overlay.classList.remove("show");
+    const addBtn = document.querySelector(".add_contact_btn");
+    if (addBtn) addBtn.disabled = false;
+  }, 250);
 }
 
 // Klick aufs halbdurchsichtige Overlay schließt das Modal
 document.getElementById("overlay")?.addEventListener("click", closeOverlay);
 
-// **Alles, was INSIDE des Containers angeklickt wird, darf nicht schließen**
+// Alles, was INSIDE des Containers angeklickt wird, darf nicht schließen
 document.getElementById("overlay-container")?.addEventListener("click", e => {
   e.stopPropagation();
 });

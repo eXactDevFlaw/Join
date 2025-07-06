@@ -38,7 +38,7 @@ main {
 /* "+ Add new contact"-Button: volle Breite & bündig */
 .btn_dark,
 .add_contact_btn {
- border: 1px;
+  border: 1px;
   border-radius: 10px;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 63, 84);
@@ -156,7 +156,16 @@ main {
    Overlay-Content (rechts kommt dein Detailbereich)
    ========================================== */
 .overlay_content {
+  display: flex;
   flex: 1;
+  width: 100%;
+  height: 100%;
+}
+#overlay-content {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .overlay_content h2 {
@@ -223,7 +232,7 @@ main {
   display: none;
 }
 
-.contact_detail{
+.contact_detail {
   display: flex;
   flex-direction: column;
   padding-top: 20px;
@@ -289,8 +298,10 @@ main {
   background: none;
   border: none;
   padding: 0;
-  font: inherit;                /* übernimm Schriftfamilie/-größe */
-  color: rgb(42, 54, 71);       /* dunkles Grau/Schwarz */
+  font: inherit;
+  /* übernimm Schriftfamilie/-größe */
+  color: rgb(42, 54, 71);
+  /* dunkles Grau/Schwarz */
   cursor: pointer;
 }
 
@@ -304,8 +315,10 @@ main {
 
 .action_button:hover span,
 .action_button:hover .icon {
-  color: rgb(41, 171, 226);     /* blau beim Hover */
-  filter: brightness(1.2);      /* Icon aufhellen */
+  color: rgb(41, 171, 226);
+  /* blau beim Hover */
+  filter: brightness(1.2);
+  /* Icon aufhellen */
 }
 
 .contact_circle_large {
@@ -382,7 +395,7 @@ main {
 /* Einzelner Toast */
 .toast {
   background-color: rgb(42, 54, 71);
-  color: #fff;
+  color: white;
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 14px;
@@ -481,43 +494,43 @@ main {
   height: 20px;
 }
 
-.btn_cancel{
-    display: flex;
-    align-items: center;
-    justify-content: center;  
-    gap: 4px;
-    height: 56px;
-    width: 126px;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-    border: 1px solid rgba(42, 54, 71, 1);
-    color: rgba(42, 54, 71, 1);
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 20px;
+.btn_cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 56px;
+  width: 126px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  border: 1px solid rgba(42, 54, 71, 1);
+  color: rgba(42, 54, 71, 1);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .btn_cancel:hover {
-    border: 2px solid rgba(41, 171, 226, 1);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    color: rgba(41, 171, 226, 1);
+  border: 2px solid rgba(41, 171, 226, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: rgba(41, 171, 226, 1);
 }
 
 .btn_cancel:active {
-    border: 1px solid rgba(9, 25, 49, 1);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    color: rgba(9, 25, 49, 1);
+  border: 1px solid rgba(9, 25, 49, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: rgba(9, 25, 49, 1);
 }
 
 .btn_cancel:hover .close_cross::before,
 .btn_cancel:hover .close_cross::after {
-    background-color: rgba(41, 171, 226, 1);
-    cursor: pointer;
+  background-color: rgba(41, 171, 226, 1);
+  cursor: pointer;
 }
 
 .btn_cancel:active .close_cross::before,
 .btn_cancel:active .close_cross::after {
-    background-color: rgba(9, 25, 49, 1);
+  background-color: rgba(9, 25, 49, 1);
 }
 
 .close_cross {
@@ -529,7 +542,8 @@ main {
 }
 
 
-.close_cross:before, .close_cross:after {
+.close_cross:before,
+.close_cross:after {
   position: absolute;
   content: " ";
   height: 16px;
