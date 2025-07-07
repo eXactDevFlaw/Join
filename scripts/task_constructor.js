@@ -7,8 +7,8 @@ class TaskClass {
         this.taskCategory = data.category;
         this.taskPriority = data.priority;
         this.taskStatus = data.status;
-        this.taskSubTasks = data.subTasks;
-        this.taskAssigendTo = data.assigendTo;
+        this.taskSubTasks = data.subtasks;
+        this.taskAssignedTo = data.assignedTo;
     }
 
     logger() {
@@ -34,17 +34,17 @@ class TaskClass {
         cardLabelDiv.className = 'card_label margin_0';
         switch (this.taskCategory) {
             case "Technical Task":
-                cardLabelDiv.style.backgroundColor =  'rgba(31, 215, 193, 1)'
+                cardLabelDiv.style.backgroundColor = 'rgba(31, 215, 193, 1)'
                 break;
             default:
-                cardLabelDiv.style.backgroundColor =  'rgba(0, 56, 255, 1)'
+                cardLabelDiv.style.backgroundColor = 'rgba(0, 56, 255, 1)'
                 break;
         }
         cardLabelDiv.innerText = this.taskCategory;
 
         // task_description
         const taskDescriptionDiv = document.createElement('div');
-        taskDescriptionDiv.className = 'task_description margin_0';
+        taskDescriptionDiv.className = 'task_description';
 
         // task_title
         const taskTitleDiv = document.createElement('div');
@@ -61,40 +61,61 @@ class TaskClass {
         // Description zusammenbauen
         taskDescriptionDiv.append(taskTitleDiv, taskContentInnerDiv);
 
-        // subtask_progress
-        const subtaskProgressDiv = document.createElement('div');
-        subtaskProgressDiv.className = 'subtask_progress margin_0';
+        // Subtask_wrapper
+        const subTasksWrapper = document.createElement('div');
+        this.taskSubTasksAmount = 0
+        this.taskSubTasksAmountCompleted = 0
 
-        const progressBarDiv = document.createElement('div');
-        progressBarDiv.className = 'progress_bar margin_0';
+        if (this.taskSubTasks != undefined) {
+            Object.values(this.taskSubTasks).forEach((item) => {
+                this.taskSubTasksAmount += 1
+                if (item.status == "closed") {
+                    this.taskSubTasksAmountCompleted += 1;
+                }
+            })
 
-        const progressStatusDiv = document.createElement('div');
-        progressStatusDiv.className = 'progress_status margin_0';
-        progressStatusDiv.style.width = '75%'; // Hier ggf. dynamisch setzen
+            // subtask_progress
+            const subtaskProgressDiv = document.createElement('div');
+            subtaskProgressDiv.className = 'subtask_progress';
 
-        progressBarDiv.append(progressStatusDiv);
+            const progressBarDiv = document.createElement('div');
+            progressBarDiv.className = 'progress_bar';
 
-        // subtasks
-        const subtasksDiv = document.createElement('div');
-        subtasksDiv.className = 'subtasks margin_0';
+            const progressStatusDiv = document.createElement('div');
+            progressStatusDiv.className = 'progress_status margin_0';
+            this.taskSubTasksProcent = (this.taskSubTasksAmountCompleted / this.taskSubTasksAmount) * 100
+            progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`; // Hier ggf. dynamisch setzen
 
-        const finishedSubtasksP = document.createElement('p');
-        finishedSubtasksP.id = 'finised-subtasks';
-        finishedSubtasksP.innerText = "0";
+            progressBarDiv.append(progressStatusDiv);
 
-        const slashP = document.createElement('p');
-        slashP.innerText = "/";
+            // subtasks
+            const subtasksDiv = document.createElement('div');
+            subtasksDiv.className = 'subtasks margin_0';
 
-        const subtasksLengthP = document.createElement('p');
-        subtasksLengthP.id = 'subtasks-length';
-        subtasksLengthP.innerText = "2";
+            const finishedSubtasksP = document.createElement('p');
+            finishedSubtasksP.id = 'finised-subtasks';
+            finishedSubtasksP.innerText = this.taskSubTasksAmountCompleted;
 
-        const subtasksTextP = document.createElement('p');
-        subtasksTextP.innerHTML = "&nbsp;Subtasks";
+            const slashP = document.createElement('p');
+            slashP.innerText = "/";
 
-        subtasksDiv.append(finishedSubtasksP, slashP, subtasksLengthP, subtasksTextP);
+            const subtasksLengthP = document.createElement('p');
+            subtasksLengthP.id = 'subtasks-length';
+            subtasksLengthP.innerText = this.taskSubTasksAmount;
 
-        subtaskProgressDiv.append(progressBarDiv, subtasksDiv);
+
+            const subtasksTextP = document.createElement('p');
+            subtasksTextP.innerHTML = "&nbsp;Subtasks";
+
+            subtasksDiv.append(finishedSubtasksP, slashP, subtasksLengthP, subtasksTextP);
+
+            subtaskProgressDiv.append(progressBarDiv, subtasksDiv);
+
+            subTasksWrapper.append(subtaskProgressDiv);
+        } else {
+            subTasksWrapper.append();
+        }
+
 
         // task_card_footer
         const footerDiv = document.createElement('div');
@@ -103,6 +124,15 @@ class TaskClass {
         // profile_badges
         const profileBadgesDiv = document.createElement('div');
         profileBadgesDiv.className = 'profile_badges d_flex_center_row margin_0 justify_start';
+
+        if(this.taskAssignedTo){
+            let data = Object.values(this.taskAssignedTo)
+            data.forEach((item) => {
+                console.log(item)
+                let color = stringToColor(item)
+                console.log(color)
+            })
+        }
 
         // Beispiel-Badges (hier ggf. dynamisch aus deinen Daten!)
         for (let i = 0; i < 3; i++) {
@@ -139,7 +169,7 @@ class TaskClass {
         taskContentDiv.append(
             cardLabelDiv,
             taskDescriptionDiv,
-            subtaskProgressDiv,
+            subTasksWrapper,
             footerDiv
         );
         cardDiv.append(taskContentDiv);

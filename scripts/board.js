@@ -38,7 +38,6 @@ async function loadTasks() {
         let [key, data] = [...singleTask]
         dataPool.push(new TaskClass(key, data));
     })
-
     dataPool.forEach((task) => {
         // task.logger()
     })
@@ -170,6 +169,35 @@ async function updateTasksOnDatabase(taskKey, data) {
         body: JSON.stringify(data),
     });
     return (responseToJson = await response.json());
+}
+
+/**
+ * Generates a color string from a string input
+ * @param {string} str
+ * @returns {string}
+ */
+function stringToColor(str) {
+  let hash = 0;
+  for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
+  return `hsl(${hash % 360}, 70%, 50%)`;
+}
+
+/**
+ * Function to set capital letters for usercontrol
+ */
+function getUserInitials() {
+  if (!userDataFromLocalStorage || !userDataFromLocalStorage.userFullName) {
+    return
+  }
+  if(userNameRef){
+    userNameRef.innerText = userDataFromLocalStorage.userFullName
+  }
+  let userName = userDataFromLocalStorage.userFullName.trim().split(' ');
+  let firstInitial = userName[0][0].toUpperCase();
+  let lastInitial = userName[userName.length - 1][0].toUpperCase();
+  if (userInitials) {
+    userInitials.innerText = firstInitial + lastInitial;
+  }
 }
 
 

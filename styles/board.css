@@ -173,7 +173,6 @@ content{
 .task_content{
     display: flex;
     flex-direction: column;
-    gap: 24px;
 }
 
 .card_label{
@@ -190,6 +189,7 @@ content{
     flex-direction: column;
     justify-content: flex-start;
     gap: 8px;
+    margin-top: 24px;
 }
 
 .task_title{
@@ -211,6 +211,7 @@ content{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 24px;
 }
 
 .progress_bar{
@@ -218,6 +219,7 @@ content{
     height: 8px;
     background-color: rgba(244, 244, 244, 1);
     border-radius: 16px;
+    margin-right: 6px;
 }
 
 .progress_status{
@@ -235,8 +237,7 @@ content{
 }
 
 .task_card_footer{
-    margin-left: 15px;
-    margin-right: 0;
+    margin: 24px 0 0 15px;
 }
 
 .profile_badges{

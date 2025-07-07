@@ -86,5 +86,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     await getTasks();
     getTasksDetails();
     renderUpcomingDeadline()
-    console.log(tasks)
 })
