@@ -111,7 +111,7 @@ function searchTaskOnBoard() {
         Object.values(cardPools).forEach((cardList) => {
             cardList.forEach((card) => {
                 let taskName = card.getAttribute('taskName').toLowerCase();
-                if(taskName.includes(searchInput)) {
+                if (taskName.includes(searchInput)) {
                     card.classList.remove('d_none');
                 } else {
                     card.classList.add('d_none')
@@ -177,29 +177,32 @@ async function updateTasksOnDatabase(taskKey, data) {
  * @returns {string}
  */
 function stringToColor(str) {
-  let hash = 0;
-  for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
-  return `hsl(${hash % 360}, 70%, 50%)`;
+    let hash = 0;
+    for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
+    return `hsl(${hash % 360}, 70%, 50%)`;
 }
 
 /**
  * Function to set capital letters for usercontrol
  */
-function getUserInitials() {
-  if (!userDataFromLocalStorage || !userDataFromLocalStorage.userFullName) {
-    return
-  }
-  if(userNameRef){
-    userNameRef.innerText = userDataFromLocalStorage.userFullName
-  }
-  let userName = userDataFromLocalStorage.userFullName.trim().split(' ');
-  let firstInitial = userName[0][0].toUpperCase();
-  let lastInitial = userName[userName.length - 1][0].toUpperCase();
-  if (userInitials) {
-    userInitials.innerText = firstInitial + lastInitial;
-  }
+function getUserCapitalInitials(data) {
+    let userName = data.trim().split(' ');
+    let firstInitial = userName[0][0].toUpperCase();
+    let lastInitial = userName[userName.length - 1][0].toUpperCase();
+    return firstInitial + lastInitial
 }
 
+/**
+ * Checks string and whitespace
+ * @param {string} str 
+ * */
+function formatDescription(str, iterator) {
+    const nextSpace = str.indexOf(" ", iterator);
+    if (nextSpace === -1) {
+        return str;
+    }
+    return str.slice(0, nextSpace);
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
     getUserLogState()

@@ -19,6 +19,13 @@ class TaskClass {
         }
     }
 
+    renderTaskCard() {
+        const taskContentDiv = document.createElement('div');
+        taskContentDiv.className = 'task_content';
+        return taskContentDiv
+    }
+
+
     constructHTMLElements() {
         // Äußere Karte
         const cardDiv = document.createElement('div');
@@ -56,7 +63,12 @@ class TaskClass {
         const taskContentInnerDiv = document.createElement('div');
         taskContentInnerDiv.className = 'task_content margin_0';
         taskContentInnerDiv.id = 'task-content';
-        taskContentInnerDiv.innerText = this.taskDescription;
+        if (this.taskDescription.length > 50) {
+            let sliceContent = formatDescription(this.taskDescription, 50)
+            taskContentInnerDiv.innerText = sliceContent += "...";
+        } else {
+            taskContentInnerDiv.innerText = this.taskDescription
+        }
 
         // Description zusammenbauen
         taskDescriptionDiv.append(taskTitleDiv, taskContentInnerDiv);
@@ -84,8 +96,7 @@ class TaskClass {
             const progressStatusDiv = document.createElement('div');
             progressStatusDiv.className = 'progress_status margin_0';
             this.taskSubTasksProcent = (this.taskSubTasksAmountCompleted / this.taskSubTasksAmount) * 100
-            progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`; // Hier ggf. dynamisch setzen
-
+            progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`;
             progressBarDiv.append(progressStatusDiv);
 
             // subtasks
@@ -116,33 +127,19 @@ class TaskClass {
             subTasksWrapper.append();
         }
 
+        // Alles zusammenbauen
+        taskContentDiv.append(
+            cardLabelDiv,
+            taskDescriptionDiv,
+            subTasksWrapper,
+            this.createFooterContainer()
+        );
+        cardDiv.append(taskContentDiv);
 
-        // task_card_footer
-        const footerDiv = document.createElement('div');
-        footerDiv.className = 'task_card_footer d_flex_center_row justify_between';
+        return cardDiv;
+    }
 
-        // profile_badges
-        const profileBadgesDiv = document.createElement('div');
-        profileBadgesDiv.className = 'profile_badges d_flex_center_row margin_0 justify_start';
-
-        if(this.taskAssignedTo){
-            let data = Object.values(this.taskAssignedTo)
-            data.forEach((item) => {
-                console.log(item)
-                let color = stringToColor(item)
-                console.log(color)
-            })
-        }
-
-        // Beispiel-Badges (hier ggf. dynamisch aus deinen Daten!)
-        for (let i = 0; i < 3; i++) {
-            const badge = document.createElement('div');
-            badge.className = 'profile_badge';
-            badge.innerText = 'AM';
-            profileBadgesDiv.append(badge);
-        }
-
-        // priority_symbol_container
+    creatPriorityContainer() {
         const priorityDiv = document.createElement('div');
         priorityDiv.className = 'priority_symbol_container d_flex_center margin_0';
         priorityDiv.id = 'priority_symbol';
@@ -162,18 +159,36 @@ class TaskClass {
                 break;
         }
         priorityDiv.append(prioImg);
+        return priorityDiv
+    }
 
-        footerDiv.append(profileBadgesDiv, priorityDiv);
+    createProfileBadgeContainer() {
+        const profileBadgesDiv = document.createElement('div');
+        profileBadgesDiv.className = 'profile_badges d_flex_center_row margin_0 justify_start';
 
-        // Alles zusammenbauen
-        taskContentDiv.append(
-            cardLabelDiv,
-            taskDescriptionDiv,
-            subTasksWrapper,
-            footerDiv
-        );
-        cardDiv.append(taskContentDiv);
+        if (this.taskAssignedTo) {
+            let data = Object.values(this.taskAssignedTo)
+            data.forEach((item) => {
+                let assignedInitals = getUserCapitalInitials(item)
+                let color = stringToColor(item)
+                const badge = document.createElement('div');
+                badge.className = 'profile_badge';
+                badge.style.backgroundColor = color
+                badge.innerText = assignedInitals;
+                profileBadgesDiv.append(badge)
+            })
+        }
+        return profileBadgesDiv
+    }
 
-        return cardDiv;
+    createFooterContainer() {
+        const footerDiv = document.createElement('div');
+        footerDiv.className = 'task_card_footer d_flex_center_row justify_between';
+        footerDiv.append(this.createProfileBadgeContainer(), this.creatPriorityContainer());
+        return footerDiv
+    }
+
+    createSubTasksContainer() {
+        
     }
 }
