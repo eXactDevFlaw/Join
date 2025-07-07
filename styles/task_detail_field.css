@@ -1,0 +1,21 @@
+.task_detail_entry{
+    padding: 48px 40px 48px 40px;
+    position: relative;
+    top: 60px;
+    width: 525px;
+    /* height: 870px; */
+    border-radius: 30px;
+    background-color: white;
+    /* transform: translateX(200%);
+    transition: transform 0.3s ease; */
+    z-index: 4;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    gap: 24px;
+}
+
+    
+.task_detail{
+    margin: 0;
+    width: 100px;
+    color: rgba(42, 54, 71, 1);
+}
