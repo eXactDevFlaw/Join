@@ -122,7 +122,7 @@ class TaskClass {
             case "urgent":
                 prioImg.src = './assets/icons/prio_high.svg';
                 break;
-            case "mid":
+            case "medium":
                 prioImg.src = './assets/icons/prio_medium.svg';
                 break;
             case "low":

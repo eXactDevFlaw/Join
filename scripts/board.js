@@ -16,6 +16,7 @@ const awaitFeedbackEmptyRef = document.getElementById('no-tasks-awaiting-feedbac
 const doneRef = document.getElementById('column-done');
 const doneEmptyRef = document.getElementById('no-tasks-done');
 const dragRef = document.querySelectorAll('.card_column');
+const searchRef = document.getElementById('find-task');
 
 const columnRefs = {
     dataToDo: todoRef,
@@ -39,7 +40,7 @@ async function loadTasks() {
     })
 
     dataPool.forEach((task) => {
-        task.logger()
+        // task.logger()
     })
 }
 
@@ -56,20 +57,20 @@ function renderAllTasks() {
     });
 }
 
-function pushCardsToCardsPool(taskStatus, htmlel){
-        if(taskStatus === "todo"){
-            todoRef.append(htmlel)
-            cardPools.dataToDo.push(htmlel)
-        } else if(taskStatus === "in progress"){
-            inProgressRef.append(htmlel)
-            cardPools.dataInProgress.push(htmlel)
-        } else if(taskStatus === "await feedback"){
-            awaitFeedbackRef.append(htmlel)
-            cardPools.dataAwaitFeedback.push(htmlel)
-        } else {
-            doneRef.append(htmlel)
-            cardPools.dataDone.push(htmlel)
-        }
+function pushCardsToCardsPool(taskStatus, htmlel) {
+    if (taskStatus === "todo") {
+        todoRef.append(htmlel)
+        cardPools.dataToDo.push(htmlel)
+    } else if (taskStatus === "in progress") {
+        inProgressRef.append(htmlel)
+        cardPools.dataInProgress.push(htmlel)
+    } else if (taskStatus === "await feedback") {
+        awaitFeedbackRef.append(htmlel)
+        cardPools.dataAwaitFeedback.push(htmlel)
+    } else {
+        doneRef.append(htmlel)
+        cardPools.dataDone.push(htmlel)
+    }
 }
 
 function checkColumnContent() {
@@ -87,7 +88,7 @@ function checkColumnContent() {
 function refreshBoard() {
     Object.keys(cardPools).forEach((key) => {
         const ref = columnRefs[key];
-        let refTasks = ref.querySelectorAll('.task_card')  
+        let refTasks = ref.querySelectorAll('.task_card')
         if (refTasks.length > 0) {
             refTasks.forEach((item) => {
                 ref.removeChild(item);
@@ -103,6 +104,26 @@ function refreshBoard() {
     renderAllTasks();
     checkColumnContent();
 }
+
+function searchTaskOnBoard() {
+    searchRef.addEventListener('input', (e) => {
+        let searchInput = e.target.value.toLowerCase().trim();
+
+        Object.values(cardPools).forEach((cardList) => {
+            cardList.forEach((card) => {
+                let taskName = card.getAttribute('taskName').toLowerCase();
+                if(taskName.includes(searchInput)) {
+                    card.classList.remove('d_none');
+                } else {
+                    card.classList.add('d_none')
+                }
+            })
+        })
+        checkColumnContent()
+    })
+};
+
+
 
 dragRef.forEach(element => {
     element.addEventListener('dragover', (e) => {
@@ -151,9 +172,11 @@ async function updateTasksOnDatabase(taskKey, data) {
     return (responseToJson = await response.json());
 }
 
+
 document.addEventListener('DOMContentLoaded', async () => {
     getUserLogState()
     await loadTasks()
     renderAllTasks()
     checkColumnContent()
+    searchTaskOnBoard()
 })
