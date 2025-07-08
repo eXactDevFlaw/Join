@@ -1,31 +1,71 @@
-@media (max-width: 1400px) {
-    
-}
-
 @media (max-width: 1200px) {
-    
+
 }
 
-@media (max-width: 1000px) {
-    
+@media (max-width: 780px) {
+     .login_main {
+         width: 90%;
+     }
+
+     .signin_main {
+        width: 90%;
+     }
 }
 
-@media (max-width: 800px) {
-    
-}
 
-@media (max-width: 700px) {
-    .login_main {
-        width: 396px;
-        height: 475px;
+@media (max-width: 550px) {
+@keyframes slide {
+    0% {
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: auto;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        top: 37px;
+        left: 38px;
+        width: 80px;
+        transform: translate(0, 0) scale(1);
     }
 }
 
-@media (max-width: 600px) {
-    
-}
+    .login_logo {
+        position: absolute;
+        top: 37px;
+        left: 38px;
+    }
 
-@media (max-width: 400px) {
-    
-}
+    .login_logo img {
+        width: 80%;
+    }
 
+    .login_container {
+        position: absolute;
+        top: 778px;
+        margin: 0;
+    }
+
+    .input_icon_wrapper {
+        width: 100%;
+    }
+
+    .login_btn_wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .login_btn {
+        width: 180px;
+        margin: 0px;
+    }
+
+    .guest_login_btn {
+        margin: 0px;
+    }
+}

@@ -182,6 +182,7 @@ function setupToggleListeners() {
       loginForm.classList.add("d_none");
       signinForm.classList.remove("d_none");
       signinContainer.classList.add("d_none");
+      console.log("hier wurde getoggelt ")
     } else {
       loginForm.classList.remove("d_none");
       signinForm.classList.add("d_none");
