@@ -168,8 +168,8 @@ async function renderAssignableContacts() {
     });
 }
 
-// Klick auf das Inputfeld oder Dropdown-Pfeil zeigt Liste an
-document.getElementById("assign-input").addEventListener("click", renderAssignableContacts);
+// // Klick auf das Inputfeld oder Dropdown-Pfeil zeigt Liste an
+// document.getElementById("assign-input").addEventListener("click", renderAssignableContacts);
 
 
 let categoryDropdown = document.querySelector(".select_category_dropdown");
