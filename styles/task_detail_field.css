@@ -16,6 +16,26 @@
     
 .task_detail{
     margin: 0;
-    width: 100px;
+    width: 150px;
     color: rgba(42, 54, 71, 1);
+}
+
+.close_detail_field {
+    position: unset;
+}
+
+.category_detail {
+    font-size: 23px;
+    border-radius: 8px;
+    padding: 4px 24px 4px 24px;
+    color: rgba(255, 255, 255, 1);
+    background-color: blue;
+}
+
+.task_detail_description{
+    font-size: 20px;
+}
+
+.detail_head{
+    font-size: 20px;
 }

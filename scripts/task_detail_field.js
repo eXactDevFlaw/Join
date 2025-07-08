@@ -6,3 +6,14 @@ function openTaskDetails() {
     void add_task_entry.offsetWidth;
     add_task_entry.classList.add("show");
 }
+
+const taskCards = document.querySelectorAll(".task_card");
+
+taskCards.forEach(element => {
+    element.addEventListener("click", function() {
+        let content = this.getAttribute("taskname");
+        console.log(content, "Geklickt");
+        
+    })
+})
+
