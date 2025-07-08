@@ -212,5 +212,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderAllTasks()
     checkColumnContent()
     searchTaskOnBoard()
-    console.log(dataPool)
 })
