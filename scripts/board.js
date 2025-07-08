@@ -124,8 +124,6 @@ function searchTaskOnBoard() {
     })
 };
 
-
-
 dragRef.forEach(element => {
     element.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -205,6 +203,7 @@ function formatDescription(str, iterator) {
     }
     return str.slice(0, nextSpace);
 }
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     getUserLogState()
