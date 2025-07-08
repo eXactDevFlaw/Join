@@ -18,7 +18,6 @@ const doneEmptyRef = document.getElementById('no-tasks-done');
 const dragRef = document.querySelectorAll('.card_column');
 const searchRef = document.getElementById('find-task');
 
-
 const columnRefs = {
     dataToDo: todoRef,
     dataInProgress: inProgressRef,
@@ -50,7 +49,7 @@ function renderAllTasks() {
         let htmlel = item.constructHTMLElements()
         htmlel.setAttribute("taskName", item.taskName)
         htmlel.setAttribute("taskStatus", item.taskStatus)
-        htmlel.setAttribute("onclick", `openTaskDetails()`)
+        // htmlel.setAttribute("onclick", `openTaskDetails()`)
         // ${item.taskKey}
         htmlel.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', item.taskName);
@@ -213,4 +212,62 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderAllTasks()
     checkColumnContent()
     searchTaskOnBoard()
+    taskDetailsRef ()
 })
+
+function taskDetailsRef (){
+    const taskCards = document.querySelectorAll(".task_card");
+    taskCards.forEach(task => {
+        task.addEventListener("click", function () {
+            let taskname = this.getAttribute("taskname")
+            dataPool.forEach((data) => {
+                if (data.taskName === taskname){
+                     renderTaskDetailView(data);
+                     console.log("geht");
+                     
+                }
+            })
+        });
+    });
+   
+}
+
+function renderTaskDetailView(data) {
+    const taskCategory = document.getElementById("task-category");
+    const taskTitle = document.querySelector(".task_detail_title");
+    const taskDescription = document.querySelector(".task_detail_description");
+    const taskDueDate = document.querySelector(".detail_due_date");
+    if (data.taskCategory === "Technical Task"){
+        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)';
+        
+    } else {
+        taskCategory.style.backgroundColor = 'rgba(0, 56, 255, 1)'
+    }
+    taskCategory.innerHTML = data.taskCategory;  
+    taskTitle.innerHTML = data.taskName;
+    taskDescription.innerHTML = data.taskDescription;
+    taskDueDate.innerHTML = data.taskData.dueDate.toLocaleString();
+    console.log(data);
+    openTaskDetails()
+}
+
+function openTaskDetails() {
+   
+    document.getElementById("task-overlay").classList.remove("d_none");
+    let task_detail_entry = document.getElementById("task-details");
+    task_detail_entry.classList.remove("d_none");
+    void task_detail_entry.offsetWidth;
+    task_detail_entry.classList.add("show");
+}
+
+function closeTaskOverlay() {
+    document.getElementById("task-overlay").classList.add("d_none");;
+    const entry = document.getElementById("add-task-entry");
+    const task_detail_entry = document.getElementById("task-details");
+    entry.classList.remove("show");
+    task_detail_entry.classList.remove("show");
+    setTimeout(() => {
+        entry.classList.add("d_none");
+        task_detail_entry.classList.add("d_none");
+    }, 300);
+}
