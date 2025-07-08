@@ -30,7 +30,7 @@ class TaskClass {
         // Äußere Karte
         const cardDiv = document.createElement('div');
         cardDiv.className = 'task_card';
-        cardDiv.draggable = true
+        cardDiv.draggable = true;
 
         // task_content
         const taskContentDiv = document.createElement('div');

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./styles/responsive.css" />
   <link rel="stylesheet" href="./styles/standart.css" />
   <link rel="stylesheet" href="./styles/add_task.css" />
+  <link rel="stylesheet" href="./styles/task_detail_field.css" />
   <title>Join - Board</title>
 </head>
 
@@ -21,6 +22,34 @@
   <div class="add_task_entry d_none" onclick="stopPropagation(event)" id="add-task-entry">
 
   </div>
+
+  <div class="task_detail_entry d_flex_center_column d_none" id="task-details">
+      <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
+        <div class="margin_0 category_detail">User Story</div>
+        <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
+      </div>
+      <div class="task_detail_title margin_0 justify_start align_none d_flex margin_0 width_100">
+        <h1>Kochwelt Page & Recipe Recommender</h1>
+      </div>
+      <div class="task_detail_description width_100">
+        Build start page with recipe recommendation.
+      </div>
+      <div class=" d_flex_center_row width_100 detail_head">
+        <p class="task_detail">Due date:</p>
+        <div class="width_100">Datum</div>
+      </div>
+      <div class="d_flex_center_row width_100 detail_head">
+        <p class="task_detail">Priority:</p>
+        <div class="width_100">Medium</div>
+      </div>
+      <div class="d_flex_center_row width_100 justify_start">
+        <p class="task_detail margin_0 detail_head">Assigned To:</p>
+      </div>
+      <div class="d_flex_center_row width_100 justify_start">
+        <p class="task_detail margin_0 detail_head">Subtasks</p>
+      </div>
+    </div>
+
   <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
     onclick="toggleLogoutOverlay()">
     <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
@@ -143,10 +172,11 @@
     </div>
   </main>
 </body>
+
 <script src="./scripts/task_constructor.js"></script>
 <script src="./script.js" defer></script>
 <script src="./scripts/add_task.js"></script>
 <script src="./scripts/add_task_template.js"></script>
 <script src="./scripts/board.js"></script>
-
+<script src="./scripts/task_detail_field.js"></script>
 </html>
