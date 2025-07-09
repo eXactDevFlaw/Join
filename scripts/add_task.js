@@ -271,7 +271,7 @@ function deleteSubTask(index) {
 function editSubTask(index) {
     document.getElementById('subtask' + index).classList.add('d_none');
     document.getElementById('edit-subtask' + index).classList.remove('d_none');
-    console.log(subTasks[index]);
+    // document.querySelector('.subtask_edit_icons').classList.remove('d_none');
 }
 
 function editCheck(index) {

@@ -120,7 +120,7 @@ function addSubTaskTemplate (subTask, index){
   return `
                  <div class="added_subtask d_flex_center justify_between" id="subtask${index}" ondblclick="editSubTask(${index})">
               <li class="margin_0">${subTask}</li>
-              <div class="subtask_edit_icons d_flex_center_row margin_0 gap_4 justify_between">
+              <div class="subtask_edit_hover_icons d_flex_center_row margin_0 gap_4 justify_between">
                 <div onclick="editSubTask(${index})" class="input_icon_container edit_check_delete d_flex_center"> <img src="./assets/icons/edit.svg" alt=""></div>
                 <div> <img src="./assets/icons/vector_3.svg" alt="" class="vector-subtask"></div>
                 <div onclick="deleteSubTask(${index})" class="input_icon_container edit_check_delete d_flex_center"> <img src="./assets/icons/delete.svg" alt=""></div>

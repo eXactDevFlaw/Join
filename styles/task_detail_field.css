@@ -43,3 +43,20 @@
 #priority{
     gap: 10px;
 }
+
+#assigned-contacts{
+    gap: 10px;
+    padding-left: 20px;
+}
+
+.assigned_contact{
+    font-size: 19px;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    padding: 7px 16px 7px 16px;
+}
+
+.profile_badge{
+    font-size: 12px;
+}

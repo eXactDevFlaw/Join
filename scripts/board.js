@@ -55,6 +55,7 @@ function renderAllTasks() {
             e.dataTransfer.setData('text/plain', item.taskName);
         })
         pushCardsToCardsPool(item.taskStatus, htmlel)
+        taskDetailsRef ()
     });
 }
 
@@ -247,10 +248,16 @@ function renderContactsDetailView(data){
     const assignedTo = document.getElementById("assigned-contacts");
     if (data.taskAssignedTo){
           data.taskAssignedTo.forEach((contact) => {
-        assignedTo.innerHTML += `<div class="">${contact}</div>`;
+        assignedTo.innerHTML += `
+        <div class="width_100 assigned_contact"> 
+        <div class="profile_badge margin_0" id="${contact}"}></div><div class="margin_0 ">${contact}</div>
+        </div>`;
+        const profileBadge = document.getElementById(contact);
+        profileBadge.style.backgroundColor = stringToColor(contact);
+        profileBadge.innerText = getUserCapitalInitials(contact);
         
     })
-    console.log(data.taskAssignedTo);
+    
     }
   
 }
