@@ -230,27 +230,29 @@ function taskDetailsRef (){
 }
 
 function renderTaskDetailView(data) {
-    const taskCategory = document.getElementById("task-category");
-    const taskTitle = document.querySelector(".task_detail_title");
-    const taskDescription = document.querySelector(".task_detail_description");
-    const taskDueDate = document.querySelector(".detail_due_date");
-    const taskPriority = document.getElementById("priority");
-    if (data.taskCategory === "Technical Task"){
+    const taskDetail = document.getElementById('task-details');
+    taskDetail.innerHTML = taskDetailViewTemplate(data);
+     const taskCategory = document.getElementById("task-category");
+       if (data.taskCategory === "Technical Task"){
         taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)'; 
     } else {
         taskCategory.style.backgroundColor = 'rgba(0, 56, 255, 1)'
     }
-    taskDetailsHTML (data, taskCategory, taskTitle, taskDescription, taskDueDate, taskPriority);
+    taskCategory.innerHTML = data.taskCategory;
+    renderContactsDetailView(data);
     openTaskDetails();
 }
 
-function taskDetailsHTML (data, taskCategory, taskTitle, taskDescription, taskDueDate, taskPriority){
-    taskCategory.innerHTML = data.taskCategory;  
-    taskTitle.innerHTML = data.taskName;
-    taskDescription.innerHTML = data.taskDescription;
-    taskDueDate.innerHTML = data.taskData.dueDate;
-    taskPriority.innerHTML = `<p class="margin_0">${data.taskPriority.charAt(0).toUpperCase()
-  + data.taskPriority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskPriority}.svg" alt=""></img>`
+function renderContactsDetailView(data){
+    const assignedTo = document.getElementById("assigned-contacts");
+    if (data.taskAssignedTo){
+          data.taskAssignedTo.forEach((contact) => {
+        assignedTo.innerHTML += `<div class="">${contact}</div>`;
+        
+    })
+    console.log(data.taskAssignedTo);
+    }
+  
 }
 
 function openTaskDetails() {
