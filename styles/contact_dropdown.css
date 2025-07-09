@@ -1,3 +1,4 @@
+
 .contact_dropdown {
   position: relative;
   background-color: white;
@@ -6,6 +7,16 @@
   overflow-y: auto;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+#add-task-contacts-list{
+  width: 100%;
+  max-height: calc(5*54px);
+  overflow-y: auto;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .assign-contact-list {
@@ -39,19 +50,21 @@
 .assign_contact_left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  margin-left: initial;
 }
 
 .contact_circle {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
+  font-size: 14px;
   border-radius: 50%;
   background-color: gray;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .assign_contact_name {
@@ -65,4 +78,6 @@
   height: 16px;
   accent-color: rgba(42, 54, 71);
   cursor: pointer;
+  flex-shrink: 0;
+  margin-right: initial;
 }

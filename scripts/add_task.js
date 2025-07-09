@@ -103,38 +103,49 @@ async function renderContacts() {
     const addTaskContactsList = document.getElementById("add-task-contacts-list");
     addTaskContactsList.innerHTML = "";
 
-    const contacts = await getContactsFromDatabase();
+    // 1) Rohe Contacts holen (Objekt) und in ein Array verwandeln
+    const contactsObj = await getContactsFromDatabase();
+    const contacts = Object.values(contactsObj);
 
-    Object.values(contacts).forEach((contact) => {
+    // 2) Array alphabetisch sortieren
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+    // 3) Nur jeweils 5 anzeigen (optional)
+    // const visible = contacts.slice(0, 5);
+
+    // 4) UI befüllen
+    contacts.forEach(contact => {
         const color = stringToColor(contact.name);
         const initials = getInitials(contact.name);
 
         const contactItem = document.createElement("div");
-        contactItem.classList.add("assign_contact_row");
-
+        contactItem.className = "assign_contact_row";
         contactItem.innerHTML = `
       <div class="assign_contact_left">
-        <div class="contact_circle" style="background-color: ${color};">${initials}</div>
+        <div class="contact_circle" style="background-color: ${color};">
+          ${initials}
+        </div>
         <span class="assign_contact_name">${contact.name}</span>
       </div>
-      <input type="checkbox" class="assign_contact_checkbox">
+      <input type="checkbox" class="assign_contact_checkbox" />
     `;
-
         addTaskContactsList.appendChild(contactItem);
     });
 }
 
+
+/** Generiert aus einem String einen HSL-Farbwert */
 function stringToColor(str) {
     let hash = 0;
     for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
     return `hsl(${hash % 360}, 70%, 50%)`;
 }
 
-
+/** Extrahiert die ersten beiden Initialen aus einem Namen */
 function getInitials(name) {
     return name
         .split(" ")
-        .map((n) => n[0].toUpperCase())
+        .map(n => n[0]?.toUpperCase() || "")
         .join("")
         .slice(0, 2);
 }
