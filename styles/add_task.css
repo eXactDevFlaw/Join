@@ -345,7 +345,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   overflow-x: auto;
  }
 
- .subtask_edit_icons{
+ .subtask_edit_hover_icons{
   display: none;
 
  }
@@ -359,7 +359,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: rgba(238, 238, 238, 1);
  }
 
-.added_subtask:hover .subtask_edit_icons{
+.added_subtask:hover .subtask_edit_hover_icons{
   display: flex;
   cursor: pointer;
 }

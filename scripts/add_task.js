@@ -105,21 +105,25 @@ async function renderContacts() {
 
     const contacts = await getContactsFromDatabase();
 
-    Object.values(contacts).forEach((contact, index) => {
+    Object.values(contacts).forEach((contact) => {
         const color = stringToColor(contact.name);
         const initials = getInitials(contact.name);
 
-        addTaskContactsList.innerHTML += `
-      <div class="list_contact d_flex_center_row justify_start gap_16">
+        const contactItem = document.createElement("div");
+        contactItem.classList.add("assign_contact_row");
+
+        contactItem.innerHTML = `
+      <div class="assign_contact_left">
         <div class="contact_circle" style="background-color: ${color};">${initials}</div>
-        <div class="contact_name">${contact.name}</div>
-        <div class="signin_btn_checkbox_img_wrapper">
-          <img class="signin_btn_checkbox_img" src="./assets/icons/checkbox.svg" alt="checkbox">
-        </div>
+        <span class="assign_contact_name">${contact.name}</span>
       </div>
+      <input type="checkbox" class="assign_contact_checkbox">
     `;
+
+        addTaskContactsList.appendChild(contactItem);
     });
 }
+
 function stringToColor(str) {
     let hash = 0;
     for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
@@ -267,7 +271,7 @@ function deleteSubTask(index) {
 function editSubTask(index) {
     document.getElementById('subtask' + index).classList.add('d_none');
     document.getElementById('edit-subtask' + index).classList.remove('d_none');
-    console.log(subTasks[index]);
+    // document.querySelector('.subtask_edit_icons').classList.remove('d_none');
 }
 
 function editCheck(index) {

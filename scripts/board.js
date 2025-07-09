@@ -55,6 +55,7 @@ function renderAllTasks() {
             e.dataTransfer.setData('text/plain', item.taskName);
         })
         pushCardsToCardsPool(item.taskStatus, htmlel)
+        taskDetailsRef ()
     });
 }
 
@@ -222,8 +223,6 @@ function taskDetailsRef (){
             dataPool.forEach((data) => {
                 if (data.taskName === taskname){
                      renderTaskDetailView(data);
-                     console.log("geht");
-                     
                 }
             })
         });
@@ -232,26 +231,38 @@ function taskDetailsRef (){
 }
 
 function renderTaskDetailView(data) {
-    const taskCategory = document.getElementById("task-category");
-    const taskTitle = document.querySelector(".task_detail_title");
-    const taskDescription = document.querySelector(".task_detail_description");
-    const taskDueDate = document.querySelector(".detail_due_date");
-    if (data.taskCategory === "Technical Task"){
-        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)';
-        
+    const taskDetail = document.getElementById('task-details');
+    taskDetail.innerHTML = taskDetailViewTemplate(data);
+     const taskCategory = document.getElementById("task-category");
+       if (data.taskCategory === "Technical Task"){
+        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)'; 
     } else {
         taskCategory.style.backgroundColor = 'rgba(0, 56, 255, 1)'
     }
-    taskCategory.innerHTML = data.taskCategory;  
-    taskTitle.innerHTML = data.taskName;
-    taskDescription.innerHTML = data.taskDescription;
-    taskDueDate.innerHTML = data.taskData.dueDate.toLocaleString();
-    console.log(data);
-    openTaskDetails()
+    taskCategory.innerHTML = data.taskCategory;
+    renderContactsDetailView(data);
+    openTaskDetails();
+}
+
+function renderContactsDetailView(data){
+    const assignedTo = document.getElementById("assigned-contacts");
+    if (data.taskAssignedTo){
+          data.taskAssignedTo.forEach((contact) => {
+        assignedTo.innerHTML += `
+        <div class="width_100 assigned_contact"> 
+        <div class="profile_badge margin_0" id="${contact}"}></div><div class="margin_0 ">${contact}</div>
+        </div>`;
+        const profileBadge = document.getElementById(contact);
+        profileBadge.style.backgroundColor = stringToColor(contact);
+        profileBadge.innerText = getUserCapitalInitials(contact);
+        
+    })
+    
+    }
+  
 }
 
 function openTaskDetails() {
-   
     document.getElementById("task-overlay").classList.remove("d_none");
     let task_detail_entry = document.getElementById("task-details");
     task_detail_entry.classList.remove("d_none");
