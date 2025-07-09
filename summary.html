@@ -30,8 +30,11 @@
   </div>
   <header>
     <div class="header_container d_flex_center justify_between width_100">
-      <div class="margin_0">Kanban Project Management Tool</div>
-      <div class="d_flex_center margin_0 gap_16">
+      <div class="d_flex_center">
+        <img src="./assets/icons/logo_header_mobile.svg" class="d_flex logo_header_mobile" />
+      </div>
+      <div class="margin_0 header_content">Kanban Project Management Tool</div>
+      <div class="d_flex_center margin_0 gap_16 help_content">
         <a href="./templates/help.html">
           <img src="./assets/icons/help.svg" class="help_icon" alt="" />
         </a>
@@ -76,15 +79,18 @@
   </nav>
   <main class="position_absolute">
     <div class="d_flex_center justify_start">
-      <div>
+      <div class="div_headline">
         <div class="headline d_flex_center justify_around">
           <h1>Join 360</h1>
           <div class="headline_vector">
             <img src="./assets/icons/vector_5.svg" alt="vector_5" />
           </div>
           <h3>Key Metrics at a Glance</h3>
+          <div class="headline_vector_vertical">
+            <img src="./assets/icons/vector_5_mobile.svg" alt="vector_5" />
+          </div>
         </div>
-        <div class="d_flex_center">
+        <div class="d_flex_center summary_div">
           <div class="summary_overview d_flex_center_column justify_between">
             <div class="summary_first_row d_flex_center justify_between width_100">
               <a href="./board.html">
@@ -104,13 +110,13 @@
                     <div class="task_name">Done</div>
                   </div>
                 </div>
-                </a>
+              </a>
             </div>
             <a href="./board.html">
               <div class="summary_box urgent d_flex_center_row">
-                <div class="d_flex_center width_100 justify_around">
+                <div class="d_flex_center width_100 justify_around summary_container">
                   <div class="d_flex_center_row gap_18">
-                    <img src="./assets/icons/urgency_summary.svg" alt="urgency_summary" />
+                    <img class="urgency_summary_icon" src="./assets/icons/urgency_summary.svg" alt="urgency_summary" />
                     <div class="d_flex_center_column">
                       <div class="task_number" id="urgents"></div>
                       <div class="task_name">
@@ -118,10 +124,10 @@
                       </div>
                     </div>
                   </div>
-                  <img src="./assets/icons/urgency_vector.svg" alt="" />
+                  <img class="vector_5_urgency" src="./assets/icons/urgency_vector.svg" alt="" />
                   <div class="d_flex_center_column date">
                     <p id="date">October 16, 2022</p>
-                    <p>Upcoming Deadline</p>
+                    <p class="deadline">Upcoming Deadline</p>
                   </div>
                 </div>
               </div>

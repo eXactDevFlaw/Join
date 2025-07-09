@@ -173,3 +173,7 @@ p {
     font-weight: 500;
     font-size: 47px;
 }
+
+.headline_vector_vertical {
+    display: none;
+}

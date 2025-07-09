@@ -45,6 +45,23 @@
     }
 }
 
+@keyframes slide-moblie {
+    0% {
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: auto;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        top: 37px;
+        left: 38px;
+        width: 80px;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
 
 .fade_out {
     opacity: 0;
