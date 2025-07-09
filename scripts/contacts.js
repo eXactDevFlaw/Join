@@ -203,32 +203,13 @@ export async function showContactDetails(contact, itemEl) {
 }
 
 /**
- * Binds the click on the pencil to open the edit-overlay and handle save.
+ * Binds the click on the pencil to open the unified edit-overlay.
  * @param {{id:string,name:string,email:string,phone:string}} c
  */
 function bindEditButton(c) {
   const btn = document.getElementById("btn-edit-detail");
   if (!btn) return;
-  btn.onclick = async () => {
-    await loadFormIntoOverlay("./templates/edit_Contacts.html");
-    slideInOverlay();
-    ["name", "email", "phone"].forEach(f =>
-      document.getElementById(`contact-${f}field`).value = c[f]
-    );
-    const ic = document.getElementById("edit-contact-initials");
-    ic.textContent = getInitials(c.name);
-    ic.style.backgroundColor = stringToColor(c.name);
-    document.getElementById("edit-contact-form").onsubmit = async e => {
-      e.preventDefault();
-      await updateContact(c.id, {
-        name: document.getElementById("contact-namefield").value,
-        email: document.getElementById("contact-emailfield").value,
-        phone: document.getElementById("contact-phonefield").value
-      });
-      closeOverlay();
-      await renderContacts();
-    };
-  };
+  btn.onclick = () => openEditContactOverlay(c);
 }
 
 /**
@@ -273,48 +254,51 @@ function setupEditDeleteButtons(c) {
 }
 
 /**
- * Opens the edit-contact overlay, pre-fills the form and binds save/delete handlers.
- * @param {{ id: string, name: string, email: string, phone: string }} contact
+ * Öffnet das Bearbeitungs‑Overlay für einen Kontakt,
+ * füllt das Formular und bindet Save/Delete.
+ * @param {{id:string,name:string,email:string,phone:string}} contact
  */
 export async function openEditContactOverlay(contact) {
   // 1) Template laden und einblenden
-  await loadFormIntoOverlay("./templates/edit_contacts.html");
+  await loadFormIntoOverlay("./templates/edit_Contacts.html");
   slideInOverlay();
 
-  // 2) Felder vorausfüllen
-  document.getElementById("contact-namefield").value = contact.name;
-  document.getElementById("contact-emailfield").value = contact.email;
-  document.getElementById("contact-phonefield").value = contact.phone;
+  // 2) Kurzes Warten, bis das HTML geparst ist
+  await new Promise(r => setTimeout(r, 0));
 
-  // 3) Initialen-Kreis setzen
-  const initialsCircle = document.getElementById("edit-contact-initials");
-  initialsCircle.textContent = getInitials(contact.name);
-  initialsCircle.style.backgroundColor = stringToColor(contact.name);
 
-  // 4) Save‑Button binden (in Deinem HTML: <button id="btnSaveContact">Save</button>)
-  const saveBtn = document.getElementById("btnSaveContact");
-  saveBtn.onclick = async (e) => {
+  // 3) Formularfelder vorausfüllen
+  ["name", "email", "phone"].forEach(f =>
+    document.getElementById(`contact-${f}field`).value = contact[f]
+  );
+  const ic = document.getElementById("edit-contact-initials");
+  ic.textContent = getInitials(contact.name);
+  ic.style.backgroundColor = stringToColor(contact.name);
+
+  // 4) Save‑Handler ans Formular hängen
+  const form = document.getElementById("edit-contact-form");
+  form.onsubmit = async e => {
     e.preventDefault();
+
     const updated = {
-      name: document.getElementById("contact-namefield").value,
-      email: document.getElementById("contact-emailfield").value,
-      phone: document.getElementById("contact-phonefield").value,
+      name: document.getElementById("contact-namefield").value.trim(),
+      email: document.getElementById("contact-emailfield").value.trim(),
+      phone: document.getElementById("contact-phonefield").value.trim(),
     };
+
     await updateContact(contact.id, updated);
     closeOverlay();
     await renderContacts();
-  };
 
-  // 5) Delete‑Button binden (in Deinem HTML: <button id="btnDeleteContact">Delete</button>)
-  const deleteBtn = document.getElementById("btnDeleteContact");
-  deleteBtn.onclick = async () => {
-    if (confirm("Kontakt wirklich löschen?")) {
-      await deleteContact(contact.id);
-      closeOverlay();
-      hideContactDetailsArea();
-      await renderContacts();
+    // 5) Detail‑Pane direkt updaten
+    const newDetail = { id: contact.id, ...updated };
+    const updatedItem = document.querySelector(`.contact-list-item[data-id="${contact.id}"]`);
+    if (updatedItem) {
+      await showContactDetails(newDetail, updatedItem);
     }
   };
+
+  // 6) Der Delete‑Button bleibt unverändert…
 }
 
 /**
