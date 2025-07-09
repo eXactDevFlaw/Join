@@ -368,6 +368,115 @@ async function openAddContactOverlay() {
 }
 
 /**
+ * Validiert die Eingaben und speichert den Kontakt, wenn alle Felder korrekt sind.
+ * Zeigt ggf. Fehler an.
+ */
+async function submitNewContact() {
+  if (validateNewContactForm()) {
+    // Felder auslesen
+    const nameRaw = document.getElementById("contact-namefield").value.trim();
+    const emailRaw = document.getElementById("contact-emailfield").value.trim();
+    const phoneRaw = document.getElementById("contact-phonefield").value.trim();
+    const phone = normalizePhone(phoneRaw);
+
+    const contact = {
+      name: nameRaw,
+      email: emailRaw,
+      phone
+    };
+
+    try {
+      const res = await createContact(contact);   // In Firebase speichern
+      const newId = res.name;                     // Firebase gibt Key zurück
+
+      closeOverlay();
+      await renderContacts();
+      showToast("Contact successfully created");
+
+      // Detailansicht automatisch öffnen
+      contact.id = newId;
+      const newItem = document.querySelector(`.contact-list-item[data-id="${newId}"]`);
+      if (newItem) showContactDetails(contact, newItem);
+
+    } catch (err) {
+      console.error("Create contact failed:", err);
+      showToast("Error creating contact");
+    }
+  } else {
+    // Validierung fehlgeschlagen, Fehlermeldungen sind bereits gesetzt
+    showToast("Please fix the errors in the form");
+  }
+}
+
+/**
+ * Validiert das Formular zur Erstellung eines neuen Kontakts.
+ * Überprüft Name, E-Mail und Telefonnummer anhand von regulären Ausdrücken.
+ * Zeigt bei ungültiger Eingabe entsprechende Fehlermeldungen an.
+ * 
+ * @returns {boolean} true, wenn alle Eingaben gültig sind, sonst false
+ */
+function validateNewContactForm() {
+  let isValid = true;
+
+  /** @type {HTMLInputElement} */
+  const nameField = document.getElementById("contact-namefield");
+  /** @type {HTMLInputElement} */
+  const emailField = document.getElementById("contact-emailfield");
+  /** @type {HTMLInputElement} */
+  const phoneField = document.getElementById("contact-phonefield");
+
+  clearContactInputErrors();
+
+  const namePattern = /^(?=.{3,})([A-Za-zÄÖÜäöüß]+(?:\s+[A-Za-zÄÖÜäöüß]+)+)$/;
+  const phonePattern = /^[0-9]{4,15}$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!namePattern.test(nameField.value.trim())) {
+    showContactInputError(nameField, "Please enter a name");
+    isValid = false;
+  }
+
+  if (!emailPattern.test(emailField.value.trim())) {
+    showContactInputError(emailField, "Please enter an e-mail address");
+    isValid = false;
+  }
+
+  if (!phonePattern.test(phoneField.value.trim())) {
+    showContactInputError(phoneField, "Please enter a phone number");
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+/**
+ * Zeigt eine Fehlermeldung für ein ungültiges Eingabefeld an und markiert es visuell.
+ * 
+ * @param {HTMLInputElement} inputElement - Das fehlerhafte Eingabefeld
+ * @param {string} message - Die anzuzeigende Fehlermeldung
+ */
+function showContactInputError(inputElement, message) {
+  inputElement.classList.add("input_error_border");
+  const errorContainer = inputElement.parentElement.querySelector(".input_error");
+  if (errorContainer) {
+    errorContainer.textContent = message;
+  }
+}
+
+/**
+ * Entfernt alle Fehleranzeigen und roten Rahmen von den Eingabefeldern im Kontaktformular.
+ */
+function clearContactInputErrors() {
+  document.querySelectorAll(".input_error_border").forEach(el => {
+    el.classList.remove("input_error_border");
+  });
+
+  document.querySelectorAll(".input_error").forEach(el => {
+    el.textContent = "";
+  });
+}
+
+/**
  * Normalisiert eine Telefonnummer
  * @param {string} rawRaw
  * @returns {string}
@@ -395,3 +504,5 @@ export function hideContactDetailsArea() {
 window.addEventListener("DOMContentLoaded", renderContacts);
 // Exponiere das Overlay-Öffnen global:
 window.openAddContactOverlay = openAddContactOverlay;
+
+window.submitNewContact = submitNewContact;
