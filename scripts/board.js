@@ -249,7 +249,8 @@ function taskDetailsHTML (data, taskCategory, taskTitle, taskDescription, taskDu
     taskTitle.innerHTML = data.taskName;
     taskDescription.innerHTML = data.taskDescription;
     taskDueDate.innerHTML = data.taskData.dueDate;
-    taskPriority.innerHTML = `<p class="margin_0">${data.taskPriority}</p><img class="margin_0" src="./assets/icons/prio_medium.svg" alt=""></img>`
+    taskPriority.innerHTML = `<p class="margin_0">${data.taskPriority.charAt(0).toUpperCase()
+  + data.taskPriority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskPriority}.svg" alt=""></img>`
 }
 
 function openTaskDetails() {

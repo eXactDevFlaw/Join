@@ -45,7 +45,7 @@ class TaskClass {
         const prioImg = document.createElement('img');
         switch (this.taskPriority) {
             case "urgent":
-                prioImg.src = './assets/icons/prio_high.svg';
+                prioImg.src = './assets/icons/prio_urgent.svg';
                 break;
             case "medium":
                 prioImg.src = './assets/icons/prio_medium.svg';
