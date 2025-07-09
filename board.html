@@ -24,31 +24,31 @@
   </div>
 
   <div class="task_detail_entry d_flex_center_column d_none" id="task-details">
-      <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
-        <div class="margin_0 category_detail" id="task-category">User Story</div>
-        <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
-      </div>
-      <div class="margin_0 justify_start align_none d_flex margin_0 width_100">
-        <h1 class="task_detail_title ">Kochwelt Page & Recipe Recommender</h1>
-      </div>
-      <div class="task_detail_description width_100">
-        Build start page with recipe recommendation.
-      </div>
-      <div class=" d_flex_center_row width_100 detail_head">
-        <p class="task_detail">Due date:</p>
-        <div class="width_100 detail_due_date">Datum</div>
-      </div>
-      <div class="d_flex_center_row width_100 detail_head">
-        <p class="task_detail">Priority:</p>
-        <div class="width_100">Medium</div>
-      </div>
-      <div class="d_flex_center_row width_100 justify_start">
-        <p class="task_detail margin_0 detail_head">Assigned To:</p>
-      </div>
-      <div class="d_flex_center_row width_100 justify_start">
-        <p class="task_detail margin_0 detail_head">Subtasks</p>
-      </div>
+    <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
+      <div class="margin_0 category_detail" id="task-category">User Story</div>
+      <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
     </div>
+    <div class="margin_0 justify_start align_none d_flex margin_0 width_100">
+      <h1 class="task_detail_title ">Kochwelt Page & Recipe Recommender</h1>
+    </div>
+    <div class="task_detail_description width_100">
+      Build start page with recipe recommendation.
+    </div>
+    <div class=" d_flex_center_row width_100 detail_head">
+      <p class="task_detail">Due date:</p>
+      <div class="width_100 detail_due_date">Datum</div>
+    </div>
+    <div class="d_flex_center_row width_100 detail_head">
+      <p class="task_detail">Priority:</p>
+      <div class="d_flex_center_row width_100 margin_0 justify_start" id="priority"><p class="margin_0">Medium</p><img class="margin_0" src="./assets/icons/prio_medium.svg" alt=""></div>
+    </div>
+    <div class="d_flex_center_row width_100 justify_start">
+      <p class="task_detail margin_0 detail_head">Assigned To:</p>
+    </div>
+    <div class="d_flex_center_row width_100 justify_start">
+      <p class="task_detail margin_0 detail_head">Subtasks</p>
+    </div>
+  </div>
 
   <div class="position_absolute height_100 width_100 d_none" id="overlay-small-logout-win"
     onclick="toggleLogoutOverlay()">
@@ -117,7 +117,7 @@
             <div class="input_icon_container d_flex_center">
               <div class="search_icon"></div>
             </div>
-            <input type="text" placeholder="Find Task" id="find-task"/>
+            <input type="text" placeholder="Find Task" id="find-task" />
           </div>
           <button class="btn_dark margin_0 d_flex_center" onclick="openTaskOverlay()">
             Add task<img src="/assets/icons/add.svg" alt="add" />
@@ -179,4 +179,5 @@
 <script src="./scripts/add_task_template.js"></script>
 <script src="./scripts/board.js"></script>
 <script src="./scripts/task_detail_field.js"></script>
+
 </html>

@@ -222,8 +222,6 @@ function taskDetailsRef (){
             dataPool.forEach((data) => {
                 if (data.taskName === taskname){
                      renderTaskDetailView(data);
-                     console.log("geht");
-                     
                 }
             })
         });
@@ -236,22 +234,25 @@ function renderTaskDetailView(data) {
     const taskTitle = document.querySelector(".task_detail_title");
     const taskDescription = document.querySelector(".task_detail_description");
     const taskDueDate = document.querySelector(".detail_due_date");
+    const taskPriority = document.getElementById("priority");
     if (data.taskCategory === "Technical Task"){
-        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)';
-        
+        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)'; 
     } else {
         taskCategory.style.backgroundColor = 'rgba(0, 56, 255, 1)'
     }
+    taskDetailsHTML (data, taskCategory, taskTitle, taskDescription, taskDueDate, taskPriority);
+    openTaskDetails();
+}
+
+function taskDetailsHTML (data, taskCategory, taskTitle, taskDescription, taskDueDate, taskPriority){
     taskCategory.innerHTML = data.taskCategory;  
     taskTitle.innerHTML = data.taskName;
     taskDescription.innerHTML = data.taskDescription;
-    taskDueDate.innerHTML = data.taskData.dueDate.toLocaleString();
-    console.log(data);
-    openTaskDetails()
+    taskDueDate.innerHTML = data.taskData.dueDate;
+    taskPriority.innerHTML = `<p class="margin_0">${data.taskPriority}</p><img class="margin_0" src="./assets/icons/prio_medium.svg" alt=""></img>`
 }
 
 function openTaskDetails() {
-   
     document.getElementById("task-overlay").classList.remove("d_none");
     let task_detail_entry = document.getElementById("task-details");
     task_detail_entry.classList.remove("d_none");
