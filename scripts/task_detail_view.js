@@ -19,11 +19,15 @@ function taskDetailViewTemplate(data) {
   + data.taskPriority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskPriority}.svg" alt=""></img></div>
     </div>
     <div class="d_flex_center_column width_100 align_none justify_start gap_8">
-      <div class="margin_0"><p class="task_detail detail_head">Assigned To:</p></div>
-        
+      <div class="margin_0">
+        <p class="task_detail detail_head">Assigned To:</p>
+    </div>
       <div id="assigned-contacts" class="d_flex_column margin_0"></div>
     </div>
-    <div class="d_flex_center_row width_100 justify_start">
-      <p class="task_detail margin_0 detail_head">Subtasks</p>
+    <div class="d_flex_center_column width_100 align_none justify_start gap_8">
+        <div class="margin_0">
+            <p class="task_detail margin_0 detail_head">Subtasks</p>
+        </div>
+        <div id="subTasks-detail-view" class=""></div>
     </div> `
 }

@@ -241,6 +241,7 @@ function renderTaskDetailView(data) {
     }
     taskCategory.innerHTML = data.taskCategory;
     renderContactsDetailView(data);
+    renderSubTasksDetailView(data)
     openTaskDetails();
 }
 
@@ -255,11 +256,20 @@ function renderContactsDetailView(data){
         const profileBadge = document.getElementById(contact);
         profileBadge.style.backgroundColor = stringToColor(contact);
         profileBadge.innerText = getUserCapitalInitials(contact);
-        
     })
-    
     }
-  
+}
+
+function renderSubTasksDetailView(data){
+    let subTasks = data.taskData.subtasks;
+    let subTasksRef = document.getElementById("subTasks-detail-view");
+    if (subTasks){
+        Object.values(subTasks).forEach((subTask) => {
+            subTasksRef.innerHTML += `<div class="margin_0">${subTask.title}</div>`;
+            console.log(subTask);
+        })
+    
+    }   
 }
 
 function openTaskDetails() {
