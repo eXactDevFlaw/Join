@@ -21,7 +21,7 @@ a {
 }
 
 .d_flex {
-    display: flex !important;
+    display: flex;
 }
 
 .d_flex_bw_st {

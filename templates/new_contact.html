@@ -20,23 +20,29 @@
           pattern="^(?=.{3,})([A-Za-zÄÖÜäöüß]+(?:\s+[A-Za-zÄÖÜäöüß]+)+)$"
           title="Gib mindestens Vor‑ und Nachname nur mit Buchstaben ein." />
         <i class="input-icon user-icon"></i>
+        <div class="input_error" for="contact-namefield"></div>
       </div>
+
       <div class="input_icon_wrapper">
         <input id="contact-emailfield" type="email" placeholder="Email" required />
         <i class="input-icon email-icon"></i>
+        <div class="input_error" for="contact-emailfield"></div>
       </div>
+
       <div class="input_icon_wrapper">
-        </select>
         <input id="contact-phonefield" type="tel" placeholder="Phone" required pattern="^[0-9]{4,15}$"
           title="Gib nur Ziffern ein (ohne führende Null)." />
         <i class="input-icon phone-icon"></i>
+        <div class="input_error" for="contact-phonefield"></div>
       </div>
+
       <div class="overlay_buttons">
         <button type="button" class="btn_cancel" onclick="closeOverlay()">
           <span>Cancel</span>
           <div class="close_cross"></div>
         </button>
-        <button type="submit" class="btn_create_contact">
+
+        <button type="button" class="btn_create_contact" onclick="submitNewContact()">
           <span>Create contact</span>
           <img src="../assets/icons/check.svg" alt="check icon" class="check_icon" />
         </button>

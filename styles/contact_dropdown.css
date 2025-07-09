@@ -3,46 +3,9 @@
   background-color: white;
   width: 440px;
   max-height: 270px;
-  /* ⬅️ 5 Einträge à ~54px Höhe = ca. 270px */
   overflow-y: auto;
-  /* Scrollbar nur bei Bedarf anzeigen */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding-top: 5px;
-}
-
-.list_contact {
-  width: 100%;
-  padding: 11px 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  justify-content: flex-start;
-}
-
-.list_contact:hover {
-  background-color: white
-}
-
-.contact_circle {
-  width: 42px;
-  height: 42px;
-  border-radius: 100%;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contact_name {
-  font-size: 16px;
-}
-
-.contact_checkbox {
-  width: 18px;
-  height: 18px;
 }
 
 .assign-contact-list {
@@ -52,28 +15,28 @@
   border-radius: 8px;
   padding: 8px;
   margin-top: 4px;
-  background-color: rgba(255, 255, 255);
+  background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
   position: absolute;
   width: 100%;
 }
 
-.assign-contact-item {
+.assign_contact_row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.2s;
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
-.assign-contact-item:hover {
-  background-color: rgba(240, 240, 240);
+.assign_contact_row:hover {
+  background-color: rgb(244, 244, 244);
 }
 
-.assign-left {
+.assign_contact_left {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -91,11 +54,15 @@
   font-weight: 500;
 }
 
-.assign-name {
+.assign_contact_name {
   font-size: 16px;
+  font-weight: 400;
+  color: black;
 }
 
-.assign-checkbox {
+.assign_contact_checkbox {
   width: 16px;
   height: 16px;
+  accent-color: rgba(42, 54, 71);
+  cursor: pointer;
 }
