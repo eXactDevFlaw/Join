@@ -12,6 +12,9 @@
     z-index: 4;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     gap: 24px;
+    padding-top: 142px;
+    max-height: 795px;
+    overflow-y: scroll;
 }
 
 .task_detail_entry.show {
@@ -147,4 +150,16 @@
     height: 24px;
     width: 1px;
     background-color: rgba(209, 209, 209, 1);
+}
+
+textarea::placeholder{
+    color: black;
+}
+
+input{
+    width: 100%;
+}
+
+input::placeholder{
+    color: black;
 }
