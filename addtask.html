@@ -8,12 +8,12 @@
   <link rel="icon" href="./assets/icons/favicon_dark.svg" type="image/x-icon" media="(prefers-color-scheme: light)" />
   <link rel="icon" href="./assets/icons/favicon_light.svg" type="image/x-icon" media="(prefers-color-scheme: dark)" />
   <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-  <link rel="stylesheet" href="./styles/board.css" />
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./styles/standart.css" />
+  <link rel="stylesheet" href="./styles/board.css" />
   <link rel="stylesheet" href="./styles/add_task.css" />
   <link rel="stylesheet" href="./styles/contact_dropdown.css" />
-  <link rel="stylesheet" href="./styles/responsive.css" />
+  <link rel="stylesheet" href="./styles/responsive/responsive_add_task.css" />
   <title>Join - Add Task</title>
 </head>
 
@@ -31,8 +31,11 @@
   </div>
   <header>
     <div class="header_container d_flex_center justify_between width_100">
-      <div class="margin_0">Kanban Project Management Tool</div>
-      <div class="d_flex_center margin_0 gap_16">
+      <div class="d_flex_center">
+        <img src="./assets/icons/logo_header_mobile.svg" class="d_flex logo_header_mobile d_none" />
+      </div>
+      <div class="margin_0 header_content">Kanban Project Management Tool</div>
+      <div class="d_flex_center margin_0 gap_16 help_content">
         <a href="./templates/help.html">
           <img src="./assets/icons/help.svg" class="help_icon" alt="" />
         </a>

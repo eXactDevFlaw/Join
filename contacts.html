@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./assets/fonts/fonts.css" />
   <link rel="stylesheet" href="./styles/contacts.css" />
   <link rel="stylesheet" href="./styles/overlay.css" />
-  <link rel="stylesheet" href="./styles/responsive.css">
+  <link rel="stylesheet" href="./styles/responsive/responsive_contacts.css">
   <!-- Scripts -->
   <!--<script src="./scripts/add-edit_contacts.js" defer></script> -->
   <!-- 1. Overlay-Logik -->
@@ -46,8 +46,11 @@
   <!-- Header -->
   <header>
     <div class="header_container d_flex_center justify_between width_100">
-      <div class="margin_0">Kanban Project Management Tool</div>
-      <div class="d_flex_center margin_0 gap_16">
+      <div class="d_flex_center">
+        <img src="./assets/icons/logo_header_mobile.svg" class="d_flex logo_header_mobile d_none" />
+      </div>
+      <div class="margin_0 header_content">Kanban Project Management Tool</div>
+      <div class="d_flex_center margin_0 gap_16 help_content">
         <a href="./templates/help.html">
           <img src="./assets/icons/help.svg" class="help_icon" alt="" />
         </a>
