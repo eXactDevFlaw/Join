@@ -247,6 +247,7 @@ function renderTaskDetailView(data) {
     renderSubTasksDetailView(data)
     openTaskDetails();
     prepareDeleteTask();
+    prepareEditTask()
 }
 
 function renderContactsDetailView(data){
@@ -324,4 +325,22 @@ function prepareDeleteTask() {
         location.reload();
         
     })
+}
+
+function prepareEditTask() {
+    const editTask = document.getElementById("edit-Task");
+    editTask.addEventListener("click", async function () {
+        let taskName = this.getAttribute("taskname");
+        // await deleteFromDatabase("tasks/" + taskName);
+        console.log(data);
+        console.log(taskName);
+        renderTaskDetailEdit()
+        // renderSubTasksDetailView(data)
+        
+    })
+}
+
+function renderTaskDetailEdit(){
+    const taskDetail = document.getElementById('task-details');
+    taskDetail.innerHTML = taskDetailEditTemplate(data);
 }
