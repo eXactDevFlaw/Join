@@ -7,6 +7,8 @@ let cardPools = {
     dataDone: [],
 }
 
+let data = [];
+
 const todoRef = document.getElementById('column-todo');
 const todoEmptyRef = document.getElementById('no-tasks-to-do');
 const inProgressRef = document.getElementById('column-in-progress');
@@ -220,8 +222,9 @@ function taskDetailsRef (){
     taskCards.forEach(task => {
         task.addEventListener("click", function () {
             let taskname = this.getAttribute("taskname")
-            dataPool.forEach((data) => {
-                if (data.taskName === taskname){
+            dataPool.forEach((task) => {
+                if (task.taskName === taskname){
+                    data = task;
                      renderTaskDetailView(data);
                 }
             })
@@ -261,12 +264,19 @@ function renderContactsDetailView(data){
 }
 
 function renderSubTasksDetailView(data){
-    let subTasks = data.taskData.subtasks;
+    subTasks = [];
+    subTasks = data.taskData.subtasks;
     let subTasksRef = document.getElementById("subTasks-detail-view");
+    subTasksRef.innerHTML = "";
     if (subTasks){
-        Object.values(subTasks).forEach((subTask) => {
-            subTasksRef.innerHTML += `<div class="margin_0">${subTask.title}</div>`;
-            console.log(subTask);
+        Object.values(subTasks).forEach((subTask, index) => {
+            if (subTask.status === "open"){
+                subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
+                <div class="checkbox-wrapper" id="checkbox${index}"><img src="./assets/icons/checkbox.svg" alt="checkbox" onclick="checkSubTask(${index})"></div>${subTask.title}</div>`;
+            } else {
+                subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
+                <div class="checkbox-wrapper" id="checkbox-active${index}"><img src="./assets/icons/checkbox_active.svg" alt="checkbox_active" onclick="unCheckSubTask(${index})"></div>${subTask.title}</div>`;
+            }
         })
     
     }   
@@ -290,4 +300,16 @@ function closeTaskOverlay() {
         entry.classList.add("d_none");
         task_detail_entry.classList.add("d_none");
     }, 300);
+    refreshBoard();
+}
+
+function checkSubTask(index) {
+    data.taskSubTasks[index].status = "closed";
+    renderSubTasksDetailView(data)
+}
+
+function unCheckSubTask(index) {
+    data.taskSubTasks[index].status = "open";
+    renderSubTasksDetailView(data)
+    refreshBoard()
 }
