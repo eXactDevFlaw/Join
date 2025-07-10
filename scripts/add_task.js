@@ -3,7 +3,7 @@ let taskDetails = {};
 let users = {};
 let categorys = ["Technical Task", "User Story"];
 let subTasks = [];
-
+let subTaskDetails = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     setPriority("medium");
@@ -240,9 +240,13 @@ function unActivateSubtask() {
 
 function addNewSubTask() {
     let subTask = document.getElementById("add-subtasks");
-    if (subTask.value > "") {
-        subTasks.push(subTask.value);
+    let subTaskTitle = subTask.value
+    if (subTaskTitle > "") {
+        subTaskDetails.status = "open";
+        subTaskDetails.title = subTaskTitle;
+        subTasks.push(subTaskDetails);
         renderSubTasks();
+        subTaskDetails = {};
     }
     subTask.value = "";
     document.querySelector(".add").classList.remove("d_none");
@@ -253,7 +257,7 @@ function renderSubTasks() {
     let addSubtaskList = document.querySelector(".added_subtask_list");
     addSubtaskList.innerHTML = "";
     subTasks.forEach((subTask, index) => {
-        addSubtaskList.innerHTML += addSubTaskTemplate(subTask, index);
+        addSubtaskList.innerHTML += addSubTaskTemplate(subTask.title, index);
     })
 }
 
