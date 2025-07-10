@@ -9,6 +9,11 @@
         height: 100vh;
         width: 100vw;
         overflow: hidden;
+        font-size: 0.875rem;
+    }
+
+    h1 {
+        font-size: 3rem;
     }
 
     header {
@@ -16,6 +21,7 @@
         width: 100%;
         position: unset;
         padding: unset;
+        z-index: 1000;
     }
 
     .header_container {
@@ -40,7 +46,7 @@
     nav {
         flex-direction: row !important;
         left: 0;
-        top: calc(100% - 80px);
+        top: calc(100% - 8.6%);
         width: 100%;
         height: 8.6% !important;
         padding: 0;
@@ -106,5 +112,83 @@
         left: unset;
         top: unset;
         overflow: auto;
+    }
+
+    .head {
+        position: sticky;
+        top: 0;
+        margin-top: 48px;
+        margin-left: 16px;
+        width: 100%;
+        height: 6%;
+        background: rgba(246, 247, 248, 1);
+    }
+
+    .add_task_content {
+        width: 100%;
+        height: 100%;
+        padding: 16px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .vector_4 {
+        display: none;
+    }
+
+    .task_entries {
+        width: 100%;
+        gap: 16px;
+    }
+
+    .input_assigned_to {
+        width: 100% !important;
+    }
+
+    .select_category_dropdown {
+        width: 100%;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .add_task_footer {
+        background: rgba(246, 247, 248, 1);
+        position: fixed;
+        width: 100%;
+        height: 8.6%;
+        top: calc(100% - 17.2%);
+        z-index: 1000;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .input_icon_wrapper {
+        width: 100%;
+    }
+
+    .added_subtask_list {
+        width: 100%;
+    }
+
+    .required_input {
+        display: none;
+    }
+
+    .required_input_mobile {
+        display: flex;
+        justify-content: flex-start;
+        padding-top: 16px;
+        padding-bottom: 100px;
+    }
+
+    .priority_button {
+        font-size: 1rem;
+        width: 30%;
+    }
+
+    .add_task_button_container {
+        width: 95%;
     }
 }
