@@ -246,6 +246,7 @@ function renderTaskDetailView(data) {
     renderContactsDetailView(data);
     renderSubTasksDetailView(data)
     openTaskDetails();
+    prepareDeleteTask();
 }
 
 function renderContactsDetailView(data){
@@ -312,4 +313,15 @@ function unCheckSubTask(index) {
     data.taskSubTasks[index].status = "open";
     renderSubTasksDetailView(data)
     refreshBoard()
+}
+
+function prepareDeleteTask() {
+    const deleteTask = document.getElementById("deleteTask");
+    deleteTask.addEventListener("click", async function () {
+        let taskName = this.getAttribute("taskname");
+        console.log(taskName);
+        await deleteFromDatabase("tasks/" + taskName);
+        location.reload();
+        
+    })
 }

@@ -29,5 +29,10 @@ function taskDetailViewTemplate(data) {
             <p class="task_detail margin_0 detail_head">Subtasks</p>
         </div>
         <div id="subTasks-detail-view" class=""></div>
-    </div> `
+    </div>
+    <div class="task_detail_view_footer">
+    <div class="d_flex gap_8 margin_0 edit" id="deleteTask" taskname="${data.taskKey}"><div class="delete_wrapper"></div><p class="delete_size">Delete</p></div>
+    <div class="vector_3"></div>
+    <div class="d_flex gap_8 margin_0 edit id="editTask""><div class="edit_wrapper"></div><p class="edit_size">Edit</p></div>
+     `
 }
