@@ -1,5 +1,5 @@
-function addTaskTemplate(){
-return     `<div>
+function addTaskTemplate() {
+  return `<div>
       <h1>Add Task</h1>
          <div class="close_add_task margin_0" onclick="closeTaskOverlay()"></div>
     </div>
@@ -62,7 +62,7 @@ return     `<div>
             <p class="margin_0">Assigned to</p>
           </div>
           <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0"
-            onclick="openAssignedToDropdown()">
+            onclick="openAssignedToDropdown(event)">
             <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
               id="assigned-to-dropdown" required />
             <div class="input_icon_container d_flex_center">
@@ -116,7 +116,7 @@ return     `<div>
     </div>`
 }
 
-function addSubTaskTemplate (subTask, index){
+function addSubTaskTemplate(subTask, index) {
   return `
                  <div class="added_subtask d_flex_center justify_between" id="subtask${index}" ondblclick="editSubTask(${index})">
               <li class="margin_0">${subTask}</li>

@@ -93,11 +93,21 @@ function closeAssignedToDropdown() {
     document.getElementById("arrow-drop-down-assign").classList.add("up");
 }
 
-function toggleAssignedToDropdown() {
+function toggleAssignedToDropdown(event) {
+    event.stopPropagation(); // ⛔ verhindert, dass das Dropdown sich sofort wieder schließt
     renderContacts();
     document.getElementById("add-task-contacts-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-assign").classList.toggle("up");
 }
+
+document.addEventListener("click", (event) => {
+    const dropdown = document.getElementById("add-task-contacts-list");
+    const input = document.getElementById("assigned-to-dropdown");
+
+    if (!dropdown.contains(event.target) && !input.contains(event.target)) {
+        closeAssignedToDropdown();
+    }
+});
 
 async function renderContacts() {
     const addTaskContactsList = document.getElementById("add-task-contacts-list");
@@ -113,7 +123,6 @@ async function renderContacts() {
     // 3) Nur jeweils 5 anzeigen (optional)
     // const visible = contacts.slice(0, 5);
 
-    // 4) UI befüllen
     contacts.forEach(contact => {
         const color = stringToColor(contact.name);
         const initials = getInitials(contact.name);
@@ -127,12 +136,28 @@ async function renderContacts() {
         </div>
         <span class="assign_contact_name">${contact.name}</span>
       </div>
-      <input type="checkbox" class="assign_contact_checkbox" />
+      <div class="assign_contact_checkbox">
+        <img src="./assets/icons/check.svg" alt="checked icon" class="check_icon d_none">
+        </div>
+
     `;
+
+        contactItem.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            contactItem.classList.toggle('contact_list_item_active');
+
+            const checkIcon = contactItem.querySelector('.check_icon');
+            checkIcon.classList.toggle('d_none');
+
+            const nameEl = contactItem.querySelector('.assign_contact_name');
+            nameEl.style.color = contactItem.classList.contains('contact_list_item_active') ? '#white' : '';
+        });
+
+
         addTaskContactsList.appendChild(contactItem);
     });
 }
-
 
 /** Generiert aus einem String einen HSL-Farbwert */
 function stringToColor(str) {
