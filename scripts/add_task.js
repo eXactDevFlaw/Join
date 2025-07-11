@@ -17,6 +17,16 @@ window.toggleAssignedToDropdown = function (e) {
     arrow.classList.toggle("up");
 };
 
+// ganz oben, direkt nach dem allContacts‑Load
+const assignedInput = document.getElementById("assigned-to-dropdown");
+assignedInput.addEventListener("input", () => {
+    // Wenn das Dropdown offen ist, neu filtern
+    const list = document.getElementById("add-task-contacts-list");
+    if (!list.classList.contains("d_none")) {
+        renderContacts();
+    }
+});
+
 /**
  * Lädt alle Kontakte einmalig ins Array.
  */
@@ -134,17 +144,19 @@ function renderContacts() {
     const container = document.getElementById("add-task-contacts-list");
     container.innerHTML = "";
 
-    allContacts
-        .slice()
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(contact => {
-            const sel = selectedContacts.includes(contact.id);
-            const color = stringToColor(contact.name);
-            const initials = getInitials(contact.name);
+    const contacts = [...allContacts].sort((a, b) => a.name.localeCompare(b.name))
 
-            const row = document.createElement("div");
-            row.className = "assign_contact_row" + (sel ? " contact_list_item_active" : "");
-            row.innerHTML = `
+    const filter = assignedInput.value.trim().toLowerCase();
+    const filtered = filter ? contacts.filter(c => c.name.toLowerCase().includes(filter)) : contacts;
+
+    filtered.forEach(contact => {
+        const sel = selectedContacts.includes(contact.id);
+        const color = stringToColor(contact.name);
+        const initials = getInitials(contact.name);
+
+        const row = document.createElement("div");
+        row.className = "assign_contact_row" + (sel ? " contact_list_item_active" : "");
+        row.innerHTML = `
         <div class="assign_contact_left">
           <div class="contact_circle" style="background-color:${color}">${initials}</div>
           <span class="assign_contact_name" style="color:${sel ? 'white' : ''}">${contact.name}</span>
@@ -154,17 +166,17 @@ function renderContacts() {
         </div>
       `;
 
-            row.addEventListener("click", e => {
-                e.stopPropagation();
-                const idx = selectedContacts.indexOf(contact.id);
-                if (idx >= 0) selectedContacts.splice(idx, 1);
-                else selectedContacts.push(contact.id);
-                renderContacts();
-                renderSelectedCircles();
-            });
-
-            container.appendChild(row);
+        row.addEventListener("click", e => {
+            e.stopPropagation();
+            const idx = selectedContacts.indexOf(contact.id);
+            if (idx >= 0) selectedContacts.splice(idx, 1);
+            else selectedContacts.push(contact.id);
+            renderContacts();
+            renderSelectedCircles();
         });
+
+        container.appendChild(row);
+    });
 }
 
 /**
@@ -307,7 +319,7 @@ if (addSubTaskInput) {
             addNewSubTask();
         }
     });
-}  
+}
 
 function clearSubTaskValue() {
     let subTask = document.getElementById("add-subtasks");
