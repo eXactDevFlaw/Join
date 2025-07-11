@@ -4,6 +4,19 @@ let users = {};
 let categorys = ["Technical Task", "User Story"];
 let subTasks = [];
 let subTaskDetails = {};
+let allContacts = [];
+let selectedContacts = [];
+
+// 2) Hook ins DOMContentLoaded, um alle Kontakte vorzulosen
+document.addEventListener("DOMContentLoaded", async () => {
+  const raw = await getContactsFromDatabase();
+  allContacts = Object.entries(raw || {}).map(([id, data]) => ({ id, ...data }));
+  // setze Dropdown-Pfeil-Handler
+  document.querySelector(".input_assigned_to")
+          .addEventListener("click", toggleAssignedToDropdown);
+  // Klick außerhalb schließt
+  document.addEventListener("click", closeIfClickedOutside);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     setPriority("medium");
@@ -88,109 +101,118 @@ if (contactDropdown) {
     });
 }
 
-function closeAssignedToDropdown() {
-    document.getElementById("add-task-contacts-list").classList.add("d_none");
-    document.getElementById("arrow-drop-down-assign").classList.add("up");
+// 3) Öffnen/Schließen
+function toggleAssignedToDropdown(e) {
+  e.stopPropagation();
+  const list  = document.getElementById("add-task-contacts-list");
+  const arrow = document.getElementById("arrow-drop-down-assign");
+  if (list.classList.contains("d_none")) {
+    renderContacts();   // nur beim Öffnen neu rendern
+  }
+  list.classList.toggle("d_none");
+  arrow.classList.toggle("up");
 }
 
-function toggleAssignedToDropdown(event) {
-    event.stopPropagation();
-    renderContacts();
-    document.getElementById("add-task-contacts-list").classList.toggle("d_none");
-    document.getElementById("arrow-drop-down-assign").classList.toggle("up");
+function closeIfClickedOutside(e) {
+  const list  = document.getElementById("add-task-contacts-list");
+  const wrap  = document.querySelector(".input_assigned_to");
+  if (!list.contains(e.target) && !wrap.contains(e.target)) {
+    list.classList.add("d_none");
+    document.getElementById("arrow-drop-down-assign")
+            .classList.add("up");
+  }
 }
 
-document.addEventListener("click", (event) => {
-    const dropdown = document.getElementById("add-task-contacts-list");
-    const input = document.getElementById("assigned-to-dropdown");
-
-    if (!dropdown.contains(event.target) && !input.contains(event.target)) {
-        closeAssignedToDropdown();
-    }
-});
-
+// 4) Das Dropdown rendern
 async function renderContacts() {
-    const addTaskContactsList = document.getElementById("add-task-contacts-list");
-    addTaskContactsList.innerHTML = "";
+  const container = document.getElementById("add-task-contacts-list");
+  container.innerHTML = "";
 
-    const contactsObj = await getContactsFromDatabase();
-    const contacts = Object.values(contactsObj);
+  // Alphabetisch sortieren
+  const contacts = [...allContacts].sort((a,b)=>a.name.localeCompare(b.name));
 
+  // optional: nur die ersten 5 anzeigen, der Rest scrollbar
+  // const visible = contacts.slice(0,5);
+  const visible = contacts;
 
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
+  visible.forEach(contact => {
+    const color    = stringToColor(contact.name);
+    const initials = getInitials(contact.name);
+    const isSel    = selectedContacts.includes(contact.id);
 
+    const row = document.createElement("div");
+    row.className = "assign_contact_row";
+    if (isSel) row.classList.add("contact_list_item_active");
 
-
-    contacts.forEach(contact => {
-        const color = stringToColor(contact.name);
-        const initials = getInitials(contact.name);
-
-        const contactItem = document.createElement("div");
-        contactItem.className = "assign_contact_row";
-        contactItem.innerHTML = `
+    row.innerHTML = `
       <div class="assign_contact_left">
-        <div class="contact_circle" style="background-color: ${color};">
-          ${initials}
-        </div>
-        <span class="assign_contact_name">${contact.name}</span>
+        <div class="contact_circle" 
+             style="background-color:${color}">${initials}</div>
+        <span class="assign_contact_name" 
+              style="color:${isSel?'white':''}">
+          ${contact.name}
+        </span>
       </div>
       <div class="assign_contact_checkbox">
-        <img src="./assets/icons/check.svg" alt="checked icon" class="check_icon d_none">
-        </div>
-
+        <img src="./assets/icons/check.svg" 
+             class="check_icon" 
+             style="display:${isSel?'block':'none'}" />
+      </div>
     `;
 
-        contactItem.addEventListener('click', (event) => {
-            event.stopPropagation();
+    // Klick toggelt Selektion
+    row.addEventListener("click", e => {
+      e.stopPropagation();
+      const idx = selectedContacts.indexOf(contact.id);
+      if (idx>=0) selectedContacts.splice(idx,1);
+      else         selectedContacts.push(contact.id);
 
-            contactItem.classList.toggle('contact_list_item_active');
+      // Zeile updaten
+      const sel = selectedContacts.includes(contact.id);
+      row.classList.toggle("contact_list_item_active", sel);
+      row.querySelector(".check_icon")
+         .style.display = sel ? "block" : "none";
+      row.querySelector(".assign_contact_name")
+         .style.color   = sel ? "white" : "";
 
-            const checkIcon = contactItem.querySelector('.check_icon');
-            checkIcon.classList.toggle('d_none');
-
-            const nameEl = contactItem.querySelector('.assign_contact_name');
-            nameEl.style.color = contactItem.classList.contains('contact_list_item_active') ? 'white' : '';
-            // 🔽 Vorschau-Kreis hinzufügen/entfernen
-            const assignedPreview = document.getElementById('assigned-contacts-preview');
-            const existingCircle = document.getElementById(`assigned-${contact.id}`);
-
-            if (contactItem.classList.contains('contact_list_item_active') && !existingCircle) {
-                const circle = document.createElement('div');
-                circle.className = 'assigned_circle';
-                circle.id = `assigned-${contact.name.replace(/\s+/g, "-").toLowerCase()}`;
-
-                circle.textContent = initials;
-                circle.style.backgroundColor = color;
-                assignedPreview.appendChild(circle);
-            } else if (!contactItem.classList.contains('contact_list_item_active') && existingCircle) {
-                existingCircle.remove();
-            }
-        });
-
-
-        addTaskContactsList.appendChild(contactItem);
+      // Vorschau aktualisieren
+      renderSelectedCircles();
     });
+
+    container.appendChild(row);
+  });
 }
 
-/** Generiert aus einem String einen HSL-Farbwert */
-function stringToColor(str) {
-    let hash = 0;
-    for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
-    return `hsl(${hash % 360}, 70%, 50%)`;
+// 5) Unterhalb die kleinen Kreise für jede Selektion
+function renderSelectedCircles() {
+  const preview = document.getElementById("assigned-contacts-preview");
+  preview.innerHTML = "";
+
+  selectedContacts.forEach(id => {
+    const c = allContacts.find(x=>x.id===id);
+    if (!c) return;
+    const initials = getInitials(c.name);
+    const color    = stringToColor(c.name);
+
+    const circle = document.createElement("div");
+    circle.className   = "assigned_circle";
+    circle.textContent = initials;
+    circle.style.backgroundColor = color;
+    preview.appendChild(circle);
+  });
 }
 
-/** Extrahiert die ersten beiden Initialen aus einem Namen */
+// Hilfsfunktionen (aus Deinem Code)
 function getInitials(name) {
-    return name
-        .split(" ")
-        .map(n => n[0]?.toUpperCase() || "")
-        .join("")
-        .slice(0, 2);
+  return name.split(" ")
+             .map(n=>n[0].toUpperCase())
+             .join("")
+             .slice(0,2);
 }
-
-function getRandomColor() {
-    const colors = ["#FF7A00", "#FF5EB3", "#6E52FF", "#9327FF", "#00BEE8", "#1FD7C1", "#FF745E", "#FFA35E"];
-    return colors[Math.floor(Math.random() * colors.length)];
+function stringToColor(str) {
+  let hash=0;
+  for(let c of str) hash=(hash<<5)-hash+c.charCodeAt(0);
+  return `hsl(${hash%360},70%,50%)`;
 }
 
 
