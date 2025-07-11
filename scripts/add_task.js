@@ -94,7 +94,7 @@ function closeAssignedToDropdown() {
 }
 
 function toggleAssignedToDropdown(event) {
-    event.stopPropagation(); // ⛔ verhindert, dass das Dropdown sich sofort wieder schließt
+    event.stopPropagation();
     renderContacts();
     document.getElementById("add-task-contacts-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-assign").classList.toggle("up");
@@ -113,15 +113,13 @@ async function renderContacts() {
     const addTaskContactsList = document.getElementById("add-task-contacts-list");
     addTaskContactsList.innerHTML = "";
 
-    // 1) Rohe Contacts holen (Objekt) und in ein Array verwandeln
     const contactsObj = await getContactsFromDatabase();
     const contacts = Object.values(contactsObj);
 
-    // 2) Array alphabetisch sortieren
+
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-    // 3) Nur jeweils 5 anzeigen (optional)
-    // const visible = contacts.slice(0, 5);
+
 
     contacts.forEach(contact => {
         const color = stringToColor(contact.name);
@@ -151,7 +149,22 @@ async function renderContacts() {
             checkIcon.classList.toggle('d_none');
 
             const nameEl = contactItem.querySelector('.assign_contact_name');
-            nameEl.style.color = contactItem.classList.contains('contact_list_item_active') ? '#white' : '';
+            nameEl.style.color = contactItem.classList.contains('contact_list_item_active') ? 'white' : '';
+            // 🔽 Vorschau-Kreis hinzufügen/entfernen
+            const assignedPreview = document.getElementById('assigned-contacts-preview');
+            const existingCircle = document.getElementById(`assigned-${contact.id}`);
+
+            if (contactItem.classList.contains('contact_list_item_active') && !existingCircle) {
+                const circle = document.createElement('div');
+                circle.className = 'assigned_circle';
+                circle.id = `assigned-${contact.name.replace(/\s+/g, "-").toLowerCase()}`;
+
+                circle.textContent = initials;
+                circle.style.backgroundColor = color;
+                assignedPreview.appendChild(circle);
+            } else if (!contactItem.classList.contains('contact_list_item_active') && existingCircle) {
+                existingCircle.remove();
+            }
         });
 
 
