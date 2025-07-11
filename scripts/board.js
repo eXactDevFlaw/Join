@@ -330,7 +330,7 @@ function prepareEditTask() {
     const editTask = document.getElementById("edit-Task");
     editTask.addEventListener("click", function () {
         renderTaskDetailEdit();
-        updateTask();
+        prepareUpdateTask();
     })
 }
 
@@ -340,11 +340,25 @@ function renderTaskDetailEdit(){
     renderSubTasks();
 }
 
-function updateTask(){
+function prepareUpdateTask(){
     const checkEditTask = document.getElementById("check-edit-task"); 
     checkEditTask.addEventListener("click", function () {
-        let taskName = this.getAttribute("taskkey");
-        console.log(taskName);
-        
+        let taskKey = this.getAttribute("taskkey");
+            dataPool.forEach((task) => {
+                if (task.taskKey === taskKey){
+                    updateTask(task);
+                }
+            })
     })
 }
+
+function updateTask(task){
+    task.taskName = document.getElementById('title-input-overlay').value;
+    task.description = document.getElementById('description-input-overlay').value;
+    task.dueDate = document.getElementById('datepicker').value;
+    task.assignedTo = document.getElementById('assigned-to-dropdown').value;
+    task.subtasks = subTasks;
+    console.log(task);
+    
+}
+
