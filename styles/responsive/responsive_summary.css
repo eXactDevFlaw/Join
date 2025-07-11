@@ -1,4 +1,4 @@
-@media (max-width: 1300px) and (orientation: portrait) {
+@media (max-width: 1349px) {
     .greetings {
         display: none;
     }
@@ -118,7 +118,7 @@
         padding: unset;
         left: unset;
         top: unset;
-        overflow: unset;
+        overflow: auto;
     }
 
     .div_headline {

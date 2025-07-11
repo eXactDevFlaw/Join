@@ -1,6 +1,6 @@
-@media (max-width: 1300px) and (orientation: portrait) {
-    .greetings {
-        display: none;
+@media (max-width: 1349px) {
+    .add_task_content{
+        flex-direction: column;
     }
 }
 
