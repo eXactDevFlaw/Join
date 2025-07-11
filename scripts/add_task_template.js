@@ -1,3 +1,7 @@
+/**
+ * Gibt das HTML für das „Add Task“-Overlay zurück.
+ * @returns {string}
+ */
 function addTaskTemplate() {
   return `<div>
       <h1>Add Task</h1>

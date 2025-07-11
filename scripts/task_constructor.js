@@ -8,7 +8,7 @@ class TaskClass {
         this.taskPriority = data.priority;
         this.taskStatus = data.status;
         this.taskSubTasks = data.subtasks;
-        this.taskAssignedTo = data.assignedTo;
+        this.taskAssignedTo = data.taskAssignedTo;
     }
 
     logger() {

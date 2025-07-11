@@ -188,11 +188,12 @@ function stringToColor(str) {
 /**
  * Function to set capital letters for usercontrol
  */
-function getUserCapitalInitials(data) {
-    let userName = data.trim().split(' ');
-    let firstInitial = userName[0][0].toUpperCase();
-    let lastInitial = userName[userName.length - 1][0].toUpperCase();
-    return firstInitial + lastInitial
+function getUserCapitalInitials(name) {
+    if (!name || typeof name !== "string") return "";
+    let userName = name.trim().split(" ");
+    let firstInitial = userName[0][0]?.toUpperCase() || "";
+    let lastInitial = userName[userName.length - 1][0]?.toUpperCase() || "";
+    return firstInitial + lastInitial;
 }
 
 /**
