@@ -279,7 +279,7 @@ function renderContactsDetailView(data){
 
 function renderSubTasksDetailView(data){
     subTasks = [];
-    subTasks = data.taskData.subtasks;
+    subTasks = data.taskSubTasks;
     let subTasksRef = document.getElementById("subTasks-detail-view");
     subTasksRef.innerHTML = "";
     if (subTasks){
@@ -292,7 +292,6 @@ function renderSubTasksDetailView(data){
                 <div class="checkbox-wrapper" id="checkbox-active${index}"><img src="./assets/icons/checkbox_active.svg" alt="checkbox_active" onclick="unCheckSubTask(${index})"></div>${subTask.title}</div>`;
             }
         })
-    
     }   
 }
 
@@ -331,11 +330,10 @@ function unCheckSubTask(index) {
 function prepareDeleteTask() {
     const deleteTask = document.getElementById("deleteTask");
     deleteTask.addEventListener("click", async function () {
-        let taskName = this.getAttribute("taskname");
-        console.log(taskName);
-        await deleteFromDatabase("tasks/" + taskName);
+        let taskKey = this.getAttribute("taskname");
+        console.log(taskKey);
+        await deleteFromDatabase("tasks/" + taskKey);
         location.reload();
-        
     })
 }
 
@@ -351,6 +349,8 @@ function renderTaskDetailEdit(){
     const taskDetail = document.getElementById('task-details');
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
+
+    setPriority(data.taskPriority);
 }
 
 function prepareUpdateTask(){
@@ -365,13 +365,17 @@ function prepareUpdateTask(){
     })
 }
 
-function updateTask(task){
-    task.taskName = document.getElementById('title-input-overlay').value;
-    task.description = document.getElementById('description-input-overlay').value;
-    task.dueDate = document.getElementById('datepicker').value;
-    task.assignedTo = document.getElementById('assigned-to-dropdown').value;
-    task.subtasks = subTasks;
-    console.log(task);
-    
+async function updateTask(data){
+    data.taskData.title = document.getElementById('title-input-overlay').value;
+    data.taskData.description = document.getElementById('description-input-overlay').value;
+    data.taskData.dueDate = document.getElementById('datepicker').value;
+    data.taskData.assignedTo = document.getElementById('assigned-to-dropdown').value;
+    data.taskData.subtasks = subTasks;
+    data.taskData.priority = taskDetails.priority;
+    taskData = data.taskData;
+    console.log(taskData);
+    taskKey = data.taskKey;
+    await updateOnDatabase("tasks/" + taskKey, taskData);
+    renderTaskDetailEdit();
 }
 
