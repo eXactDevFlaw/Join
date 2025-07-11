@@ -307,7 +307,7 @@ if (addSubTaskInput) {
             addNewSubTask();
         }
     });
-}
+}  
 
 function clearSubTaskValue() {
     let subTask = document.getElementById("add-subtasks");

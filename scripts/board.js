@@ -343,4 +343,5 @@ function prepareEditTask() {
 function renderTaskDetailEdit(){
     const taskDetail = document.getElementById('task-details');
     taskDetail.innerHTML = taskDetailEditTemplate(data);
+    renderSubTasks();
 }
