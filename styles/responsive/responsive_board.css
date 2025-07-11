@@ -1,12 +1,11 @@
-@media (max-width: 1349px) {
-
-}
+@media (max-width: 1349px) {}
 
 @media (max-width: 980px) and (orientation: portrait) {
     body {
         height: 100vh;
         width: 100vw;
         overflow: hidden;
+        font-size: 0.875rem;
     }
 
     header {
@@ -50,6 +49,10 @@
 
     .logo_header_mobile {
         display: unset !important;
+    }
+
+    .header_mobile_container {
+        display: flex !important;
     }
 
     .nav_items {
@@ -104,5 +107,36 @@
         left: unset;
         top: unset;
         overflow: auto;
+    }
+
+    .board_wrapper {
+        height: 100%;
+        max-width: unset;
+        display: flex;
+        justify-content: center;
+    }
+
+    .headline {
+        width: 95%;
+        padding: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: start;
+    }
+
+    .find_add button {
+        position: absolute;
+        top: 0px;
+        left: 90%;
+        width: 10%;
+    }
+
+    .find_add button span {
+        display: none;
+    }
+
+    content {
+        width: 100%;
+        flex-direction: column;
     }
 }
