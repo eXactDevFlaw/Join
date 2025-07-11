@@ -51,6 +51,8 @@ function renderAllTasks() {
         let htmlel = item.constructHTMLElements()
         htmlel.setAttribute("taskName", item.taskName)
         htmlel.setAttribute("taskStatus", item.taskStatus)
+        // htmlel.setAttribute("onclick", `openTaskDetails()`)
+        // ${item.taskKey}
         htmlel.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', item.taskName);
         })
@@ -224,7 +226,13 @@ function taskDetailsRef (){
             dataPool.forEach((task) => {
                 if (task.taskName === taskname){
                     data = task;
+                    if (data.taskSubTasks === undefined){
+                        subTasks = [];
+                        data.taskSubTasks = subTasks;
+                    }
                      renderTaskDetailView(data);
+                     console.log(data);
+                     
                 }
             })
         });
