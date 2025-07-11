@@ -297,26 +297,4 @@ content{
     /* transition: transform 2.3s ease; */
 }
 
-.portrait_placeholder {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(246, 247, 248, 1);
-    display: none;
-
-}
-
-.portrait_placeholder > p {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(246, 247, 248, 1);
-    z-index: 5000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    z-index: 5;
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    color: rgb(42, 54, 71);
-    margin: 0;
-}
 
