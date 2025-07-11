@@ -38,7 +38,12 @@ function taskDetailViewTemplate(data) {
 }
 
 function taskDetailEditTemplate(data) {
-      return `    
+      return ` 
+      <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
+      <div></div>
+      <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
+    </div>   
+      <div class="task_edit_view_container d_flex_center_column">
             <div class="title_input margin_0 gap_8 width_100">
           <div class="d_flex_center_row justify_start margin_0">
             <p class="margin_0">Title</p>
@@ -138,7 +143,9 @@ function taskDetailEditTemplate(data) {
           </div>
         </div>
 
-    <div class="task_detail_view_footer">
+
+    </div>
+        <div class="task_detail_view_footer">
             <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Ok <img
             src="./assets/icons/check.svg" alt="">
         </button>

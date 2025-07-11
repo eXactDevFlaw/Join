@@ -282,7 +282,7 @@ function renderSubTasks() {
     let addSubtaskList = document.querySelector(".added_subtask_list");
     addSubtaskList.innerHTML = "";
     subTasks.forEach((subTask, index) => {
-        addSubtaskList.innerHTML += addSubTaskTemplate(subTask.title, index);
+        addSubtaskList.innerHTML += addSubTaskTemplate(subTask, index);
     })
 }
 
@@ -294,7 +294,7 @@ if (addSubTaskInput) {
             addNewSubTask();
         }
     });
-}
+}  
 
 function clearSubTaskValue() {
     let subTask = document.getElementById("add-subtasks");
@@ -316,6 +316,6 @@ function editSubTask(index) {
 function editCheck(index) {
     let editCheck = document.getElementById("edit-value" + index)
     let editCheckValue = editCheck.value;
-    subTasks[index] = editCheckValue;
+    subTasks[index].title = editCheckValue;
     renderSubTasks()
 }
