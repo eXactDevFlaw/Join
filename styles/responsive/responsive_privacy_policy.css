@@ -1,6 +1,4 @@
-@media (max-width: 1349px) {
-
-}
+@media (max-width: 1349px) {}
 
 @media (max-width: 980px) and (orientation: portrait) {
     body {
@@ -50,6 +48,10 @@
 
     .logo_header_mobile {
         display: unset !important;
+    }
+
+    .header_mobile_container {
+        display: flex !important;
     }
 
     .nav_items {
@@ -105,4 +107,6 @@
         top: unset;
         overflow: auto;
     }
+
+
 }

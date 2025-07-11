@@ -104,7 +104,7 @@ document.addEventListener("click", (event) => {
     const dropdown = document.getElementById("add-task-contacts-list");
     const input = document.getElementById("assigned-to-dropdown");
 
-    if (!dropdown.contains(event.target) && !input.contains(event.target)) {
+    if (dropdown && input && !dropdown.contains(event.target) && !input.contains(event.target)) {
         closeAssignedToDropdown();
     }
 });
