@@ -51,8 +51,6 @@ function renderAllTasks() {
         let htmlel = item.constructHTMLElements()
         htmlel.setAttribute("taskName", item.taskName)
         htmlel.setAttribute("taskStatus", item.taskStatus)
-        // htmlel.setAttribute("onclick", `openTaskDetails()`)
-        // ${item.taskKey}
         htmlel.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', item.taskName);
         })

@@ -8,12 +8,14 @@ class TaskClass {
         this.taskPriority = data.priority;
         this.taskStatus = data.status;
         this.taskSubTasks = data.subtasks;
-        this.taskAssignedTo = data.taskAssignedTo;
+        this.taskAssignedTo = data.assignedTo;
     }
 
     logger() {
         if (this.taskData) {
+            console.log(this.taskKey)
             console.table(this.taskData);
+            console.log(this.taskAssignedTo)
         } else {
             console.log("Error on loading of data!");
         }
@@ -66,8 +68,10 @@ class TaskClass {
 
         if (this.taskAssignedTo) {
             let data = Object.values(this.taskAssignedTo)
-            for (let i = 0; i < 3; i++) {
+            console.log(data)
+            for (let i = 0; i < Math.min(3, data.length); i++) {
                 const element = data[i];
+                console.log(element)
                 let assignedInitals = getUserCapitalInitials(element)
                 let color = stringToColor(element)
                 const badge = document.createElement('div');

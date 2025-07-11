@@ -19,13 +19,15 @@ window.toggleAssignedToDropdown = function (e) {
 
 
 const assignedInput = document.getElementById("assigned-to-dropdown");
-assignedInput.addEventListener("input", () => {
-
-    const list = document.getElementById("add-task-contacts-list");
-    if (!list.classList.contains("d_none")) {
-        renderContacts();
-    }
-});
+if(assignedInput){
+    assignedInput.addEventListener("input", () => {
+    
+        const list = document.getElementById("add-task-contacts-list");
+        if (!list.classList.contains("d_none")) {
+            renderContacts();
+        }
+    });
+}
 
 /**
  * Lädt alle Kontakte einmalig ins Array.
@@ -40,6 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
     initContacts();
     setPriority("medium");
 });
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.id != "add-task-contacts-list"){
+        const list = document.getElementById("add-task-contacts-list");
+        if (list)
+            {list.classList.add('d_none')}
+    }
+})
 
 /**
  * Öffnet das Overlay und injiziert das Template.
@@ -132,7 +143,7 @@ async function createTask() {
     taskDetails.title = document.getElementById('title-input-overlay').value;
     taskDetails.description = document.getElementById('description-input-overlay').value;
     taskDetails.dueDate = document.getElementById('datepicker').value;
-    taskDetails.assignedTo = document.getElementById('assigned-to-dropdown').value;
+    taskDetails.assignedTo = selectedContacts;
     taskDetails.category = document.getElementById("selected-category").innerHTML;
     taskDetails.subtasks = subTasks;
     taskDetails.status = "todo";
@@ -168,13 +179,15 @@ function renderContacts() {
     container.innerHTML = "";
 
     const contacts = [...allContacts].sort((a, b) => a.name.localeCompare(b.name))
-
+    console.log(assignedInput)
     const filter = assignedInput.value.trim().toLowerCase();
     const filtered = filter ? contacts.filter(c => c.name.toLowerCase().includes(filter)) : contacts;
 
     filtered.forEach(contact => {
+        console.log(contact)
         const sel = selectedContacts.includes(contact.id);
         const color = stringToColor(contact.name);
+        console.log(contact.name)
         const initials = getInitials(contact.name);
 
         const row = document.createElement("div");
