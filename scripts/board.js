@@ -329,14 +329,9 @@ function prepareDeleteTask() {
 
 function prepareEditTask() {
     const editTask = document.getElementById("edit-Task");
-    editTask.addEventListener("click", async function () {
-        let taskName = this.getAttribute("taskname");
-        // await deleteFromDatabase("tasks/" + taskName);
-        console.log(data);
-        console.log(taskName);
-        renderTaskDetailEdit()
-        // renderSubTasksDetailView(data)
-        
+    editTask.addEventListener("click", function () {
+        renderTaskDetailEdit();
+        updateTask();
     })
 }
 
@@ -344,4 +339,13 @@ function renderTaskDetailEdit(){
     const taskDetail = document.getElementById('task-details');
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
+}
+
+function updateTask(){
+    const checkEditTask = document.getElementById("check-edit-task"); 
+    checkEditTask.addEventListener("click", function () {
+        let taskName = this.getAttribute("taskkey");
+        console.log(taskName);
+        
+    })
 }

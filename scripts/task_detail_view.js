@@ -146,7 +146,7 @@ function taskDetailEditTemplate(data) {
 
     </div>
         <div class="task_detail_view_footer">
-            <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Ok <img
+            <button class="btn_dark margin_0 add_task_button" taskkey="${data.taskKey}" id="check-edit-task">Ok <img
             src="./assets/icons/check.svg" alt="">
         </button>
     </div>

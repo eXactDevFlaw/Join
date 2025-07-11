@@ -316,9 +316,12 @@ function addNewSubTask() {
 function renderSubTasks() {
     let addSubtaskList = document.querySelector(".added_subtask_list");
     addSubtaskList.innerHTML = "";
-    subTasks.forEach((subTask, index) => {
+    if (subTasks > "") {
+        subTasks.forEach((subTask, index) => {
         addSubtaskList.innerHTML += addSubTaskTemplate(subTask, index);
     })
+    }
+    
 }
 
 let addSubTaskInput = document.getElementById("add-subtasks");
