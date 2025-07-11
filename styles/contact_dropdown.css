@@ -9,13 +9,19 @@
 }
 
 .contact_list_item_active {
+  background-color: rgba(9, 25, 49, 1) !important;
+  border-radius: 8px;
+}
+
+.contact_list_item_active:hover {
   background-color: rgba(42, 54, 71, 1) !important;
   border-radius: 8px;
 }
 
 .contact_list_item_active .assign_contact_checkbox {
-  background-color: white;
-  border-color: white;
+  background-color: rgba(9, 25, 49, 1) !important;
+  border-color: rgba(255, 255, 255, 1); 
+  background-image: url('../assets/icons/checkbox_active.svg');
 }
 
 .contact_list_item_active .check_icon {
@@ -92,24 +98,44 @@
 }
 
 .assign_contact_checkbox {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 2px solid rgba(42, 54, 71, 1);
   border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s, border-color 0.2s;
   margin-right: initial;
 }
 
+.assign_contact_checkbox:hover {
+  background-image: none;
+}
+
 .check_icon {
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   display: none;
   /* Standardmäßig versteckt */
 }
 
 .contact_list_item_active .check_icon {
   display: block;
+}
+
+.assigned_circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

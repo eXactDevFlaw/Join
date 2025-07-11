@@ -29,12 +29,12 @@
   gap: 24px;
 }
 
-.textarea_wrapper{
+.textarea_wrapper {
   position: relative;
   display: inline-block;
 }
 
-.resize_icon{
+.resize_icon {
   position: absolute;
   bottom: 11px;
   right: 5px;
@@ -55,7 +55,7 @@ textarea {
   border-radius: 10px;
   border: 1px solid rgba(209, 209, 209, 1);
   resize: none;
-  padding-bottom: 20px; 
+  padding-bottom: 20px;
 }
 
 textarea::placeholder {
@@ -174,7 +174,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   rotate: 180deg;
 }
 
-.dropdown{
+.dropdown {
   background-color: rgba(255, 255, 255, 1);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -214,7 +214,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 14px;
 }
 
-.close_add_task{
+.close_add_task {
   position: absolute;
   left: 1044px;
   top: 64px;
@@ -232,11 +232,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: rgba(238, 238, 238, 1);
 }
 
-.close_add_task:active{
+.close_add_task:active {
   background-color: rgba(41, 171, 226, 1);
 }
 
-.close_add_task:before, .close_add_task:after {
+.close_add_task:before,
+.close_add_task:after {
   position: absolute;
   content: " ";
   height: 16px;
@@ -278,7 +279,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-.close_cross:before, .close_cross:after {
+.close_cross:before,
+.close_cross:after {
   position: absolute;
   content: " ";
   height: 16px;
@@ -297,78 +299,79 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .btn_white:hover .close_cross::before,
 .btn_white:hover .close_cross::after {
-    background-color: rgba(41, 171, 226, 1);
-    cursor: pointer;
+  background-color: rgba(41, 171, 226, 1);
+  cursor: pointer;
 }
 
 .btn_white:active .close_cross::before,
 .btn_white:active .close_cross::after {
-    background-color: rgba(9, 25, 49, 1);
+  background-color: rgba(9, 25, 49, 1);
 }
 
- .add_task_footer {
+.add_task_footer {
   z-index: 2;
   position: absolute;
   width: 988px;
   top: 750px;
- }
+}
 
- .category {
+.category {
   width: 440px;
   padding: 12px 16px 12px 16px;
   border-radius: 10px;
- }
+}
 
- .category:hover {
+.category:hover {
   cursor: pointer;
-  background-color: rgba(209, 209, 209, 1);;
- }
+  background-color: rgba(209, 209, 209, 1);
+  ;
+}
 
- .add_or_remove{
+.add_or_remove {
   position: absolute;
   right: 10px;
- }
+}
 
- .add_or_remove img{
+.add_or_remove img {
   height: 24px;
- }
+}
 
- .added_subtask{
+.added_subtask {
   padding: 4px 16px 4px 16px;
   font-size: 16px;
   border-radius: 10px;
   height: 32px;
- }
+}
 
- .added_subtask_list {
+.added_subtask_list {
   max-height: 150px;
   overflow-x: auto;
- }
+}
 
- .subtask_edit_hover_icons{
+.subtask_edit_hover_icons {
   display: none;
 
- }
+}
 
- .vector-subtask{
+.vector-subtask {
   height: 24px;
- }
+}
 
-.added_subtask:hover{
+.added_subtask:hover {
   cursor: pointer;
   background-color: rgba(238, 238, 238, 1);
- }
+}
 
-.added_subtask:hover .subtask_edit_hover_icons{
+.added_subtask:hover .subtask_edit_hover_icons {
   display: flex;
   cursor: pointer;
 }
 
- ul{
+ul {
   padding: 0;
- }
+}
 
- .subtask_edit_input input{
+.subtask_edit_input input {
   height: 32px;
   font-size: 16px;
   padding: 4px 16px 4px 16px;
@@ -377,9 +380,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-right: unset;
   border-color: rgba(0, 93, 255, 1);
   border-radius: unset;
- }
+}
 
-.subtask_edit_input input:focus{
+.subtask_edit_input input:focus {
   outline: unset;
 }
 
@@ -391,6 +394,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   right: 16px;
 }
 
-.edit_input{
+.edit_input {
   padding-right: 75px !important;
+}
+
+.required_input_mobile {
+  display: none;
 }
