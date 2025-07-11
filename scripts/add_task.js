@@ -7,7 +7,7 @@ let subTaskDetails = {};
 let allContacts = [];
 let selectedContacts = [];
 
-// am einfachsten: alias auf den internen Handler
+
 window.toggleAssignedToDropdown = function (e) {
     e.stopPropagation();
     const list = document.getElementById("add-task-contacts-list");
@@ -17,10 +17,10 @@ window.toggleAssignedToDropdown = function (e) {
     arrow.classList.toggle("up");
 };
 
-// ganz oben, direkt nach dem allContacts‑Load
+
 const assignedInput = document.getElementById("assigned-to-dropdown");
 assignedInput.addEventListener("input", () => {
-    // Wenn das Dropdown offen ist, neu filtern
+
     const list = document.getElementById("add-task-contacts-list");
     if (!list.classList.contains("d_none")) {
         renderContacts();
@@ -35,7 +35,7 @@ async function initContacts() {
     allContacts = Object.entries(raw || {}).map(([id, data]) => ({ id, ...data }));
 }
 
-// Priority initialisieren
+
 document.addEventListener("DOMContentLoaded", () => {
     initContacts();
     setPriority("medium");
@@ -46,22 +46,45 @@ document.addEventListener("DOMContentLoaded", () => {
  * Binded hier auch den Assigned‑to‑Dropdown‑Handler.
  */
 function openTaskOverlay() {
-    // Overlay anzeigen
-    document.getElementById("task-overlay").classList.remove("d_none");
-    const entry = document.getElementById("add-task-entry");
+    const overlay = document.getElementById("task-overlay");
+    overlay.classList.remove("d_none");
 
-    // Template injizieren
-    entry.innerHTML = addTaskTemplate();
-    entry.classList.remove("d_none");
-    void entry.offsetWidth;
+    const addTaskEntry = document.getElementById("add-task-entry");
+    addTaskEntry.innerHTML = addTaskTemplate();
+    addTaskEntry.classList.remove("d_none");
+    void addTaskEntry.offsetWidth;
+    addTaskEntry.classList.add("show");
+
+    initAssignedDropdownListeners();
+
+    function initAssignedDropdownListeners() {
+        const wrap = document.querySelector(".input_assigned_to");
+        if (wrap) {
+            wrap.addEventListener("click", toggleAssignedToDropdown);
+        }
+
+        const input = document.getElementById("assigned-to-dropdown");
+        if (input) {
+            input.addEventListener("input", () => {
+                const list = document.getElementById("add-task-contacts-list");
+                if (!list.classList.contains("d_none")) {
+                    renderContacts();
+                }
+            });
+        }
+    }
+
+    addTaskEntry.innerHTML = addTaskTemplate();
+    addTaskEntry.classList.remove("d_none");
+    void addTaskEntry.offsetWidth;
     entry.classList.add("show");
 
-    // === Assigned‑to Dropdown SETUP ===
+
     const wrap = entry.querySelector(".input_assigned_to");
     const list = entry.querySelector("#add-task-contacts-list");
     const arrow = entry.querySelector("#arrow-drop-down-assign");
 
-    // Klick auf Wrap öffnet/schließt das Dropdown
+
     wrap.addEventListener("click", e => {
         e.stopPropagation();
         if (list.classList.contains("d_none")) renderContacts();
@@ -69,7 +92,7 @@ function openTaskOverlay() {
         arrow.classList.toggle("up");
     });
 
-    // Klick außerhalb von Wrap/List schließt das Dropdown
+
     document.addEventListener("click", e => {
         if (!wrap.contains(e.target) && !list.contains(e.target)) {
             list.classList.add("d_none");
@@ -213,7 +236,7 @@ async function renderAssignableContacts() {
     container.innerHTML = "";
     container.classList.remove("d_none");
 
-    const contacts = await fetchContacts(); // bereits in contacts.js definiert
+    const contacts = await fetchContacts();
 
     contacts.forEach((c, i) => {
         const div = document.createElement("div");
@@ -232,10 +255,6 @@ async function renderAssignableContacts() {
         container.appendChild(div);
     });
 }
-
-// // Klick auf das Inputfeld oder Dropdown-Pfeil zeigt Liste an
-// document.getElementById("assign-input").addEventListener("click", renderAssignableContacts);
-
 
 let categoryDropdown = document.querySelector(".select_category_dropdown");
 if (categoryDropdown) {
