@@ -35,14 +35,19 @@ const emptyRefs = {
 };
 
 async function loadTasks() {
-    rawTasksData = Object.entries(await getTasksFromDatabase())
-    rawTasksData.forEach((singleTask) => {
-        let [key, data] = [...singleTask]
-        dataPool.push(new TaskClass(key, data));
-    })
-    dataPool.forEach((task) => {
-        // task.logger()
-    })
+    let dataFromDatabase = await getTasksFromDatabase()
+    if (dataFromDatabase){
+        rawTasksData = Object.entries(dataFromDatabase)
+    }
+    if(rawTasksData){
+        rawTasksData.forEach((singleTask) => {
+            let [key, data] = [...singleTask]
+            dataPool.push(new TaskClass(key, data));
+        })
+        dataPool.forEach((task) => {
+            // task.logger()
+        })
+    }
 }
 
 function renderAllTasks() {

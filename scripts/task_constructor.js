@@ -68,7 +68,6 @@ class TaskClass {
 
         if (this.taskAssignedTo) {
             let data = Object.values(this.taskAssignedTo)
-            console.log(data)
             for (let i = 0; i < Math.min(3, data.length); i++) {
                 const element = data[i];
                 console.log(element)
@@ -100,6 +99,7 @@ class TaskClass {
             Object.values(this.taskSubTasks).forEach((item) => {
                 this.taskSubTasksAmount += 1
                 if (item.status == "closed") {
+                    console.log(item.status)
                     this.taskSubTasksAmountCompleted += 1;
                 }
             })

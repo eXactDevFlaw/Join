@@ -6,6 +6,7 @@ let subTasks = [];
 let subTaskDetails = {};
 let allContacts = [];
 let selectedContacts = [];
+let pushedContactsName = [];
 
 
 window.toggleAssignedToDropdown = function (e) {
@@ -143,7 +144,7 @@ async function createTask() {
     taskDetails.title = document.getElementById('title-input-overlay').value;
     taskDetails.description = document.getElementById('description-input-overlay').value;
     taskDetails.dueDate = document.getElementById('datepicker').value;
-    taskDetails.assignedTo = selectedContacts;
+    taskDetails.assignedTo = pushedContactsName;
     taskDetails.category = document.getElementById("selected-category").innerHTML;
     taskDetails.subtasks = subTasks;
     taskDetails.status = "todo";
@@ -179,13 +180,13 @@ function renderContacts() {
     container.innerHTML = "";
 
     const contacts = [...allContacts].sort((a, b) => a.name.localeCompare(b.name))
-    console.log(assignedInput)
     const filter = assignedInput.value.trim().toLowerCase();
     const filtered = filter ? contacts.filter(c => c.name.toLowerCase().includes(filter)) : contacts;
 
     filtered.forEach(contact => {
         console.log(contact)
         const sel = selectedContacts.includes(contact.id);
+        console.log(sel)
         const color = stringToColor(contact.name);
         console.log(contact.name)
         const initials = getInitials(contact.name);
@@ -207,6 +208,7 @@ function renderContacts() {
             const idx = selectedContacts.indexOf(contact.id);
             if (idx >= 0) selectedContacts.splice(idx, 1);
             else selectedContacts.push(contact.id);
+            pushedContactsName.push(contact.name)
             renderContacts();
             renderSelectedCircles();
         });
