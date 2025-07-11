@@ -70,7 +70,6 @@ class TaskClass {
             let data = Object.values(this.taskAssignedTo)
             for (let i = 0; i < Math.min(3, data.length); i++) {
                 const element = data[i];
-                console.log(element)
                 let assignedInitals = getUserCapitalInitials(element)
                 let color = stringToColor(element)
                 const badge = document.createElement('div');

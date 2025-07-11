@@ -184,11 +184,8 @@ function renderContacts() {
     const filtered = filter ? contacts.filter(c => c.name.toLowerCase().includes(filter)) : contacts;
 
     filtered.forEach(contact => {
-        console.log(contact)
         const sel = selectedContacts.includes(contact.id);
-        console.log(sel)
         const color = stringToColor(contact.name);
-        console.log(contact.name)
         const initials = getInitials(contact.name);
 
         const row = document.createElement("div");
