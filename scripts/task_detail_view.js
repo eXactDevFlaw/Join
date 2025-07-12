@@ -1,4 +1,6 @@
 function taskDetailViewTemplate(data) {
+  console.log(data.taskKey)
+  console.log(data.taskPriority)
     return `    <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div class="margin_0 category_detail" id="task-category">User Story</div>
       <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
@@ -12,7 +14,7 @@ function taskDetailViewTemplate(data) {
     </div>
     <div class=" d_flex_center_row width_100 detail_head">
       <p class="task_detail">Due date:</p>
-      <div class="width_100 detail_due_date">${data.taskData.dueDate}</div>
+      <div class="width_100 detail_due_date">${data.taskDueDate}</div>
     </div>
     <div class="d_flex_center_row width_100 detail_head">
       <p class="task_detail">Priority:</p>
@@ -40,6 +42,8 @@ function taskDetailViewTemplate(data) {
 }
 
 function taskDetailEditTemplate(data) {
+  console.log(data)
+  console.log(data.taskKey)
       return ` 
       <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div></div>
@@ -73,7 +77,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Due Date</p>
           </div>
           <div class="margin_0">
-            <input class="date" id="datepicker" type="date"  value="${data.taskData.dueDate}"/>
+            <input class="date" id="datepicker" type="date"  value="${data.taskDueDate}"/>
           </div>
         </div>
 
@@ -148,7 +152,7 @@ function taskDetailEditTemplate(data) {
 
     </div>
         <div class="task_detail_view_footer">
-            <button class="btn_dark margin_0 add_task_button" taskkey="${data.taskKey}" id="check-edit-task">Ok <img
+            <button class="btn_dark margin_0 add_task_button" taskname="${data.taskKey}" id="check-edit-task">Ok <img
             src="./assets/icons/check.svg" alt="">
         </button>
     </div>

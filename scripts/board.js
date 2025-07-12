@@ -236,8 +236,6 @@ function taskDetailsRef (){
                         data.taskSubTasks = subTasks;
                     }
                      renderTaskDetailView(data);
-                     console.log(data);
-                     
                 }
             })
         });
@@ -333,7 +331,6 @@ function prepareDeleteTask() {
     const deleteTask = document.getElementById("deleteTask");
     deleteTask.addEventListener("click", async function () {
         let taskKey = this.getAttribute("taskname");
-        console.log(taskKey);
         await deleteFromDatabase("tasks/" + taskKey);
         location.reload();
     })
@@ -351,14 +348,13 @@ function renderTaskDetailEdit(){
     const taskDetail = document.getElementById('task-details');
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
-
     setPriority(data.taskPriority);
 }
 
 function prepareUpdateTask(){
     const checkEditTask = document.getElementById("check-edit-task"); 
     checkEditTask.addEventListener("click", function () {
-        let taskKey = this.getAttribute("taskkey");
+        let taskKey = this.getAttribute("taskname");
             dataPool.forEach((task) => {
                 if (task.taskKey === taskKey){
                     updateTask(task);
@@ -368,15 +364,19 @@ function prepareUpdateTask(){
 }
 
 async function updateTask(data){
+    let rawPrio = Object.values(taskDetails)
     data.taskName= document.getElementById('title-input-overlay').value;
     data.taskDescription = document.getElementById('description-input-overlay').value;
     data.taskData.dueDate = document.getElementById('datepicker').value;
     data.taskAssignedTo = document.getElementById('assigned-to-dropdown').value;
     data.taskSubtasks = subTasks;
-    data.taskPriority = taskDetails.priority;
-    data = data.taskData;
+    data.taskPriority = rawPrio[0]
+    console.log(data)
+    console.log(dataPool)
     taskKey = data.taskKey;
-    await updateOnDatabase("tasks/" + taskKey, data);
+
+    console.log(taskKey)
+    // await updateOnDatabase("tasks/" + taskKey, data);
     // closeTaskOverlay();
     // openTaskDetails();
     renderTaskDetailView(data);

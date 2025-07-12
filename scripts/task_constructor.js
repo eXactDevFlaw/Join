@@ -9,6 +9,7 @@ class TaskClass {
         this.taskStatus = data.status;
         this.taskSubTasks = data.subtasks;
         this.taskAssignedTo = data.assignedTo;
+        this.taskDueDate = data.dueDate
     }
 
     logger() {
