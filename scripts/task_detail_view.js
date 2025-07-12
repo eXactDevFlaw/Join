@@ -45,7 +45,7 @@ function taskDetailEditTemplate(data) {
       <div></div>
       <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
     </div>   
-      <div class="task_edit_view_container d_flex_center_column">
+      <div class="task_edit_view_container padding_edit_view d_flex_center_column">
             <div class="title_input margin_0 gap_8 width_100">
           <div class="d_flex_center_row justify_start margin_0">
             <p class="margin_0">Title</p>

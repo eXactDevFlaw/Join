@@ -247,7 +247,9 @@ function taskDetailsRef (){
 
 function renderTaskDetailView(data) {
     const taskDetail = document.getElementById('task-details');
+    taskDetail.innerHTML = "";
     taskDetail.innerHTML = taskDetailViewTemplate(data);
+
      const taskCategory = document.getElementById("task-category");
        if (data.taskCategory === "Technical Task"){
         taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)'; 
@@ -366,16 +368,17 @@ function prepareUpdateTask(){
 }
 
 async function updateTask(data){
-    data.taskData.title = document.getElementById('title-input-overlay').value;
-    data.taskData.description = document.getElementById('description-input-overlay').value;
+    data.taskName= document.getElementById('title-input-overlay').value;
+    data.taskDescription = document.getElementById('description-input-overlay').value;
     data.taskData.dueDate = document.getElementById('datepicker').value;
-    data.taskData.assignedTo = document.getElementById('assigned-to-dropdown').value;
-    data.taskData.subtasks = subTasks;
-    data.taskData.priority = taskDetails.priority;
-    taskData = data.taskData;
-    console.log(taskData);
+    data.taskAssignedTo = document.getElementById('assigned-to-dropdown').value;
+    data.taskSubtasks = subTasks;
+    data.taskPriority = taskDetails.priority;
+    data = data.taskData;
     taskKey = data.taskKey;
-    await updateOnDatabase("tasks/" + taskKey, taskData);
-    renderTaskDetailEdit();
+    await updateOnDatabase("tasks/" + taskKey, data);
+    // closeTaskOverlay();
+    // openTaskDetails();
+    renderTaskDetailView(data);
 }
 
