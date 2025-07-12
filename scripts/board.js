@@ -364,15 +364,16 @@ function prepareUpdateTask(){
 }
 
 async function updateTask(data){
-    let rawPrio = Object.values(taskDetails)
-    data.taskName= document.getElementById('title-input-overlay').value;
-    data.taskDescription = document.getElementById('description-input-overlay').value;
-    data.taskData.dueDate = document.getElementById('datepicker').value;
-    data.taskAssignedTo = document.getElementById('assigned-to-dropdown').value;
-    data.taskSubtasks = subTasks;
-    data.taskPriority = rawPrio[0]
     console.log(data)
-    console.log(dataPool)
+    console.log(rawTasksData)
+    let rawPrio = Object.values(taskDetails)
+    data.taskData.title= document.getElementById('title-input-overlay').value;
+    data.taskData.description = document.getElementById('description-input-overlay').value;
+    data.taskData.dueDate = document.getElementById('datepicker').value;
+    data.taskData.assignedTo = document.getElementById('assigned-to-dropdown').value;
+    data.taskData.subtasks = subTasks;
+    data.taskData.priority = rawPrio[0]
+
     taskKey = data.taskKey;
 
     console.log(taskKey)

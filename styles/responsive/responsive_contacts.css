@@ -1,15 +1,20 @@
-@media (max-width: 1400px) and (min-width: 801px){
+@media (max-width: 1400px) and (min-width: 641px){
     .portrait_placeholder {
         display: flex;
+    }
+
+    main {
+        display: none;
     }
 }
 
 
-@media (max-width: 800px) and (orientation: portrait) {
+@media (max-width: 640px) and (orientation: portrait) {
     body {
         height: 100vh;
         width: 100vw;
         overflow: hidden;
+        background: rgba(255, 255, 255, 1);
     }
 
     header {
@@ -113,5 +118,34 @@
         overflow: auto;
     }
 
+    .contacts_layout_wrapper {
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+    }
 
+    .contacts_overview {
+        display: none;
+    }
+
+    .contactlist_area {
+        width: 100%;
+        box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .add_contact_btn {
+        position: absolute;
+        top: 90%;
+        left: 83%;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: unset;
+        padding: unset;
+        margin: unset;
+    }
+
+    .add_contact_btn > span {
+        display: none;
+    }
 }

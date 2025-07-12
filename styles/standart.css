@@ -221,11 +221,7 @@ a {
     position: unset !important;
 }
 
- ul{
-  padding: 0;
- }
-
- input[type="date"]:invalid::-webkit-datetime-edit {
+input[type="date"]:invalid::-webkit-datetime-edit {
   color: rgba(209, 209, 209, 1);
 }
 

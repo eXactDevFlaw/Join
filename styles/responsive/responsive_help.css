@@ -1,11 +1,11 @@
-@media (max-width: 1400px) and (min-width: 801px){
+@media (max-width: 1400px) and (min-width: 641px){
     .portrait_placeholder {
         display: flex;
     }
 }
 
 
-@media (max-width: 800px) and (orientation: portrait) {
+@media (max-width: 640px) and (orientation: portrait) {
     body {
         height: 100vh;
         width: 100vw;
@@ -113,5 +113,44 @@
         overflow: auto;
     }
 
+    .help_content_wrapper {
+        display: flex;
+        justify-content: center;
+    }
 
+    .help_wrapper {
+        max-width: unset;
+        width: 95% !important;
+        height: 100%;
+        padding: 1px 0 0 0;
+        justify-content: unset;
+    }
+
+    .help_btn_back {
+        top: 5%;
+        left: 100%;
+    }
+
+.help_list {
+  list-style-type: decimal;
+}
+.help_list li {
+  position: relative;
+  margin: 0 0 24px 0;
+  padding-left: 48px;
+  font-size: 1.1em;
+  line-height: 1.4;
+}
+.help_list li::marker {
+  font-weight: bold;
+  font-size: 2em;
+  color: #000;
+  font-family: inherit;
+}
+.help_list li strong {
+  font-size: 1.2em;
+  font-weight: bold;
+  display: inline;
+  margin-right: 0.2em;
+}
 }

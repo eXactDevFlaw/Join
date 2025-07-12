@@ -10,7 +10,7 @@
     }
 }
 
-@media (max-width: 550px) and (orientation: portrait) {
+@media (max-width: 640px) and (orientation: portrait) {
     .login_logo {
         position: absolute;
         top: 37px;

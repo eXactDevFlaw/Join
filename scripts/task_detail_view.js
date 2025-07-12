@@ -1,6 +1,4 @@
 function taskDetailViewTemplate(data) {
-  console.log(data.taskKey)
-  console.log(data.taskPriority)
     return `    <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div class="margin_0 category_detail" id="task-category">User Story</div>
       <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
@@ -42,8 +40,6 @@ function taskDetailViewTemplate(data) {
 }
 
 function taskDetailEditTemplate(data) {
-  console.log(data)
-  console.log(data.taskKey)
       return ` 
       <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div></div>

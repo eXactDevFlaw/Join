@@ -1,11 +1,11 @@
-@media (max-width: 1400px) and (min-width: 801px){
+@media (max-width: 1400px) and (min-width: 641px){
     .portrait_placeholder {
         display: flex;
     }
 }
 
 
-@media (max-width: 800px) and (orientation: portrait) {
+@media (max-width: 640px) and (orientation: portrait) {
     body {
         height: 100vh;
         width: 100vw;
@@ -35,6 +35,10 @@
     .header_container {
         width: 100%;
         padding: 10px;
+    }
+
+    .header_mobile_container {
+        display: flex !important;
     }
 
     .header_content {
