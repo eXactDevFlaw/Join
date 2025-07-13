@@ -1,10 +1,6 @@
-@media (max-width: 1400px) and (min-width: 641px){
+@media (max-width: 1400px) and (min-width: 641px) {
     .portrait_placeholder {
         display: flex;
-    }
-
-    main {
-        display: none;
     }
 }
 
@@ -14,7 +10,6 @@
         height: 100vh;
         width: 100vw;
         overflow: hidden;
-        background: rgba(255, 255, 255, 1);
     }
 
     header {
@@ -107,6 +102,17 @@
     .nav_privacy_legal {
         display: none !important;
     }
+
+    .small_logout_win {
+        height: 200px;
+        top: 7%;
+        right: 2%;
+    }
+
+    .small_logout_win_help {
+        display: flex !important;
+    }
+
 
     main {
         margin: 0;

@@ -1,4 +1,4 @@
-@media (max-width: 1400px) and (min-width: 641px){
+@media (max-width: 1400px) and (min-width: 641px) {
     .portrait_placeholder {
         display: flex;
     }
@@ -103,6 +103,17 @@
         display: none !important;
     }
 
+    .small_logout_win {
+        height: 200px;
+        top: 7%;
+        right: 2%;
+    }
+
+    .small_logout_win_help {
+        display: flex !important;
+    }
+
+
     main {
         margin: 0;
         width: 100%;
@@ -131,26 +142,29 @@
         left: 100%;
     }
 
-.help_list {
-  list-style-type: decimal;
-}
-.help_list li {
-  position: relative;
-  margin: 0 0 24px 0;
-  padding-left: 48px;
-  font-size: 1.1em;
-  line-height: 1.4;
-}
-.help_list li::marker {
-  font-weight: bold;
-  font-size: 2em;
-  color: #000;
-  font-family: inherit;
-}
-.help_list li strong {
-  font-size: 1.2em;
-  font-weight: bold;
-  display: inline;
-  margin-right: 0.2em;
-}
+    .help_list {
+        list-style-type: decimal;
+    }
+
+    .help_list li {
+        position: relative;
+        margin: 0 0 24px 0;
+        padding-left: 48px;
+        font-size: 1.1em;
+        line-height: 1.4;
+    }
+
+    .help_list li::marker {
+        font-weight: bold;
+        font-size: 2em;
+        color: #000;
+        font-family: inherit;
+    }
+
+    .help_list li strong {
+        font-size: 1.2em;
+        font-weight: bold;
+        display: inline;
+        margin-right: 0.2em;
+    }
 }

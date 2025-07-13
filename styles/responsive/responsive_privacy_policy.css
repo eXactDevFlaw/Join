@@ -1,4 +1,4 @@
-@media (max-width: 1400px) and (min-width: 641px){
+@media (max-width: 1400px) and (min-width: 641px) {
     .portrait_placeholder {
         display: flex;
     }
@@ -103,6 +103,17 @@
         display: none !important;
     }
 
+    .small_logout_win {
+        height: 200px;
+        top: 7%;
+        right: 2%;
+    }
+
+    .small_logout_win_help {
+        display: flex !important;
+    }
+
+
     main {
         margin: 0;
         width: 100%;
@@ -113,5 +124,9 @@
         overflow: auto;
     }
 
-
+    .privacy_policy_wrapper {
+        padding: 40px 0 0 0;
+        justify-self: center;
+        width: 95%;
+    }
 }

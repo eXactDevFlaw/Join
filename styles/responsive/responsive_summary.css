@@ -1,4 +1,4 @@
-@media (max-width: 1400px) and (min-width: 641px){
+@media (max-width: 1400px) and (min-width: 641px) {
     .portrait_placeholder {
         display: flex;
     }
@@ -12,19 +12,6 @@
         overflow: hidden;
     }
 
-    .task_name,
-    .deadline {
-        font-size: 0.875rem;
-    }
-
-    #date {
-        font-size: 1rem;
-    }
-
-    .task_number {
-        font-size: 3rem;
-    }
-
     header {
         height: 8.6%;
         width: 100%;
@@ -35,10 +22,6 @@
     .header_container {
         width: 100%;
         padding: 10px;
-    }
-
-    .header_mobile_container {
-        display: flex !important;
     }
 
     .header_content {
@@ -70,6 +53,10 @@
 
     .logo_header_mobile {
         display: unset !important;
+    }
+
+    .header_mobile_container {
+        display: flex !important;
     }
 
     .nav_items {
@@ -115,6 +102,17 @@
     .nav_privacy_legal {
         display: none !important;
     }
+
+    .small_logout_win {
+        height: 200px;
+        top: 7%;
+        right: 2%;
+    }
+
+    .small_logout_win_help {
+        display: flex !important;
+    }
+
 
     main {
         margin: 0;
