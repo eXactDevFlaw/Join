@@ -99,7 +99,6 @@ class TaskClass {
             Object.values(this.taskSubTasks).forEach((item) => {
                 this.taskSubTasksAmount += 1
                 if (item.status == "closed") {
-                    console.log(item.status)
                     this.taskSubTasksAmountCompleted += 1;
                 }
             })

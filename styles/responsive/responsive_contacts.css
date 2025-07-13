@@ -112,8 +112,8 @@
     .small_logout_win_help {
         display: flex !important;
     }
-
-
+    
+    
     main {
         margin: 0;
         width: 100%;
@@ -123,22 +123,22 @@
         top: unset;
         overflow: auto;
     }
-
+    
     .contacts_layout_wrapper {
         justify-content: center;
         align-items: center;
         gap: 0;
     }
-
+    
     .contacts_overview {
         display: none;
     }
-
+    
     .contactlist_area {
         width: 100%;
         box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.08);
     }
-
+    
     .add_contact_btn {
         position: absolute;
         top: 90%;
@@ -150,8 +150,87 @@
         padding: unset;
         margin: unset;
     }
-
+    
     .add_contact_btn > span {
+        display: none;
+    }
+    
+    #overlay-container {
+        width: 95%;
+        height: 82%;
+        transform: translateX(105%);
+    }
+    
+    .overlay_content_inner {
+        flex-direction: column;
+    }
+    
+    
+    .closebutton_blue::before {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    
+    .closebutton_blue::after {
+        background-color: rgba(255, 255, 255, 1);
+    }    
+    
+    .overlay_container_left {
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+        padding: 0;
+        align-items: center;
+    }
+    
+    .add_contact_head_wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 95%;
+    }
+
+    .form_layout {
+        position: absolute;
+        margin: 0;
+        height: unset;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .overlay_container_right {
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+        padding: 0;
+    }
+    .join_logo {
+        display: none;
+    }
+
+    #addnew-contact-form {
+        width: 100%;
+        height: 100%;
+        padding-top: 20%;
+        gap: 0;
+        align-items: center;
+    }
+
+    .input_icon_wrapper {
+        width: 95%;
+        margin: 0;
+    }
+
+    .input-icon {
+        top: 30%
+    }
+
+    .overlay_buttons {
+        margin-top: 3%;
+    }
+
+    .btn_cancel {
         display: none;
     }
 }
