@@ -304,7 +304,7 @@ function openTaskDetails() {
 }
 
 function closeTaskOverlay() {
-    document.getElementById("task-overlay").classList.add("d_none");;
+    document.getElementById("task-overlay").classList.add("d_none");
     const entry = document.getElementById("add-task-entry");
     const task_detail_entry = document.getElementById("task-details");
     entry.classList.remove("show");
@@ -316,9 +316,12 @@ function closeTaskOverlay() {
     refreshBoard();
 }
 
-function checkSubTask(index) {
-    data.taskSubTasks[index].status = "closed";
-    renderSubTasksDetailView(data)
+async function checkSubTask(index) {
+    data.taskData.subtasks[index].status = "closed";
+    pushData = data.taskData;
+    taskKey =  data.taskKey;
+    renderSubTasksDetailView(data);
+    await updateOnDatabase("tasks/" + taskKey, pushData);
 }
 
 function unCheckSubTask(index) {
@@ -349,6 +352,8 @@ function renderTaskDetailEdit(){
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
     setPriority(data.taskPriority);
+    selectedContacts = data.taskData.assignedTo;
+    // renderSelectedCircles();
 }
 
 function prepareUpdateTask(){
@@ -367,17 +372,17 @@ async function updateTask(data){
     console.log(data)
     console.log(rawTasksData)
     let rawPrio = Object.values(taskDetails)
-    data.taskData.title= document.getElementById('title-input-overlay').value;
+    data.taskData.title = document.getElementById('title-input-overlay').value;
     data.taskData.description = document.getElementById('description-input-overlay').value;
     data.taskData.dueDate = document.getElementById('datepicker').value;
     data.taskData.assignedTo = document.getElementById('assigned-to-dropdown').value;
     data.taskData.subtasks = subTasks;
     data.taskData.priority = rawPrio[0]
-
+    pushData = data.taskData;
     taskKey = data.taskKey;
 
     console.log(taskKey)
-    // await updateOnDatabase("tasks/" + taskKey, data);
+    await updateOnDatabase("tasks/" + taskKey, pushData);
     // closeTaskOverlay();
     // openTaskDetails();
     renderTaskDetailView(data);

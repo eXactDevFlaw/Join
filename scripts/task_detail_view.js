@@ -5,19 +5,19 @@ function taskDetailViewTemplate(data) {
     </div>
     <div class="task_edit_view_container d_flex_center_column">
     <div class="margin_0 justify_start align_none d_flex margin_0 width_100">
-      <h1 class="task_detail_title ">${data.taskName}</h1>
+      <h1 class="task_detail_title ">${data.taskData.title}</h1>
     </div>
     <div class="task_detail_description width_100">
-      ${data.taskDescription}
+      ${data.taskData.description}
     </div>
     <div class=" d_flex_center_row width_100 detail_head">
       <p class="task_detail">Due date:</p>
-      <div class="width_100 detail_due_date">${data.taskDueDate}</div>
+      <div class="width_100 detail_due_date">${data.taskData.dueDate}</div>
     </div>
     <div class="d_flex_center_row width_100 detail_head">
       <p class="task_detail">Priority:</p>
-      <div class="d_flex_center_row width_100 margin_0 justify_start" id="priority"><p class="margin_0">${data.taskPriority.charAt(0).toUpperCase()
-  + data.taskPriority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskPriority}.svg" alt=""></img></div>
+      <div class="d_flex_center_row width_100 margin_0 justify_start" id="priority"><p class="margin_0">${data.taskData.priority.charAt(0).toUpperCase()
+  + data.taskData.priority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskData.priority}.svg" alt=""></img></div>
     </div>
     <div class="d_flex_center_column width_100 align_none justify_start gap_8">
       <div class="margin_0">
@@ -51,7 +51,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Title</p>
           </div>
           <div class="margin_0">
-            <input type="text" value="${data.taskName}" id="title-input-overlay" required />
+            <input type="text" value="${data.taskData.title}" id="title-input-overlay" required />
             <div class="margin_0 input_error font_12">
               <p class="d_none" id="required-title">this field is required</p>
             </div>
@@ -63,7 +63,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Description</p>
           </div>
           <div class="textarea_wrapper margin_0">
-            <textarea id="description-input-overlay">${data.taskDescription}</textarea>
+            <textarea id="description-input-overlay">${data.taskData.description}</textarea>
             <div class="resize_icon"></div>
           </div>
         </div>
@@ -73,7 +73,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Due Date</p>
           </div>
           <div class="margin_0">
-            <input class="date" id="datepicker" type="date"  value="${data.taskDueDate}"/>
+            <input class="date" id="datepicker" type="date"  value="${data.taskData.dueDate}"/>
           </div>
         </div>
 
@@ -105,6 +105,9 @@ function taskDetailEditTemplate(data) {
             <div class="d_flex_center_row justify_start margin_0">
               <p class="margin_0">Assigned to</p>
             </div>
+
+            
+
             <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0"
               onclick="toggleAssignedToDropdown(event)">
               <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
@@ -120,6 +123,7 @@ function taskDetailEditTemplate(data) {
             <div class="assign-contact-list d_none" id="assign-contact-list"></div>
 
           </div>
+             <div id="assigned-contacts-preview" class="d_flex_row gap_8 margin_t8"></div>
         </div>
 
                 <div class="title_input margin_0 gap_8">

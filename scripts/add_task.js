@@ -220,6 +220,7 @@ function renderContacts() {
 function renderSelectedCircles() {
     const preview = document.getElementById("assigned-contacts-preview");
     preview.innerHTML = "";
+    if (selectedContacts > "")
     selectedContacts.forEach(id => {
         const c = allContacts.find(x => x.id === id);
         if (!c) return;
