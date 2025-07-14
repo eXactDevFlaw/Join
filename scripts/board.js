@@ -360,7 +360,7 @@ function renderTaskDetailEdit(){
     }
     prepareRenderContacts();
     renderSelectedCircles();
-    renderContactsDetalEditView(data);
+    renderContactsDetailEditView(data);
 }
 
 function prepareUpdateTask(){

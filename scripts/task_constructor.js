@@ -164,7 +164,6 @@ class TaskClass {
         } else {
             taskContentInnerDiv.innerText = this.taskDescription
         }
-
         taskDescriptionDiv.append(taskTitleDiv, taskContentInnerDiv);
         return taskDescriptionDiv
     }
