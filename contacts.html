@@ -34,9 +34,11 @@
     onclick="toggleLogoutOverlay()">
     <div class="position_absolute small_logout_win d_flex_center" onclick="stopPropagation(event)">
       <div class="d_flex_center justify_around flex_column">
-        <a class="d_flex_center justify_start small_logout_link d_none small_logout_win_help" href="./templates/help.html">Help</a>
+        <a class="d_flex_center justify_start small_logout_link d_none small_logout_win_help"
+          href="./templates/help.html">Help</a>
         <a class="d_flex_center justify_start small_logout_link" href="./templates/legalNotice.html">Legal Notice</a>
-        <a class="d_flex_center justify_start small_logout_link" href="./templates/privacyPolicy.html">Privacy Policy</a>
+        <a class="d_flex_center justify_start small_logout_link" href="./templates/privacyPolicy.html">Privacy
+          Policy</a>
         <a class="d_flex_center justify_start small_logout_link" id="btn-log-out">Log Out</a>
       </div>
     </div>
@@ -102,15 +104,33 @@
           <span>Add new contact</span>
           <img src="./assets/icons/addPerson.svg" alt="" />
         </button>
+        <button class="btn_dark contact_edit_mobile_btn d_none">
+          <img src="./assets/icons/contact_edit_mobile_btn.svg" alt="" />
+        </button>
+        <div class="edit_contacts_mobile_nav d_none">
+          <div class="edit_contacts_mobile_nav_item">
+            <img src="./assets/icons/edit.svg" alt="Edit" class="edit_contacts_mobile_nav_icon">
+            <span>Edit</span>
+          </div>
+          <div class="edit_contacts_mobile_nav_item">
+             <img src="./assets/icons/delete.svg" alt="Delete" class="edit_contacts_mobile_nav_icon">
+            <span>Delete</span>
+          </div>
+        </div>
         <div id="contacts-list" class="contacts_list"></div>
       </div>
 
       <!-- Rechte Spalte: Kontakt-Details -->
       <div class="contacts_overview" id="contacts-overview">
+        <button id="btn-contacts-back" class="contacts_btn_back d_none"><img src="../assets/icons/arrow_left.svg" alt=""
+            srcset=""></button>
         <div class="headline_with_divider d_flex_ac gap8">
           <h1>Contacts</h1>
           <div class="head_dividing_line"></div>
           <h6>Better with a team</h6>
+          <div class="headline_vector_vertical d_none">
+            <img src="./assets/icons/vector_5_mobile.svg" alt="vector_5" />
+          </div>
         </div>
 
         <!-- Detail-Panel: startet versteckt -->

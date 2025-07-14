@@ -5,7 +5,7 @@
 }
 
 
-@media (max-width: 640px) and (orientation: portrait) {
+@media (max-width: 768px) and (orientation: portrait) {
     body {
         height: 100vh;
         width: 100vw;
@@ -112,8 +112,8 @@
     .small_logout_win_help {
         display: flex !important;
     }
-    
-    
+
+
     main {
         margin: 0;
         width: 100%;
@@ -123,22 +123,85 @@
         top: unset;
         overflow: auto;
     }
-    
+
     .contacts_layout_wrapper {
         justify-content: center;
         align-items: center;
         gap: 0;
     }
-    
+
     .contacts_overview {
         display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        background: rgba(246, 247, 248, 1);
+        align-items: center;
     }
-    
+
+    .headline_with_divider {
+        width: 95%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+        margin: 0
+    }
+
+    .headline_with_divider h1 {
+        font-size: 3rem;
+    }
+
+    .headline_with_divider h6 {
+        font-size: 1.25rem;
+    }
+
+    .head_dividing_line {
+        display: none;
+    }
+
+    .headline_vector_vertical {
+        display: unset !important;
+    }
+
+    .contacts_btn_back {
+        display: unset !important;
+        top: 5%;
+        left: 90%;
+        background: none;
+        border: none;
+        position: sticky;
+        height: 32px;
+        width: 32px;
+        object-fit: cover;
+    }
+
+    .contact_detail {
+        width: 95%;
+        height: 100%;
+        transition: none;
+    }
+
+    .contact_detail_header {
+        gap: 0;
+    }
+
+    .detail_actions {
+        display: none;
+    }
+
+    .contact_info h5 {
+        padding: 0;
+    }
+
     .contactlist_area {
         width: 100%;
         box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.08);
     }
-    
+
     .add_contact_btn {
         position: absolute;
         top: 90%;
@@ -150,30 +213,30 @@
         padding: unset;
         margin: unset;
     }
-    
-    .add_contact_btn > span {
+
+    .add_contact_btn>span {
         display: none;
     }
-    
+
     #overlay-container {
         width: 95%;
         height: 82%;
         transform: translateX(105%);
     }
-    
+
     .overlay_content_inner {
         flex-direction: column;
     }
-    
-    
+
+
     .closebutton_blue::before {
         background-color: rgba(255, 255, 255, 1);
     }
-    
+
     .closebutton_blue::after {
-        background-color: rgba(255, 255, 255, 1);
-    }    
-    
+        background-color: rgb(255, 255, 255);
+    }
+
     .overlay_container_left {
         width: 100%;
         height: 100%;
@@ -181,7 +244,7 @@
         padding: 0;
         align-items: center;
     }
-    
+
     .add_contact_head_wrapper {
         display: flex;
         flex-direction: column;
@@ -205,6 +268,7 @@
         flex-grow: 1;
         padding: 0;
     }
+
     .join_logo {
         display: none;
     }
@@ -232,5 +296,45 @@
 
     .btn_cancel {
         display: none;
+    }
+
+    .contact_edit_mobile_btn {
+        z-index: 2;
+        position: absolute;
+        top: 90%;
+        left: 83%;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: unset;
+        padding: unset;
+        margin: unset;
+    }
+
+    .edit_contacts_mobile_nav {
+        position: absolute;
+        top: 86%;
+        left: 75%;
+        background-color: white;
+        border-radius: 15px 15px 0 15px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: 15px;
+        width: 100px;
+        z-index: 2;
+    }
+
+    .edit_contacts_mobile_nav_item {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 0.875rem;
+        color: rgb(42, 54, 71);
+        cursor: pointer;
+    }
+
+    .edit_contacts_mobile_nav_icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
     }
 }
