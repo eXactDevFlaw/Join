@@ -3,7 +3,8 @@
  * @returns {string}
  */
 function addTaskTemplate() {
-  return `    <div class="head">
+  return `
+    <div class="head">
       <h1>Add Task</h1>
     </div>
     <div class="add_task_content d_flex_row justify_between">
@@ -41,8 +42,11 @@ function addTaskTemplate() {
             </div>
           </div>
         </div>
+
       </div>
+
       <div class="vector_4 margin_0"></div>
+
       <div class="task_entries">
         <div class="title_input margin_0 gap_8">
           <div class="d_flex_center_row justify_start margin_0">
@@ -51,54 +55,59 @@ function addTaskTemplate() {
           <div class="priority_button_container d_flex_center_row justify_between">
             <div class="priority_button d_flex_center_row" id="urgent-button" onclick="setPriority('urgent')">
               <p class="margin_0">Urgent</p>
-              <img class="" src="./assets/icons/prio_urgent.svg" alt="" id="prio-urgent-icon" />
+              <img src="./assets/icons/prio_urgent.svg" alt="" id="prio-urgent-icon" />
               <img class="d_none" src="./assets/icons/prio_urgent_active.svg" alt="" id="prio-urgent-icon-active" />
             </div>
             <div class="priority_button d_flex_center_row" id="medium-button" onclick="setPriority('medium')">
               <p class="margin_0">Medium</p>
-              <img class="" src="./assets/icons/prio_medium.svg" alt="" id="prio-medium-icon" />
+              <img src="./assets/icons/prio_medium.svg" alt="" id="prio-medium-icon" />
               <img class="d_none" src="./assets/icons/prio_medium_active.svg" alt="" id="prio-medium-icon-active" />
             </div>
             <div class="priority_button d_flex_center_row" id="low-button" onclick="setPriority('low')">
               <p class="margin_0">Low</p>
-              <img class="" src="./assets/icons/prio_low.svg" alt="" id="prio-low-icon" />
+              <img src="./assets/icons/prio_low.svg" alt="" id="prio-low-icon" />
               <img class="d_none" src="./assets/icons/prio_low_active.svg" alt="" id="prio-low-icon-active" />
             </div>
           </div>
         </div>
-        <div class="title_input margin_0">
-          <div class="d_flex_center_column align_none gap_8">
-            <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Assigned to</p>
-            </div>
-            <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0" onclick="toggleAssignedToDropdown(event)">
-              <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
-                id="assigned-to-dropdown" required />
-              <div class="input_icon_container z_3 d_flex_center">
-                <div class="arrow_drop up" id="arrow-drop-down-assign">
-                  <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
-                </div>
+
+        <!-- Assigned to -->
+        <div class="title_input margin_0 gap_8">
+          <div class="d_flex_center_row justify_start margin_0">
+            <p class="margin_0">Assigned to</p>
+          </div>
+          <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0">
+            <input
+              id="assigned-to-dropdown"
+              class="assigned_to_dropdown"
+              type="text"
+              placeholder="Select contacts to assign"
+              autocomplete="off"
+              required
+            />
+            <div class="input_icon_container z_3 d_flex_center">
+              <div id="arrow-drop-down-assign" class="arrow_drop up">
+                <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
               </div>
             </div>
           </div>
-          <div class="contact_dropdown d_none" id="add-task-contacts-list">
-
-            <div class="assign-contact-list d_none" id="assign-contact-list"></div>
-
-          </div>
+          <div id="add-task-contacts-list" class="contact_dropdown d_none"></div>
         </div>
+
         <div id="assigned-contacts-preview" class="d_flex_row gap_8 margin_t8"></div>
+
         <div class="title_input margin_0 gap_8">
           <div class="d_flex_center_row justify_start margin_0">
             <p class="margin_0">Category</p>
             <p class="red_star margin_0">*</p>
           </div>
           <div class="input_icon_wrapper width_100 d_flex_center_column margin_0">
-            <div class="select_category_dropdown d_flex_center justify_between z_3" id="select-task-category"
-              onclick="toggleCategoryDropdown()">
+            <div class="select_category_dropdown d_flex_center justify_between z_3"
+                 id="select-task-category"
+                 onclick="toggleCategoryDropdown()">
               <div class="margin_0 task_category" id="selected-category">Select task category</div>
               <div class="input_icon_container d_flex_center">
-                <div class="arrow_drop up margin_0" id="arrow-drop-down-category">
+                <div id="arrow-drop-down-category" class="arrow_drop up">
                   <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
                 </div>
               </div>
@@ -106,12 +115,13 @@ function addTaskTemplate() {
             <div class="margin_0 input_error font_12 width_100" id="required-category-container">
               <p class="d_none" id="required-category">this field is required</p>
             </div>
-            <div class="dropdown d_none" id="category-list">
+            <div id="category-list" class="dropdown d_none">
               <div class="category" id="category1" onclick="setCategory('1')">Technical Task</div>
               <div class="category" id="category2" onclick="setCategory('2')">User Story</div>
             </div>
           </div>
         </div>
+
         <div class="title_input margin_0 gap_8">
           <div class="d_flex_center_row justify_start margin_0">
             <p class="margin_0">Subtasks</p>
@@ -129,33 +139,37 @@ function addTaskTemplate() {
                 <img src="./assets/icons/subtask_check.svg" alt="subtask_check" onclick="addNewSubTask()">
               </div>
             </div>
-            <input type="text" placeholder="Add new subtasks" id="add-subtasks" required onclick="activateSubtask()" />
+            <input
+              type="text"
+              placeholder="Add new subtasks"
+              id="add-subtasks"
+              required
+              onclick="activateSubtask()"
+            />
           </div>
-          <div class="added_subtask_list margin_0">
-          </div>
+          <div class="added_subtask_list margin_0"></div>
         </div>
-      </div>
-      <div class="d_flex_center_row margin_0 required_input_mobile">
-        <p class="red_star margin_0">*</p>
-        <p class="margin_0">This field is required</p>
+
       </div>
     </div>
+
     <div class="d_flex_center_row justify_between margin_0 align_end add_task_footer">
       <div class="d_flex_center_row margin_0 required_input">
         <p class="red_star margin_0">*</p>
         <p class="margin_0">This field is required</p>
       </div>
       <div class="d_flex_center_row justify_between margin_0 add_task_button_container">
-        <button class="btn_white margin_0 add_task_button" onclick="locationReload()">Clear <div class="close_cross">
-          </div>
+        <button class="btn_white margin_0 add_task_button" onclick="locationReload()">Clear
+          <div class="close_cross"></div>
         </button>
-        </button>
-        <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Create Task <img
-            src="./assets/icons/check.svg" alt="">
+        <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Create Task
+          <img src="./assets/icons/check.svg" alt="">
         </button>
       </div>
-    </div>`
+    </div>
+  `;
 }
+
 
 function addSubTaskTemplate(subTask, index) {
   return `
