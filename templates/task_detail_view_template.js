@@ -3,7 +3,7 @@ function taskDetailViewTemplate(data) {
       <div class="margin_0 category_detail" id="task-category">User Story</div>
       <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
     </div>
-    <div class="task_edit_view_container d_flex_center_column">
+    <div class="task_edit_view_container justify_none d_flex_center_column">
     <div class="margin_0 justify_start align_none d_flex margin_0 width_100">
       <h1 class="task_detail_title ">${data.taskData.title}</h1>
     </div>
