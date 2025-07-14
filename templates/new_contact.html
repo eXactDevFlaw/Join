@@ -20,22 +20,24 @@
       <div class="input_icon_wrapper">
         <input id="contact-namefield" type="text" placeholder="Name" required
           pattern="^(?=.{3,})([A-Za-zÄÖÜäöüß]+(?:\s+[A-Za-zÄÖÜäöüß]+)+)$"
-          title="Gib mindestens Vor‑ und Nachname nur mit Buchstaben ein." />
+          title="Gib mindestens Vor‑ und Nachname nur mit Buchstaben ein."
+          onblur="validateInput('contact-namefield')" />
         <i class="input-icon user-icon"></i>
-        <div class="input_error" for="contact-namefield"></div>
+        <div class="input_error d_none" id="namefield-error">Bitte vollständigen Namen eingeben (Vor- und Nachname).
+        </div>
       </div>
-
       <div class="input_icon_wrapper">
-        <input id="contact-emailfield" type="email" placeholder="Email" required />
+        <input id="contact-emailfield" type="email" placeholder="Email" required
+          onblur="validateInput('contact-emailfield')" />
         <i class="input-icon email-icon"></i>
-        <div class="input_error" for="contact-emailfield"></div>
+        <div class="input_error d_none" id="error-contact-emailfield"></div>
       </div>
 
       <div class="input_icon_wrapper">
         <input id="contact-phonefield" type="tel" placeholder="Phone" required pattern="^[0-9]{4,15}$"
-          title="Gib nur Ziffern ein (ohne führende Null)." />
+          title="Gib nur Ziffern ein (ohne führende Null)." onblur="validateInput('contact-phonefield')" />
         <i class="input-icon phone-icon"></i>
-        <div class="input_error" for="contact-phonefield"></div>
+        <div class="input_error d_none" id="error-contact-phonefield"></div>
       </div>
 
       <div class="overlay_buttons">

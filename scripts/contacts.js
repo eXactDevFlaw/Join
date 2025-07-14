@@ -298,8 +298,33 @@ export async function openEditContactOverlay(contact) {
     }
   };
 
-  // 6) Der Delete‑Button bleibt unverändert…
 }
+
+/**
+ * Validiert das Namensfeld im Kontaktformular.
+ * Entfernt die Fehlermeldung, wenn Eingabe korrekt ist.
+ */
+window.validateInput = function (inputId) {
+  const input = document.getElementById(inputId);
+  const error = document.getElementById(`error-${inputId}`);
+
+  if (!input || !error) return;
+
+  const value = input.value.trim();
+  const pattern = input.pattern ? new RegExp(input.pattern) : null;
+
+  const isValid =
+    (input.type === "email" && input.validity.valid) ||
+    (input.type !== "email" && (!pattern || pattern.test(value)));
+
+  if (!value || !isValid) {
+    error.textContent = input.title || "Bitte gib einen gültigen Wert ein.";
+    error.classList.remove("d_none");
+  } else {
+    error.classList.add("d_none");
+    error.textContent = "";
+  }
+};
 
 /**
  * Öffnet das „Add Contact“ Overlay und verarbeitet das Formular.
