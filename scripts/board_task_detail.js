@@ -22,7 +22,7 @@ function renderContactsDetalEditView(data){
           data.taskAssignedTo.forEach((contact) => {
         assignedTo.innerHTML += `
         <div class="assigned_contact_edit_view"> 
-        <div class="profile_badge margin_0" id="${contact}"}></div>
+        <div class="assigned_circle margin_0" id="${contact}"}></div>
         </div>`;
         const profileBadge = document.getElementById(contact);
         profileBadge.style.backgroundColor = stringToColor(contact);
@@ -50,7 +50,7 @@ function renderContacts() {
     const filtered = filter ? contacts.filter(c => c.name.toLowerCase().includes(filter)) : contacts;
 
     filtered.forEach(contact => {
-        const sel = selectedContacts.includes(contact.id);
+        const sel = selectedContacts.includes(contact.name);
         const color = stringToColor(contact.name);
         const initials = getInitials(contact.name);
 
@@ -68,14 +68,29 @@ function renderContacts() {
 
         row.addEventListener("click", e => {
             e.stopPropagation();
-            const idx = selectedContacts.indexOf(contact.id);
+            const idx = selectedContacts.indexOf(contact.name);
             if (idx >= 0) selectedContacts.splice(idx, 1);
-            else selectedContacts.push(contact.id);
+            else selectedContacts.push(contact.name);
             pushedContactsName.push(contact.name)
             renderContacts();
-            renderSelectedCircles();
+            addSelectedCircles();
         });
 
         container.appendChild(row);
+    });
+}
+
+function addSelectedCircles(){
+        const preview = document.getElementById("assigned-contacts-preview");
+    preview.innerHTML = "";
+    if (selectedContacts > "")
+    selectedContacts.forEach(name => {
+        const c = allContacts.find(x => x.name === name);
+        if (!c) return;
+        const circle = document.createElement("div");
+        circle.className = "assigned_circle";
+        circle.textContent = getInitials(c.name);
+        circle.style.backgroundColor = stringToColor(c.name);
+        preview.appendChild(circle);
     });
 }

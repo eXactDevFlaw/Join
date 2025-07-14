@@ -264,11 +264,11 @@ function renderTaskDetailView(data) {
 
 function renderContactsDetailView(data){
     const assignedTo = document.getElementById("assigned-contacts");
-    if (data.taskAssignedTo){
-          data.taskAssignedTo.forEach((contact) => {
+    if (data.taskData.assignedTo){
+          data.taskData.assignedTo.forEach((contact) => {
         assignedTo.innerHTML += `
         <div class="width_100 assigned_contact"> 
-        <div class="profile_badge margin_0" id="${contact}"}></div><div class="margin_0 ">${contact}</div>
+        <div class="assigned_circle margin_0" id="${contact}"}></div><div class="margin_0 ">${contact}</div>
         </div>`;
         const profileBadge = document.getElementById(contact);
         profileBadge.style.backgroundColor = stringToColor(contact);
@@ -315,6 +315,7 @@ function closeTaskOverlay() {
         task_detail_entry.classList.add("d_none");
     }, 300);
     refreshBoard();
+    location.reload();
 }
 
 async function checkSubTask(index) {
@@ -354,6 +355,9 @@ function renderTaskDetailEdit(){
     renderSubTasks();
     setPriority(data.taskPriority);
     selectedContacts = data.taskData.assignedTo; 
+    if (selectedContacts === ""){
+        selectedContacts = [];
+    }
     prepareRenderContacts();
     renderSelectedCircles();
     renderContactsDetalEditView(data);
@@ -378,7 +382,7 @@ async function updateTask(data){
     data.taskData.title = document.getElementById('title-input-overlay').value;
     data.taskData.description = document.getElementById('description-input-overlay').value;
     data.taskData.dueDate = document.getElementById('datepicker').value;
-    data.taskData.assignedTo = document.getElementById('assigned-to-dropdown').value;
+    data.taskData.assignedTo = selectedContacts;
     data.taskData.subtasks = subTasks;
     data.taskData.priority = rawPrio[0]
     pushData = data.taskData;
@@ -389,4 +393,5 @@ async function updateTask(data){
     // closeTaskOverlay();
     // openTaskDetails();
     renderTaskDetailView(data);
+    refreshBoard();
 }
