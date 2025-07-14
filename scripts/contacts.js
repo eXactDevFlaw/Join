@@ -323,7 +323,7 @@ window.validateInput = function (inputId) {
   }
 
   if (inputId.includes("email")) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(value)) {
       valid = false;
       message = "Bitte gib eine gültige E-Mail-Adresse ein.";
