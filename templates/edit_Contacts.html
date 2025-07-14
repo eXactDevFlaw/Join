@@ -14,6 +14,7 @@
     <div class="overlay_contact_circle" id="edit-contact-initials"></div>
   </div>
 
+
   <!-- Rechte Seite: Formular -->
   <div class="overlay_container_right">
     <!-- Kreis mit Initialen -->
@@ -21,19 +22,19 @@
     <!-- Edit‑Form -->
     <form id="edit-contact-form">
       <div class="input_icon_wrapper">
-        <input id="contact-namefield" type="text" placeholder="Name" required />
+        <input id="contact-namefield" type="text" placeholder="Name" onblur="validateInput('contact-namefield')" />
         <i class="input-icon user-icon" aria-hidden="true"></i>
-        <div class="input_error" for="contact-namefield"></div>
+        <div class="input_error d_none" id="error-contact-namefield"></div>
       </div>
       <div class="input_icon_wrapper">
-        <input id="contact-emailfield" type="email" placeholder="Email" required />
+        <input id="contact-emailfield" type="text" placeholder="Email" onblur="validateInput('contact-emailfield')" />
         <i class="input-icon email-icon" aria-hidden="true"></i>
-        <div class="input_error" for="contact-emailfield"></div>
+        <div class="input_error d_none" id="error-contact-emailfield"></div>
       </div>
       <div class="input_icon_wrapper">
-        <input id="contact-phonefield" type="tel" placeholder="Phone" required />
+        <input id="contact-phonefield" type="text" placeholder="Phone" onblur="validateInput('contact-phonefield')" />
         <i class="input-icon phone-icon" aria-hidden="true"></i>
-        <div class="input_error" for="contact-phonefield"></div>
+        <div class="input_error d_none" id="error-contact-phonefield"></div>
       </div>
       <div class="overlay_buttons">
         <button class="delete_btn margin_0" onclick="deleteContact(); closeOverlay(); hideContactDetailsArea();">

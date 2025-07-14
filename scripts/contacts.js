@@ -302,28 +302,53 @@ export async function openEditContactOverlay(contact) {
 }
 
 /**
- * Validiert das Namensfeld im Kontaktformular.
+ * Validiert das Eingabefeld im Kontaktformular.
  * Entfernt die Fehlermeldung, wenn Eingabe korrekt ist.
  */
 window.validateInput = function (inputId) {
   const input = document.getElementById(inputId);
   const error = document.getElementById(`error-${inputId}`);
-
   if (!input || !error) return;
 
   const value = input.value.trim();
-  const pattern = input.pattern ? new RegExp(input.pattern) : null;
+  let valid = true;
+  let message = "";
 
-  const isValid =
-    (input.type === "email" && input.validity.valid) ||
-    (input.type !== "email" && (!pattern || pattern.test(value)));
+  if (inputId.includes("name")) {
+    const namePattern = /^[A-Za-zÄÖÜäöüß]{2,}(?: [A-Za-zÄÖÜäöüß]{2,})+$/;
+    if (!namePattern.test(value)) {
+      valid = false;
+      message = "Bitte gib Vor- und Nachname mit Buchstaben ein.";
+    }
+  }
 
-  if (!value || !isValid) {
-    error.textContent = input.title || "Bitte gib einen gültigen Wert ein.";
+  if (inputId.includes("email")) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(value)) {
+      valid = false;
+      message = "Bitte gib eine gültige E-Mail-Adresse ein.";
+    }
+  }
+
+  if (inputId.includes("phone")) {
+    const phonePattern = /^[0-9]{4,15}$/;
+    if (!phonePattern.test(value)) {
+      valid = false;
+      message = "Nur Ziffern, mindestens 4 Stellen.";
+    }
+  }
+
+  if (!value) {
+    valid = false;
+    message = "Dieses Feld darf nicht leer sein.";
+  }
+
+  if (!valid) {
+    error.textContent = message;
     error.classList.remove("d_none");
   } else {
-    error.classList.add("d_none");
     error.textContent = "";
+    error.classList.add("d_none");
   }
 };
 
@@ -534,7 +559,7 @@ function checkAndRenderMobileView() {
 
 if (contactEditMobileBtn) {
   contactEditMobileBtn.addEventListener('click', (e) => {
-      mobileEditContactsNav.classList.remove('d_none')
+    mobileEditContactsNav.classList.remove('d_none')
   })
 }
 
