@@ -185,6 +185,8 @@ export async function showContactDetails(contact, itemEl) {
   document.getElementById("detail-phone").textContent = contact.phone;
   checkAndRenderMobileView()
   setupEditDeleteButtons(contact);
+  setupEditDeleteButtonsMobile(contact);
+
 }
 /**
  * Binds the click on the pencil to open the unified edit-overlay.
@@ -490,6 +492,9 @@ const mobileDetailContactView = document.getElementById('contacts-overview')
 const contactEditMobileBtn = document.querySelector('.contact_edit_mobile_btn')
 const addContactMobileBtn = document.querySelector('.add_contact_btn')
 const mobileEditContactsNav = document.querySelector('.edit_contacts_mobile_nav')
+const editContactMobileBtn = document.querySelector('#edit-contacts-mobile-view')
+const deleteContactMobileBtn = document.querySelector('#delete-contacts-mobile-view')
+
 if (backBtnMobile) {
   backBtnMobile.addEventListener('click', () => {
     mobileDetailContactView.style.display = "none";
@@ -516,6 +521,20 @@ document.addEventListener('click', (event) => {
     mobileEditContactsNav.classList.add('d_none');
   }
 });
+
+function setupEditDeleteButtonsMobile(contact) {
+  if(editContactMobileBtn){
+    editContactMobileBtn.addEventListener('click', () => {
+      openEditContactOverlay(contact)
+    })
+  }
+
+  if(deleteContactMobileBtn){
+    deleteContactMobileBtn.addEventListener('click', () => {
+      deleteContact(contact.id)
+    })
+  }
+}
 
 window.addEventListener("DOMContentLoaded", renderContacts);
 window.openAddContactOverlay = openAddContactOverlay;
