@@ -20,6 +20,7 @@ window.toggleAssignedToDropdown = function (e) {
 
 
 const assignedInput = document.getElementById("assigned-to-dropdown");
+console.log(assignedInput)
 if(assignedInput){
     assignedInput.addEventListener("input", () => {
     

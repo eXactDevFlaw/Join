@@ -199,6 +199,7 @@ export async function showContactDetails(contact, itemEl) {
   emailEl.textContent = contact.email;
   emailEl.href = `mailto:${contact.email}`;
   document.getElementById("detail-phone").textContent = contact.phone;
+  checkAndRenderMobileView()
   setupEditDeleteButtons(contact);
 }
 
@@ -484,6 +485,43 @@ export function hideContactDetailsArea() {
     lastSelectedItem = null;
   }
 }
+
+const backBtnMobile = document.getElementById('btn-contacts-back')
+const mobileDetailContactView = document.getElementById('contacts-overview')
+const contactEditMobileBtn = document.querySelector('.contact_edit_mobile_btn')
+const addContactMobileBtn = document.querySelector('.add_contact_btn')
+const mobileEditContactsNav = document.querySelector('.edit_contacts_mobile_nav')
+if (backBtnMobile) {
+  backBtnMobile.addEventListener('click', () => {
+    mobileDetailContactView.style.display = "none";
+    contactEditMobileBtn.classList.add('d_none')
+    addContactMobileBtn.classList.remove('d_none')
+  })
+}
+
+function checkAndRenderMobileView() {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    mobileDetailContactView.style.display = "flex";
+    contactEditMobileBtn.classList.remove('d_none')
+    addContactMobileBtn.classList.add('d_none')
+  }
+}
+
+if (contactEditMobileBtn) {
+  contactEditMobileBtn.addEventListener('click', (e) => {
+      mobileEditContactsNav.classList.remove('d_none')
+  })
+}
+
+document.addEventListener('click', (event) => {
+  const isClickInsideNav = mobileEditContactsNav.contains(event.target);
+  const isClickOnEditButton = contactEditMobileBtn.contains(event.target);
+
+  if (!isClickInsideNav && !isClickOnEditButton) {
+    mobileEditContactsNav.classList.add('d_none');
+  }
+});
+
 
 window.addEventListener("DOMContentLoaded", renderContacts);
 // Exponiere das Overlay-Öffnen global:

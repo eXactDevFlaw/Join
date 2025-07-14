@@ -219,8 +219,15 @@
         padding: 0px;
     }
 
+    .task_number {
+        font-size: 3rem;
+    }
+
+    .task_name {
+        font-size: 0.857rem;
+    }
+
     .greetings {
         display: none;
-        /* HIER MUSS NOCH GEARBEITET WERDEN ! ANIMATION ! */
     }
 }
