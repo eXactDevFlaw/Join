@@ -175,3 +175,11 @@ input::placeholder{
 .padding_edit_view{
     padding-top: 200px;
 }
+
+.assigned_contact_edit_view{
+    font-size: 19px;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    padding: 7px 0px 7px 8px;
+}

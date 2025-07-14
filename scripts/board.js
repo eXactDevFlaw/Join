@@ -277,6 +277,7 @@ function renderContactsDetailView(data){
     }
 }
 
+
 function renderSubTasksDetailView(data){
     subTasks = [];
     subTasks = data.taskSubTasks;
@@ -352,8 +353,10 @@ function renderTaskDetailEdit(){
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
     setPriority(data.taskPriority);
-    selectedContacts = data.taskData.assignedTo;
-    // renderSelectedCircles();
+    selectedContacts = data.taskData.assignedTo; 
+    prepareRenderContacts();
+    renderSelectedCircles();
+    renderContactsDetalEditView(data);
 }
 
 function prepareUpdateTask(){
@@ -387,4 +390,3 @@ async function updateTask(data){
     // openTaskDetails();
     renderTaskDetailView(data);
 }
-
