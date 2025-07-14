@@ -231,38 +231,40 @@ function setupEditDeleteButtons(c) {
   bindOverlayDelete(c);
   bindDetailDelete(c);
 }
+
 /**
  * Öffnet das Bearbeitungs‑Overlay für einen Kontakt,
  * füllt das Formular und bindet Save/Delete.
  * @param {{id:string,name:string,email:string,phone:string}} contact
  */
 export async function openEditContactOverlay(contact) {
-  // 1) Template laden und einblenden
   await loadFormIntoOverlay("./templates/edit_Contacts.html");
   slideInOverlay();
-  // 2) Kurzes Warten, bis das HTML geparst ist
   await new Promise(r => setTimeout(r, 0));
 
-  // 3) Formularfelder vorausfüllen
-  ["name", "email", "phone"].forEach(f =>
-    document.getElementById(`contact-${f}field`).value = contact[f]
-  );
-  const ic = document.getElementById("edit-contact-initials");
-  ic.textContent = getInitials(contact.name);
-  ic.style.backgroundColor = stringToColor(contact.name);
-  // 4) Save‑Handler ans Formular hängen
+  fillContactFormFields(contact);
+  updateContactInitialsPreview(contact.name);
+
   const form = document.getElementById("edit-contact-form");
   form.onsubmit = async e => {
     e.preventDefault();
+    clearContactInputErrors();
+
+    if (!validateNewContactForm()) {
+      showToast("Please fix the errors in the form");
+      return;
+    }
+
     const updated = {
       name: document.getElementById("contact-namefield").value.trim(),
       email: document.getElementById("contact-emailfield").value.trim(),
-      phone: document.getElementById("contact-phonefield").value.trim(),
+      phone: document.getElementById("contact-phonefield").value.trim()
     };
+
     await updateContact(contact.id, updated);
     closeOverlay();
     await renderContacts();
-    // 5) Detail‑Pane direkt updaten
+
     const newDetail = { id: contact.id, ...updated };
     const updatedItem = document.querySelector(`.contact-list-item[data-id="${contact.id}"]`);
     if (updatedItem) {
@@ -270,6 +272,27 @@ export async function openEditContactOverlay(contact) {
     }
   };
 }
+
+/**
+ * Füllt die Eingabefelder des Formulars mit Kontaktdaten.
+ * @param {{name:string,email:string,phone:string}} contact 
+ */
+function fillContactFormFields(contact) {
+  ["name", "email", "phone"].forEach(f =>
+    document.getElementById(`contact-${f}field`).value = contact[f]
+  );
+}
+
+/**
+ * Aktualisiert das Initialen-Preview im Bearbeitungs-Overlay.
+ * @param {string} name 
+ */
+function updateContactInitialsPreview(name) {
+  const ic = document.getElementById("edit-contact-initials");
+  ic.textContent = getInitials(name);
+  ic.style.backgroundColor = stringToColor(name);
+}
+
 /**
  * Validiert das Eingabefeld im Kontaktformular.
  * Entfernt die Fehlermeldung, wenn Eingabe korrekt ist.
@@ -322,28 +345,23 @@ window.validateInput = function (inputId) {
 async function openAddContactOverlay() {
   await loadFormIntoOverlay("./templates/new_contact.html");
   slideInOverlay();
-  // Formular‑Handler
   document.getElementById("addnew-contact-form").onsubmit = async e => {
     e.preventDefault();
-    // Name und Email aus den Feldern auslesen
     const nameRaw = document.getElementById("contact-namefield").value.trim();
     const emailRaw = document.getElementById("contact-emailfield").value.trim();
     const phoneRaw = document.getElementById("contact-phonefield").value.trim();
-    // Telefonnummer normalisieren (siehe normalizePhone weiter unten)
     const phone = normalizePhone(phoneRaw);
-    // Kontakt‑Objekt bauen
     const contact = {
       name: nameRaw,
       email: emailRaw,
       phone
     };
     try {
-      const res = await createContact(contact);     // anlegen in Firebase
-      const newId = res.name;                         // key aus der Antwort
+      const res = await createContact(contact);
+      const newId = res.name;
       closeOverlay();
       await renderContacts();
       showToast("Contact successfully created");
-      // Automatisch Detail‑View öffnen
       contact.id = newId;
       const newItem = document.querySelector(
         `.contact-list-item[data-id="${newId}"]`
@@ -361,7 +379,6 @@ async function openAddContactOverlay() {
  */
 async function submitNewContact() {
   if (validateNewContactForm()) {
-    // Felder auslesen
     const nameRaw = document.getElementById("contact-namefield").value.trim();
     const emailRaw = document.getElementById("contact-emailfield").value.trim();
     const phoneRaw = document.getElementById("contact-phonefield").value.trim();
@@ -372,12 +389,11 @@ async function submitNewContact() {
       phone
     };
     try {
-      const res = await createContact(contact);   // In Firebase speichern
-      const newId = res.name;                     // Firebase gibt Key zurück
+      const res = await createContact(contact);
+      const newId = res.name;
       closeOverlay();
       await renderContacts();
       showToast("Contact successfully created");
-      // Detailansicht automatisch öffnen
       contact.id = newId;
       const newItem = document.querySelector(`.contact-list-item[data-id="${newId}"]`);
       if (newItem) showContactDetails(contact, newItem);
@@ -386,7 +402,6 @@ async function submitNewContact() {
       showToast("Error creating contact");
     }
   } else {
-    // Validierung fehlgeschlagen, Fehlermeldungen sind bereits gesetzt
     showToast("Please fix the errors in the form");
   }
 }
@@ -503,6 +518,5 @@ document.addEventListener('click', (event) => {
 });
 
 window.addEventListener("DOMContentLoaded", renderContacts);
-// Exponiere das Overlay-Öffnen global:
 window.openAddContactOverlay = openAddContactOverlay;
 window.submitNewContact = submitNewContact;
