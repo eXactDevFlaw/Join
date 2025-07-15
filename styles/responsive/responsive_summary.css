@@ -1,10 +1,110 @@
-@media (max-width: 1400px) and (min-width: 641px) {
-    .portrait_placeholder {
-        display: flex;
+@media (max-width: 1400px) {
+    header {
+        padding: 20px 40px;
     }
+
+    main {
+        width: 100%;
+        position: unset !important;
+        padding: unset;
+        padding-top: 5%;
+        margin-top: 96px;
+        overflow: auto;
+    }
+
+    main>div {
+        padding: 0 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    nav {
+        flex-direction: row !important;
+        left: 0;
+        top: calc(100% - 8.6%);
+        width: 100%;
+        height: 8.6% !important;
+        padding: 0;
+    }
+
+    .logo_navbar {
+        display: none;
+    }
+
+    .logo_header_mobile {
+        display: unset !important;
+    }
+
+    .header_mobile_container {
+        display: flex !important;
+    }
+
+    .nav_items {
+        justify-content: space-around !important;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        gap: 0px;
+    }
+
+    .nav_items a {
+        width: unset !important;
+    }
+
+    .nav_item_active {
+        flex-direction: column;
+        justify-content: center !important;
+        align-items: center;
+        min-width: 80px;
+        width: unset;
+        height: 100%;
+        border-radius: 16px;
+        font-size: 0.875rem;
+        padding: 0;
+        gap: 4px;
+    }
+
+    .nav_item_active img,
+    .nav_item img {
+        width: 100%;
+        height: 32%;
+    }
+
+    .nav_item {
+        flex-direction: column;
+        justify-content: center !important;
+        width: 80px;
+        height: 76px;
+        padding: 0;
+        font-size: 0.875rem;
+    }
+
+    .nav_privacy_legal {
+        display: none !important;
+    }
+
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1140px) {
+    main {
+        margin: 0;
+        width: 100%;
+        padding: unset;
+        left: unset;
+        top: unset;
+        overflow: auto;
+    }
+
+    main > div {
+        margin-top: 16%;
+    }
+
+}
+
+@media (max-width: 640px) and (orientation: portrait) {
     body {
         height: 100vh;
         width: 100vw;
