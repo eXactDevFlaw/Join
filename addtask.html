@@ -79,162 +79,162 @@
     </div>
   </nav>
   <main class="position_absolute overlay_form">
-    <div class="head">
-      <h1>Add Task</h1>
-    </div>
-    <div class="add_task_content d_flex_row justify_between">
-      <div class="task_entries">
-        <div class="title_input margin_0 gap_8">
-          <div class="d_flex_center_row justify_start margin_0">
-            <p class="margin_0">Title</p>
-            <p class="red_star margin_0">*</p>
-          </div>
-          <div class="margin_0">
-            <input type="text" placeholder="Enter a title" id="title-input-overlay" required />
-            <div class="margin_0 input_error font_12">
-              <p class="d_none" id="required-title">this field is required</p>
-            </div>
-          </div>
-        </div>
-        <div class="title_input margin_0 gap_8">
-          <div class="d_flex_center_row justify_start margin_0">
-            <p class="margin_0">Description</p>
-          </div>
-          <div class="textarea_wrapper margin_0">
-            <textarea placeholder="Enter a Description" id="description-input-overlay"></textarea>
-            <div class="resize_icon"></div>
-          </div>
-        </div>
-        <div class="title_input margin_0 gap_8">
-          <div class="d_flex_center_row justify_start margin_0">
-            <p class="margin_0">Due Date</p>
-            <p class="red_star margin_0">*</p>
-          </div>
-          <div class="margin_0">
-            <input class="date" id="datepicker" type="date" placeholder="dd/mm/yyyy" required />
-            <div class="margin_0 input_error font_12">
-              <p class="d_none" id="required-date">this field is required</p>
-            </div>
-          </div>
-        </div>
+    <div>
+
+      <div class="head">
+        <h1>Add Task</h1>
       </div>
-      <div class="vector_4 margin_0"></div>
-      <div class="task_entries">
-        <div class="title_input margin_0 gap_8">
-          <div class="d_flex_center_row justify_start margin_0">
-            <p class="margin_0">Priority</p>
-          </div>
-          <div class="priority_button_container d_flex_center_row justify_between">
-            <div class="priority_button d_flex_center_row" id="urgent-button" onclick="setPriority('urgent')">
-              <p class="margin_0">Urgent</p>
-              <img class="" src="./assets/icons/prio_urgent.svg" alt="" id="prio-urgent-icon" />
-              <img class="d_none" src="./assets/icons/prio_urgent_active.svg" alt="" id="prio-urgent-icon-active" />
-            </div>
-            <div class="priority_button d_flex_center_row" id="medium-button" onclick="setPriority('medium')">
-              <p class="margin_0">Medium</p>
-              <img class="" src="./assets/icons/prio_medium.svg" alt="" id="prio-medium-icon" />
-              <img class="d_none" src="./assets/icons/prio_medium_active.svg" alt="" id="prio-medium-icon-active" />
-            </div>
-            <div class="priority_button d_flex_center_row" id="low-button" onclick="setPriority('low')">
-              <p class="margin_0">Low</p>
-              <img class="" src="./assets/icons/prio_low.svg" alt="" id="prio-low-icon" />
-              <img class="d_none" src="./assets/icons/prio_low_active.svg" alt="" id="prio-low-icon-active" />
-            </div>
-          </div>
-        </div>
-        <div class="title_input margin_0">
-          <div class="d_flex_center_column align_none gap_8">
+      <div class="add_task_content d_flex_row justify_between">
+        <div class="task_entries">
+          <div class="title_input margin_0 gap_8">
             <div class="d_flex_center_row justify_start margin_0">
-              <p class="margin_0">Assigned to</p>
+              <p class="margin_0">Title</p>
+              <p class="red_star margin_0">*</p>
             </div>
-            <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0" onclick="toggleAssignedToDropdown(event)">
-              <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
-                id="assigned-to-dropdown" required />
-              <div class="input_icon_container z_3 d_flex_center">
-                <div class="arrow_drop up" id="arrow-drop-down-assign">
-                  <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
+            <div class="margin_0">
+              <input type="text" placeholder="Enter a title" id="title-input-overlay" required />
+              <div class="margin_0 input_error font_12">
+                <p class="d_none" id="required-title">this field is required</p>
+              </div>
+            </div>
+          </div>
+          <div class="title_input margin_0 gap_8">
+            <div class="d_flex_center_row justify_start margin_0">
+              <p class="margin_0">Description</p>
+            </div>
+            <div class="textarea_wrapper margin_0">
+              <textarea placeholder="Enter a Description" id="description-input-overlay"></textarea>
+              <div class="resize_icon"></div>
+            </div>
+          </div>
+          <div class="title_input margin_0 gap_8">
+            <div class="d_flex_center_row justify_start margin_0">
+              <p class="margin_0">Due Date</p>
+              <p class="red_star margin_0">*</p>
+            </div>
+            <div class="margin_0">
+              <input class="date" id="datepicker" type="date" placeholder="dd/mm/yyyy" required />
+              <div class="margin_0 input_error font_12">
+                <p class="d_none" id="required-date">this field is required</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vector_4 margin_0"></div>
+        <div class="task_entries">
+          <div class="title_input margin_0 gap_8">
+            <div class="d_flex_center_row justify_start margin_0">
+              <p class="margin_0">Priority</p>
+            </div>
+            <div class="priority_button_container d_flex_center_row justify_between">
+              <div class="priority_button d_flex_center_row" id="urgent-button" onclick="setPriority('urgent')">
+                <p class="margin_0">Urgent</p>
+                <img class="" src="./assets/icons/prio_urgent.svg" alt="" id="prio-urgent-icon" />
+                <img class="d_none" src="./assets/icons/prio_urgent_active.svg" alt="" id="prio-urgent-icon-active" />
+              </div>
+              <div class="priority_button d_flex_center_row" id="medium-button" onclick="setPriority('medium')">
+                <p class="margin_0">Medium</p>
+                <img class="" src="./assets/icons/prio_medium.svg" alt="" id="prio-medium-icon" />
+                <img class="d_none" src="./assets/icons/prio_medium_active.svg" alt="" id="prio-medium-icon-active" />
+              </div>
+              <div class="priority_button d_flex_center_row" id="low-button" onclick="setPriority('low')">
+                <p class="margin_0">Low</p>
+                <img class="" src="./assets/icons/prio_low.svg" alt="" id="prio-low-icon" />
+                <img class="d_none" src="./assets/icons/prio_low_active.svg" alt="" id="prio-low-icon-active" />
+              </div>
+            </div>
+          </div>
+          <div class="title_input margin_0">
+            <div class="d_flex_center_column align_none gap_8">
+              <div class="d_flex_center_row justify_start margin_0">
+                <p class="margin_0">Assigned to</p>
+              </div>
+              <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0" onclick="toggleAssignedToDropdown(event)">
+                <input class="assigned_to_dropdown" type="text" placeholder="Select contacts to assing"
+                  id="assigned-to-dropdown" required />
+                <div class="input_icon_container z_3 d_flex_center">
+                  <div class="arrow_drop up" id="arrow-drop-down-assign">
+                    <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="contact_dropdown d_none" id="add-task-contacts-list">
+  
+              <div class="assign-contact-list d_none" id="assign-contact-list"></div>
+  
+            </div>
           </div>
-          <div class="contact_dropdown d_none" id="add-task-contacts-list">
-
-            <div class="assign-contact-list d_none" id="assign-contact-list"></div>
-
-          </div>
-        </div>
-        <div id="assigned-contacts-preview" class="d_flex_row gap_8 margin_t8"></div>
-        <div class="title_input margin_0 gap_8">
-          <div class="d_flex_center_row justify_start margin_0">
-            <p class="margin_0">Category</p>
-            <p class="red_star margin_0">*</p>
-          </div>
-          <div class="input_icon_wrapper width_100 d_flex_center_column margin_0">
-            <div class="select_category_dropdown d_flex_center justify_between z_3" id="select-task-category"
-              onclick="toggleCategoryDropdown()">
-              <div class="margin_0 task_category" id="selected-category">Select task category</div>
-              <div class="input_icon_container d_flex_center">
-                <div class="arrow_drop up margin_0" id="arrow-drop-down-category">
-                  <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
+          <div id="assigned-contacts-preview" class="d_flex_row gap_8 margin_t8"></div>
+          <div class="title_input margin_0 gap_8">
+            <div class="d_flex_center_row justify_start margin_0">
+              <p class="margin_0">Category</p>
+              <p class="red_star margin_0">*</p>
+            </div>
+            <div class="input_icon_wrapper width_100 d_flex_center_column margin_0">
+              <div class="select_category_dropdown d_flex_center justify_between z_3" id="select-task-category"
+                onclick="toggleCategoryDropdown()">
+                <div class="margin_0 task_category" id="selected-category">Select task category</div>
+                <div class="input_icon_container d_flex_center">
+                  <div class="arrow_drop up margin_0" id="arrow-drop-down-category">
+                    <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
+                  </div>
                 </div>
               </div>
+              <div class="margin_0 input_error font_12 width_100" id="required-category-container">
+                <p class="d_none" id="required-category">this field is required</p>
+              </div>
+              <div class="dropdown d_none" id="category-list">
+                <div class="category" id="category1" onclick="setCategory('1')">Technical Task</div>
+                <div class="category" id="category2" onclick="setCategory('2')">User Story</div>
+              </div>
             </div>
-            <div class="margin_0 input_error font_12 width_100" id="required-category-container">
-              <p class="d_none" id="required-category">this field is required</p>
+          </div>
+          <div class="title_input margin_0 gap_8">
+            <div class="d_flex_center_row justify_start margin_0">
+              <p class="margin_0">Subtasks</p>
             </div>
-            <div class="dropdown d_none" id="category-list">
-              <div class="category" id="category1" onclick="setCategory('1')">Technical Task</div>
-              <div class="category" id="category2" onclick="setCategory('2')">User Story</div>
+            <div class="input_icon_wrapper d_flex_center margin_0">
+              <div class="input_icon_container add d_flex_center" onclick="activateSubtask()">
+                <div class="add_icon"></div>
+              </div>
+              <div class="add_or_remove d_flex_center_row gap_4 d_none">
+                <div class="input_icon_container position_unset">
+                  <img src="./assets/icons/subtask_close.svg" alt="subtask_close" onclick="clearSubTaskValue()">
+                </div>
+                <img src="./assets/icons/vector_3.svg" alt="vector">
+                <div class="input_icon_container position_unset">
+                  <img src="./assets/icons/subtask_check.svg" alt="subtask_check" onclick="addNewSubTask()">
+                </div>
+              </div>
+              <input type="text" placeholder="Add new subtasks" id="add-subtasks" required onclick="activateSubtask()" />
+            </div>
+            <div class="added_subtask_list margin_0">
             </div>
           </div>
         </div>
-        <div class="title_input margin_0 gap_8">
-          <div class="d_flex_center_row justify_start margin_0">
-            <p class="margin_0">Subtasks</p>
-          </div>
-          <div class="input_icon_wrapper d_flex_center margin_0">
-            <div class="input_icon_container add d_flex_center" onclick="activateSubtask()">
-              <div class="add_icon"></div>
-            </div>
-            <div class="add_or_remove d_flex_center_row gap_4 d_none">
-              <div class="input_icon_container position_unset">
-                <img src="./assets/icons/subtask_close.svg" alt="subtask_close" onclick="clearSubTaskValue()">
-              </div>
-              <img src="./assets/icons/vector_3.svg" alt="vector">
-              <div class="input_icon_container position_unset">
-                <img src="./assets/icons/subtask_check.svg" alt="subtask_check" onclick="addNewSubTask()">
-              </div>
-            </div>
-            <input type="text" placeholder="Add new subtasks" id="add-subtasks" required onclick="activateSubtask()" />
-          </div>
-          <div class="added_subtask_list margin_0">
-          </div>
+        <div class="d_flex_center_row margin_0 required_input_mobile">
+          <p class="red_star margin_0">*</p>
+          <p class="margin_0">This field is required</p>
         </div>
       </div>
-      <div class="d_flex_center_row margin_0 required_input_mobile">
-        <p class="red_star margin_0">*</p>
-        <p class="margin_0">This field is required</p>
-      </div>
-    </div>
-    <div class="d_flex_center_row justify_between margin_0 align_end add_task_footer">
-      <div class="d_flex_center_row margin_0 required_input">
-        <p class="red_star margin_0">*</p>
-        <p class="margin_0">This field is required</p>
-      </div>
-      <div class="d_flex_center_row justify_between margin_0 add_task_button_container">
-        <button class="btn_white margin_0 add_task_button" onclick="locationReload()">Clear <div class="close_cross">
-          </div>
-        </button>
-        </button>
-        <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Create Task <img
-            src="./assets/icons/check.svg" alt="">
-        </button>
+      <div class="d_flex_center_row justify_between margin_0 align_end add_task_footer">
+        <div class="d_flex_center_row margin_0 required_input">
+          <p class="red_star margin_0">*</p>
+          <p class="margin_0">This field is required</p>
+        </div>
+        <div class="d_flex_center_row justify_between margin_0 add_task_button_container">
+          <button class="btn_white margin_0 add_task_button" onclick="locationReload()">Clear <div class="close_cross">
+            </div>
+          </button>
+          </button>
+          <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Create Task <img
+              src="./assets/icons/check.svg" alt="">
+          </button>
+        </div>
       </div>
     </div>
   </main>
-    <div class="portrait_placeholder">
-    <p>This feature is only available in portrait mode!</p>
-  </div>
 </body>
 <script src="./script.js"></script>
 <script src="./scripts/add_task.js"></script>
