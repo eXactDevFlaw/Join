@@ -4,16 +4,19 @@
     }
 
     main {
+        width: 100%;
         position: unset !important;
         padding: unset;
         padding-top: 5%;
-        margin-left: auto;
-        margin-right: auto;
         margin-top: 96px;
         overflow: auto;
     }
 
-    main > div {
+    main>div {
+        padding: 0 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
         height: 100%;
     }
@@ -88,7 +91,8 @@
     }
 
     .add_task_content {
-        width: 100%
+        width: 100%;
+        gap: 5%;
     }
 
     .add_task_footer {
@@ -97,14 +101,101 @@
 }
 
 @media (max-width: 1140px) {
+    main {
+        margin: 0;
+        width: 100%;
+        padding: unset;
+        left: unset;
+        top: unset;
+        overflow: auto;
+    }
+
+    main > div {
+        margin-top: 16%;
+    }
+
+    .head {
+        padding-left: 16px;
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: end;
+    }
+
     .add_task_content {
+        width: 100%;
+        height: 100%;
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 10%;
     }
 
     .vector_4 {
         display: none;
     }
-    
+
+    .task_entries {
+        width: 95%;
+        gap: 16px;
+    }
+
+    .input_assigned_to {
+        width: 100% !important;
+    }
+
+    .select_category_dropdown {
+        width: 100%;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .add_task_footer {
+        background: rgba(246, 247, 248, 1);
+        position: fixed;
+        width: 100%;
+        height: 8.6%;
+        top: calc(100% - 19%);
+        z-index: 1000;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .input_icon_wrapper {
+        width: 100%;
+    }
+
+    .added_subtask_list {
+        width: 100%;
+    }
+
+    .required_input {
+        display: none;
+    }
+
+    .required_input_mobile {
+        display: flex;
+        justify-content: flex-start;
+        width: 95%;
+        padding-top: 16px;
+        padding-bottom: 100px;
+    }
+
+    .priority_button {
+        font-size: 1rem;
+        width: 30%;
+    }
+
+    .add_task_button_container {
+        width: 95%;
+    }
+
+    .textarea_wrapper {
+        z-index: -1;
+    }
 }
 
 @media (max-width: 640px) and (orientation: portrait) {
@@ -230,11 +321,9 @@
         padding-left: 16px;
         width: 100%;
         height: 15%;
-        background: rgba(246, 247, 248, 1);
         display: flex;
         justify-content: flex-start;
         align-items: end;
-        z-index: 1;
     }
 
     .add_task_content {
@@ -272,7 +361,7 @@
         position: fixed;
         width: 100%;
         height: 8.6%;
-        top: calc(100% - 17.2%);
+        top: calc(100% - 19%);
         z-index: 1000;
         align-items: center;
         justify-content: space-evenly;
