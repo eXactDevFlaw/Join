@@ -65,8 +65,8 @@ function openTaskOverlay() {
     addTaskEntry.classList.add("show");
 
     // Elemente greifen **innerhalb** des neueingefügten DOM
-    const wrap  = addTaskEntry.querySelector(".input_assigned_to");
-    const list  = addTaskEntry.querySelector("#add-task-contacts-list");
+    const wrap = addTaskEntry.querySelector(".input_assigned_to");
+    const list = addTaskEntry.querySelector("#add-task-contacts-list");
     const arrow = addTaskEntry.querySelector("#arrow-drop-down-assign");
     const input = addTaskEntry.querySelector("#assigned-to-dropdown");
 
@@ -140,7 +140,7 @@ async function createTask() {
 
     if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
         await postToDatabase("tasks", taskDetails);
-        locationReload();
+        showSuccessAddedTask()
     } else {
         validationHandling();
     }
@@ -161,12 +161,21 @@ function validationHandling() {
     }
 }
 
+function showSuccessAddedTask() {
+    const successContent = document.querySelector('.added_success_task_wrapper')
+    successContent.classList.remove('d_none');
+    setTimeout(() => {
+        window.location.href = './board.html';
+    }, 2000);
+}
+
+
 /**
  * Rendert die Contact‑Liste im Dropdown alphabetisch und optional gefiltert.
  */
 async function renderContacts() {
     const container = document.getElementById("add-task-contacts-list");
-    const input     = document.getElementById("assigned-to-dropdown");
+    const input = document.getElementById("assigned-to-dropdown");
     if (!container || !input) {
         console.warn("renderContacts: Container oder Input nicht gefunden.");
         return;
@@ -180,31 +189,31 @@ async function renderContacts() {
         .sort((a, b) => a.name.localeCompare(b.name))
         .forEach(contact => {
             if (!contact.name.toLowerCase().startsWith(searchTerm)) return;
-            const sel      = selectedContacts.includes(contact.id);
-            const color    = stringToColor(contact.name);
+            const sel = selectedContacts.includes(contact.id);
+            const color = stringToColor(contact.name);
             const initials = getInitials(contact.name);
-            const row      = document.createElement("div");
-            row.className  = "assign_contact_row" + (sel ? " contact_list_item_active" : "");
-            row.innerHTML  = `
+            const row = document.createElement("div");
+            row.className = "assign_contact_row" + (sel ? " contact_list_item_active" : "");
+            row.innerHTML = `
                 <div class="assign_contact_left">
                   <div class="contact_circle" style="background-color:${color}">
                     ${initials}
                   </div>
-                  <span class="assign_contact_name" style="color:${sel?'white':''}">
+                  <span class="assign_contact_name" style="color:${sel ? 'white' : ''}">
                     ${contact.name}
                   </span>
                 </div>
                 <div class="assign_contact_checkbox">
                   <img src="./assets/icons/check.svg"
                        class="check_icon"
-                       style="display:${sel?'block':'none'}" />
+                       style="display:${sel ? 'block' : 'none'}" />
                 </div>
             `;
             row.addEventListener("click", e => {
                 e.stopPropagation();
                 const idx = selectedContacts.indexOf(contact.id);
                 if (idx >= 0) selectedContacts.splice(idx, 1);
-                else           selectedContacts.push(contact.id);
+                else selectedContacts.push(contact.id);
                 renderContacts();
                 renderSelectedCircles();
             });
@@ -219,18 +228,39 @@ async function renderContacts() {
 function renderSelectedCircles() {
     const preview = document.getElementById("assigned-contacts-preview");
     if (!preview) return;                  // ← Guard
-
     preview.innerHTML = "";
-    selectedContacts.forEach(id => {
-        const c = allContacts.find(x => x.id === id);
-        if (!c) return;
-        const circle = document.createElement("div");
-        circle.className = "assigned_circle";
-        circle.textContent = getInitials(c.name);
-        circle.style.backgroundColor = stringToColor(c.name);
-        preview.appendChild(circle);
-    });
+
+    if (selectedContacts.length) {
+        for (i = 0; i < Math.min(4, selectedContacts.length); i++) {
+            let id = selectedContacts[i];
+
+            const c = allContacts.find(x => x.id === id);
+            if (!c) return;
+            const circle = document.createElement("div");
+            circle.className = "assigned_circle";
+            circle.textContent = getInitials(c.name);
+            circle.style.backgroundColor = stringToColor(c.name);
+            preview.appendChild(circle);
+        };
+        const badge = renderBlankedBadge()
+        if(badge) {
+            preview.appendChild(badge)
+        }
+    }
+
 }
+
+function renderBlankedBadge() {
+    let moreBadge
+    if (selectedContacts.length > 4){
+        moreBadge = document.createElement('div');
+        moreBadge.className = "assigned_circle"
+        moreBadge.textContent = "More.."
+        moreBadge.style.backgroundColor = "grey"
+    }
+    return moreBadge
+}
+
 
 /** Hilfsfunktionen */
 function getInitials(name) {
