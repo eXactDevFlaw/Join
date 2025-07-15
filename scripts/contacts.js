@@ -302,6 +302,9 @@ function updateContactInitialsPreview(name) {
 window.validateInput = function (inputId) {
   const input = document.getElementById(inputId);
   const error = document.getElementById(`error-${inputId}`);
+  const nameField = document.getElementById("contact-namefield");
+  const emailField = document.getElementById("contact-emailfield");
+  const phoneField = document.getElementById("contact-phonefield");
   if (!input || !error) return;
   const value = input.value.trim();
   let valid = true;
@@ -310,27 +313,27 @@ window.validateInput = function (inputId) {
     const namePattern = /^[A-Za-zÄÖÜäöüß]{2,}(?: [A-Za-zÄÖÜäöüß]{2,})+$/;
     if (!namePattern.test(value)) {
       valid = false;
-      message = "Bitte gib Vor- und Nachname mit Buchstaben ein.";
+      message = "Please enter full name";
+      showContactInputError(nameField, message);
     }
   }
   if (inputId.includes("email")) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(value)) {
       valid = false;
-      message = "Bitte gib eine gültige E-Mail-Adresse ein.";
+      message = "Please enter e-mail";
+      showContactInputError(emailField, message);
     }
   }
   if (inputId.includes("phone")) {
-    const phonePattern = /^[0-9]{4,15}$/;
+    const phonePattern = /^\+?[0-9]{4,15}$/;
     if (!phonePattern.test(value)) {
       valid = false;
-      message = "Nur Ziffern, mindestens 4 Stellen.";
+      message = "Please enter a phone number";
+      showContactInputError(phoneField, message);
     }
   }
-  if (!value) {
-    valid = false;
-    message = "Dieses Feld darf nicht leer sein.";
-  }
+
   if (!valid) {
     error.textContent = message;
     error.classList.remove("d_none");
@@ -424,14 +427,14 @@ function validateNewContactForm() {
   const phoneField = document.getElementById("contact-phonefield");
   clearContactInputErrors();
   const namePattern = /^(?=.{3,})([A-Za-zÄÖÜäöüß]+(?:\s+[A-Za-zÄÖÜäöüß]+)+)$/;
-  const phonePattern = /^[0-9]{4,15}$/;
+  const phonePattern = /^\+?[0-9]{4,15}$/;
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!namePattern.test(nameField.value.trim())) {
-    showContactInputError(nameField, "Please enter a name");
+    showContactInputError(nameField, "Please enter full name");
     isValid = false;
   }
   if (!emailPattern.test(emailField.value.trim())) {
-    showContactInputError(emailField, "Please enter an e-mail address");
+    showContactInputError(emailField, "Please enter e-mail");
     isValid = false;
   }
   if (!phonePattern.test(phoneField.value.trim())) {
