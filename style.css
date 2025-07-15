@@ -1,8 +1,7 @@
 body {
     font-family: "Inter", sans-serif;
-    font-size: 16px;
+    font-size: clamp(1rem, 2vw + 0.5rem, 1.125rem);
     background-color: rgba(246, 247, 248, 1);
-    max-width: 1440px;
     margin: 0 auto;
     overflow-x: hidden;
 }
@@ -147,7 +146,7 @@ button {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-top: 243px;
+    padding-top: 22%;
     gap: 8px;
     font-size: 16px;
     font-weight: 400;

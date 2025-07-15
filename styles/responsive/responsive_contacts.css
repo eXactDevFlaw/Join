@@ -1,9 +1,115 @@
-@media (max-width: 1400px) and (min-width: 641px) {
-    .portrait_placeholder {
-        display: flex;
+@media (max-width: 1400px) {
+    header {
+        padding: 20px 40px;
     }
+
+    main {
+        width: 100%;
+        position: unset !important;
+        margin-top: 96px;
+    }
+
+
+    nav {
+        flex-direction: row !important;
+        left: 0;
+        top: calc(100% - 8.6%);
+        width: 100%;
+        height: 8.6% !important;
+        padding: 0;
+    }
+
+    .logo_navbar {
+        display: none;
+    }
+
+    .logo_header_mobile {
+        display: unset !important;
+    }
+
+    .header_mobile_container {
+        display: flex !important;
+    }
+
+    .nav_items {
+        justify-content: space-around !important;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        gap: 0px;
+    }
+
+    .nav_items a {
+        width: unset !important;
+    }
+
+    .nav_item_active {
+        flex-direction: column;
+        justify-content: center !important;
+        align-items: center;
+        min-width: 80px;
+        width: unset;
+        height: 100%;
+        border-radius: 16px;
+        font-size: 0.875rem;
+        padding: 0;
+        gap: 4px;
+    }
+
+    .nav_item_active img,
+    .nav_item img {
+        width: 100%;
+        height: 32%;
+    }
+
+    .nav_item {
+        flex-direction: column;
+        justify-content: center !important;
+        width: 80px;
+        height: 76px;
+        padding: 0;
+        font-size: 0.875rem;
+    }
+
+    .nav_privacy_legal {
+        display: none !important;
+    }
+
+    .contacts_layout_wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        gap: 3%;
+    }
+
 }
 
+@media (max-width: 1010px) {
+     .headline_with_divider {
+        width: 95%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .headline_with_divider h1 {
+        font-size: 3rem;
+    }
+
+    .headline_with_divider h6 {
+        font-size: 1.25rem;
+    }
+
+    .head_dividing_line {
+        display: none;
+    }
+
+    .headline_vector_vertical {
+        display: unset !important;
+    }
+    
+}
 
 @media (max-width: 768px) and (orientation: portrait) {
     body {
@@ -115,6 +221,7 @@
 
 
     main {
+        position: absolute !important;
         margin: 0;
         width: 100%;
         height: 82.8%;
