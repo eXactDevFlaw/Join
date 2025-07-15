@@ -273,7 +273,15 @@ export async function openEditContactOverlay(contact) {
       await showContactDetails(newDetail, updatedItem);
     }
   };
+  updateDeleteBtn(contact.id);
 }
+
+function updateDeleteBtn(id){
+  const deleteBtn = document.querySelector(".delete_btn");
+  deleteBtn.addEventListener("click", async function (){
+    await deleteContact(id);
+  })
+  }
 
 /**
  * Füllt die Eingabefelder des Formulars mit Kontaktdaten.
