@@ -92,16 +92,25 @@
     main {
         margin: 0;
         width: 100%;
-        padding: unset;
         left: unset;
         top: unset;
         overflow: auto;
     }
 
-    main > div {
-        margin-top: 16%;
+    main>div {
+        margin-top: 96px;
     }
 
+}
+
+@media (max-width: 850px) {
+    .greetings {
+        display: none;
+    }
+
+    .summary_overview {
+        margin-right: 0;
+    }
 }
 
 @media (max-width: 640px) and (orientation: portrait) {
@@ -223,6 +232,11 @@
         overflow: auto;
     }
 
+    main>div {
+        margin-top: 0;
+        padding: 0;
+    }
+
     .div_headline {
         width: 100%;
     }
@@ -238,8 +252,8 @@
         align-items: flex-start;
         padding-top: 38px;
         padding-left: 5%;
-        padding-bottom: 5%;
-        gap: 16px;
+        padding-bottom: 0;
+        gap: 0px;
     }
 
     .headline_vector {
@@ -262,6 +276,7 @@
     }
 
     .summary_overview {
+        justify-content: flex-start;
         margin: 16px 0px 16px 0px;
         width: 100%;
         height: 100%;
@@ -281,7 +296,7 @@
         flex-grow: 1;
         justify-self: center;
         width: 93%;
-        height: 110px;
+        min-height: 20.4%;
     }
 
     .box_item {
