@@ -133,7 +133,7 @@ async function createTask() {
     taskDetails.title = document.getElementById('title-input-overlay').value;
     taskDetails.description = document.getElementById('description-input-overlay').value;
     taskDetails.dueDate = document.getElementById('datepicker').value;
-    taskDetails.assignedTo = pushedContactsName;
+    taskDetails.assignedTo = selectedContacts;
     taskDetails.category = document.getElementById("selected-category").innerHTML;
     taskDetails.subtasks = subTasks;
     taskDetails.status = "todo";
@@ -189,7 +189,7 @@ async function renderContacts() {
         .sort((a, b) => a.name.localeCompare(b.name))
         .forEach(contact => {
             if (!contact.name.toLowerCase().startsWith(searchTerm)) return;
-            const sel = selectedContacts.includes(contact.id);
+            const sel = selectedContacts.includes(contact.name);
             const color = stringToColor(contact.name);
             const initials = getInitials(contact.name);
             const row = document.createElement("div");
@@ -211,15 +211,15 @@ async function renderContacts() {
             `;
             row.addEventListener("click", e => {
                 e.stopPropagation();
-                const idx = selectedContacts.indexOf(contact.id);
-                const idname = selectedContacts[contact.name]
+                const idx = selectedContacts.indexOf(contact.name);
+                // const idname = selectedContacts[contact.name]
                 if (idx >= 0) {
                     selectedContacts.splice(idx, 1);
-                    pushedContactsName.splice(idname, 1)
+                    // pushedContactsName.splice(idname, 1)
                 } 
                 else {
-                    selectedContacts.push(contact.id);
-                   pushedContactsName.push(contact.name) 
+                    selectedContacts.push(contact.name);
+                //    pushedContactsName.push(contact.name) 
                 } 
                 renderContacts();
                 renderSelectedCircles();
@@ -239,9 +239,9 @@ function renderSelectedCircles() {
     preview.innerHTML = "";
     if (selectedContacts.length) {
         for (i = 0; i < Math.min(4, selectedContacts.length); i++) {
-            let id = selectedContacts[i];
+            let name = selectedContacts[i];
 
-            const c = allContacts.find(x => x.id === id);
+            const c = allContacts.find(x => x.name === name);
             if (!c) return;
             const circle = document.createElement("div");
             circle.className = "assigned_circle";

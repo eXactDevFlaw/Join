@@ -359,12 +359,11 @@ function renderTaskDetailEdit(){
     renderSubTasks();
     setPriority(data.taskPriority);
     selectedContacts = data.taskData.assignedTo; 
-    if (selectedContacts === ""){
+    if (selectedContacts === undefined){
         selectedContacts = [];
     }
     prepareRenderContacts();
     renderSelectedCircles();
-    renderContactsDetailEditView(data);
 }
 
 function prepareUpdateTask(){
