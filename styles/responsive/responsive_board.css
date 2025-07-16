@@ -1,14 +1,16 @@
 @media (max-width: 1400px) {
     header {
+        height: 8.6%;
         padding: 20px 40px;
     }
 
     main {
+        top: 8.6%;
+        left: 0;
         width: 100%;
-        position: unset !important;
+        height: 82.8%;
         padding: unset;
         padding-top: 5%;
-        margin-top: 96px;
         overflow: auto;
     }
 
@@ -28,6 +30,7 @@
         width: 100%;
         height: 8.6% !important;
         padding: 0;
+        z-index: 1;
     }
 
     .logo_navbar {
@@ -85,7 +88,29 @@
     .nav_privacy_legal {
         display: none !important;
     }
+    
+    content {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0 1%;
+        justify-content: center;
+    }
 
+    .board_column {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+    
+    .card_column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
 }
 
 @media (max-width: 1140px) {
@@ -98,7 +123,7 @@
         overflow: auto;
     }
 
-    main > div {
+    main>div {
         margin-top: 16%;
     }
 
@@ -288,21 +313,9 @@
         justify-content: flex-start;
         align-items: center;
         gap: 3.4%;
-        overflow-x: auto;
+        overflow: auto;
     }
 
-    .card_column {
-        min-height: unset;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 3.4%;
-        overflow-x: auto;
-        overflow-y: hidden;
-    }
 
     .task_card {
         width: 46%;
