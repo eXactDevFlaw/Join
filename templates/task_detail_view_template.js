@@ -51,7 +51,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Title</p>
           </div>
           <div class="margin_0">
-            <input type="text" value="${data.taskData.title}" id="title-input-overlay" required />
+            <input class="input_task_detail" type="text" value="${data.taskData.title}" id="title-input-overlay" required />
             <div class="margin_0 input_error font_12">
               <p class="d_none" id="required-title">this field is required</p>
             </div>
@@ -63,7 +63,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Description</p>
           </div>
           <div class="textarea_wrapper margin_0">
-            <textarea id="description-input-overlay">${data.taskData.description}</textarea>
+            <textarea class="input_textarea_detail" id="description-input-overlay">${data.taskData.description}</textarea>
             <div class="resize_icon"></div>
           </div>
         </div>

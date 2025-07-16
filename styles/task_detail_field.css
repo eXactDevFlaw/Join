@@ -152,7 +152,7 @@
     background-color: rgba(209, 209, 209, 1);
 }
 
-textarea::placeholder{
+.input_textarea_detail textarea::placeholder{
     color: black;
 }
 
@@ -160,7 +160,7 @@ input{
     width: 100%;
 }
 
-input::placeholder{
+.input_task_detail input::placeholder{
     color: black;
 }
 

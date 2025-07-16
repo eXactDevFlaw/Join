@@ -1,5 +1,48 @@
 let assignedDetailInput = "";
 
+function openTaskOverlay() {
+    const overlay = document.getElementById("task-overlay");
+    overlay.classList.remove("d_none");
+    const addTaskEntry = document.getElementById("add-task-entry");
+    addTaskEntry.innerHTML = addTaskTemplate();
+    addTaskEntry.classList.remove("d_none");
+    void addTaskEntry.offsetWidth;
+    addTaskEntry.classList.add("show");
+    setPriority("medium");
+    prepareDropdownToggle();
+}
+
+function prepareDropdownToggle(){
+    const contactList = document.getElementById("add-task-entry");
+    contactList.addEventListener('click', (e) => {
+    if (e.target.id != "add-task-contacts-list") {
+        const list = document.getElementById("add-task-contacts-list");
+        if (list) { list.classList.add('d_none') }
+    }
+})
+
+}
+
+function closeTaskOverlay() {
+    document.getElementById("task-overlay").classList.add("d_none");
+    const entry = document.getElementById("add-task-entry");
+    const task_detail_entry = document.getElementById("task-details");
+    if (entry){
+         entry.classList.remove("show");
+    }
+   
+    task_detail_entry.classList.remove("show");
+    setTimeout(() => {
+        entry.classList.add("d_none");
+        task_detail_entry.classList.add("d_none");
+    }, 300);
+    const addTaskEntry = document.querySelector(".add_task_entry");
+    // addTaskEntry.remove();
+    refreshBoard();
+    selectedContacts = [];
+
+}
+
 function prepareRenderContacts(){
     let assignedInput = document.getElementById("assigned-to-dropdown");
     assignedDetailInput = assignedInput;

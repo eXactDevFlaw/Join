@@ -309,19 +309,6 @@ function openTaskDetails() {
     task_detail_entry.classList.add("show");
 }
 
-function closeTaskOverlay() {
-    document.getElementById("task-overlay").classList.add("d_none");
-    const entry = document.getElementById("add-task-entry");
-    const task_detail_entry = document.getElementById("task-details");
-    entry.classList.remove("show");
-    task_detail_entry.classList.remove("show");
-    setTimeout(() => {
-        entry.classList.add("d_none");
-        task_detail_entry.classList.add("d_none");
-    }, 300);
-    refreshBoard();
-}
-
 async function checkSubTask(index) {
     data.taskData.subtasks[index].status = "closed";
     pushData = data.taskData;

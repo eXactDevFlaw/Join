@@ -72,11 +72,12 @@ function addTaskTemplate() {
         </div>
 
         <!-- Assigned to -->
-        <div class="title_input margin_0 gap_8">
+        <div class="title_input margin_0">
+        <div class="d_flex_center_column align_none gap_8">
           <div class="d_flex_center_row justify_start margin_0">
             <p class="margin_0">Assigned to</p>
           </div>
-          <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0">
+          <div class="input_assigned_to input_icon_wrapper width_100 d_flex_center margin_0" onclick="toggleAssignedToDropdown(event)">
             <input
               id="assigned-to-dropdown"
               class="assigned_to_dropdown"
@@ -90,6 +91,7 @@ function addTaskTemplate() {
                 <img src="./assets/icons/arrow_drop_down.svg" alt="drop-down-arrow" />
               </div>
             </div>
+          </div>
           </div>
           <div id="add-task-contacts-list" class="contact_dropdown d_none"></div>
         </div>

@@ -52,65 +52,7 @@ document.addEventListener('click', (e) => {
     }
 })
 
-function openTaskOverlay() {
-    // Overlay öffnen
-    const overlay = document.getElementById("task-overlay");
-    overlay.classList.remove("d_none");
 
-    // Template injizieren
-    const addTaskEntry = document.getElementById("add-task-entry");
-    addTaskEntry.innerHTML = addTaskTemplate();
-    addTaskEntry.classList.remove("d_none");
-    void addTaskEntry.offsetWidth;
-    addTaskEntry.classList.add("show");
-
-    // Elemente greifen **innerhalb** des neueingefügten DOM
-    const wrap = addTaskEntry.querySelector(".input_assigned_to");
-    const list = addTaskEntry.querySelector("#add-task-contacts-list");
-    const arrow = addTaskEntry.querySelector("#arrow-drop-down-assign");
-    const input = addTaskEntry.querySelector("#assigned-to-dropdown");
-
-    // Sofort erst rendern (ohne Suchbegriff)
-    renderContacts();
-
-    // 1) Live-Filter
-    if (input) {
-        input.addEventListener("input", () => {
-            if (!list.classList.contains("d_none")) {
-                renderContacts();
-            }
-        });
-    }
-
-    // 2) Öffnen / Schließen per Klick auf Wrap (Input + Pfeil)
-    if (wrap && list && arrow) {
-        wrap.addEventListener("click", e => {
-            e.stopPropagation();
-            if (list.classList.contains("d_none")) renderContacts();
-            list.classList.toggle("d_none");
-            arrow.classList.toggle("up");
-        });
-
-        // 3) Klick außerhalb schließt Dropdown
-        document.addEventListener("click", e => {
-            if (!wrap.contains(e.target) && !list.contains(e.target)) {
-                list.classList.add("d_none");
-                arrow.classList.add("up");
-            }
-        });
-    }
-}
-
-
-/**
- * Schließt das Overlay wieder.
- */
-function closeTaskOverlay() {
-    document.getElementById("task-overlay").classList.add("d_none");
-    const entry = document.getElementById("add-task-entry");
-    entry.classList.remove("show");
-    setTimeout(() => entry.classList.add("d_none"), 300);
-}
 
 function setPriority(level) {
     const priorities = ['urgent', 'medium', 'low'];
@@ -140,24 +82,36 @@ async function createTask() {
 
     if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
         await postToDatabase("tasks", taskDetails);
-        showSuccessAddedTask()
+        showSuccessAddedTask();
+        closeTaskOverlay();
     } else {
         validationHandling();
     }
+    selectedContacts = []
+    
 }
 
 function validationHandling() {
     if (!taskDetails.title) {
         document.getElementById('title-input-overlay').classList.add("input_error_border");
         document.getElementById('required-title').classList.remove("d_none");
+    } else  {
+        document.getElementById('title-input-overlay').classList.remove("input_error_border");
+        document.getElementById('required-title').classList.add("d_none");
     }
     if (!taskDetails.dueDate) {
         document.getElementById('datepicker').classList.add("input_error_border");
         document.getElementById('required-date').classList.remove("d_none");
+    } else {
+        document.getElementById('datepicker').classList.remove("input_error_border");
+        document.getElementById('required-date').classList.add("d_none");
     }
     if (taskDetails.category === "Select task category") {
         document.getElementById("select-task-category").classList.add("input_error_border");
         document.getElementById('required-category').classList.remove("d_none");
+    } else {
+        document.getElementById("select-task-category").classList.remove("input_error_border");
+        document.getElementById('required-category').classList.add("d_none");
     }
 }
 
