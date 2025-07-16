@@ -113,6 +113,7 @@
 
     main > div {
         margin-top: 16%;
+        padding: 0 4%;
     }
 
     .head {
@@ -186,7 +187,7 @@
     }
 
     .priority_button {
-        font-size: 1rem;
+        font-size: 0.875rem;
         width: 30%;
     }
 
@@ -388,8 +389,9 @@
     }
 
     .priority_button {
-        font-size: 1rem;
+        font-size: 0.875rem;
         width: 30%;
+        gap: 2%;
     }
 
     .add_task_button_container {
