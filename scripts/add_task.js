@@ -176,11 +176,11 @@ function showSuccessAddedTask() {
 async function renderContacts() {
     const container = document.getElementById("add-task-contacts-list");
     const input = document.getElementById("assigned-to-dropdown");
+    console.log("Hallo")
     if (!container || !input) {
         console.warn("renderContacts: Container oder Input nicht gefunden.");
         return;
     }
-
     const searchTerm = input.value.trim().toLowerCase();
     container.innerHTML = "";
 
@@ -212,8 +212,15 @@ async function renderContacts() {
             row.addEventListener("click", e => {
                 e.stopPropagation();
                 const idx = selectedContacts.indexOf(contact.id);
-                if (idx >= 0) selectedContacts.splice(idx, 1);
-                else selectedContacts.push(contact.id);
+                const idname = selectedContacts[contact.name]
+                if (idx >= 0) {
+                    selectedContacts.splice(idx, 1);
+                    pushedContactsName.splice(idname, 1)
+                } 
+                else {
+                    selectedContacts.push(contact.id);
+                   pushedContactsName.push(contact.name) 
+                } 
                 renderContacts();
                 renderSelectedCircles();
             });
@@ -227,9 +234,9 @@ async function renderContacts() {
  */
 function renderSelectedCircles() {
     const preview = document.getElementById("assigned-contacts-preview");
+
     if (!preview) return;                  // ← Guard
     preview.innerHTML = "";
-
     if (selectedContacts.length) {
         for (i = 0; i < Math.min(4, selectedContacts.length); i++) {
             let id = selectedContacts[i];

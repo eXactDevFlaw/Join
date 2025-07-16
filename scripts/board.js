@@ -56,8 +56,6 @@ function renderAllTasks() {
         let htmlel = item.constructHTMLElements()
         htmlel.setAttribute("taskName", item.taskName)
         htmlel.setAttribute("taskStatus", item.taskStatus)
-        // htmlel.setAttribute("onclick", `openTaskDetails()`)
-        // ${item.taskKey}
         htmlel.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', item.taskName);
         })
@@ -135,10 +133,17 @@ function searchTaskOnBoard() {
 dragRef.forEach(element => {
     element.addEventListener('dragover', (e) => {
         e.preventDefault();
+        element.classList.add('hover_dragzone');
+    })
+
+    element.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        element.classList.remove('hover_dragzone');
     })
 
     element.addEventListener('drop', async (e) => {
         e.preventDefault();
+        element.classList.remove('hover_dragzone')
         let cardTaskName = e.dataTransfer.getData('text/plain')
         const card = document.querySelector(`.task_card[taskName="${cardTaskName}"]`)
         element.appendChild(card)
@@ -315,7 +320,6 @@ function closeTaskOverlay() {
         task_detail_entry.classList.add("d_none");
     }, 300);
     refreshBoard();
-    location.reload();
 }
 
 async function checkSubTask(index) {
@@ -372,6 +376,7 @@ function prepareUpdateTask(){
                     updateTask(task);
                 }
             })
+        refreshBoard()
     })
 }
 

@@ -152,6 +152,11 @@ content{
     padding-top: 12px;
 }
 
+.hover_dragzone {
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 .task_card{
     margin-bottom: 10px;
     width: 252px;
