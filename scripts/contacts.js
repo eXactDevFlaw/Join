@@ -202,7 +202,7 @@ function bindEditButton(c) {
  * @param {{id:string}} c
  */
 function bindOverlayDelete(c) {
-  const btn = document.querySelector(".btn_clear");
+  const btn = document.querySelector(".delete_btn");
   if (!btn) return;
   btn.onclick = async () => {
     await deleteContact(c.id);
@@ -273,7 +273,7 @@ export async function openEditContactOverlay(contact) {
       await showContactDetails(newDetail, updatedItem);
     }
   };
-  updateDeleteBtn(contact.id);
+  bindOverlayDelete(contact);
 }
 
 function updateDeleteBtn(id){
