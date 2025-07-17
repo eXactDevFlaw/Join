@@ -79,7 +79,8 @@ async function createTask() {
     } else {
         validationHandling();
     }
-    selectedContacts = []
+    selectedContacts = [];
+    refreshBoard();
 }
 
 function validationHandling() {
@@ -110,8 +111,9 @@ function showSuccessAddedTask() {
     const successContent = document.querySelector('.added_success_task_wrapper')
     successContent.classList.remove('d_none');
     setTimeout(() => {
-        window.location.href = './board.html';
+       refreshBoard();
     }, 2000);
+    successContent.classList.add('d_none');
 }
 
 async function renderContacts() {
@@ -350,3 +352,17 @@ function clearTask(){
    selectedContacts = []; 
 }
 
+function clearAddTask(){
+    document.getElementById('title-input-overlay').value = "";
+    description = document.getElementById('description-input-overlay').value = "";
+
+    taskDetails.dueDate = document.getElementById('datepicker').value ="";
+    // taskDetails.assignedTo = selectedContacts;
+    taskDetails.category = document.getElementById("selected-category").innerHTML = "Select task category";
+    subTasks = [];
+    renderSubTasks();
+    selectedContacts = [];
+    setPriority("medium");
+    renderContacts();
+    document.getElementById("assigned-contacts-preview").innerHTML = "";
+}
