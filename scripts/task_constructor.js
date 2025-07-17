@@ -95,7 +95,7 @@ class TaskClass {
         this.taskSubTasksAmount = 0
         this.taskSubTasksAmountCompleted = 0
 
-        if (this.taskSubTasks != undefined) {
+        if (this.taskSubTasks != undefined && this.taskSubTasks.length > 0) {
             Object.values(this.taskSubTasks).forEach((item) => {
                 this.taskSubTasksAmount += 1
                 if (item.status == "closed") {
