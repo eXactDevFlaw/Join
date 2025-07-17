@@ -79,15 +79,13 @@ async function createTask() {
     } else {
         validationHandling();
     }
-    selectedContacts = [];
-    refreshBoard();
 }
 
 function validationHandling() {
     if (!taskDetails.title) {
         document.getElementById('title-input-overlay').classList.add("input_error_border");
         document.getElementById('required-title').classList.remove("d_none");
-    } else  {
+    } else {
         document.getElementById('title-input-overlay').classList.remove("input_error_border");
         document.getElementById('required-title').classList.add("d_none");
     }
@@ -111,9 +109,8 @@ function showSuccessAddedTask() {
     const successContent = document.querySelector('.added_success_task_wrapper')
     successContent.classList.remove('d_none');
     setTimeout(() => {
-       refreshBoard();
+        window.location.href = './board.html';
     }, 2000);
-    successContent.classList.add('d_none');
 }
 
 async function renderContacts() {
@@ -157,11 +154,11 @@ async function renderContacts() {
                 if (idx >= 0) {
                     selectedContacts.splice(idx, 1);
                     // pushedContactsName.splice(idname, 1)
-                } 
+                }
                 else {
                     selectedContacts.push(contact.name);
-                //    pushedContactsName.push(contact.name) 
-                } 
+                    //    pushedContactsName.push(contact.name) 
+                }
                 renderContacts();
                 renderSelectedCircles();
             });
@@ -187,7 +184,7 @@ function renderSelectedCircles() {
             preview.appendChild(circle);
         };
         const badge = renderBlankedBadge()
-        if(badge) {
+        if (badge) {
             preview.appendChild(badge)
         }
     }
@@ -195,7 +192,7 @@ function renderSelectedCircles() {
 
 function renderBlankedBadge() {
     let moreBadge
-    if (selectedContacts.length > 4){
+    if (selectedContacts.length > 4) {
         moreBadge = document.createElement('div');
         moreBadge.className = "assigned_circle"
         moreBadge.textContent = "More.."
@@ -345,18 +342,18 @@ function editCheck(index) {
     renderSubTasks()
 }
 
-function clearTask(){
-   let taskEntry = document.getElementById("add-task-entry");
-   taskEntry.innerHTML = addTaskTemplate();
-   setPriority("medium");
-   selectedContacts = []; 
+function clearTask() {
+    let taskEntry = document.getElementById("add-task-entry");
+    taskEntry.innerHTML = addTaskTemplate();
+    setPriority("medium");
+    selectedContacts = [];
 }
 
-function clearAddTask(){
+function clearAddTask() {
     document.getElementById('title-input-overlay').value = "";
     description = document.getElementById('description-input-overlay').value = "";
 
-    taskDetails.dueDate = document.getElementById('datepicker').value ="";
+    taskDetails.dueDate = document.getElementById('datepicker').value = "";
     // taskDetails.assignedTo = selectedContacts;
     taskDetails.category = document.getElementById("selected-category").innerHTML = "Select task category";
     subTasks = [];

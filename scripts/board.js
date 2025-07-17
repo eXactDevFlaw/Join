@@ -37,15 +37,14 @@ const emptyRefs = {
 async function loadTasks() {
     let dataFromDatabase = await getTasksFromDatabase()
     if (dataFromDatabase) {
+        dataPool = [];
+        rawTasksData = []; 
         rawTasksData = Object.entries(dataFromDatabase)
     }
     if (rawTasksData) {
         rawTasksData.forEach((singleTask) => {
             let [key, data] = [...singleTask]
             dataPool.push(new TaskClass(key, data));
-        })
-        dataPool.forEach((task) => {
-            // task.logger()
         })
     }
 }
