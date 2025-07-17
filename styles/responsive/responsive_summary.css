@@ -337,7 +337,13 @@
         font-size: 3rem;
     }
 
-    .task_name {
+    #date {
+        font-size: 1rem;
+    }
+
+    .task_name,
+    .deadline,
+    .task_name p {
         font-size: 0.857rem;
     }
 
