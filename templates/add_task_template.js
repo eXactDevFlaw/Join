@@ -3,7 +3,7 @@
  * @returns {string}
  */
 function addTaskTemplate() {
-  return `
+  return `<div class="add_task_container">
     <div class="head">
       <h1>Add Task</h1>
     </div>
@@ -168,6 +168,7 @@ function addTaskTemplate() {
           <img src="./assets/icons/check.svg" alt="">
         </button>
       </div>
+    </div>
     </div>
   `;
 }

@@ -36,8 +36,10 @@ function closeTaskOverlay() {
         entry.classList.add("d_none");
         task_detail_entry.classList.add("d_none");
     }, 300);
-    const addTaskEntry = document.querySelector(".add_task_entry");
-    // addTaskEntry.remove();
+    const addTaskContainer = document.querySelector(".add_task_container");
+    if (addTaskContainer){
+        addTaskContainer.remove();
+    }
     refreshBoard();
     selectedContacts = [];
 
