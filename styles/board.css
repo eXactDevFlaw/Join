@@ -175,6 +175,12 @@ content{
     cursor: grabbing;
 }
 
+.task_card.rotating {
+    transition: transform 0.3s;
+    transform: rotateY(5deg);
+    cursor: grabbing;
+}
+
 .task_content{
     display: flex;
     flex-direction: column;

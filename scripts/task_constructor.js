@@ -99,12 +99,17 @@ class TaskClass {
             subtaskProgressDiv.className = 'subtask_progress';
 
             const progressBarDiv = document.createElement('div');
-            progressBarDiv.className = 'progress_bar';
+            
 
             const progressStatusDiv = document.createElement('div');
             progressStatusDiv.className = 'progress_status margin_0';
             this.taskSubTasksProcent = (this.taskSubTasksAmountCompleted / this.taskSubTasksAmount) * 100
             progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`;
+            if(this.taskSubTasksProcent < 1){
+                progressBarDiv.className = 'progress_bar d_none';
+            } else {
+                progressBarDiv.className = 'progress_bar';
+            }
             progressBarDiv.append(progressStatusDiv);
 
             // subtasks

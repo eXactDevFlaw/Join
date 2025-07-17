@@ -141,6 +141,11 @@
         margin: 0;
     }
 
+    .task_card:active{
+    rotate: unset;
+    cursor: unset;
+}
+
     .headline {
         position: unset;
         width: 95%;

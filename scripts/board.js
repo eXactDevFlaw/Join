@@ -60,6 +60,9 @@ function renderAllTasks() {
         })
         pushCardsToCardsPool(item.taskStatus, htmlel)
         taskDetailsRef()
+        setupMobileTaskMove()
+        setupMobileNavbarMove()
+        setupCardRotation()
     });
 }
 
@@ -238,27 +241,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     checkColumnContent()
     searchTaskOnBoard()
     taskDetailsRef()
-    mobileTaskMove()
 })
 
 function taskDetailsRef() {
     const taskCards = document.querySelectorAll(".task_card");
-    taskCards.forEach(task => {
-        task.addEventListener("click", function () {
-            let taskname = this.getAttribute("taskname")
-            dataPool.forEach((task) => {
-                if (task.taskName === taskname) {
-                    data = task;
-                    if (data.taskSubTasks === undefined) {
-                        subTasks = [];
-                        data.taskSubTasks = subTasks;
-                    }
-                    renderTaskDetailView(data);
-                }
-            })
+    taskCards.forEach(taskCard => {
+        taskCard.addEventListener("click", function (e) {
+            if (
+                e.target.classList.contains('mobile_move_btn') ||
+                e.target.closest('.mobile_navbar')
+            ) return;
+            handleTaskCardClick(this);
         });
     });
+}
 
+function handleTaskCardClick(cardElement) {
+    let taskname = cardElement.getAttribute("taskname");
+    dataPool.forEach((task) => {
+        if (task.taskName === taskname) {
+            data = task;
+            if (data.taskSubTasks === undefined) {
+                subTasks = [];
+                data.taskSubTasks = subTasks;
+            }
+            renderTaskDetailView(data);
+        }
+    });
 }
 
 function renderTaskDetailView(data) {
@@ -278,6 +287,7 @@ function renderTaskDetailView(data) {
     openTaskDetails();
     prepareDeleteTask();
     prepareEditTask()
+    setupMobileTaskMove()
 }
 
 function renderContactsDetailView(data) {

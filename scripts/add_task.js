@@ -362,11 +362,16 @@ function editSubTask(index) {
     document.getElementById('edit-subtask' + index).classList.remove('d_none');
 }
 
-function editCheck(index) {
+async function editCheck(index) {
     let editCheck = document.getElementById("edit-value" + index)
     let editCheckValue = editCheck.value;
     subTasks[index].title = editCheckValue;
     renderSubTasks()
+
+    if (taskDetails.taskKey) { 
+        taskDetails.subtasks = subTasks;
+        await updateOnDatabase("tasks/" + taskDetails.taskKey, taskDetails);
+    }
 }
 
 function clearTask() {
