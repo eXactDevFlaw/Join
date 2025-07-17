@@ -216,11 +216,9 @@ function getUserLogState() {
  */
 function renderNavbar() {
   if (isUserLogin && navLogin && navBar) {
-    console.log(isUserLogin);
     navLogin.classList.add('d_none');
     navBar.classList.remove('d_none');
   } else if (!isUserLogin && navLogin && navBar) {
-    console.log(isUserLogin);
     navLogin.classList.remove('d_none');
     navBar.classList.add('d_none');
   }

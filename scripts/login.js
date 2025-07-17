@@ -280,7 +280,6 @@ async function handleLogin(event) {
   if (!isValidLoginInput(email, password)) return handleLoginError();
 
   let {state, userFullName} = await checkUserCredentials(email, password);
-  console.log(state, userFullName);
   
   if (state) {
     setUserIsLoggedIn(email, password, userFullName);

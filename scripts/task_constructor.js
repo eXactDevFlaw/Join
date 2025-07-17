@@ -12,16 +12,6 @@ class TaskClass {
         this.taskDueDate = data.dueDate
     }
 
-    logger() {
-        if (this.taskData) {
-            console.log(this.taskKey)
-            console.table(this.taskData);
-            console.log(this.taskAssignedTo)
-        } else {
-            console.log("Error on loading of data!");
-        }
-    }
-
     constructHTMLElements() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'task_card';

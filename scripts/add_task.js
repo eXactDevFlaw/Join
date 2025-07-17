@@ -8,7 +8,6 @@ let allContacts = [];
 let selectedContacts = [];
 let pushedContactsName = [];
 
-
 window.toggleAssignedToDropdown = function (e) {
     e.stopPropagation();
     const list = document.getElementById("add-task-contacts-list");
@@ -17,7 +16,6 @@ window.toggleAssignedToDropdown = function (e) {
     list.classList.toggle("d_none");
     arrow.classList.toggle("up");
 };
-
 
 const assignedInput = document.getElementById("assigned-to-dropdown");
 if (assignedInput) {
@@ -30,14 +28,10 @@ if (assignedInput) {
     });
 }
 
-/**
- * Lädt alle Kontakte einmalig ins Array.
- */
 async function initContacts() {
     const raw = await getContactsFromDatabase();
     allContacts = Object.entries(raw || {}).map(([id, data]) => ({ id, ...data }));
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
     initContacts();
@@ -51,8 +45,6 @@ document.addEventListener('click', (e) => {
         if (list) { list.classList.add('d_none') }
     }
 })
-
-
 
 function setPriority(level) {
     const priorities = ['urgent', 'medium', 'low'];
@@ -88,7 +80,6 @@ async function createTask() {
         validationHandling();
     }
     selectedContacts = []
-    
 }
 
 function validationHandling() {
@@ -123,21 +114,15 @@ function showSuccessAddedTask() {
     }, 2000);
 }
 
-
-/**
- * Rendert die Contact‑Liste im Dropdown alphabetisch und optional gefiltert.
- */
 async function renderContacts() {
     const container = document.getElementById("add-task-contacts-list");
     const input = document.getElementById("assigned-to-dropdown");
-    console.log("Hallo")
     if (!container || !input) {
         console.warn("renderContacts: Container oder Input nicht gefunden.");
         return;
     }
     const searchTerm = input.value.trim().toLowerCase();
     container.innerHTML = "";
-
     allContacts
         .slice()
         .sort((a, b) => a.name.localeCompare(b.name))
@@ -182,10 +167,6 @@ async function renderContacts() {
         });
 }
 
-
-/**
- * Zeigt unter dem Inputkreischen der ausgewählten Kontakte.
- */
 function renderSelectedCircles() {
     const preview = document.getElementById("assigned-contacts-preview");
 
@@ -208,7 +189,6 @@ function renderSelectedCircles() {
             preview.appendChild(badge)
         }
     }
-
 }
 
 function renderBlankedBadge() {
@@ -222,8 +202,6 @@ function renderBlankedBadge() {
     return moreBadge
 }
 
-
-/** Hilfsfunktionen */
 function getInitials(name) {
     return name.split(" ").map(w => w[0].toUpperCase()).join("").slice(0, 2);
 }
@@ -236,16 +214,12 @@ function stringToColor(str) {
 async function renderAssignableContacts() {
     const container = document.getElementById("assign-contact-list");
     if (!container) return;
-
     container.innerHTML = "";
     container.classList.remove("d_none");
-
     const contacts = await fetchContacts();
-
     contacts.forEach((c, i) => {
         const div = document.createElement("div");
         div.className = "assign-contact-item";
-
         div.innerHTML = `
       <div class="assign-left">
         <div class="contact_circle" style="background-color:${stringToColor(c.name)}">
@@ -255,7 +229,6 @@ async function renderAssignableContacts() {
       </div>
       <input type="checkbox" id="assign-checkbox-${i}" class="assign-checkbox" />
     `;
-
         container.appendChild(div);
     });
 }
@@ -334,7 +307,6 @@ function renderSubTasks() {
             addSubtaskList.innerHTML += addSubTaskTemplate(subTask, index);
         })
     }
-
 }
 
 let addSubTaskInput = document.getElementById("add-subtasks");
@@ -377,3 +349,4 @@ function clearTask(){
    setPriority("medium");
    selectedContacts = []; 
 }
+

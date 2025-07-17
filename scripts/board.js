@@ -381,8 +381,6 @@ function prepareUpdateTask() {
 }
 
 async function updateTask(data) {
-    console.log(data)
-    console.log(rawTasksData)
     let rawPrio = Object.values(taskDetails)
     data.taskData.title = document.getElementById('title-input-overlay').value;
     data.taskData.description = document.getElementById('description-input-overlay').value;
@@ -392,8 +390,6 @@ async function updateTask(data) {
     data.taskData.priority = rawPrio[0]
     pushData = data.taskData;
     taskKey = data.taskKey;
-
-    console.log(taskKey)
     await updateOnDatabase("tasks/" + taskKey, pushData);
     // closeTaskOverlay();
     // openTaskDetails();
