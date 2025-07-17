@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="./styles/board.css" />
   <link rel="stylesheet" href="./styles/add_task.css" />
   <link rel="stylesheet" href="./styles/task_detail_field.css" />
-   <link rel="stylesheet" href="./styles/contact_dropdown.css" />
+  <link rel="stylesheet" href="./styles/contact_dropdown.css" />
   <link rel="stylesheet" href="./styles/responsive/responsive_board.css" />
   <title>Join - Board</title>
 </head>
@@ -117,7 +117,12 @@
   <main class="position_absolute">
     <div class="board_wrapper max_width_1440_calc">
       <div class="headline d_flex_center justify_between margin_0">
-        <h1>Board</h1>
+        <div class="headline_mobile_wrapper">
+          <h1>Board</h1>
+          <button class="btn_dark margin_0 d_flex_center d_none" onclick="openTaskOverlay()">
+            <img src="/assets/icons/add.svg" alt="add" />
+          </button>
+        </div>
         <div class="find_add d_flex_center justify_between gap_32px">
           <div class="input_icon_wrapper find_task_input d_flex_center margin_0">
             <img src="./assets/icons/vector_3.svg" class="vector" alt="vector" />
@@ -192,4 +197,5 @@
 <script src="./scripts/board.js"></script>
 <script src="./templates/task_detail_view_template.js"></script>
 <script src="./scripts/board_overlay.js"></script>
+
 </html>

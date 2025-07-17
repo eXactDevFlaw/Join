@@ -88,28 +88,63 @@
     .nav_privacy_legal {
         display: none !important;
     }
-    
+
     content {
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 0 1%;
-        justify-content: center;
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .board_wrapper {
+        max-width: unset;
+        width: 100%;
+        padding: 0;
+
     }
 
     .board_column {
-        width: 100%;
-        height: 100%;
+        width: 96.6%;
         align-items: center;
+        max-height: unset;
     }
-    
+
+    .board_column_head {
+        width: 100%;
+    }
+
     .card_column {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        min-height: unset;
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 3.4%;
         overflow: auto;
+    }
+
+    .task_card {
+        width: 46%;
+        flex: 0 0 46%;
+        max-width: 250px;
+        box-sizing: border-box;
+        height: 95%;
+        margin: 0;
+    }
+
+    .headline {
+        position: unset;
+        width: 95%;
+        padding: 0;
+        gap: 2%;
+    }
+
+    .find_add {
+        gap: 2%;
     }
 }
 
@@ -117,14 +152,7 @@
     main {
         margin: 0;
         width: 100%;
-        padding: unset;
-        left: unset;
-        top: unset;
         overflow: auto;
-    }
-
-    main>div {
-        margin-top: 16%;
     }
 
 }
@@ -237,97 +265,35 @@
         display: flex !important;
     }
 
-
-    main {
-        margin: 0;
-        width: 100%;
-        height: 82.8%;
-        padding: unset;
-        left: unset;
-        top: unset;
-        overflow: auto;
-    }
-
-    .board_wrapper {
-        height: 100%;
-        max-width: unset;
-        display: flex;
-        justify-content: center;
-    }
-
     .headline {
-        position: unset;
-        width: 96.6%;
-        padding: 0;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: start;
-        padding-top: 40px;
+    }
+
+    .headline_mobile_wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .headline_mobile_wrapper button {
+        display: flex !important;
+        width: 10%;
+        padding: 0;
     }
 
     .find_add {
         width: 100%;
-    }
-
-    .find_add button {
-        position: absolute;
-        top: 50px;
-        left: 88%;
-        width: 10%;
-    }
-
-    .find_add button span {
-        display: none;
+        flex-direction: column;
+        margin-top: 5%;
     }
 
     .find_task_input {
         width: 100% !important;
     }
 
-
-    content {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        flex-direction: column;
-        align-items: center;
+    .find_add>button {
+        display: none;
     }
-
-    .board_column {
-        width: 96.6%;
-        align-items: center;
-        max-height: unset;
-    }
-
-    .board_column_head {
-        width: 100%;
-    }
-
-    .card_column {
-        min-height: unset;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 3.4%;
-        overflow: auto;
-    }
-
-
-    .task_card {
-        width: 46%;
-        flex: 0 0 46%;
-        max-width: 46%;
-        box-sizing: border-box;
-        height: 95%;
-        margin: 0;
-    }
-
-    .task_content {
-        font-size: 0.875rem;
-    }
-
 }
