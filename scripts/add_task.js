@@ -75,7 +75,7 @@ async function createTaskOnSide() {
     if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
         await postToDatabase("tasks", taskDetails);
         showSuccessAddedTask();
-       
+
     } else {
         validationHandling();
     }
@@ -126,9 +126,18 @@ function validationHandling() {
 function showSuccessAddedTask() {
     const successContent = document.querySelector('.added_success_task_wrapper')
     successContent.classList.remove('d_none');
-    setTimeout(() => {
-        window.location.href = './board.html';
-    }, 2000);
+    if (window.location.pathname.endsWith('addtask.html')) {
+        setTimeout(() => {
+            window.location.href = './board.html';
+        }, 2000);
+    } else {
+        setTimeout(async () => {
+            successContent.classList.add('d_none');
+            await loadTasks();
+            refreshBoard();
+
+        }, 2000);
+    }
 }
 
 async function renderContacts() {

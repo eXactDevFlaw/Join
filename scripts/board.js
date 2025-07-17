@@ -38,7 +38,7 @@ async function loadTasks() {
     let dataFromDatabase = await getTasksFromDatabase()
     if (dataFromDatabase) {
         dataPool = [];
-        rawTasksData = []; 
+        rawTasksData = [];
         rawTasksData = Object.entries(dataFromDatabase)
     }
     if (rawTasksData) {
@@ -120,7 +120,7 @@ function searchTaskOnBoard() {
                 let taskName = card.getAttribute('taskName').toLowerCase();
                 let taskDescription = card.querySelector('#task-content').innerHTML.toLowerCase();
                 searchTaskName(taskName, searchInput, card, taskDescription);
-                
+
             })
         })
         checkColumnContent()
@@ -341,7 +341,10 @@ function prepareDeleteTask() {
     deleteTask.addEventListener("click", async function () {
         let taskKey = this.getAttribute("taskname");
         await deleteFromDatabase("tasks/" + taskKey);
-        location.reload();
+        document.getElementById("task-overlay").classList.add("d_none");
+        document.getElementById("task-details").classList.add("d_none");
+        await loadTasks();
+        refreshBoard();
     })
 }
 
