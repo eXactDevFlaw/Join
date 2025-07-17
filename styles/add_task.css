@@ -226,7 +226,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 50%;
 }
 
-
 .close_add_task:hover {
   cursor: pointer;
   background-color: rgba(238, 238, 238, 1);
@@ -365,10 +364,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-ul {
-  padding: 0;
-}
-
 .subtask_edit_input input {
   height: 32px;
   font-size: 16px;
@@ -420,18 +415,11 @@ ul {
   animation: slideIn 0.5s ease forwards;
 }
 
-@keyframes slideIn {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 .added_success_task_content img {
   width: 100%;
   height: auto;
+}
+
+#category-list{
+  box-shadow: 0px 4px 14px 3px rgba(0, 0, 0, 0.04); 
 }

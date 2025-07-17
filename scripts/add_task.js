@@ -370,3 +370,10 @@ function editCheck(index) {
     subTasks[index].title = editCheckValue;
     renderSubTasks()
 }
+
+function clearTask(){
+   let taskEntry = document.getElementById("add-task-entry");
+   taskEntry.innerHTML = addTaskTemplate();
+   setPriority("medium");
+   selectedContacts = []; 
+}

@@ -161,7 +161,7 @@ function addTaskTemplate() {
         <p class="margin_0">This field is required</p>
       </div>
       <div class="d_flex_center_row justify_between margin_0 add_task_button_container">
-        <button class="btn_white margin_0 add_task_button" onclick="locationReload()">Clear
+        <button class="btn_white margin_0 add_task_button" onclick="clearTask()">Clear
           <div class="close_cross"></div>
         </button>
         <button class="btn_dark margin_0 add_task_button" onclick="createTask()">Create Task
