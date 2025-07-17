@@ -179,6 +179,13 @@ content{
     flex-direction: column;
 }
 
+.card_label_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .card_label{
     width: fit-content;
     color: rgba(255, 255, 255, 1);
@@ -186,6 +193,10 @@ content{
     padding: 4px 16px 4px 16px;
     border-radius: 8px;
     gap: 10px;
+}
+
+.mobile_move_btn {
+    display: none;
 }
 
 .task_description{

@@ -200,10 +200,6 @@
         justify-content: space-evenly;
         width: 95%;
     }
-
-    .textarea_wrapper {
-        z-index: -1;
-    }
 }
 
 @media (max-width: 640px) and (orientation: portrait) {

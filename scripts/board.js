@@ -240,6 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     checkColumnContent()
     searchTaskOnBoard()
     taskDetailsRef()
+    mobileTaskMove()
 })
 
 function taskDetailsRef() {

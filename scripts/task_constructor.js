@@ -159,6 +159,9 @@ class TaskClass {
     }
 
     createTaskCategoryContainer() {
+        const cardLableWrapper = document.createElement('div')
+        cardLableWrapper.className = 'card_label_wrapper'
+
         const cardLabelDiv = document.createElement('div');
         cardLabelDiv.className = 'card_label margin_0';
         switch (this.taskCategory) {
@@ -168,8 +171,20 @@ class TaskClass {
             default:
                 cardLabelDiv.style.backgroundColor = 'rgba(0, 56, 255, 1)'
                 break;
-        }
+        } 
         cardLabelDiv.innerText = this.taskCategory;
-        return cardLabelDiv
+
+        const cardMoveBtnImg = document.createElement('img')
+        cardMoveBtnImg.src = './assets/icons/move_btn_mobile.svg'
+        cardMoveBtnImg.className = 'mobile_move_btn'
+
+        cardLableWrapper.append(cardLabelDiv, cardMoveBtnImg)        
+        return cardLableWrapper
     }
+
+    createMobileNavbar() {
+        const mobileNavbarDiv = document.createElement('div');
+        mobileNavbarDiv.className = 'mobile_navbar'
+    }
+
 }

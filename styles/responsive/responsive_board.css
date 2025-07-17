@@ -127,9 +127,14 @@
         overflow: auto;
     }
 
+    .mobile_move_btn {
+        display: flex;
+        width: 10%;
+        height: auto;
+    }
+
     .task_card {
-        width: 46%;
-        flex: 0 0 46%;
+        flex: 0 0 100%;
         max-width: 250px;
         box-sizing: border-box;
         height: 95%;
@@ -161,7 +166,6 @@
     body {
         height: 100vh;
         width: 100vw;
-        overflow: hidden;
     }
 
     header {
@@ -280,6 +284,7 @@
     .headline_mobile_wrapper button {
         display: flex !important;
         width: 10%;
+        height: 80%;
         padding: 0;
     }
 
@@ -295,5 +300,46 @@
 
     .find_add>button {
         display: none;
+    }
+
+    .task_detail_entry {
+        width: 95%;
+        max-height: 80%;
+        padding: 5%;
+    }
+
+    .category_detail, 
+    .task_detail_description,
+    .detail_head,
+    .assigned_contact,
+    .title_input,
+    .input_task_detail,
+    .input_textarea_detail,
+    .date,
+    .priority_button
+      {
+        font-size: 1rem;
+    }
+
+    .priority_button_container {
+        min-height: 200px;
+        flex-direction: column;
+    }
+
+    .input_assigned_to {
+        width: 100% !important;
+        font-size: 1rem;
+    }
+
+    #assigned-contacts-preview {
+        margin-top: 2%;
+    }
+
+    .input_icon_wrapper {
+        width: 100%;
+    }
+
+    .task_detail_view_footer {
+        height: 100%;
     }
 }
