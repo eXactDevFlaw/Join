@@ -162,8 +162,7 @@ dragRef.forEach(element => {
         element.appendChild(card)
         const [cardIdentifyer] = [...dataPool.filter(item => item.taskName == cardTaskName)]
         cardIdentifyer.taskStatus = element.getAttribute("name");
-        updateOnCardsStatus(cardIdentifyer)
-        checkColumnContent();
+        await updateOnCardsStatus(cardIdentifyer)
         refreshBoard()
     })
 });

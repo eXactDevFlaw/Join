@@ -23,7 +23,8 @@ class TaskClass {
             this.createTaskCategoryContainer(),
             this.creatTaskDescriptionContainer(),
             this.createSubTasksContainer(),
-            this.createFooterContainer()
+            this.createFooterContainer(),
+            this.createMobileNavbar(),
         );
         cardDiv.append(taskContentDiv);
 
@@ -171,20 +172,41 @@ class TaskClass {
             default:
                 cardLabelDiv.style.backgroundColor = 'rgba(0, 56, 255, 1)'
                 break;
-        } 
+        }
         cardLabelDiv.innerText = this.taskCategory;
 
         const cardMoveBtnImg = document.createElement('img')
         cardMoveBtnImg.src = './assets/icons/move_btn_mobile.svg'
         cardMoveBtnImg.className = 'mobile_move_btn'
 
-        cardLableWrapper.append(cardLabelDiv, cardMoveBtnImg)        
+        cardLableWrapper.append(cardLabelDiv, cardMoveBtnImg)
         return cardLableWrapper
     }
 
     createMobileNavbar() {
         const mobileNavbarDiv = document.createElement('div');
-        mobileNavbarDiv.className = 'mobile_navbar'
+        mobileNavbarDiv.className = 'mobile_navbar d_none';
+
+        const mobileNavbarHead = document.createElement('h6');
+        mobileNavbarHead.innerText = "Move to";
+
+        const statuses = [
+            { text: "To do", value: "todo" },
+            { text: "In progress", value: "in_progress" },
+            { text: "Await feedback", value: "await_feedback" },
+            { text: "Done", value: "done" }
+        ];
+
+        mobileNavbarDiv.appendChild(mobileNavbarHead);
+        statuses.forEach(status => {
+            if (this.taskStatus !== status.value) { 
+                const statusElement = document.createElement('p');
+                statusElement.textContent = status.text;
+                mobileNavbarDiv.appendChild(statusElement);
+            }
+        });
+
+        return mobileNavbarDiv;
     }
 
 }

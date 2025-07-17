@@ -157,6 +157,7 @@ content{
 }
 
 .task_card{
+    position: relative;
     margin-bottom: 10px;
     width: 252px;
     background-color: rgba(255, 255, 255, 1);
@@ -197,6 +198,31 @@ content{
 
 .mobile_move_btn {
     display: none;
+}
+
+.mobile_navbar {
+    color: white;
+    position: absolute;
+    top: 6%;
+    left: 65%;
+    background: rgba(42, 54, 71, 1);
+    min-width: 130px;
+    min-height: 110px;
+    border-radius: 0px 20px 20px 20px;
+    padding: 2%;
+    z-index: 1;
+}
+
+.mobile_navbar h6 {
+    font-size: 1rem;
+}
+
+.mobile_navbar p {
+    font-size: 0.875rem;
+}
+
+.mobile_navbar p:hover {
+    background: rgba(9, 25, 49, 1);
 }
 
 .task_description{
