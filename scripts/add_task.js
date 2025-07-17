@@ -63,7 +63,7 @@ function setPriority(level) {
     taskDetails.priority = level;
 }
 
-async function createTask() {
+async function createTaskOnSide() {
     taskDetails.title = document.getElementById('title-input-overlay').value;
     taskDetails.description = document.getElementById('description-input-overlay').value;
     taskDetails.dueDate = document.getElementById('datepicker').value;
@@ -76,6 +76,24 @@ async function createTask() {
         await postToDatabase("tasks", taskDetails);
         showSuccessAddedTask();
        
+    } else {
+        validationHandling();
+    }
+}
+
+async function createTask() {
+    taskDetails.title = document.getElementById('title-input-overlay').value;
+    taskDetails.description = document.getElementById('description-input-overlay').value;
+    taskDetails.dueDate = document.getElementById('datepicker').value;
+    taskDetails.assignedTo = selectedContacts;
+    taskDetails.category = document.getElementById("selected-category").innerHTML;
+    taskDetails.subtasks = subTasks;
+    taskDetails.status = "todo";
+
+    if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
+        await postToDatabase("tasks", taskDetails);
+        showSuccessAddedTask();
+        closeTaskOverlay();
     } else {
         validationHandling();
     }
