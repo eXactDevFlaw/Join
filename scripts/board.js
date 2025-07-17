@@ -36,10 +36,10 @@ const emptyRefs = {
 
 async function loadTasks() {
     let dataFromDatabase = await getTasksFromDatabase()
-    if (dataFromDatabase){
+    if (dataFromDatabase) {
         rawTasksData = Object.entries(dataFromDatabase)
     }
-    if(rawTasksData){
+    if (rawTasksData) {
         rawTasksData.forEach((singleTask) => {
             let [key, data] = [...singleTask]
             dataPool.push(new TaskClass(key, data));
@@ -60,7 +60,7 @@ function renderAllTasks() {
             e.dataTransfer.setData('text/plain', item.taskName);
         })
         pushCardsToCardsPool(item.taskStatus, htmlel)
-        taskDetailsRef ()
+        taskDetailsRef()
     });
 }
 
@@ -119,16 +119,30 @@ function searchTaskOnBoard() {
         Object.values(cardPools).forEach((cardList) => {
             cardList.forEach((card) => {
                 let taskName = card.getAttribute('taskName').toLowerCase();
-                if (taskName.includes(searchInput)) {
-                    card.classList.remove('d_none');
-                } else {
-                    card.classList.add('d_none')
-                }
+                let taskDescription = card.querySelector('#task-content').innerHTML.toLowerCase();
+                searchTaskName(taskName, searchInput, card, taskDescription);
+                
             })
         })
         checkColumnContent()
     })
 };
+
+function searchTaskName(taskName, searchInput, card, taskDescription) {
+    if (taskName.includes(searchInput)) {
+        card.classList.remove('d_none');
+    } else {
+        searchTaskDescription(taskName, searchInput, card, taskDescription);
+    }
+}
+
+function searchTaskDescription(taskName, searchInput, card, taskDescription) {
+    if (taskDescription.includes(searchInput)) {
+        card.classList.remove('d_none');
+    } else {
+        card.classList.add('d_none')
+    }
+}
 
 dragRef.forEach(element => {
     element.addEventListener('dragover', (e) => {
@@ -225,27 +239,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderAllTasks()
     checkColumnContent()
     searchTaskOnBoard()
-    taskDetailsRef ()
+    taskDetailsRef()
 })
 
-function taskDetailsRef (){
+function taskDetailsRef() {
     const taskCards = document.querySelectorAll(".task_card");
     taskCards.forEach(task => {
         task.addEventListener("click", function () {
             let taskname = this.getAttribute("taskname")
             dataPool.forEach((task) => {
-                if (task.taskName === taskname){
+                if (task.taskName === taskname) {
                     data = task;
-                    if (data.taskSubTasks === undefined){
+                    if (data.taskSubTasks === undefined) {
                         subTasks = [];
                         data.taskSubTasks = subTasks;
                     }
-                     renderTaskDetailView(data);
+                    renderTaskDetailView(data);
                 }
             })
         });
     });
-   
+
 }
 
 function renderTaskDetailView(data) {
@@ -253,9 +267,9 @@ function renderTaskDetailView(data) {
     taskDetail.innerHTML = "";
     taskDetail.innerHTML = taskDetailViewTemplate(data);
 
-     const taskCategory = document.getElementById("task-category");
-       if (data.taskCategory === "Technical Task"){
-        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)'; 
+    const taskCategory = document.getElementById("task-category");
+    if (data.taskCategory === "Technical Task") {
+        taskCategory.style.backgroundColor = 'rgba(31, 215, 193, 1)';
     } else {
         taskCategory.style.backgroundColor = 'rgba(0, 56, 255, 1)'
     }
@@ -267,30 +281,30 @@ function renderTaskDetailView(data) {
     prepareEditTask()
 }
 
-function renderContactsDetailView(data){
+function renderContactsDetailView(data) {
     const assignedTo = document.getElementById("assigned-contacts");
-    if (data.taskData.assignedTo){
-          data.taskData.assignedTo.forEach((contact) => {
-        assignedTo.innerHTML += `
+    if (data.taskData.assignedTo) {
+        data.taskData.assignedTo.forEach((contact) => {
+            assignedTo.innerHTML += `
         <div class="width_100 assigned_contact"> 
         <div class="assigned_circle margin_0" id="${contact}"}></div><div class="margin_0 ">${contact}</div>
         </div>`;
-        const profileBadge = document.getElementById(contact);
-        profileBadge.style.backgroundColor = stringToColor(contact);
-        profileBadge.innerText = getUserCapitalInitials(contact);
-    })
+            const profileBadge = document.getElementById(contact);
+            profileBadge.style.backgroundColor = stringToColor(contact);
+            profileBadge.innerText = getUserCapitalInitials(contact);
+        })
     }
 }
 
 
-function renderSubTasksDetailView(data){
+function renderSubTasksDetailView(data) {
     subTasks = [];
     subTasks = data.taskSubTasks;
     let subTasksRef = document.getElementById("subTasks-detail-view");
     subTasksRef.innerHTML = "";
-    if (subTasks){
+    if (subTasks) {
         Object.values(subTasks).forEach((subTask, index) => {
-            if (subTask.status === "open"){
+            if (subTask.status === "open") {
                 subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
                 <div class="checkbox-wrapper" id="checkbox${index}"><img src="./assets/icons/checkbox.svg" alt="checkbox" onclick="checkSubTask(${index})"></div>${subTask.title}</div>`;
             } else {
@@ -298,7 +312,7 @@ function renderSubTasksDetailView(data){
                 <div class="checkbox-wrapper" id="checkbox-active${index}"><img src="./assets/icons/checkbox_active.svg" alt="checkbox_active" onclick="unCheckSubTask(${index})"></div>${subTask.title}</div>`;
             }
         })
-    }   
+    }
 }
 
 function openTaskDetails() {
@@ -312,7 +326,7 @@ function openTaskDetails() {
 async function checkSubTask(index) {
     data.taskData.subtasks[index].status = "closed";
     pushData = data.taskData;
-    taskKey =  data.taskKey;
+    taskKey = data.taskKey;
     renderSubTasksDetailView(data);
     await updateOnDatabase("tasks/" + taskKey, pushData);
 }
@@ -340,33 +354,33 @@ function prepareEditTask() {
     })
 }
 
-function renderTaskDetailEdit(){
+function renderTaskDetailEdit() {
     const taskDetail = document.getElementById('task-details');
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
     setPriority(data.taskPriority);
-    selectedContacts = data.taskData.assignedTo; 
-    if (selectedContacts === undefined){
+    selectedContacts = data.taskData.assignedTo;
+    if (selectedContacts === undefined) {
         selectedContacts = [];
     }
     prepareRenderContacts();
     renderSelectedCircles();
 }
 
-function prepareUpdateTask(){
-    const checkEditTask = document.getElementById("check-edit-task"); 
+function prepareUpdateTask() {
+    const checkEditTask = document.getElementById("check-edit-task");
     checkEditTask.addEventListener("click", function () {
         let taskKey = this.getAttribute("taskname");
-            dataPool.forEach((task) => {
-                if (task.taskKey === taskKey){
-                    updateTask(task);
-                }
-            })
+        dataPool.forEach((task) => {
+            if (task.taskKey === taskKey) {
+                updateTask(task);
+            }
+        })
         refreshBoard()
     })
 }
 
-async function updateTask(data){
+async function updateTask(data) {
     console.log(data)
     console.log(rawTasksData)
     let rawPrio = Object.values(taskDetails)
