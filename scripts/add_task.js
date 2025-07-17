@@ -75,7 +75,7 @@ async function createTask() {
     if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
         await postToDatabase("tasks", taskDetails);
         showSuccessAddedTask();
-        closeTaskOverlay();
+       
     } else {
         validationHandling();
     }
