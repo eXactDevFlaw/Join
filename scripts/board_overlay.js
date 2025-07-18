@@ -103,3 +103,139 @@ function addSelectedCircles() {
             preview.appendChild(circle);
         });
 }
+
+/**
+ * Opens the task detail view overlay with animation.
+ */
+function openTaskDetails() {
+    document.getElementById("task-overlay").classList.remove("d_none");
+    let task_detail_entry = document.getElementById("task-details");
+    task_detail_entry.classList.remove("d_none");
+    void task_detail_entry.offsetWidth;
+    task_detail_entry.classList.add("show");
+}
+
+/**
+ * Marks a subtask as closed and updates the database.
+ * @async
+ * @param {number} index - Index of the subtask.
+ */
+async function checkSubTask(index) {
+    data.taskData.subtasks[index].status = "closed";
+    pushData = data.taskData;
+    taskKey = data.taskKey;
+    renderSubTasksDetailView(data);
+    await updateOnDatabase("tasks/" + taskKey, pushData);
+}
+
+/**
+ * Reopens a closed subtask and refreshes the board.
+ * @param {number} index - Index of the subtask.
+ */
+async function unCheckSubTask(index) {
+    data.taskData.subtasks[index].status = "open";
+    pushData = data.taskData;
+    taskKey = data.taskKey;
+    renderSubTasksDetailView(data);
+    await updateOnDatabase("tasks/" + taskKey, pushData);
+}
+
+/**
+ * Prepares the delete functionality for a task in the detail view.
+ */
+function prepareDeleteTask() {
+    const deleteTask = document.getElementById("deleteTask");
+    deleteTask.addEventListener("click", async function () {
+        let taskKey = this.getAttribute("taskname");
+        await deleteFromDatabase("tasks/" + taskKey);
+        document.getElementById("task-overlay").classList.add("d_none");
+        document.getElementById("task-details").classList.add("d_none");
+        await loadTasks();
+        refreshBoard();
+    })
+}
+
+/**
+ * Prepares the edit functionality for a task in the detail view.
+ */
+function prepareEditTask() {
+    const editTask = document.getElementById("edit-Task");
+    editTask.addEventListener("click", function () {
+        renderTaskDetailEdit();
+        prepareUpdateTask();
+    })
+}
+
+/**
+ * Renders the editable form for task details.
+ */
+function renderTaskDetailEdit() {
+    const taskDetail = document.getElementById('task-details');
+    taskDetail.innerHTML = taskDetailEditTemplate(data);
+    renderSubTasks();
+    setPriority(data.taskPriority);
+    selectedContacts = data.taskData.assignedTo;
+    if (selectedContacts === undefined) {
+        selectedContacts = [];
+    }
+    prepareRenderContacts();
+    renderSelectedCircles();
+}
+
+/**
+ * Adds listener to confirm and update edited task details.
+ */
+function prepareUpdateTask() {
+    const checkEditTask = document.getElementById("check-edit-task");
+    checkEditTask.addEventListener("click", function () {
+        let taskKey = this.getAttribute("taskname");
+        dataPool.forEach((task) => {
+            if (task.taskKey === taskKey) {
+                updateTask(task);
+            }
+        })
+        refreshBoard()
+    })
+}
+
+/**
+ * Updates the task data from the edit form and sends it to the database.
+ * @async
+ * @param {Object} data - Task object to update.
+ */
+async function updateTask(data) {
+    let rawPrio = Object.values(taskDetails)
+    data.taskData.title = document.getElementById('title-input-overlay').value;
+    data.taskData.description = document.getElementById('description-input-overlay').value;
+    data.taskData.dueDate = document.getElementById('datepicker').value;
+    data.taskData.assignedTo = selectedContacts;
+    data.taskData.subtasks = subTasks;
+    data.taskData.priority = rawPrio[0]
+    pushData = data.taskData;
+    taskKey = data.taskKey;
+    await updateOnDatabase("tasks/" + taskKey, pushData);
+    renderTaskDetailView(data);
+    refreshBoard();
+}
+
+/**
+ * Renders contact chips for assigned contacts in detail view.
+ * @param {Object} data - Task data object.
+ */
+function renderSubTasksDetailView(data) {
+    subTasks = [];
+    subTasks = data.taskSubTasks;
+    let subTasksRef = document.getElementById("subTasks-detail-view");
+    subTasksRef.innerHTML = "";
+    if (subTasks) {
+        Object.values(subTasks).forEach((subTask, index) => {
+            if (subTask.status === "open") {
+                subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
+                <div class="checkbox-wrapper" id="checkbox${index}"><img src="./assets/icons/checkbox.svg" alt="checkbox" onclick="checkSubTask(${index})"></div>${subTask.title}</div>`;
+            } else {
+                subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
+                <div class="checkbox-wrapper" id="checkbox-active${index}"><img src="./assets/icons/checkbox_active.svg" alt="checkbox_active" onclick="unCheckSubTask(${index})"></div>${subTask.title}</div>`;
+            }
+        })
+    }
+}

@@ -1,3 +1,7 @@
+/**
+ * Selects constant and variables that are used for workflow.
+ * @type {NodeListOf<HTMLImageElement>}
+ */
 
 let rawTasksData = [];
 let dataPool = [];
@@ -9,10 +13,6 @@ let cardPools = {
 }
 let data = [];
 
-/**
- * Selects constant and variables that are used for workflow.
- * @type {NodeListOf<HTMLImageElement>}
- */
 const todoRef = document.getElementById('column-todo');
 const todoEmptyRef = document.getElementById('no-tasks-to-do');
 const inProgressRef = document.getElementById('column-in-progress');
@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     checkColumnContent()
     searchTaskOnBoard()
     taskDetailsRef()
+    dragFunction()
 })
 
 /**
@@ -143,14 +144,19 @@ function refreshBoard() {
             })
         }
     });
+    clearCardPools();
+    renderAllTasks();
+    checkColumnContent();
+}
 
+/**
+ * Clears all task card pools.
+ */
+function clearCardPools(){
     cardPools.dataToDo = [];
     cardPools.dataInProgress = [];
     cardPools.dataAwaitFeedback = [];
     cardPools.dataDone = [];
-
-    renderAllTasks();
-    checkColumnContent();
 }
 
 /**
@@ -202,8 +208,12 @@ function searchTaskDescription(taskName, searchInput, card, taskDescription) {
     }
 }
 
-
-dragRef.forEach(element => {
+/**
+ * Adds drag and drop event listeners to all columns.
+ * Handles visual feedback and updates task status after drop.
+ */
+function dragFunction(){
+    dragRef.forEach(element => {
     element.addEventListener('dragover', (e) => {
         e.preventDefault();
         element.classList.add('hover_dragzone');
@@ -225,8 +235,14 @@ dragRef.forEach(element => {
         await updateOnCardsStatus(cardIdentifyer)
         refreshBoard()
     })
-});
+})
+}
 
+/**
+ * Updates the task status in the database after drag-and-drop.
+ * @async
+ * @param {Object} cardIdentifyer - Task object to update.
+ */
 const updateOnCardsStatus = async (cardIdentifyer) => {
     if (cardIdentifyer) {
         let taskFromDB = await loadCurrentTaskFromDatabase(cardIdentifyer.taskKey);
@@ -235,6 +251,12 @@ const updateOnCardsStatus = async (cardIdentifyer) => {
     }
 }
 
+/**
+ * Loads the current task from the database.
+ * @async
+ * @param {string} taskKey - Task identifier key.
+ * @returns {Promise<Object>} Task data object.
+ */
 async function loadCurrentTaskFromDatabase(taskKey) {
     try {
         let response = await fetch(FIREBASE_URL + "tasks/" + taskKey + ".json");
@@ -245,6 +267,13 @@ async function loadCurrentTaskFromDatabase(taskKey) {
     }
 }
 
+/**
+ * Updates task data in the database.
+ * @async
+ * @param {string} taskKey - Task identifier key.
+ * @param {Object} data - Task data to update.
+ * @returns {Promise<Object>} Response from database.
+ */
 async function updateTasksOnDatabase(taskKey, data) {
     let response = await fetch(FIREBASE_URL + "tasks/" + taskKey + ".json", {
         method: "PUT",
@@ -257,9 +286,9 @@ async function updateTasksOnDatabase(taskKey, data) {
 }
 
 /**
- * Generates a color string from a string input
- * @param {string} str
- * @returns {string}
+ * Generates a color string based on a string input.
+ * @param {string} str - Input string.
+ * @returns {string} HSL color string.
  */
 function stringToColor(str) {
     let hash = 0;
@@ -268,7 +297,9 @@ function stringToColor(str) {
 }
 
 /**
- * Function to set capital letters for usercontrol
+ * Extracts and returns the capital initials from a name string.
+ * @param {string} name - Full name of the user.
+ * @returns {string} Initials.
  */
 function getUserCapitalInitials(name) {
     if (!name || typeof name !== "string") return "";
@@ -279,9 +310,11 @@ function getUserCapitalInitials(name) {
 }
 
 /**
- * Checks string and whitespace
- * @param {string} str 
- * */
+ * Cuts the string at the next space after the given index.
+ * @param {string} str - String to format.
+ * @param {number} iterator - Index to start checking from.
+ * @returns {string} Formatted string.
+ */
 function formatDescription(str, iterator) {
     const nextSpace = str.indexOf(" ", iterator);
     if (nextSpace === -1) {
@@ -290,9 +323,9 @@ function formatDescription(str, iterator) {
     return str.slice(0, nextSpace);
 }
 
-
-
-
+/**
+ * Adds click listeners to all task cards for showing details.
+ */
 function taskDetailsRef() {
     const taskCards = document.querySelectorAll(".task_card");
     taskCards.forEach(taskCard => {
@@ -306,6 +339,10 @@ function taskDetailsRef() {
     });
 }
 
+/**
+ * Handles click event on a task card and displays task details.
+ * @param {HTMLElement} cardElement - Clicked task card.
+ */
 function handleTaskCardClick(cardElement) {
     let taskname = cardElement.getAttribute("taskname");
     dataPool.forEach((task) => {
@@ -320,6 +357,10 @@ function handleTaskCardClick(cardElement) {
     });
 }
 
+/**
+ * Renders the detailed view of a task in the overlay.
+ * @param {Object} data - Task data object.
+ */
 function renderTaskDetailView(data) {
     const taskDetail = document.getElementById('task-details');
     taskDetail.innerHTML = "";
@@ -340,6 +381,10 @@ function renderTaskDetailView(data) {
     setupMobileTaskMove()
 }
 
+/**
+ * Renders contact chips for assigned contacts in detail view.
+ * @param {Object} data - Task data object.
+ */
 function renderContactsDetailView(data) {
     const assignedTo = document.getElementById("assigned-contacts");
     if (data.taskData.assignedTo) {
@@ -355,106 +400,3 @@ function renderContactsDetailView(data) {
     }
 }
 
-
-function renderSubTasksDetailView(data) {
-    subTasks = [];
-    subTasks = data.taskSubTasks;
-    let subTasksRef = document.getElementById("subTasks-detail-view");
-    subTasksRef.innerHTML = "";
-    if (subTasks) {
-        Object.values(subTasks).forEach((subTask, index) => {
-            if (subTask.status === "open") {
-                subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
-                <div class="checkbox-wrapper" id="checkbox${index}"><img src="./assets/icons/checkbox.svg" alt="checkbox" onclick="checkSubTask(${index})"></div>${subTask.title}</div>`;
-            } else {
-                subTasksRef.innerHTML += `<div class="margin_0 subtask_detail_view">
-                <div class="checkbox-wrapper" id="checkbox-active${index}"><img src="./assets/icons/checkbox_active.svg" alt="checkbox_active" onclick="unCheckSubTask(${index})"></div>${subTask.title}</div>`;
-            }
-        })
-    }
-}
-
-function openTaskDetails() {
-    document.getElementById("task-overlay").classList.remove("d_none");
-    let task_detail_entry = document.getElementById("task-details");
-    task_detail_entry.classList.remove("d_none");
-    void task_detail_entry.offsetWidth;
-    task_detail_entry.classList.add("show");
-}
-
-async function checkSubTask(index) {
-    data.taskData.subtasks[index].status = "closed";
-    pushData = data.taskData;
-    taskKey = data.taskKey;
-    renderSubTasksDetailView(data);
-    await updateOnDatabase("tasks/" + taskKey, pushData);
-}
-
-async function unCheckSubTask(index) {
-    data.taskData.subtasks[index].status = "open";
-    pushData = data.taskData;
-    taskKey = data.taskKey;
-    renderSubTasksDetailView(data);
-    await updateOnDatabase("tasks/" + taskKey, pushData);
-}
-
-function prepareDeleteTask() {
-    const deleteTask = document.getElementById("deleteTask");
-    deleteTask.addEventListener("click", async function () {
-        let taskKey = this.getAttribute("taskname");
-        await deleteFromDatabase("tasks/" + taskKey);
-        document.getElementById("task-overlay").classList.add("d_none");
-        document.getElementById("task-details").classList.add("d_none");
-        await loadTasks();
-        refreshBoard();
-    })
-}
-
-function prepareEditTask() {
-    const editTask = document.getElementById("edit-Task");
-    editTask.addEventListener("click", function () {
-        renderTaskDetailEdit();
-        prepareUpdateTask();
-    })
-}
-
-function renderTaskDetailEdit() {
-    const taskDetail = document.getElementById('task-details');
-    taskDetail.innerHTML = taskDetailEditTemplate(data);
-    renderSubTasks();
-    setPriority(data.taskPriority);
-    selectedContacts = data.taskData.assignedTo;
-    if (selectedContacts === undefined) {
-        selectedContacts = [];
-    }
-    prepareRenderContacts();
-    renderSelectedCircles();
-}
-
-function prepareUpdateTask() {
-    const checkEditTask = document.getElementById("check-edit-task");
-    checkEditTask.addEventListener("click", function () {
-        let taskKey = this.getAttribute("taskname");
-        dataPool.forEach((task) => {
-            if (task.taskKey === taskKey) {
-                updateTask(task);
-            }
-        })
-        refreshBoard()
-    })
-}
-
-async function updateTask(data) {
-    let rawPrio = Object.values(taskDetails)
-    data.taskData.title = document.getElementById('title-input-overlay').value;
-    data.taskData.description = document.getElementById('description-input-overlay').value;
-    data.taskData.dueDate = document.getElementById('datepicker').value;
-    data.taskData.assignedTo = selectedContacts;
-    data.taskData.subtasks = subTasks;
-    data.taskData.priority = rawPrio[0]
-    pushData = data.taskData;
-    taskKey = data.taskKey;
-    await updateOnDatabase("tasks/" + taskKey, pushData);
-    renderTaskDetailView(data);
-    refreshBoard();
-}
