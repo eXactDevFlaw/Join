@@ -390,10 +390,12 @@ async function checkSubTask(index) {
     await updateOnDatabase("tasks/" + taskKey, pushData);
 }
 
-function unCheckSubTask(index) {
-    data.taskSubTasks[index].status = "open";
-    renderSubTasksDetailView(data)
-    refreshBoard()
+async function unCheckSubTask(index) {
+    data.taskData.subtasks[index].status = "open";
+    pushData = data.taskData;
+    taskKey = data.taskKey;
+    renderSubTasksDetailView(data);
+    await updateOnDatabase("tasks/" + taskKey, pushData);
 }
 
 function prepareDeleteTask() {

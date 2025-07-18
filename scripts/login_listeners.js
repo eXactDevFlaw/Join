@@ -222,16 +222,3 @@ function setupHoverPrivacyCheckboxListener(){
     labelHover.style.background = null;
   })
 }
-
-// Initialization after document is loaded
-document.addEventListener('DOMContentLoaded', function () {
-  runFadeInOut();
-  setUserIsLoggedOut()
-  validateSigninForm();
-  setupLoginListeners();
-  setupSigninListeners();
-  setupToggleListeners();
-  setupPasswordToggle();
-  setupPrivacyCheckboxListener();
-  setupHoverPrivacyCheckboxListener();
-});
