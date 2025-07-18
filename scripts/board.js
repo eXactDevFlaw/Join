@@ -165,7 +165,6 @@ function clearCardPools(){
 function searchTaskOnBoard() {
     searchRef.addEventListener('input', (e) => {
         let searchInput = e.target.value.toLowerCase().trim();
-
         Object.values(cardPools).forEach((cardList) => {
             cardList.forEach((card) => {
                 let taskName = card.getAttribute('taskName').toLowerCase();

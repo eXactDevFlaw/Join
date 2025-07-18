@@ -43,7 +43,6 @@ function closeTaskOverlay() {
     if (entry) {
         entry.classList.remove("show");
     }
-
     task_detail_entry.classList.remove("show");
     setTimeout(() => {
         entry.classList.add("d_none");

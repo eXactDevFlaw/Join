@@ -276,31 +276,7 @@ function createContactRow(contact) {
     return row;
 }
 
-/**
- * Returns HTML for a contact assignment row.
- * @param {string} color
- * @param {string} initials
- * @param {boolean} sel - Selected state.
- * @param {string} contactName
- * @returns {string}
- */
-function creatContactsHtml(color, initials, sel, contactName) {
-    return `
-                <div class="assign_contact_left">
-                  <div class="contact_circle" style="background-color:${color}">
-                    ${initials}
-                  </div>
-                  <span class="assign_contact_name" style="color:${sel ? 'white' : ''}">
-                    ${contactName}
-                  </span>
-                </div>
-                <div class="assign_contact_checkbox">
-                  <img src="./assets/icons/check.svg"
-                       class="check_icon"
-                       style="display:${sel ? 'block' : 'none'}" />
-                </div>
-            `;
-}
+
 
 /**
  * Renders up to 4 selected contact badges, and a 'More..' badge if >4.
@@ -435,7 +411,6 @@ function clearTask() {
 function clearAddTask() {
     document.getElementById('title-input-overlay').value = "";
     description = document.getElementById('description-input-overlay').value = "";
-
     taskDetails.dueDate = document.getElementById('datepicker').value = "";
     taskDetails.category = document.getElementById("selected-category").innerHTML = "Select task category";
     subTasks = [];
