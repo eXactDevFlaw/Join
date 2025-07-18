@@ -195,21 +195,25 @@ class TaskClass {
         const mobileNavbarHead = document.createElement('h6');
         mobileNavbarHead.innerText = "Move to";
 
+        const navItemsDiv = document.createElement('div');
+        navItemsDiv.className = 'mobile_navbar_items';
+
         const statuses = [
             { text: "To do", value: "todo" },
-            { text: "In progress", value: "in_progress" },
-            { text: "Await feedback", value: "await_feedback" },
+            { text: "In progress", value: "in progress" },
+            { text: "Await feedback", value: "await feedback" },
             { text: "Done", value: "done" }
         ];
 
-        mobileNavbarDiv.appendChild(mobileNavbarHead);
         statuses.forEach(status => {
             if (this.taskStatus !== status.value) { 
                 const statusElement = document.createElement('p');
                 statusElement.textContent = status.text;
-                mobileNavbarDiv.appendChild(statusElement);
+                navItemsDiv.appendChild(statusElement);
             }
         });
+
+        mobileNavbarDiv.append(mobileNavbarHead, navItemsDiv);
 
         return mobileNavbarDiv;
     }

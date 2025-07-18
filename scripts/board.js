@@ -403,8 +403,6 @@ async function updateTask(data) {
     pushData = data.taskData;
     taskKey = data.taskKey;
     await updateOnDatabase("tasks/" + taskKey, pushData);
-    // closeTaskOverlay();
-    // openTaskDetails();
     renderTaskDetailView(data);
     refreshBoard();
 }
