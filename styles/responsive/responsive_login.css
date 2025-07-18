@@ -4,9 +4,22 @@
         height: 100vh;
     }
 
-    .login_main,
+    .login_main {
+        width: 95%;
+        height: 60%;
+    }
     .signin_main {
         width: 90%;
+        height: 82%;
+    }
+
+    .login_bottom {
+        top: 92%;
+    }
+
+    .signin_btn_back {
+        top: 10%;
+        left: 10%;
     }
 }
 

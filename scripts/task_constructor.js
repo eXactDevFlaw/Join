@@ -96,19 +96,19 @@ class TaskClass {
 
             // subtask_progress
             const subtaskProgressDiv = document.createElement('div');
-            subtaskProgressDiv.className = 'subtask_progress';
+            
 
             const progressBarDiv = document.createElement('div');
-            
+            progressBarDiv.className = 'progress_bar';
 
             const progressStatusDiv = document.createElement('div');
             progressStatusDiv.className = 'progress_status margin_0';
             this.taskSubTasksProcent = (this.taskSubTasksAmountCompleted / this.taskSubTasksAmount) * 100
             progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`;
             if(this.taskSubTasksProcent < 1){
-                progressBarDiv.className = 'progress_bar d_none';
+                subtaskProgressDiv.className = 'progress_bar v_hidden ';
             } else {
-                progressBarDiv.className = 'progress_bar';
+                subtaskProgressDiv.className = 'subtask_progress';
             }
             progressBarDiv.append(progressStatusDiv);
 

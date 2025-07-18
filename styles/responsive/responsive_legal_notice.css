@@ -82,8 +82,39 @@
         font-size: 0.875rem;
     }
 
+    .nav_login {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        padding-left: 5%;
+    }
+
+    .nav_login>a {
+        width: unset !important;
+    }
+
     .nav_privacy_legal {
-        display: none !important;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+    }
+
+    .pp_ln_active{
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+        height: 90%;
+        padding: 0;
+        border-radius: 16px;
+    }
+
+    .pp_ln {
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        cursor: pointer;
     }
 
 }
@@ -196,10 +227,6 @@
         height: 76px;
         padding: 0;
         font-size: 0.875rem;
-    }
-
-    .nav_privacy_legal {
-        display: none !important;
     }
 
     .small_logout_win {

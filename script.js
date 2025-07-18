@@ -4,6 +4,8 @@
  */
 const navLogin = document.getElementById('nav-login');
 const navBar = document.querySelector('.nav_items');
+const helpDiv = document.querySelector('.help_content');
+const navBarBottomDiv = document.querySelector('.nav_privacy_legal')
 const btnLogOut = document.getElementById('btn-log-out');
 const fadeOutRef = document.querySelectorAll('.fade_out');
 const userInitials = document.getElementById('header-user-short-latters');
@@ -216,10 +218,14 @@ function getUserLogState() {
  */
 function renderNavbar() {
   if (isUserLogin && navLogin && navBar) {
+    helpDiv.classList.remove('v_hidden')
     navLogin.classList.add('d_none');
+    navBarBottomDiv.classList.add('d_none');
     navBar.classList.remove('d_none');
   } else if (!isUserLogin && navLogin && navBar) {
+    helpDiv.classList.add('v_hidden')
     navLogin.classList.remove('d_none');
+    navBarBottomDiv.classList.remove('d_none')
     navBar.classList.add('d_none');
   }
 }
@@ -249,7 +255,9 @@ function getUserInitials() {
   }
 }
 
+function renderLogOutState() {
 
+}
 
 /**
  * Event listener for the DOM to be loaded to start the inital functions
