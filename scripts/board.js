@@ -399,4 +399,3 @@ function renderContactsDetailView(data) {
         })
     }
 }
-

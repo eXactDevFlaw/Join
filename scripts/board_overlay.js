@@ -1,5 +1,8 @@
 let assignedDetailInput = "";
 
+/**
+ * Opens the overlay for adding a new task, or redirects to mobile page.
+ */
 function openTaskOverlay() {
     if (window.innerWidth < 1400) {
         window.location.href = "./addtask.html"
@@ -16,6 +19,9 @@ function openTaskOverlay() {
     }
 }
 
+/**
+ * Prepares closing the contact dropdown when clicking outside.
+ */
 function prepareDropdownToggle() {
     const contactList = document.getElementById("add-task-entry");
     contactList.addEventListener('click', (e) => {
@@ -27,6 +33,9 @@ function prepareDropdownToggle() {
 
 }
 
+/**
+ * Closes the task overlay and resets UI state.
+ */
 function closeTaskOverlay() {
     document.getElementById("task-overlay").classList.add("d_none");
     const entry = document.getElementById("add-task-entry");
@@ -46,9 +55,11 @@ function closeTaskOverlay() {
     }
     refreshBoard();
     selectedContacts = [];
-
 }
 
+/**
+ * Prepares contact rendering for the input field.
+ */
 function prepareRenderContacts() {
     let assignedInput = document.getElementById("assigned-to-dropdown");
     assignedDetailInput = assignedInput;
@@ -63,6 +74,10 @@ function prepareRenderContacts() {
     }
 }
 
+/**
+ * Renders assigned contacts preview in the edit view.
+ * @param {Object} data - Task data object.
+ */
 function renderContactsDetailEditView(data) {
     const assignedTo = document.getElementById("assigned-contacts-preview");
     if (data.taskAssignedTo) {
@@ -78,6 +93,10 @@ function renderContactsDetailEditView(data) {
     }
 }
 
+/**
+ * Toggles the contact selection dropdown.
+ * @param {Event} e - Click event.
+ */
 function toggleAssignedToDropdown(e) {
     prepareRenderContacts();
     e.stopPropagation();
@@ -88,7 +107,9 @@ function toggleAssignedToDropdown(e) {
     arrow.classList.toggle("up");
 };
 
-
+/**
+ * Renders selected contact circles in preview.
+ */
 function addSelectedCircles() {
     const preview = document.getElementById("assigned-contacts-preview");
     preview.innerHTML = "";
