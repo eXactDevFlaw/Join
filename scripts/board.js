@@ -1,3 +1,4 @@
+
 let rawTasksData = [];
 let dataPool = [];
 let cardPools = {
@@ -6,9 +7,12 @@ let cardPools = {
     dataAwaitFeedback: [],
     dataDone: [],
 }
-
 let data = [];
 
+/**
+ * Selects constant and variables that are used for workflow.
+ * @type {NodeListOf<HTMLImageElement>}
+ */
 const todoRef = document.getElementById('column-todo');
 const todoEmptyRef = document.getElementById('no-tasks-to-do');
 const inProgressRef = document.getElementById('column-in-progress');
@@ -34,24 +38,48 @@ const emptyRefs = {
     dataDone: doneEmptyRef,
 };
 
+/**
+ * Event listener for the DOM to be loaded to start the inital functions
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+    getUserLogState()
+    await loadTasks()
+    renderAllTasks()
+    checkColumnContent()
+    searchTaskOnBoard()
+    taskDetailsRef()
+})
+
+/**
+ * Retrieves tasks from the database and fills dataPool and rawTasksData.
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 async function loadTasks() {
-    let dataFromDatabase = await getTasksFromDatabase()
-    if (dataFromDatabase) {
-        dataPool = [];
-        rawTasksData = [];
-        rawTasksData = Object.entries(dataFromDatabase)
-    }
-    if (rawTasksData) {
-        rawTasksData.forEach((singleTask) => {
-            let [key, data] = [...singleTask]
-            dataPool.push(new TaskClass(key, data));
-        })
+    try {
+        let dataFromDatabase = await getTasksFromDatabase();
+        if (dataFromDatabase) {
+            dataPool = [];
+            rawTasksData = [];
+            rawTasksData = Object.entries(dataFromDatabase);
+        }
+        if (rawTasksData) {
+            rawTasksData.forEach((singleTask) => {
+                let [key, data] = [...singleTask];
+                dataPool.push(new TaskClass(key, data));
+            });
+        }
+    } catch (error) {
+        console.error("Error loading tasks:", error);
     }
 }
 
-function renderAllTasks() {
+/**
+ * Renders all tasks intoBoard
+ */
+function renderAllTasks(htmlel) {
     dataPool.forEach((item) => {
-        /**@type {HTMLElement} */
         let htmlel = item.constructHTMLElements()
         htmlel.setAttribute("taskName", item.taskName)
         htmlel.setAttribute("taskStatus", item.taskStatus)
@@ -66,6 +94,11 @@ function renderAllTasks() {
     });
 }
 
+/**
+ * Appends a task card to the appropriate column based on its status.
+ * @param {string} taskStatus - Status of the task (todo, in progress, await feedback, done).
+ * @param {HTMLElement} htmlel - HTML element representing the task card.
+ */
 function pushCardsToCardsPool(taskStatus, htmlel) {
     if (taskStatus === "todo") {
         todoRef.append(htmlel)
@@ -82,6 +115,9 @@ function pushCardsToCardsPool(taskStatus, htmlel) {
     }
 }
 
+/**
+ * Checks each column for content and shows/hides empty messages accordingly.
+ */
 function checkColumnContent() {
     Object.keys(cardPools).forEach((key) => {
         const pool = cardPools[key];
@@ -94,6 +130,9 @@ function checkColumnContent() {
     });
 }
 
+/**
+ * Refreshes the board by clearing and re-rendering all task cards.
+ */
 function refreshBoard() {
     Object.keys(cardPools).forEach((key) => {
         const ref = columnRefs[key];
@@ -114,6 +153,9 @@ function refreshBoard() {
     checkColumnContent();
 }
 
+/**
+ * Adds event listener to search input for filtering tasks by name or description.
+ */
 function searchTaskOnBoard() {
     searchRef.addEventListener('input', (e) => {
         let searchInput = e.target.value.toLowerCase().trim();
@@ -130,6 +172,13 @@ function searchTaskOnBoard() {
     })
 };
 
+/**
+ * Filters tasks by name based on the search input.
+ * @param {string} taskName - Name of the task.
+ * @param {string} searchInput - User input to search.
+ * @param {HTMLElement} card - Task card element.
+ * @param {string} taskDescription - Description of the task.
+ */
 function searchTaskName(taskName, searchInput, card, taskDescription) {
     if (taskName.includes(searchInput)) {
         card.classList.remove('d_none');
@@ -138,6 +187,13 @@ function searchTaskName(taskName, searchInput, card, taskDescription) {
     }
 }
 
+/**
+ * Filters tasks by description if name does not match the search input.
+ * @param {string} taskName - Name of the task.
+ * @param {string} searchInput - User input to search.
+ * @param {HTMLElement} card - Task card element.
+ * @param {string} taskDescription - Description of the task.
+ */
 function searchTaskDescription(taskName, searchInput, card, taskDescription) {
     if (taskDescription.includes(searchInput)) {
         card.classList.remove('d_none');
@@ -145,6 +201,7 @@ function searchTaskDescription(taskName, searchInput, card, taskDescription) {
         card.classList.add('d_none')
     }
 }
+
 
 dragRef.forEach(element => {
     element.addEventListener('dragover', (e) => {
@@ -234,14 +291,7 @@ function formatDescription(str, iterator) {
 }
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-    getUserLogState()
-    await loadTasks()
-    renderAllTasks()
-    checkColumnContent()
-    searchTaskOnBoard()
-    taskDetailsRef()
-})
+
 
 function taskDetailsRef() {
     const taskCards = document.querySelectorAll(".task_card");
