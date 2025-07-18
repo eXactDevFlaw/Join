@@ -1,6 +1,9 @@
 /**
- * Gibt das HTML für das „Add Task“-Overlay zurück.
- * @returns {string}
+ * Returns the HTML string for the add task modal/template.
+ * This template includes fields for title, description, due date, priority,
+ * assignees, category, and subtasks, as well as the UI for adding/clearing tasks.
+ * 
+ * @returns {string} HTML markup for the add task modal.
  */
 function addTaskTemplate() {
   return `<div class="add_task_container">
@@ -173,7 +176,15 @@ function addTaskTemplate() {
   `;
 }
 
-
+/**
+ * Returns the HTML string for a single added subtask entry,
+ * including edit and delete controls, as well as the inline edit UI.
+ * 
+ * @param {Object} subTask - The subtask object to render.
+ * @param {string} subTask.title - The title of the subtask.
+ * @param {number} index - The index of the subtask in the list, used for element IDs and event handlers.
+ * @returns {string} HTML markup for the subtask entry.
+ */
 function addSubTaskTemplate(subTask, index) {
   return `
                  <div class="added_subtask d_flex_center justify_between" id="subtask${index}" ondblclick="editSubTask(${index})">

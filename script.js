@@ -1,5 +1,5 @@
 /**
- * Selects const that are used for workflow.
+ * Selects constant and variables that are used for workflow.
  * @type {NodeListOf<HTMLImageElement>}
  */
 const navLogin = document.getElementById('nav-login');
@@ -15,20 +15,36 @@ let isUserLogin;
 let userDataFromLocalStorage = getUserLogState();
 
 /**
- * Retrieves contacts from the database.
+ * Event listener for the DOM to be loaded to start the inital functions
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  getUserLogState();
+  renderNavbar();
+  getUserInitials()
+})
+
+/**
+ * Retrieves users from the database.
  * @async
  * @function
- * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
+ * @returns {Promise<object>} A promise that resolves to the users data from the database.
  */
 async function getUsersFromDatabase() {
   let users = await loadFromDatabase("users");
   return users;
 }
 
+/**
+ * Retrieves contacts from the database.
+ * @async
+ * @function
+ * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
+ */
 async function getContactsFromDatabase() {
   let contacts = await loadFromDatabase("contacts");
   return contacts;
 }
+
 /**
  * Retrieves contacts from the database.
  * @async
@@ -55,9 +71,8 @@ async function loadFromDatabase(path) {
   } catch (error) {
     throw new Error("Failed to fetch firebase url", error)
   }
-  
- ;
 }
+
 /**
  * Posts new data to the specified path in the Firebase Realtime Database.
  * @async
@@ -135,7 +150,6 @@ function toggleLogoutOverlay() {
  * 
  * @type {HTMLButtonElement|null}
  */
-
 if (btnLogOut) {
   btnLogOut.addEventListener('click', () => {
     setUserIsLoggedOut()
@@ -254,16 +268,3 @@ function getUserInitials() {
     userInitials.innerText = firstInitial + lastInitial;
   }
 }
-
-function renderLogOutState() {
-
-}
-
-/**
- * Event listener for the DOM to be loaded to start the inital functions
- */
-document.addEventListener('DOMContentLoaded', () => {
-  getUserLogState();
-  renderNavbar();
-  getUserInitials()
-})

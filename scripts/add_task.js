@@ -1,3 +1,9 @@
+/**
+ * Global used constant and variables
+ */
+const assignedInput = document.getElementById("assigned-to-dropdown");
+const categoryDropdown = document.querySelector(".select_category_dropdown");
+
 let task = [];
 let taskDetails = {};
 let users = {};
@@ -7,7 +13,85 @@ let subTaskDetails = {};
 let allContacts = [];
 let selectedContacts = [];
 let pushedContactsName = [];
+let subtaskInput = document.getElementById("add-subtasks");
+let addSubTaskInput = document.getElementById("add-subtasks");
 
+/**
+ * Initializes contacts and sets default priority when the DOM is fully loaded.
+ * @event DOMContentLoaded
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    initContacts();
+    setPriority("medium");
+});
+
+/**
+ * Hides the contact assignment dropdown when clicking outside of it.
+ * @event click
+ */
+document.addEventListener('click', (e) => {
+    if (e.target.id != "add-task-contacts-list") {
+        const list = document.getElementById("add-task-contacts-list");
+        if (list) { list.classList.add('d_none') }
+    }
+})
+
+/**
+ * Closes the category dropdown when clicking outside of it.
+ * @event click
+ */
+if (categoryDropdown) {
+    document.addEventListener("click", function (event) {
+        if (!categoryDropdown.contains(event.target)) {
+            closeCategoryDropdown();
+        }
+    });
+}
+
+/**
+ * Updates the contact assignment dropdown when the input changes.
+ * @event input
+ */
+if (assignedInput) {
+    assignedInput.addEventListener("input", () => {
+        const list = document.getElementById("add-task-contacts-list");
+        if (!list.classList.contains("d_none")) {
+            renderContacts();
+        }
+    });
+}
+
+/**
+ * Deactivates the subtask input if clicking outside and input is empty.
+ * @event click
+ */
+if (subtaskInput) {
+    document.addEventListener("click", function (event) {
+        if (!subtaskInput.contains(event.target)) {
+            if (subtaskInput.value === "") {
+                unActivateSubtask();
+            }
+        }
+    });
+}
+
+/**
+ * Adds a new subtask when pressing Enter in the subtask input field.
+ * @event keypress
+ */
+if (addSubTaskInput) {
+    addSubTaskInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addNewSubTask();
+        }
+    });
+}
+
+/**
+ * Handles showing/hiding the assignment dropdown and rendering contacts.
+ * @param {MouseEvent} e - The click event.
+ */
 window.toggleAssignedToDropdown = function (e) {
     e.stopPropagation();
     const list = document.getElementById("add-task-contacts-list");
@@ -17,35 +101,20 @@ window.toggleAssignedToDropdown = function (e) {
     arrow.classList.toggle("up");
 };
 
-const assignedInput = document.getElementById("assigned-to-dropdown");
-if (assignedInput) {
-    assignedInput.addEventListener("input", () => {
-
-        const list = document.getElementById("add-task-contacts-list");
-        if (!list.classList.contains("d_none")) {
-            renderContacts();
-        }
-    });
-}
-
+/**
+ * Initializes contacts on page load.
+ * Loads all contacts from database and formats for use in assignment UI.
+ * @returns {Promise<void>}
+ */
 async function initContacts() {
     const raw = await getContactsFromDatabase();
     allContacts = Object.entries(raw || {}).map(([id, data]) => ({ id, ...data }));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    initContacts();
-    setPriority("medium");
-});
-
-
-document.addEventListener('click', (e) => {
-    if (e.target.id != "add-task-contacts-list") {
-        const list = document.getElementById("add-task-contacts-list");
-        if (list) { list.classList.add('d_none') }
-    }
-})
-
+/**
+ * Sets priority selection state and updates the UI accordingly.
+ * @param {string} level - Priority level ('urgent', 'medium', or 'low').
+ */
 function setPriority(level) {
     const priorities = ['urgent', 'medium', 'low'];
     priorities.forEach(p => {
@@ -63,6 +132,10 @@ function setPriority(level) {
     taskDetails.priority = level;
 }
 
+/**
+ * Creates a task using current form values from the side overlay, validates and persists to DB.
+ * @returns {Promise<void>}
+ */
 async function createTaskOnSide() {
     taskDetails.title = document.getElementById('title-input-overlay').value;
     taskDetails.description = document.getElementById('description-input-overlay').value;
@@ -81,6 +154,10 @@ async function createTaskOnSide() {
     }
 }
 
+/**
+ * Creates a task using current form values, validates, persists to DB, and closes overlay.
+ * @returns {Promise<void>}
+ */
 async function createTask() {
     taskDetails.title = document.getElementById('title-input-overlay').value;
     taskDetails.description = document.getElementById('description-input-overlay').value;
@@ -99,6 +176,9 @@ async function createTask() {
     }
 }
 
+/**
+ * Validates required fields and shows/hides error messages.
+ */
 function validationHandling() {
     if (!taskDetails.title) {
         document.getElementById('title-input-overlay').classList.add("input_error_border");
@@ -123,6 +203,9 @@ function validationHandling() {
     }
 }
 
+/**
+ * Shows the 'success added' message and redirects or refreshes as needed.
+ */
 function showSuccessAddedTask() {
     const successContent = document.querySelector('.added_success_task_wrapper')
     successContent.classList.remove('d_none');
@@ -135,37 +218,80 @@ function showSuccessAddedTask() {
             successContent.classList.add('d_none');
             await loadTasks();
             refreshBoard();
-
         }, 2000);
     }
 }
 
+/**
+ * Renders the list of assignable contacts into the assign dropdown,
+ * filtered by input search term and sorted alphabetically.
+ * Uses helpers for filtering and row creation.
+ * @returns {Promise<void>}
+ */
 async function renderContacts() {
     const container = document.getElementById("add-task-contacts-list");
     const input = document.getElementById("assigned-to-dropdown");
-    if (!container || !input) {
-        console.warn("renderContacts: Container oder Input nicht gefunden.");
-        return;
-    }
+    if (!container || !input) return console.warn("renderContacts: Container oder Input nicht gefunden.");
+
     const searchTerm = input.value.trim().toLowerCase();
+
     container.innerHTML = "";
-    allContacts
+    getFilteredContacts(searchTerm).forEach(contact => {
+        container.appendChild(createContactRow(contact));
+    });
+}
+
+/**
+ * Returns a filtered and sorted array of contacts matching the search term.
+ * @param {string} searchTerm
+ * @returns {Array<Object>}
+ */
+function getFilteredContacts(searchTerm) {
+    return allContacts
         .slice()
         .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(contact => {
-            if (!contact.name.toLowerCase().startsWith(searchTerm)) return;
-            const sel = selectedContacts.includes(contact.name);
-            const color = stringToColor(contact.name);
-            const initials = getInitials(contact.name);
-            const row = document.createElement("div");
-            row.className = "assign_contact_row" + (sel ? " contact_list_item_active" : "");
-            row.innerHTML = `
+        .filter(contact => contact.name.toLowerCase().startsWith(searchTerm));
+}
+
+/**
+ * Creates a DOM row for a contact in the assign dropdown.
+ * @param {Object} contact
+ * @returns {HTMLDivElement}
+ */
+function createContactRow(contact) {
+    const sel = selectedContacts.includes(contact.name);
+    const color = stringToColor(contact.name);
+    const initials = getInitials(contact.name);
+    const row = document.createElement("div");
+    row.className = "assign_contact_row" + (sel ? " contact_list_item_active" : "");
+    row.innerHTML = creatContactsHtml(color, initials, sel, contact.name);
+    row.addEventListener("click", e => {
+        e.stopPropagation();
+        const idx = selectedContacts.indexOf(contact.name);
+        if (idx >= 0) selectedContacts.splice(idx, 1);
+        else selectedContacts.push(contact.name);
+        renderContacts();
+        renderSelectedCircles();
+    });
+    return row;
+}
+
+/**
+ * Returns HTML for a contact assignment row.
+ * @param {string} color
+ * @param {string} initials
+ * @param {boolean} sel - Selected state.
+ * @param {string} contactName
+ * @returns {string}
+ */
+function creatContactsHtml(color, initials, sel, contactName) {
+    return `
                 <div class="assign_contact_left">
                   <div class="contact_circle" style="background-color:${color}">
                     ${initials}
                   </div>
                   <span class="assign_contact_name" style="color:${sel ? 'white' : ''}">
-                    ${contact.name}
+                    ${contactName}
                   </span>
                 </div>
                 <div class="assign_contact_checkbox">
@@ -174,29 +300,14 @@ async function renderContacts() {
                        style="display:${sel ? 'block' : 'none'}" />
                 </div>
             `;
-            row.addEventListener("click", e => {
-                e.stopPropagation();
-                const idx = selectedContacts.indexOf(contact.name);
-                // const idname = selectedContacts[contact.name]
-                if (idx >= 0) {
-                    selectedContacts.splice(idx, 1);
-                    // pushedContactsName.splice(idname, 1)
-                }
-                else {
-                    selectedContacts.push(contact.name);
-                    //    pushedContactsName.push(contact.name) 
-                }
-                renderContacts();
-                renderSelectedCircles();
-            });
-            container.appendChild(row);
-        });
 }
 
+/**
+ * Renders up to 4 selected contact badges, and a 'More..' badge if >4.
+ */
 function renderSelectedCircles() {
     const preview = document.getElementById("assigned-contacts-preview");
-
-    if (!preview) return;                  // ← Guard
+    if (!preview) return;
     preview.innerHTML = "";
     if (selectedContacts.length) {
         for (i = 0; i < Math.min(4, selectedContacts.length); i++) {
@@ -217,6 +328,10 @@ function renderSelectedCircles() {
     }
 }
 
+/**
+ * If more than 4 contacts are selected, returns a DOM badge.
+ * @returns {HTMLDivElement|undefined}
+ */
 function renderBlankedBadge() {
     let moreBadge
     if (selectedContacts.length > 4) {
@@ -228,15 +343,30 @@ function renderBlankedBadge() {
     return moreBadge
 }
 
+/**
+ * Gets up to 2 initials from a name (for badge display).
+ * @param {string} name
+ * @returns {string}
+ */
 function getInitials(name) {
     return name.split(" ").map(w => w[0].toUpperCase()).join("").slice(0, 2);
 }
+
+/**
+ * Generates a unique color for a string (used for contact badges).
+ * @param {string} str
+ * @returns {string} hsl color string
+ */
 function stringToColor(str) {
     let hash = 0;
     for (const c of str) hash = (hash << 5) - hash + c.charCodeAt(0);
     return `hsl(${hash % 360},70%,50%)`;
 }
 
+/**
+ * Renders assignable contacts in the edit overlay as a checkbox list.
+ * @returns {Promise<void>}
+ */
 async function renderAssignableContacts() {
     const container = document.getElementById("assign-contact-list");
     if (!container) return;
@@ -259,20 +389,17 @@ async function renderAssignableContacts() {
     });
 }
 
-let categoryDropdown = document.querySelector(".select_category_dropdown");
-if (categoryDropdown) {
-    document.addEventListener("click", function (event) {
-        if (!categoryDropdown.contains(event.target)) {
-            closeCategoryDropdown();
-        }
-    });
-}
-
+/**
+ * Closes the category dropdown and resets the arrow icon.
+ */
 function closeCategoryDropdown() {
     document.getElementById("category-list").classList.add("d_none");
     document.getElementById("arrow-drop-down-category").classList.add("up");
 }
 
+/**
+ * Opens or closes the category dropdown and hides error messages.
+ */
 function toggleCategoryDropdown() {
     document.getElementById("category-list").classList.toggle("d_none");
     document.getElementById("arrow-drop-down-category").classList.toggle("up");
@@ -280,6 +407,10 @@ function toggleCategoryDropdown() {
     document.getElementById("required-category-container").classList.add("d_none");
 }
 
+/**
+ * Sets the selected category for the task and updates the UI.
+ * @param {string|number} number - Category identifier or index.
+ */
 function setCategory(number) {
     let category = document.getElementById("category" + number).innerHTML;
     let selectedCategory = document.getElementById("selected-category");
@@ -288,92 +419,9 @@ function setCategory(number) {
     document.getElementById("arrow-drop-down-category").classList.toggle("up");
 }
 
-function activateSubtask() {
-    document.querySelector(".add").classList.add("d_none");
-    document.getElementById("add-subtasks").focus();
-    document.querySelector(".add_or_remove").classList.remove("d_none");
-}
-
-let subtaskInput = document.getElementById("add-subtasks");
-if (subtaskInput) {
-    document.addEventListener("click", function (event) {
-        if (!subtaskInput.contains(event.target)) {
-            if (subtaskInput.value === "") {
-                unActivateSubtask();
-            }
-        }
-    });
-}
-
-function unActivateSubtask() {
-    document.querySelector(".add").classList.remove("d_none");
-    document.querySelector(".add_or_remove").classList.add("d_none");
-}
-
-function addNewSubTask() {
-    let subTask = document.getElementById("add-subtasks");
-    let subTaskTitle = subTask.value
-    if (subTaskTitle > "") {
-        subTaskDetails.status = "open";
-        subTaskDetails.title = subTaskTitle;
-        subTasks.push(subTaskDetails);
-        renderSubTasks();
-        subTaskDetails = {};
-    }
-    subTask.value = "";
-    document.querySelector(".add").classList.remove("d_none");
-    document.querySelector(".add_or_remove").classList.add("d_none");
-}
-
-function renderSubTasks() {
-    let addSubtaskList = document.querySelector(".added_subtask_list");
-    addSubtaskList.innerHTML = "";
-    if (subTasks > "") {
-        subTasks.forEach((subTask, index) => {
-            addSubtaskList.innerHTML += addSubTaskTemplate(subTask, index);
-        })
-    }
-}
-
-let addSubTaskInput = document.getElementById("add-subtasks");
-if (addSubTaskInput) {
-    addSubTaskInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            addNewSubTask();
-        }
-    });
-}
-
-function clearSubTaskValue() {
-    let subTask = document.getElementById("add-subtasks");
-    subTask.value = "";
-    document.querySelector(".add").classList.remove("d_none");
-    document.querySelector(".add_or_remove").classList.add("d_none");
-}
-
-function deleteSubTask(index) {
-    subTasks.splice(index, 1);
-    renderSubTasks();
-}
-
-function editSubTask(index) {
-    document.getElementById('subtask' + index).classList.add('d_none');
-    document.getElementById('edit-subtask' + index).classList.remove('d_none');
-}
-
-async function editCheck(index) {
-    let editCheck = document.getElementById("edit-value" + index)
-    let editCheckValue = editCheck.value;
-    subTasks[index].title = editCheckValue;
-    renderSubTasks()
-
-    if (taskDetails.taskKey) { 
-        taskDetails.subtasks = subTasks;
-        await updateOnDatabase("tasks/" + taskDetails.taskKey, taskDetails);
-    }
-}
-
+/**
+ * Clears the entire add-task form and resets all UI state.
+ */
 function clearTask() {
     let taskEntry = document.getElementById("add-task-entry");
     taskEntry.innerHTML = addTaskTemplate();
@@ -381,12 +429,14 @@ function clearTask() {
     selectedContacts = [];
 }
 
+/**
+ * Clears the add-task form fields and resets task details and UI.
+ */
 function clearAddTask() {
     document.getElementById('title-input-overlay').value = "";
     description = document.getElementById('description-input-overlay').value = "";
 
     taskDetails.dueDate = document.getElementById('datepicker').value = "";
-    // taskDetails.assignedTo = selectedContacts;
     taskDetails.category = document.getElementById("selected-category").innerHTML = "Select task category";
     subTasks = [];
     renderSubTasks();

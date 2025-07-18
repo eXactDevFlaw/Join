@@ -1,3 +1,10 @@
+/**
+ * Generates the HTML template for displaying the detail view of a task.
+ * @param {Object} data - The task data object to render.
+ * @param {Object} data.taskData - The properties of the task (title, description, dueDate, priority, etc.).
+ * @param {string} data.taskKey - The unique key or ID of the task.
+ * @returns {string} - HTML string for the task detail view.
+ */
 function taskDetailViewTemplate(data) {
     return `    <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div class="margin_0 category_detail" id="task-category">User Story</div>
@@ -39,6 +46,13 @@ function taskDetailViewTemplate(data) {
      `
 }
 
+/**
+ * Generates the HTML template for editing the details of a task.
+ * @param {Object} data - The task data object to render.
+ * @param {Object} data.taskData - The properties of the task (title, description, dueDate, priority, etc.).
+ * @param {string} data.taskKey - The unique key or ID of the task.
+ * @returns {string} - HTML string for the task detail edit view.
+ */
 function taskDetailEditTemplate(data) {
       return ` 
       <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
