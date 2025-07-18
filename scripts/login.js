@@ -27,6 +27,19 @@ const toggleLogIn = document.querySelector('#signin-btn-back');
 const togglePrivacyCheck = document.getElementById('sign-up-label');
 let isPasswordVisible = false;
 
+// Initialization after document is loaded
+document.addEventListener('DOMContentLoaded', function () {
+  runFadeInOut();
+  setUserIsLoggedOut()
+  validateSigninForm();
+  setupLoginListeners();
+  setupSigninListeners();
+  setupToggleListeners();
+  setupPasswordToggle();
+  setupPrivacyCheckboxListener();
+  setupHoverPrivacyCheckboxListener();
+});
+
 /**
  * Displays an error message for a given input field.
  * @param {HTMLInputElement} input - The input element.

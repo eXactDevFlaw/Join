@@ -1,4 +1,21 @@
+/**
+ * @class TaskClass
+ * Represents a task and provides methods to render its UI components as HTML elements.
+ */
 class TaskClass {
+    /**
+     * Initializes a TaskClass instance.
+     * @param {string} key - The unique key for the task.
+     * @param {Object} data - The task data object.
+     * @param {string} data.title - Task title.
+     * @param {string} data.description - Task description.
+     * @param {string} data.category - Task category.
+     * @param {string} data.priority - Task priority ('urgent', 'medium', 'low').
+     * @param {string} data.status - Task status.
+     * @param {Array<Object>} data.subtasks - Array of subtask objects.
+     * @param {Array|string} data.assignedTo - List of assigned users.
+     * @param {string} data.dueDate - Task due date.
+     */
     constructor(key, data) {
         this.taskKey = key;
         this.taskData = data;
@@ -12,6 +29,10 @@ class TaskClass {
         this.taskDueDate = data.dueDate
     }
 
+    /**
+     * Constructs the main HTML element for the task card.
+     * @returns {HTMLDivElement} The task card element.
+     */
     constructHTMLElements() {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'task_card';
@@ -27,10 +48,13 @@ class TaskClass {
             this.createMobileNavbar(),
         );
         cardDiv.append(taskContentDiv);
-
         return cardDiv;
     }
 
+    /**
+     * Creates the priority icon container for the task card footer.
+     * @returns {HTMLDivElement} The priority icon container.
+     */
     creatPriorityContainer() {
         const priorityDiv = document.createElement('div');
         priorityDiv.className = 'priority_symbol_container d_flex_center margin_0';
@@ -54,6 +78,10 @@ class TaskClass {
         return priorityDiv
     }
 
+    /**
+     * Creates the profile badge container for assigned users.
+     * @returns {HTMLDivElement} The profile badge container.
+     */
     createProfileBadgeContainer() {
         const profileBadgesDiv = document.createElement('div');
         profileBadgesDiv.className = 'profile_badges d_flex_center_row margin_0 justify_start';
@@ -81,67 +109,112 @@ class TaskClass {
         return footerDiv
     }
 
+     /**
+     * Creates the subtasks progress and summary container for the task card.
+     * @returns {HTMLDivElement} The subtasks wrapper element.
+     */
     createSubTasksContainer() {
         const subTasksWrapper = document.createElement('div');
-        this.taskSubTasksAmount = 0
-        this.taskSubTasksAmountCompleted = 0
+        this._resetSubtaskCounters();
 
-        if (this.taskSubTasks != undefined && this.taskSubTasks.length > 0) {
-            Object.values(this.taskSubTasks).forEach((item) => {
-                this.taskSubTasksAmount += 1
-                if (item.status == "closed") {
-                    this.taskSubTasksAmountCompleted += 1;
-                }
-            })
-
-            // subtask_progress
-            const subtaskProgressDiv = document.createElement('div');
-            
-
-            const progressBarDiv = document.createElement('div');
-            progressBarDiv.className = 'progress_bar';
-
-            const progressStatusDiv = document.createElement('div');
-            progressStatusDiv.className = 'progress_status margin_0';
-            this.taskSubTasksProcent = (this.taskSubTasksAmountCompleted / this.taskSubTasksAmount) * 100
-            progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`;
-            if(this.taskSubTasksProcent < 1){
-                subtaskProgressDiv.className = 'progress_bar v_hidden ';
-            } else {
-                subtaskProgressDiv.className = 'subtask_progress';
-            }
-            progressBarDiv.append(progressStatusDiv);
-
-            // subtasks
-            const subtasksDiv = document.createElement('div');
-            subtasksDiv.className = 'subtasks margin_0';
-
-            const finishedSubtasksP = document.createElement('p');
-            finishedSubtasksP.id = 'finised-subtasks';
-            finishedSubtasksP.innerText = this.taskSubTasksAmountCompleted;
-
-            const slashP = document.createElement('p');
-            slashP.innerText = "/";
-
-            const subtasksLengthP = document.createElement('p');
-            subtasksLengthP.id = 'subtasks-length';
-            subtasksLengthP.innerText = this.taskSubTasksAmount;
-
-
-            const subtasksTextP = document.createElement('p');
-            subtasksTextP.innerHTML = "&nbsp;Subtasks";
-
-            subtasksDiv.append(finishedSubtasksP, slashP, subtasksLengthP, subtasksTextP);
-
-            subtaskProgressDiv.append(progressBarDiv, subtasksDiv);
-
+        if (this._hasValidSubtasks()) {
+            this._countSubtasks();
+            const subtaskProgressDiv = this._createSubtaskProgress();
             subTasksWrapper.append(subtaskProgressDiv);
-        } else {
-            subTasksWrapper.append();
         }
-        return subTasksWrapper
+        return subTasksWrapper;
     }
 
+    /**
+     * Checks if the task has a valid, non-empty subtasks array.
+     * @returns {boolean}
+     */
+    _hasValidSubtasks() {
+        return Array.isArray(this.taskSubTasks) && this.taskSubTasks.length > 0;
+    }
+
+    /**
+     * Resets subtask counters.
+     */
+    _resetSubtaskCounters() {
+        this.taskSubTasksAmount = 0;
+        this.taskSubTasksAmountCompleted = 0;
+    }
+
+    /**
+     * Counts total and completed subtasks.
+     */
+    _countSubtasks() {
+        this.taskSubTasks.forEach(item => {
+            this.taskSubTasksAmount++;
+            if (item.status === "closed") this.taskSubTasksAmountCompleted++;
+        });
+        this.taskSubTasksProcent = (this.taskSubTasksAmountCompleted / this.taskSubTasksAmount) * 100;
+    }
+
+    /**
+     * Creates the DOM element representing the subtask progress bar and summary.
+     * @returns {HTMLDivElement}
+     */
+    _createSubtaskProgress() {
+        const subtaskProgressDiv = document.createElement('div');
+        subtaskProgressDiv.className = this.taskSubTasksProcent < 1
+            ? 'progress_bar v_hidden'
+            : 'subtask_progress';
+
+        const progressBarDiv = this._createProgressBar();
+        const subtasksDiv = this._createSubtaskSummary();
+
+        subtaskProgressDiv.append(progressBarDiv, subtasksDiv);
+        return subtaskProgressDiv;
+    }
+
+    /**
+     * Creates the progress bar element for subtasks.
+     * @returns {HTMLDivElement}
+     */
+    _createProgressBar() {
+        const progressBarDiv = document.createElement('div');
+        progressBarDiv.className = 'progress_bar';
+
+        const progressStatusDiv = document.createElement('div');
+        progressStatusDiv.className = 'progress_status margin_0';
+        progressStatusDiv.style.width = `${this.taskSubTasksProcent}%`;
+
+        progressBarDiv.append(progressStatusDiv);
+        return progressBarDiv;
+    }
+
+    /**
+     * Creates the summary element for subtasks (X / Y Subtasks).
+     * @returns {HTMLDivElement}
+     */
+    _createSubtaskSummary() {
+        const subtasksDiv = document.createElement('div');
+        subtasksDiv.className = 'subtasks margin_0';
+
+        const finishedSubtasksP = document.createElement('p');
+        finishedSubtasksP.id = 'finised-subtasks';
+        finishedSubtasksP.innerText = this.taskSubTasksAmountCompleted;
+
+        const slashP = document.createElement('p');
+        slashP.innerText = "/";
+
+        const subtasksLengthP = document.createElement('p');
+        subtasksLengthP.id = 'subtasks-length';
+        subtasksLengthP.innerText = this.taskSubTasksAmount;
+
+        const subtasksTextP = document.createElement('p');
+        subtasksTextP.innerHTML = "&nbsp;Subtasks";
+
+        subtasksDiv.append(finishedSubtasksP, slashP, subtasksLengthP, subtasksTextP);
+        return subtasksDiv;
+    }
+
+    /**
+     * Creates the task description container, including title and truncated description.
+     * @returns {HTMLDivElement} The task description container.
+     */
     creatTaskDescriptionContainer() {
         const taskDescriptionDiv = document.createElement('div');
         taskDescriptionDiv.className = 'task_description';
@@ -164,6 +237,10 @@ class TaskClass {
         return taskDescriptionDiv
     }
 
+    /**
+     * Creates the task category label and mobile move button.
+     * @returns {HTMLDivElement} The task category container.
+     */
     createTaskCategoryContainer() {
         const cardLableWrapper = document.createElement('div')
         cardLableWrapper.className = 'card_label_wrapper'
@@ -188,6 +265,10 @@ class TaskClass {
         return cardLableWrapper
     }
 
+    /**
+     * Creates the mobile navbar for changing task status.
+     * @returns {HTMLDivElement} The mobile navbar element.
+     */
     createMobileNavbar() {
         const mobileNavbarDiv = document.createElement('div');
         mobileNavbarDiv.className = 'mobile_navbar d_none';
@@ -217,5 +298,4 @@ class TaskClass {
 
         return mobileNavbarDiv;
     }
-
 }
