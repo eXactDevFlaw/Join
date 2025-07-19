@@ -352,17 +352,28 @@ async function renderAssignableContacts() {
     contacts.forEach((c, i) => {
         const div = document.createElement("div");
         div.className = "assign-contact-item";
-        div.innerHTML = `
-      <div class="assign-left">
-        <div class="contact_circle" style="background-color:${stringToColor(c.name)}">
-          ${getInitials(c.name)}
-        </div>
-        <span class="assign-name">${c.name}</span>
-      </div>
-      <input type="checkbox" id="assign-checkbox-${i}" class="assign-checkbox" />
-    `;
+        div.innerHTML = getAssignableContactItemHTML(contact, index);
         container.appendChild(div);
     });
+}
+
+/**
+ * Generates the HTML string for an assignable contact item with a checkbox.
+ * @param {Object} contact - The contact object.
+ * @param {string} contact.name - The contact's name.
+ * @param {number} index - The index for generating unique checkbox IDs.
+ * @returns {string} The HTML string for the contact item.
+ */
+function getAssignableContactItemHTML(contact, index) {
+  return `
+    <div class="assign-left">
+      <div class="contact_circle" style="background-color:${stringToColor(contact.name)}">
+        ${getInitials(contact.name)}
+      </div>
+      <span class="assign-name">${contact.name}</span>
+    </div>
+    <input type="checkbox" id="assign-checkbox-${index}" class="assign-checkbox" />
+  `;
 }
 
 /**

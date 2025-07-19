@@ -16,11 +16,6 @@
   <link rel="stylesheet" href="./styles/contacts.css" />
   <link rel="stylesheet" href="./styles/overlay.css" />
   <link rel="stylesheet" href="./styles/responsive/responsive_contacts.css">
-
-
-
-  <!-- 4. Hauptlogik (verwendet Funktionen aus database.js) -->
-  <script type="module" src="./scripts/contacts.js"></script>
 </head>
 
 <body>
@@ -55,7 +50,6 @@
     </div>
   </header>
 
-  <!-- Sidebar -->
   <nav class="height_100 position_absolute d_flex flex_column justify_between">
     <div class="d_flex_center">
       <img src="./assets/img/logo_navbar.svg" class="d_flex logo_navbar" alt="" />
@@ -113,7 +107,6 @@
         <div id="contacts-list" class="contacts_list"></div>
       </div>
 
-      <!-- Rechte Spalte: Kontakt-Details -->
       <div class="contacts_overview" id="contacts-overview">
         <button id="btn-contacts-back" class="contacts_btn_back d_none"><img src="../assets/icons/arrow_left.svg" alt=""
             srcset=""></button>
@@ -126,12 +119,9 @@
           </div>
         </div>
 
-        <!-- Detail-Panel: startet versteckt -->
         <div class="contact_detail d_none" id="contact-detail">
           <div class="contact_detail_header d_flex_ac gap16">
-            <!-- Kreis links -->
             <div class="contact_circle contact_circle_large" id="detail-initials"></div>
-            <!-- Text- und Aktions-Wrapper -->
             <div class="detail_header_text">
               <h2 id="detail-name"></h2>
               <div class="detail_actions d_flex_ac gap16">
@@ -161,7 +151,6 @@
         </div>
   </main>
 
-  <!-- Overlay: wird per overlay.js befüllt -->
   <div id="overlay" class="overlay">
     <div id="overlay-container" class="overlay_container">
       <div id="overlay-content" class="overlay_content">
@@ -169,7 +158,6 @@
     </div>
   </div>
 
-  <!-- Toast-Meldungen -->
   <div id="toast-container" class="toast-container"></div>
 
 </body>
@@ -177,5 +165,6 @@
   <script src="./scripts/overlay.js" defer></script>
   <script src="./script.js" defer></script>
   <script type="module" src="./scripts/contacts.js"></script>
+  <script type="module" src="./scripts/contact_ui.js"></script>
 
 </html>

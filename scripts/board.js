@@ -208,33 +208,55 @@ function searchTaskDescription(taskName, searchInput, card, taskDescription) {
 }
 
 /**
- * Adds drag and drop event listeners to all columns.
- * Handles visual feedback and updates task status after drop.
+ * Initializes drag-and-drop functionality for all elements in dragRef.
+ * Adds event listeners for dragover, dragleave, and drop events.
  */
-function dragFunction(){
-    dragRef.forEach(element => {
-    element.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        element.classList.add('hover_dragzone');
-    })
+function dragFunction() {
+  dragRef.forEach(element => {
+    addDragOverListener(element);
+    addDragLeaveListener(element);
+    addDropListener(element);
+  });
+}
 
-    element.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        element.classList.remove('hover_dragzone');
-    })
+/**
+ * Adds a dragover event listener to show hover effect.
+ * @param {HTMLElement} element - The element to add the listener to.
+ */
+function addDragOverListener(element) {
+  element.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    element.classList.add('hover_dragzone');
+  });
+}
 
-    element.addEventListener('drop', async (e) => {
-        e.preventDefault();
-        element.classList.remove('hover_dragzone')
-        let cardTaskName = e.dataTransfer.getData('text/plain')
-        const card = document.querySelector(`.task_card[taskName="${cardTaskName}"]`)
-        element.appendChild(card)
-        const [cardIdentifyer] = [...dataPool.filter(item => item.taskName == cardTaskName)]
-        cardIdentifyer.taskStatus = element.getAttribute("name");
-        await updateOnCardsStatus(cardIdentifyer)
-        refreshBoard()
-    })
-})
+/**
+ * Adds a dragleave event listener to remove hover effect.
+ * @param {HTMLElement} element - The element to add the listener to.
+ */
+function addDragLeaveListener(element) {
+  element.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    element.classList.remove('hover_dragzone');
+  });
+}
+
+/**
+ * Adds a drop event listener to update task status and move the card.
+ * @param {HTMLElement} element - The element to add the listener to.
+ */
+function addDropListener(element) {
+  element.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    element.classList.remove('hover_dragzone');
+    const cardTaskName = e.dataTransfer.getData('text/plain');
+    const card = document.querySelector(`.task_card[taskName="${cardTaskName}"]`);
+    element.appendChild(card);
+    const [cardIdentifyer] = dataPool.filter(item => item.taskName === cardTaskName);
+    cardIdentifyer.taskStatus = element.getAttribute("name");
+    await updateOnCardsStatus(cardIdentifyer);
+    refreshBoard();
+  });
 }
 
 /**
