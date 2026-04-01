@@ -1,7 +1,3 @@
-/**
- * Selects constant and variables that are used for workflow.
- * @type {NodeListOf<HTMLImageElement>}
- */
 const navLogin = document.getElementById('nav-login');
 const navBar = document.querySelector('.nav_items');
 const helpDiv = document.querySelector('.help_content');
@@ -10,261 +6,227 @@ const btnLogOut = document.getElementById('btn-log-out');
 const fadeOutRef = document.querySelectorAll('.fade_out');
 const userInitials = document.getElementById('header-user-short-latters');
 const userNameRef = document.getElementById('user-name');
-const FIREBASE_URL = "https://join-19b54-default-rtdb.europe-west1.firebasedatabase.app/";
+
+const API_URL = "https://api.lutz-boelling.dev";
+
 let isUserLogin;
 let userDataFromLocalStorage = getUserLogState();
 
-/**
- * Event listener for the DOM to be loaded to start the inital functions
- */
 document.addEventListener('DOMContentLoaded', () => {
   getUserLogState();
   renderNavbar();
-  getUserInitials()
-})
+  getUserInitials();
+});
 
 /**
- * Retrieves users from the database.
- * @async
- * @function
- * @returns {Promise<object>} A promise that resolves to the users data from the database.
+ * Returns the JWT token from localStorage.
  */
-async function getUsersFromDatabase() {
-  let users = await loadFromDatabase("users");
-  return users;
+function getToken() {
+  const data = JSON.parse(localStorage.getItem("isJoinUserLogin"));
+  return data ? data.token : null;
 }
 
 /**
- * Retrieves contacts from the database.
- * @async
- * @function
- * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
+ * Returns headers with Authorization token for API calls.
+ */
+function authHeaders() {
+  return {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + getToken()
+  };
+}
+
+/**
+ * Retrieves contacts from the API.
  */
 async function getContactsFromDatabase() {
-  let contacts = await loadFromDatabase("contacts");
-  return contacts;
+  const res = await fetch(`${API_URL}/api/contacts`, {
+    headers: authHeaders()
+  });
+  if (!res.ok) throw new Error("Failed to fetch contacts");
+  return await res.json();
 }
 
 /**
- * Retrieves contacts from the database.
- * @async
- * @function
- * @returns {Promise<object>} A promise that resolves to the contacts data from the database.
+ * Retrieves tasks from the API.
  */
 async function getTasksFromDatabase() {
-  let tasks = await loadFromDatabase("tasks");
-  return tasks;
-}
-
-/**
- * Loads data from the specified path in the Firebase Realtime Database.
- * @async
- * @function
- * @param {string} path - The path to the data in the database.
- * @returns {Promise<object>} A promise that resolves to the data from the database.
- */
-async function loadFromDatabase(path) {
-  try {
-    let response = await fetch(FIREBASE_URL + path + ".json");
-    let responseToJson = await response.json();
-    return responseToJson
-  } catch (error) {
-    throw new Error("Failed to fetch firebase url", error)
-  }
-}
-
-/**
- * Posts new data to the specified path in the Firebase Realtime Database.
- * @async
- * @function postToDatabase
- * @param {string} path – Firebase-Pfad (z. B. "contacts")
- * @param {object} data – Das zu speichernde Objekt
- * @returns {Promise<{name: string}>} – Das JSON mit dem generierten Key
- */
-async function postToDatabase(path, data) {
-  const res = await fetch(`${FIREBASE_URL}${path}.json`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+  const res = await fetch(`${API_URL}/api/tasks`, {
+    headers: authHeaders()
   });
-  if (!res.ok) throw new Error(`POST ${path} failed (${res.status})`);
-  return await res.json();  // <-- hier kommt { name: "-Mx123ABC" }
+  if (!res.ok) throw new Error("Failed to fetch tasks");
+  return await res.json();
 }
 
 /**
- * Legt einen neuen Kontakt an und gibt das gesamte Ergebnis zurück.
- * @async
- * @function createContact
- * @param {object} contact
- * @returns {Promise<{name: string}>}
+ * Creates a new contact.
  */
 async function createContact(contact) {
-  return await postToDatabase("contacts", contact);
+  const res = await fetch(`${API_URL}/api/contacts`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(contact)
+  });
+  if (!res.ok) throw new Error("Failed to create contact");
+  return await res.json();
 }
 
 /**
- * Updates data at the specified path in the Firebase Realtime Database.
- * @async
- * @function
- * @param {string} path - The path where the data should be updated.
- * @param {object} data - The data to be updated.
- * @returns {Promise<object>} A promise that resolves to the response data from the database.
+ * Updates a contact by ID.
  */
-async function updateOnDatabase(path, data) {
-  let response = await fetch(FIREBASE_URL + path + ".json", {
+async function updateContact(id, data) {
+  const res = await fetch(`${API_URL}/api/contacts/${id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+    headers: authHeaders(),
+    body: JSON.stringify(data)
   });
-  return (responseToJson = await response.json());
+  if (!res.ok) throw new Error("Failed to update contact");
+  return await res.json();
 }
 
 /**
- * Deletes data from the specified path in the Firebase Realtime Database.
- * @async
- * @function
- * @param {string} path - The path to the data to be deleted.
- * @returns {Promise<object>} A promise that resolves to the response data from the database.
+ * Deletes a contact by ID.
  */
-async function deleteFromDatabase(path) {
-  let response = await fetch(FIREBASE_URL + path + ".json", {
+async function deleteContact(id) {
+  const res = await fetch(`${API_URL}/api/contacts/${id}`, {
     method: "DELETE",
+    headers: authHeaders()
   });
-  return (responseToJson = await response.json());
+  if (!res.ok) throw new Error("Failed to delete contact");
+  return await res.json();
 }
 
 /**
- * Toggles the visibility of the logout overlay by adding or removing the 'd_none' class.
+ * Creates a new task.
+ */
+async function apiCreateTask(task) {
+  const res = await fetch(`${API_URL}/api/tasks`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(task)
+  });
+  if (!res.ok) throw new Error("Failed to create task");
+  return await res.json();
+}
+
+/**
+ * Updates a task by ID.
+ */
+async function updateTask(id, data) {
+  const res = await fetch(`${API_URL}/api/tasks/${id}`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error("Failed to update task");
+  return await res.json();
+}
+
+/**
+ * Deletes a task by ID.
+ */
+async function deleteTask(id) {
+  const res = await fetch(`${API_URL}/api/tasks/${id}`, {
+    method: "DELETE",
+    headers: authHeaders()
+  });
+  if (!res.ok) throw new Error("Failed to delete task");
+  return await res.json();
+}
+
+/**
+ * Toggles the visibility of the logout overlay.
  */
 function toggleLogoutOverlay() {
-  document
-    .getElementById("overlay-small-logout-win")
-    .classList.toggle("d_none");
+  document.getElementById("overlay-small-logout-win").classList.toggle("d_none");
 }
 
-/**
- * Event listener for the logout button.
- * Sets the isUserLogin variable to false and redirects the user to the index page.
- * 
- * @type {HTMLButtonElement|null}
- */
 if (btnLogOut) {
   btnLogOut.addEventListener('click', () => {
-    setUserIsLoggedOut()
+    setUserIsLoggedOut();
     window.location = "/index.html";
   });
 }
 
-/**
- * Stops the propagation of the given event.
- * 
- * @param {Event} event - The event whose propagation should be stopped.
- */
 function stopPropagation(event) {
   event.stopPropagation();
 }
 
 /**
- * Set the userloginstate in localstorage
+ * Saves login state + JWT token to localStorage.
  */
-function setUserIsLoggedIn(email, password, name) {
-  if (email && password) {
+function setUserIsLoggedIn(token, name, isGuest = false) {
+  if (isGuest) {
     localStorage.setItem("isJoinUserLogin", JSON.stringify({
       loginstate: true,
-      userName: email,
-      userPassword: password,
-      userFullName: name
+      token: null,
+      userFullName: "Guest User",
+      isGuest: true
     }));
   } else {
     localStorage.setItem("isJoinUserLogin", JSON.stringify({
       loginstate: true,
-      userName: "Guestuser@test.com",
-      userPassword: "password",
-      userFullName: "Guest User",
+      token: token,
+      userFullName: name,
+      isGuest: false
     }));
   }
 }
 
 /**
- * Set the userloginstate in localstorage
+ * Clears login state from localStorage.
  */
 function setUserIsLoggedOut() {
   localStorage.setItem("isJoinUserLogin", JSON.stringify({
     loginstate: false,
-    userName: null,
-    userPassword: null,
+    token: null,
     userFullName: null,
+    isGuest: false
   }));
 }
 
 /**
- * Get the userloginstate from localstorage
- * false by default
- * 
+ * Reads login state from localStorage.
  */
 function getUserLogState() {
-  let data = JSON.parse(localStorage.getItem("isJoinUserLogin"))
+  let data = JSON.parse(localStorage.getItem("isJoinUserLogin"));
   if (data) {
-    switch (data.loginstate) {
-      case true:
-        isUserLogin = true;
-        break;
-
-      case false:
-        isUserLogin = false;
-        break;
-
-      default:
-        isUserLogin = false;
-        break;
-    }
+    isUserLogin = data.loginstate === true;
   } else {
     isUserLogin = false;
-  } return data
+  }
+  return data;
 }
 
 /**
- * Renders the navigation bar based on the user's login status.
- * If the user is logged in, hides the login navigation and shows the main navigation bar.
- * If the user is not logged in, does the opposite.
+ * Renders navbar based on login state.
  */
 function renderNavbar() {
   if (isUserLogin && navLogin && navBar) {
-    helpDiv.classList.remove('v_hidden')
+    helpDiv.classList.remove('v_hidden');
     navLogin.classList.add('d_none');
     navBarBottomDiv.classList.add('d_none');
     navBar.classList.remove('d_none');
   } else if (!isUserLogin && navLogin && navBar) {
-    helpDiv.classList.add('v_hidden')
+    helpDiv.classList.add('v_hidden');
     navLogin.classList.remove('d_none');
-    navBarBottomDiv.classList.remove('d_none')
+    navBarBottomDiv.classList.remove('d_none');
     navBar.classList.add('d_none');
   }
 }
 
-/**
- * Reloads the current page.
- */
 function locationReload() {
   location.reload();
 }
 
 /**
- * Function to set capital letters for usercontrol
+ * Displays user initials in the header.
  */
 function getUserInitials() {
-  if (!userDataFromLocalStorage || !userDataFromLocalStorage.userFullName) {
-    return
-  }
-  if(userNameRef){
-    userNameRef.innerText = userDataFromLocalStorage.userFullName
-  }
+  if (!userDataFromLocalStorage || !userDataFromLocalStorage.userFullName) return;
+  if (userNameRef) userNameRef.innerText = userDataFromLocalStorage.userFullName;
   let userName = userDataFromLocalStorage.userFullName.trim().split(' ');
   let firstInitial = userName[0][0].toUpperCase();
   let lastInitial = userName[userName.length - 1][0].toUpperCase();
-  if (userInitials) {
-    userInitials.innerText = firstInitial + lastInitial;
-  }
+  if (userInitials) userInitials.innerText = firstInitial + lastInitial;
 }

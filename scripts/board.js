@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     getUserLogState()
     await loadTasks()
     renderAllTasks()
-    checkColumnContent()
+    setTimeout(() => checkColumnContent(), 100);
     searchTaskOnBoard()
     taskDetailsRef()
     dragFunction()
@@ -59,16 +59,13 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function loadTasks() {
     try {
-        let dataFromDatabase = await getTasksFromDatabase();
-        if (dataFromDatabase) {
-            dataPool = [];
-            rawTasksData = [];
-            rawTasksData = Object.entries(dataFromDatabase);
-        }
-        if (rawTasksData) {
-            rawTasksData.forEach((singleTask) => {
-                let [key, data] = [...singleTask];
-                dataPool.push(new TaskClass(key, data));
+        const dataFromDatabase = await getTasksFromDatabase();
+        dataPool = [];
+        rawTasksData = [];
+
+        if (Array.isArray(dataFromDatabase)) {
+            dataFromDatabase.forEach((task) => {
+                dataPool.push(new TaskClass(task.id, task));
             });
         }
     } catch (error) {
@@ -79,20 +76,21 @@ async function loadTasks() {
 /**
  * Renders all tasks intoBoard
  */
-function renderAllTasks(htmlel) {
+function renderAllTasks() {
     dataPool.forEach((item) => {
-        let htmlel = item.constructHTMLElements()
-        htmlel.setAttribute("taskName", item.taskName)
-        htmlel.setAttribute("taskStatus", item.taskStatus)
+        let htmlel = item.constructHTMLElements();
+        htmlel.setAttribute("taskName", item.taskName);
+        htmlel.setAttribute("taskStatus", item.taskStatus);
         htmlel.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', item.taskName);
-        })
-        pushCardsToCardsPool(item.taskStatus, htmlel)
-        taskDetailsRef()
-        setupMobileTaskMove()
-        setupMobileNavbarMove()
-        setupCardRotation()
+        });
+        pushCardsToCardsPool(item.taskStatus, htmlel);
+        taskDetailsRef();
+        setupMobileTaskMove();
+        setupMobileNavbarMove();
+        setupCardRotation();
     });
+    checkColumnContent();
 }
 
 /**
@@ -102,17 +100,17 @@ function renderAllTasks(htmlel) {
  */
 function pushCardsToCardsPool(taskStatus, htmlel) {
     if (taskStatus === "todo") {
-        todoRef.append(htmlel)
-        cardPools.dataToDo.push(htmlel)
+        todoRef.append(htmlel);
+        cardPools.dataToDo.push(htmlel);
     } else if (taskStatus === "in progress") {
-        inProgressRef.append(htmlel)
-        cardPools.dataInProgress.push(htmlel)
+        inProgressRef.append(htmlel);
+        cardPools.dataInProgress.push(htmlel);
     } else if (taskStatus === "await feedback") {
-        awaitFeedbackRef.append(htmlel)
-        cardPools.dataAwaitFeedback.push(htmlel)
+        awaitFeedbackRef.append(htmlel);
+        cardPools.dataAwaitFeedback.push(htmlel);
     } else {
-        doneRef.append(htmlel)
-        cardPools.dataDone.push(htmlel)
+        doneRef.append(htmlel);
+        cardPools.dataDone.push(htmlel);
     }
 }
 
@@ -120,15 +118,14 @@ function pushCardsToCardsPool(taskStatus, htmlel) {
  * Checks each column for content and shows/hides empty messages accordingly.
  */
 function checkColumnContent() {
-    Object.keys(cardPools).forEach((key) => {
-        const pool = cardPools[key];
-        const ref = emptyRefs[key];
-        if (pool.length === 0) {
-            ref.classList.remove('d_none');
-        } else {
-            ref.classList.add('d_none');
-        }
-    });
+    todoEmptyRef.classList.toggle('d_none',
+        todoRef.querySelectorAll('.task_card').length > 0);
+    inProgressEmptyRef.classList.toggle('d_none',
+        inProgressRef.querySelectorAll('.task_card').length > 0);
+    awaitFeedbackEmptyRef.classList.toggle('d_none',
+        awaitFeedbackRef.querySelectorAll('.task_card').length > 0);
+    doneEmptyRef.classList.toggle('d_none',
+        doneRef.querySelectorAll('.task_card').length > 0);
 }
 
 /**
@@ -137,16 +134,12 @@ function checkColumnContent() {
 function refreshBoard() {
     Object.keys(cardPools).forEach((key) => {
         const ref = columnRefs[key];
-        let refTasks = ref.querySelectorAll('.task_card')
-        if (refTasks.length > 0) {
-            refTasks.forEach((item) => {
-                ref.removeChild(item);
-            })
-        }
+        let refTasks = ref.querySelectorAll('.task_card');
+        refTasks.forEach((item) => ref.removeChild(item));
     });
     clearCardPools();
     renderAllTasks();
-    checkColumnContent();
+    setTimeout(() => checkColumnContent(), 100);
 }
 
 /**
@@ -266,44 +259,44 @@ function addDropListener(element) {
  */
 const updateOnCardsStatus = async (cardIdentifyer) => {
     if (cardIdentifyer) {
-        let taskFromDB = await loadCurrentTaskFromDatabase(cardIdentifyer.taskKey);
-        taskFromDB.status = cardIdentifyer.taskStatus;
-        await updateTasksOnDatabase(cardIdentifyer.taskKey, taskFromDB);
+        try {
+            const res = await fetch(`${API_URL}/api/tasks/${cardIdentifyer.taskKey}/status`, {
+                method: "PATCH",
+                headers: authHeaders(),
+                body: JSON.stringify({ status: cardIdentifyer.taskStatus })
+            });
+            if (!res.ok) {
+                const err = await res.json();
+                console.error('Status update failed:', err);
+            }
+        } catch (err) {
+            console.error('Network error:', err);
+        }
+        await loadTasks();
+        refreshBoard();
     }
 }
 
 /**
  * Loads the current task from the database.
  * @async
- * @param {string} taskKey - Task identifier key.
+ * @param {string} taskId - Task identifier.
  * @returns {Promise<Object>} Task data object.
  */
-async function loadCurrentTaskFromDatabase(taskKey) {
-    try {
-        let response = await fetch(FIREBASE_URL + "tasks/" + taskKey + ".json");
-        let responseToJson = await response.json();
-        return responseToJson
-    } catch (error) {
-        throw new Error("Failed to fetch firebase url", error)
-    }
+async function loadCurrentTaskFromDatabase(taskId) {
+    const tasks = await getTasksFromDatabase();
+    return tasks.find(t => t.id == taskId);
 }
 
 /**
  * Updates task data in the database.
  * @async
- * @param {string} taskKey - Task identifier key.
+ * @param {string} taskId - Task identifier.
  * @param {Object} data - Task data to update.
  * @returns {Promise<Object>} Response from database.
  */
-async function updateTasksOnDatabase(taskKey, data) {
-    let response = await fetch(FIREBASE_URL + "tasks/" + taskKey + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return (responseToJson = await response.json());
+async function updateTasksOnDatabase(taskId, data) {
+    return await updateTask(taskId, { status: data.status });
 }
 
 /**
@@ -397,7 +390,7 @@ function renderTaskDetailView(data) {
     renderContactsDetailView(data);
     renderSubTasksDetailView(data)
     openTaskDetails();
-    prepareDeleteTask();
+    prepareDeleteTaskBtn();
     prepareEditTask()
     setupMobileTaskMove()
 }

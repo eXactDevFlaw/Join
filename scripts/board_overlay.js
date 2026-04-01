@@ -142,10 +142,11 @@ function openTaskDetails() {
  */
 async function checkSubTask(index) {
     data.taskData.subtasks[index].status = "closed";
-    pushData = data.taskData;
-    taskKey = data.taskKey;
     renderSubTasksDetailView(data);
-    await updateOnDatabase("tasks/" + taskKey, pushData);
+    await updateTask(data.taskKey, {
+        status: data.taskStatus,
+        subtasks: data.taskData.subtasks
+    });
 }
 
 /**
@@ -154,25 +155,26 @@ async function checkSubTask(index) {
  */
 async function unCheckSubTask(index) {
     data.taskData.subtasks[index].status = "open";
-    pushData = data.taskData;
-    taskKey = data.taskKey;
     renderSubTasksDetailView(data);
-    await updateOnDatabase("tasks/" + taskKey, pushData);
+    await updateTask(data.taskKey, {
+        status: data.taskStatus,
+        subtasks: data.taskData.subtasks
+    });
 }
 
 /**
  * Prepares the delete functionality for a task in the detail view.
  */
-function prepareDeleteTask() {
-    const deleteTask = document.getElementById("deleteTask");
-    deleteTask.addEventListener("click", async function () {
+function prepareDeleteTaskBtn() {
+    const deleteTaskBtn = document.getElementById("deleteTask");
+    deleteTaskBtn.addEventListener("click", async function () {
         let taskKey = this.getAttribute("taskname");
-        await deleteFromDatabase("tasks/" + taskKey);
+        await deleteTask(taskKey);
         document.getElementById("task-overlay").classList.add("d_none");
         document.getElementById("task-details").classList.add("d_none");
         await loadTasks();
         refreshBoard();
-    })
+    });
 }
 
 /**
@@ -194,10 +196,7 @@ function renderTaskDetailEdit() {
     taskDetail.innerHTML = taskDetailEditTemplate(data);
     renderSubTasks();
     setPriority(data.taskPriority);
-    selectedContacts = data.taskData.assignedTo;
-    if (selectedContacts === undefined) {
-        selectedContacts = [];
-    }
+    selectedContacts = data.taskData.assigned_to || [];  // ← fix
     prepareRenderContacts();
     renderSelectedCircles();
 }
@@ -210,12 +209,12 @@ function prepareUpdateTask() {
     checkEditTask.addEventListener("click", function () {
         let taskKey = this.getAttribute("taskname");
         dataPool.forEach((task) => {
-            if (task.taskKey === taskKey) {
-                updateTask(task);
+            if (task.taskKey == taskKey) {
+                saveEditedTask(task);
             }
-        })
-        refreshBoard()
-    })
+        });
+        refreshBoard();
+    });
 }
 
 /**
@@ -223,18 +222,26 @@ function prepareUpdateTask() {
  * @async
  * @param {Object} data - Task object to update.
  */
-async function updateTask(data) {
-    let rawPrio = Object.values(taskDetails)
-    data.taskData.title = document.getElementById('title-input-overlay').value;
-    data.taskData.description = document.getElementById('description-input-overlay').value;
-    data.taskData.dueDate = document.getElementById('datepicker').value;
-    data.taskData.assignedTo = selectedContacts;
-    data.taskData.subtasks = subTasks;
-    data.taskData.priority = rawPrio[0]
-    pushData = data.taskData;
-    taskKey = data.taskKey;
-    await updateOnDatabase("tasks/" + taskKey, pushData);
-    renderTaskDetailView(data);
+async function saveEditedTask(taskData) {
+    const rawPrio = Object.values(taskDetails);
+    taskData.taskData.title = document.getElementById('title-input-overlay').value;
+    taskData.taskData.description = document.getElementById('description-input-overlay').value;
+    taskData.taskData.due_date = document.getElementById('datepicker').value;
+    taskData.taskData.assigned_to = selectedContacts;
+    taskData.taskData.subtasks = subTasks;
+    taskData.taskData.priority = rawPrio[0];
+
+    await updateTask(taskData.taskKey, {
+        title: taskData.taskData.title,
+        description: taskData.taskData.description,
+        due_date: taskData.taskData.due_date,
+        priority: taskData.taskData.priority,
+        category: taskData.taskData.category,
+        status: taskData.taskStatus,
+        assigned_to: taskData.taskData.assigned_to
+    });
+
+    renderTaskDetailView(taskData);
     refreshBoard();
 }
 

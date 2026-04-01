@@ -6,19 +6,30 @@ async function handleSignup(event) {
   event.preventDefault();
   validateSigninForm();
   if (signupBtn.disabled) return;
+
   const name = formatFullName(signinNameInput.value);
   const email = signinEmailInput.value.trim();
   const password = signinPasswordInput.value;
 
-  if (await emailExists(email)) {
-    showEmailExistsError();
-    return;
-  }
+  try {
+    const res = await fetch("https://api.lutz-boelling.dev/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password })
+    });
 
-  const userData = { name, email, password };
-  const contactData = { name, email };
-  await saveUserAndContact(userData, contactData);
-  showSigninSuccessDialog();
+    if (res.status === 409) {
+      showEmailExistsError();
+      return;
+    }
+
+    if (!res.ok) throw new Error("Registration failed");
+
+    showSigninSuccessDialog();
+
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 /**
@@ -79,7 +90,7 @@ function clearSigninInputs() {
  * @returns {Promise<Object>}
  */
 async function fetchUsers() {
-  return await getUsersFromDatabase();
+  return [];
 }
 
 /**
@@ -89,8 +100,6 @@ async function fetchUsers() {
  * @returns {Promise<void>}
  */
 async function saveUserAndContact(userData, contactData) {
-  await postToDatabase('/users', userData);
-  await postToDatabase('/contacts', contactData);
 }
 
 /**
@@ -127,7 +136,7 @@ function setupLoginListeners() {
   if (loginBtn) loginBtn.addEventListener('click', handleLogin);
   if (guestLoginBtn) {
     guestLoginBtn.addEventListener('click', () => {
-      setUserIsLoggedIn();
+      setUserIsLoggedIn(null, "Guest User", true);
       window.location = "./summary.html";
     });
   }
@@ -211,9 +220,9 @@ function setupPrivacyCheckboxListener() {
  * Hover effect on an div box while effected only in the img inside
  * @type {HTMLElement}
  * */
-function setupHoverPrivacyCheckboxListener(){
+function setupHoverPrivacyCheckboxListener() {
   signupBtnHover.addEventListener('mouseover', () => {
-    labelHover.style.borderRadius = "50%"; 
+    labelHover.style.borderRadius = "50%";
     labelHover.style.background = "rgba(237, 242, 250, 1)";
   })
 

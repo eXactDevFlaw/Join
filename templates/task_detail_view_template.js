@@ -6,7 +6,7 @@
  * @returns {string} - HTML string for the task detail view.
  */
 function taskDetailViewTemplate(data) {
-    return `    <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
+  return `    <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div class="margin_0 category_detail" id="task-category">User Story</div>
       <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
     </div>
@@ -19,12 +19,12 @@ function taskDetailViewTemplate(data) {
     </div>
     <div class=" d_flex_center_row width_100 detail_head">
       <p class="task_detail">Due date:</p>
-      <div class="width_100 detail_due_date">${data.taskData.dueDate}</div>
+      <div class="width_100 detail_due_date">${data.taskData.due_date || ''}</div>
     </div>
     <div class="d_flex_center_row width_100 detail_head">
       <p class="task_detail">Priority:</p>
       <div class="d_flex_center_row width_100 margin_0 justify_start" id="priority"><p class="margin_0">${data.taskData.priority.charAt(0).toUpperCase()
-  + data.taskData.priority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskData.priority}.svg" alt=""></img></div>
+    + data.taskData.priority.slice(1)}</p><img class="margin_0" src="./assets/icons/prio_${data.taskData.priority}.svg" alt=""></img></div>
     </div>
     <div class="d_flex_center_column width_100 align_none justify_start gap_8">
       <div class="margin_0">
@@ -54,7 +54,7 @@ function taskDetailViewTemplate(data) {
  * @returns {string} - HTML string for the task detail edit view.
  */
 function taskDetailEditTemplate(data) {
-      return ` 
+  return ` 
       <div class="taskd_detail_header d_flex_center_row justify_between margin_0 width_100">
       <div></div>
       <div class="close_detail_field  close_add_task margin_0" onclick="closeTaskOverlay()"></div>
@@ -87,7 +87,7 @@ function taskDetailEditTemplate(data) {
             <p class="margin_0">Due Date</p>
           </div>
           <div class="margin_0">
-            <input class="date" id="datepicker" type="date"  value="${data.taskData.dueDate}"/>
+            <input class="date" id="datepicker" type="date" value="${data.taskData.due_date || ''}"/>
           </div>
         </div>
 

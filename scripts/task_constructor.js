@@ -11,14 +11,14 @@ class TaskClass {
     constructor(key, data) {
         this.taskKey = key;
         this.taskData = data;
-        this.taskName = data.title;
-        this.taskDescription = data.description;
-        this.taskCategory = data.category;
-        this.taskPriority = data.priority;
-        this.taskStatus = data.status;
-        this.taskSubTasks = data.subtasks;
-        this.taskAssignedTo = data.assignedTo;
-        this.taskDueDate = data.dueDate;
+        this.taskName = data.title || "Untitled";
+        this.taskDescription = data.description || "";
+        this.taskCategory = data.category || "";
+        this.taskPriority = data.priority || "medium";
+        this.taskStatus = data.status || "todo";
+        this.taskSubTasks = data.subtasks || [];
+        this.taskAssignedTo = data.assigned_to || [];
+        this.taskDueDate = data.due_date || "";
     }
 
     /**
@@ -77,10 +77,9 @@ class TaskClass {
     createProfileBadgeContainer() {
         const profileBadgesDiv = document.createElement('div');
         profileBadgesDiv.className = 'profile_badges d_flex_center_row margin_0 justify_start';
-        if (this.taskAssignedTo) {
-            let data = Object.values(this.taskAssignedTo);
-            for (let i = 0; i < Math.min(3, data.length); i++) {
-                const badge = this._createProfileBadge(data[i]);
+        if (this.taskAssignedTo && this.taskAssignedTo.length > 0) {
+            for (let i = 0; i < Math.min(3, this.taskAssignedTo.length); i++) {
+                const badge = this._createProfileBadge(this.taskAssignedTo[i]);
                 profileBadgesDiv.append(badge);
             }
         }

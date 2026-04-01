@@ -1,3 +1,25 @@
-up.sh
-summerysafe.html
-.vscode
+# Environment files
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+/dist
+/build
+
+# Dependencies
+node_modules/

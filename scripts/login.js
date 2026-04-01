@@ -252,7 +252,7 @@ function findMatchingUser(users, email, password) {
   for (let i = 0; i < userValues.length; i++) {
     if (userValues[i].email === email && userValues[i].password === password) {
       let userFullName = userValues[i].name
-      return {state: true, userFullName};
+      return { state: true, userFullName };
     }
   }
   return false;
@@ -280,8 +280,7 @@ function showEmailExistsError() {
 }
 
 /**
- * Handles the login form submission, validating input and processing authentication.
- * @param {Event} event - The form submission event.
+ * Handles login — calls your own API instead of Firebase.
  */
 async function handleLogin(event) {
   event.preventDefault();
@@ -289,16 +288,63 @@ async function handleLogin(event) {
   const email = userNameInput.value;
   const password = userPasswordInput.value;
 
-
   if (!isValidLoginInput(email, password)) return handleLoginError();
 
-  let {state, userFullName} = await checkUserCredentials(email, password);
-  
-  if (state) {
-    setUserIsLoggedIn(email, password, userFullName);
-    return handleLoginSuccess()
-  } else {
+  try {
+    const res = await fetch("https://api.lutz-boelling.dev/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    if (!res.ok) return handleLoginError();
+
+    const data = await res.json();
+    setUserIsLoggedIn(data.token, data.name);
+    handleLoginSuccess();
+
+  } catch (err) {
+    console.error(err);
     handleLoginError();
+  }
+}
+
+/**
+ * Handles registration — calls your own API instead of Firebase.
+ */
+async function handleSignin(event) {
+  event.preventDefault();
+
+  const name = formatFullName(signinNameInput.value);
+  const email = signinEmailInput.value.trim();
+  const password = signinPasswordInput.value;
+
+  try {
+    const res = await fetch("https://api.lutz-boelling.dev/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password })
+    });
+
+    if (res.status === 409) {
+      showInputError(signinEmailInput, "Email already in use.");
+      return;
+    }
+
+    if (!res.ok) throw new Error("Registration failed");
+
+    const loginRes = await fetch("https://api.lutz-boelling.dev/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const loginData = await loginRes.json();
+    setUserIsLoggedIn(loginData.token, loginData.name);
+    handleLoginSuccess();
+
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -333,7 +379,7 @@ function validateSigninForm() {
   let passwordValid = signinPasswordInput.value.length > 3;
   let passwordMatch = doPasswordsMatch();
   let checkboxChecked = signinCheckbox.checked;
-  showInputErrorIfInvalid(signinNameInput, nameValid, "Please enter your first and last name.");
+  showInputErrorIfInvalid(signinNameInput, nameValid, "Please enter first and last name (e.g. John Doe).");
   showInputErrorIfInvalid(signinEmailInput, emailValid, "Please enter a valid email address.");
   showInputErrorIfInvalid(signinPasswordInput, passwordValid, "Please enter at least 4 characters.");
   showInputErrorIfInvalid(signinPasswordCheckInput, passwordMatch, "The passwords did not match.");

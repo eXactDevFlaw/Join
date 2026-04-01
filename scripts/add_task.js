@@ -108,7 +108,7 @@ window.toggleAssignedToDropdown = function (e) {
  */
 async function initContacts() {
     const raw = await getContactsFromDatabase();
-    allContacts = Object.entries(raw || {}).map(([id, data]) => ({ id, ...data }));
+    allContacts = Array.isArray(raw) ? raw : [];
 }
 
 /**
@@ -146,7 +146,7 @@ async function createTaskOnSide() {
     taskDetails.status = "todo";
 
     if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
-        await postToDatabase("tasks", taskDetails);
+        await submitTaskToApi("todo");
         showSuccessAddedTask();
 
     } else {
@@ -168,7 +168,7 @@ async function createTask() {
     taskDetails.status = "todo";
 
     if (taskDetails.title && taskDetails.dueDate && taskDetails.category !== "Select task category") {
-        await postToDatabase("tasks", taskDetails);
+        await submitTaskToApi("todo");
         showSuccessAddedTask();
         closeTaskOverlay();
     } else {
@@ -277,7 +277,6 @@ function createContactRow(contact) {
 }
 
 
-
 /**
  * Renders up to 4 selected contact badges, and a 'More..' badge if >4.
  */
@@ -365,7 +364,7 @@ async function renderAssignableContacts() {
  * @returns {string} The HTML string for the contact item.
  */
 function getAssignableContactItemHTML(contact, index) {
-  return `
+    return `
     <div class="assign-left">
       <div class="contact_circle" style="background-color:${stringToColor(contact.name)}">
         ${getInitials(contact.name)}
@@ -430,4 +429,32 @@ function clearAddTask() {
     setPriority("medium");
     renderContacts();
     document.getElementById("assigned-contacts-preview").innerHTML = "";
+}
+
+/**
+ * Builds and saves a task + its subtasks to the API.
+ * @param {string} status - The column status e.g. "todo"
+ * @returns {Promise<void>}
+ */
+async function submitTaskToApi(status) {
+    const taskPayload = {
+        title: taskDetails.title,
+        description: taskDetails.description,
+        due_date: taskDetails.dueDate,
+        priority: taskDetails.priority,
+        category: taskDetails.category,
+        status: status || "todo",
+        assigned_to: selectedContacts
+    };
+
+    const newTask = await apiCreateTask(taskPayload);
+
+    // Save each subtask linked to the new task ID
+    for (const sub of subTasks) {
+        await fetch(`https://api.lutz-boelling.dev/api/tasks/${newTask.id}/subtasks`, {
+            method: "POST",
+            headers: authHeaders(),
+            body: JSON.stringify({ title: sub.title || sub, done: false })
+        });
+    }
 }
